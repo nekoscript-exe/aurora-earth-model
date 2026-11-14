@@ -1,0 +1,44 @@
+{
+    "cube": "data/synthetic/cube.npz",
+    "history_months": 12,
+    "forecast_horizon": 1,
+    "splits": {
+        "train": {
+            "months": 204,
+            "start": "2002-01",
+            "end": "2018-12"
+        },
+        "validation": {
+            "months": 36,
+            "start": "2019-01",
+            "end": "2021-12"
+        },
+        "test": {
+            "months": 48,
+            "start": "2022-01",
+            "end": "2025-12"
+        }
+    },
+    "results": {
+        "validation": {
+            "persistence": {
+                "observations": 459206,
+                "mae": 0.04662313164804146,
+                "rmse": 0.05636474803878373,
+                "r2": 0.9045094415589119
+            },
+            "seasonal": {
+                "observations": 459206,
+                "mae": 0.028526825630941954,
+                "rmse": 0.035761766007372825,
+                "r2": 0.9615600151632293
+            },
+            "climatology": {
+                "observations": 459206,
+                "mae": 0.05032975733949379,
+                "rmse": 0.06239331100670715,
+                "r2": 0.8829904365991157
+            }
+        }
+    }
+}
