@@ -29,3 +29,16 @@ Rama: `feature/data-validation`
 - Confirmar que Ian y Sofía abren el paquete de Drive.
 - Revisión visual de tres fechas en Earth Engine.
 - Lote histórico 2001–2025 por tramos.
+
+## Revisión visual (14 de noviembre de 2026)
+Comparación de medias de NDVI sobre la región entre Earth Engine (mismo filtro:
+SummaryQA == 0, mediana mensual, factor 0.0001) y los TIFF locales:
+- 2001-01: 0.3869 (EE) vs 0.3866 (local)
+- 2003-08: 0.5601 (EE) vs 0.5802 (local); diferencia de 0.02, mes con cobertura de 61 %
+  (hipótesis, sin comprobar: distinto promedio al agregar a 1000 m con datos parciales)
+- 2025-12: 0.5129 (EE) vs 0.5093 (local)
+Patrón espacial de 2001-01 coincide (norte/noreste verde, suroeste con valores bajos).
+Figura local: docs/evidence/data/visual_check_local.png.
+Limitación: la comprobación usa la misma lógica de filtrado que la exportación, así que
+verifica consistencia, no independencia.
+
