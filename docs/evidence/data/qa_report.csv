@@ -1,0 +1,4 @@
+date,path,status,issues,valid_fraction,min,max,mean
+2001-01-01,data/raw/ndvi_2001_01.tif,OK,,0.9961,0.0086,0.8367,0.3866
+2001-02-01,data/raw/ndvi_2001_02.tif,OK,,0.9984,-0.0677,0.7991,0.3567
+2001-03-01,data/raw/ndvi_2001_03.tif,OK,,0.996,0.0266,0.8187,0.3394
