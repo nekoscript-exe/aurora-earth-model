@@ -1,0 +1,27 @@
+{
+    "dataset": "synthetic",
+    "method": "Newey-West HAC",
+    "maxlags": 2,
+    "alpha": 0.05,
+    "comparable_pixels": 12160,
+    "excluded_pixels": 4224,
+    "ols_fdr": {
+        "significant": 6193,
+        "true_positives": 6055,
+        "false_positives": 138,
+        "recall": 1.0,
+        "false_positive_rate": 0.022604422604422605,
+        "false_discovery_proportion": 0.022283222993702567
+    },
+    "hac_fdr": {
+        "significant": 6447,
+        "true_positives": 6055,
+        "false_positives": 392,
+        "recall": 1.0,
+        "false_positive_rate": 0.06420966420966422,
+        "false_discovery_proportion": 0.06080347448425624
+    },
+    "lost_significance": 14,
+    "gained_significance": 268,
+    "seconds": 2.2138090469998133
+}

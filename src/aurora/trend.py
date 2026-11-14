@@ -144,3 +144,134 @@ def fdr_correction(p_values, alpha=0.05):
         significant[valid] = rejected
 
     return q, significant
+
+
+def residual_diagnostics(values, years, result):
+    """Diagnose temporal dependence in OLS residuals."""
+
+    y = np.asarray(values, dtype=np.float64)
+    years = np.asarray(years, dtype=np.float64)
+
+    t = (years - years[0])[:, None, None]
+
+    prediction = (
+        result["intercept"][None]
+        + result["slope"][None] * t
+    )
+
+    residuals = y - prediction
+
+    previous = residuals[:-1]
+    current = residuals[1:]
+
+    consecutive = (
+        np.diff(years) == 1
+    )[:, None, None]
+
+    valid = (
+        np.isfinite(previous)
+        & np.isfinite(current)
+        & consecutive
+    )
+
+    n = valid.sum(axis=0)
+
+    a = np.where(valid, previous, 0.0)
+    b = np.where(valid, current, 0.0)
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        covariance = (
+            (a * b).sum(axis=0)
+            - a.sum(axis=0) * b.sum(axis=0) / n
+        )
+
+        variance_a = (
+            (a**2).sum(axis=0)
+            - a.sum(axis=0)**2 / n
+        )
+
+        variance_b = (
+            (b**2).sum(axis=0)
+            - b.sum(axis=0)**2 / n
+        )
+
+        rho = covariance / np.sqrt(
+            variance_a * variance_b
+        )
+
+        dw = (
+            ((b - a)**2).sum(axis=0)
+            / np.nansum(residuals**2, axis=0)
+        )
+
+    rho = np.where(
+        (n >= 10) & np.isfinite(rho),
+        rho, np.nan
+    )
+
+    complete = np.isfinite(residuals).all(axis=0)
+
+    dw = np.where(
+        complete
+        & consecutive.all()
+        & np.isfinite(dw),
+        dw, np.nan
+    )
+
+    return {
+        "lag1": rho,
+        "durbin_watson": dw,
+        "pairs": n
+    }
+
+
+def hac_significance(values, years, maxlags=2, min_years=15):
+    """Newey-West HAC sensitivity analysis for complete series."""
+
+    import statsmodels.api as sm
+
+    y = np.asarray(values, dtype=np.float64)
+    years = np.asarray(years, dtype=np.float64)
+
+    height, width = y.shape[1:]
+    flat = y.reshape(len(years), -1)
+
+    p = np.full(flat.shape[1], np.nan)
+    stderr = np.full(flat.shape[1], np.nan)
+
+    if len(years) < min_years:
+        return {
+            "p_hac": p.reshape(height, width),
+            "stderr_hac": stderr.reshape(height, width)
+        }
+
+    if not np.all(np.diff(years) == 1):
+        raise ValueError("HAC requires consecutive annual dates")
+
+    design = sm.add_constant(years - years[0])
+
+    for i in range(flat.shape[1]):
+        series = flat[:, i]
+
+        if not np.isfinite(series).all():
+            continue
+
+        if np.ptp(series) < 1e-12:
+            continue
+
+        model = sm.OLS(series, design).fit(
+            cov_type="HAC",
+            cov_kwds={
+                "maxlags": maxlags,
+                "use_correction": True
+            },
+            use_t=True
+        )
+
+        p[i] = model.pvalues[1]
+        stderr[i] = model.bse[1]
+
+    return {
+        "p_hac": p.reshape(height, width),
+        "stderr_hac": stderr.reshape(height, width)
+    }
