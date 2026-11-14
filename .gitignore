@@ -218,3 +218,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# AURORA local artifacts and secrets
+/data/raw/
+/data/processed/
+/checkpoints/
+/outputs/
+*.tif
+*.tiff
+*.npz
+*.pt
+*.pth
+credentials*.json
+service-account*.json
