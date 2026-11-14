@@ -152,7 +152,7 @@ def main():
     n_tested = int(tested.sum())
 
     metrics = {
-        "dataset": "satellite",
+        "dataset": metadata["dataset"],
         "period": [str(dates[0]), str(dates[-1])],
         "months": len(dates),
         "regional_pixels": n_region,
