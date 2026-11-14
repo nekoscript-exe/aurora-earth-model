@@ -1,0 +1,51 @@
+{
+    "cube": "data/synthetic/cube.npz",
+    "evaluation": "held_out_test",
+    "period": [
+        "2022-01",
+        "2025-12"
+    ],
+    "months": 48,
+    "comparable_observations": 611569,
+    "observed_targets": 723140,
+    "results": {
+        "persistence": {
+            "observations": 611569,
+            "mae": 0.046637306708033406,
+            "rmse": 0.056369673591552,
+            "r2": 0.9174179210718341
+        },
+        "seasonal": {
+            "observations": 611569,
+            "mae": 0.028501017089517893,
+            "rmse": 0.03571721833147739,
+            "r2": 0.9668449239341753
+        },
+        "climatology": {
+            "observations": 611569,
+            "mae": 0.06427327004664124,
+            "rmse": 0.080871469023308,
+            "r2": 0.8300248489611005
+        },
+        "xgboost": {
+            "observations": 611569,
+            "mae": 0.022034060518705018,
+            "rmse": 0.027741742551338707,
+            "r2": 0.9799985147755411
+        },
+        "convlstm": {
+            "observations": 611569,
+            "mae": 0.020949908448959262,
+            "rmse": 0.026287871808427832,
+            "r2": 0.982040029122722
+        }
+    },
+    "ranking_by_rmse": [
+        "convlstm",
+        "xgboost",
+        "seasonal",
+        "persistence",
+        "climatology"
+    ],
+    "best_model": "convlstm"
+}
