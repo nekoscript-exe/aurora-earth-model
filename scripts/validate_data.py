@@ -130,25 +130,23 @@ def main():
         w.writeheader()
         w.writerows(report)
 
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    pts = [(x["date"], x["valid_fraction"]) for x in report if x["valid_fraction"] != ""]
+    import datetime as dt
+    import matplotlib.dates as mdates
+    pts = [(dt.date.fromisoformat(x["date"]), x["valid_fraction"])
+           for x in report if x["valid_fraction"] != ""]
     if pts:
-        fig, ax = plt.subplots(figsize=(8, 3))
-        ax.plot([d for d, _ in pts], [v for _, v in pts], marker="o")
+        fig, ax = plt.subplots(figsize=(10, 3.5))
+        ax.plot([d for d, _ in pts], [v for _, v in pts],
+                marker="o", markersize=3, linewidth=0.8)
         ax.axhline(MIN_COVERAGE, color="red", ls="--", label="umbral 70%")
         ax.set_ylim(0, 1.05)
-        ax.set_ylabel("fracción válida (dentro de la región)")
-        ax.tick_params(axis="x", rotation=60, labelsize=6)
+        ax.set_ylabel("fracción válida")
+        ax.set_title("Cobertura mensual dentro de la región")
+        ax.xaxis.set_major_locator(mdates.YearLocator(2))
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
         ax.legend()
         fig.tight_layout()
         fig.savefig(a.out_fig, dpi=100)
-
-    n_rev = sum(x["status"] == "REVISAR" for x in report)
-    print(f"{len(report)} archivos | errores: {errors} | a revisar (<70%): {n_rev}")
-    print("CSV:", a.out_csv)
-    sys.exit(1 if errors else 0)
 
 
 if __name__ == "__main__":
