@@ -1,0 +1,4 @@
+date,path,variable,unit,crs,scale_m,valid_fraction,source_id
+2001-01-01,data/raw/ndvi_2001_01.tif,ndvi,1,EPSG:32614,1000,0.9961,MODIS/061/MOD13Q1
+2001-02-01,data/raw/ndvi_2001_02.tif,ndvi,1,EPSG:32614,1000,0.9984,MODIS/061/MOD13Q1
+2001-03-01,data/raw/ndvi_2001_03.tif,ndvi,1,EPSG:32614,1000,0.996,MODIS/061/MOD13Q1
