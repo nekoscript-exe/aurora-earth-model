@@ -12,6 +12,7 @@ from PySide6.QtCore import Qt, QPointF, QPoint, QAbstractAnimation
 from PySide6.QtGui import QWheelEvent
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication
+import shiboken6
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'src'))
@@ -41,6 +42,7 @@ def explorer(tmp_path, app):
     app.processEvents()
     yield w
     w.pause(); w.planet.rotation.stop(); w.planet.animation.stop(); w.close()
+    shiboken6.delete(w)
     app.processEvents()
 
 
@@ -137,7 +139,8 @@ def test_hiding_pauses_playback(explorer, app):
 def test_host_retains_all_tabs_and_investigation_controls(app):
     from aurora.desktop.window import AuroraWindow
     w = AuroraWindow(); w.show(); app.processEvents()
-    assert w.tabs.count() == 8
+    assert w.tabs.count() == 9
+    assert any(w.tabs.tabText(i) == "Multivariate Laboratory" for i in range(w.tabs.count()))
     w.tabs.setCurrentWidget(w.planetary_explorer); app.processEvents()
     assert not w.investigation_panel.isVisible()
     w.planetary_explorer.setup_toggle.click()
@@ -146,4 +149,15 @@ def test_host_retains_all_tabs_and_investigation_controls(app):
     assert w.investigation_panel.isVisible()
     w.tabs.setCurrentWidget(w.planetary_explorer)
     assert not w.investigation_panel.isVisible()
-    w.close()
+    w.close(); shiboken6.delete(w)
+
+
+def test_shared_monthly_interval_calendars_and_timeline(explorer):
+    w = explorer; w.load_dataset(); w.planet.animation.stop()
+    w.period.set_interval('2001-02-17', '2001-03-20')
+    assert w.slider.minimum() == 1 and w.slider.maximum() == 2
+    assert w.period.start.calendarPopup() and not w.period.start.keyboardTracking()
+    w.slider.setValue(2); w.step(1)
+    assert w.slider.value() == 1
+    w.period.low.setValue(2)
+    assert w.period.interval() == ('2001-03', '2001-03')

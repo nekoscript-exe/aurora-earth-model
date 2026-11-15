@@ -1,13 +1,19 @@
 """AURORA Predictive Intelligence Laboratory."""
 
 import json
+from pathlib import Path
 
 import numpy as np
 import rasterio
+from aurora.catalog import populate_regions, DatasetRegistry, display_scale
+from aurora.model_catalog import ModelRegistry
+from aurora.jobs import request_cancel
+from .tasks import ReaderJobs
 
+from PySide6.QtCore import QProcess
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout,
-    QLabel, QComboBox, QPushButton
+    QLabel, QComboBox, QPushButton, QFileDialog
 )
 
 from matplotlib.figure import Figure
@@ -22,7 +28,9 @@ class AILaboratory(QWidget):
         super().__init__(parent)
 
         self.root = root
-        self.directory = root / "outputs/queretaro"
+        self.model_jobs = ReaderJobs(self, self.models_ready, self.models_error)
+        self.model_registry = None
+        self.directory = None
 
         layout = QVBoxLayout(self)
 
@@ -35,7 +43,7 @@ class AILaboratory(QWidget):
         layout.addWidget(title)
 
         self.info = QLabel(
-            "NDVI / Queretaro / Historical predictive experiment"
+            "Historical predictive experiment"
         )
 
         self.info.setWordWrap(True)
@@ -43,6 +51,12 @@ class AILaboratory(QWidget):
 
         controls = QHBoxLayout()
 
+        self.region = QComboBox()
+        self.registry = DatasetRegistry(root)
+        controls.addWidget(self.region)
+        self.variable = QComboBox()
+
+        controls.addWidget(self.variable)
         self.view = QComboBox()
 
         self.view.addItems([
@@ -62,6 +76,11 @@ class AILaboratory(QWidget):
         refresh.clicked.connect(self.render)
 
         controls.addWidget(refresh)
+        self.export_button = QPushButton('Export'); self.export_button.clicked.connect(self.export_results)
+        controls.addWidget(self.export_button)
+        self.cancel_export_button = QPushButton('Cancel'); self.cancel_export_button.setEnabled(False)
+        self.cancel_export_button.clicked.connect(self.cancel_export); controls.addWidget(self.cancel_export_button)
+        self.export_process = QProcess(self); self.export_process.finished.connect(self.export_finished)
 
         layout.addLayout(controls)
 
@@ -85,8 +104,11 @@ class AILaboratory(QWidget):
 
         layout.addWidget(self.details)
 
+        self.region.currentIndexChanged.connect(self.models_region_changed)
+        self.variable.currentIndexChanged.connect(self.render)
         self.view.currentIndexChanged.connect(self.render)
 
+        self.refresh_catalog()
         self.render()
 
     def read_json(self, path):
@@ -108,6 +130,19 @@ class AILaboratory(QWidget):
 
     def render(self, *_):
 
+        variable = self.variable.currentData()
+        self.unit = "°C" if variable == "lst" else "NDVI"
+        region = self.region.currentData()
+        model = None
+        if self.model_registry is not None:
+            try: model = self.model_registry.find(region, variable)
+            except FileNotFoundError: pass
+        if model is not None:
+            self.directory = model['directory']
+            self.unit = model['unit']
+            self.scale = display_scale(self.registry.find(region, variable).metadata)
+        else: self.directory = self.root/'outputs/NO_TRAINED_EVALUATED_MODELS'
+        self.info.setText(f"{str(variable).upper()} / {region} · "+('trained and held-out evaluated' if model else 'No current trained/evaluated models'))
         self.figure.clear()
 
         ax = self.figure.add_subplot(111)
@@ -166,7 +201,10 @@ class AILaboratory(QWidget):
 
         results = data["results"]
 
-        names = list(results)
+        names = [name for name in results if results[name].get(field) is not None and np.isfinite(results[name][field])]
+        if not names:
+            ax.text(.5, .5, field.upper()+' undefined for this target population', ha='center', color='#efbd76')
+            self.details.setText('Undefined scores are not replaced with zero.'); return
 
         names.sort(
             key=lambda name: results[name][field],
@@ -212,7 +250,7 @@ class AILaboratory(QWidget):
             f"Predictive model comparison / {field.upper()}"
         )
 
-        ax.set_xlabel(field.upper())
+        ax.set_xlabel(field.upper() + (f" ({self.unit})" if field != "r2" else ""))
 
         period = data["period"]
 
@@ -270,11 +308,13 @@ class AILaboratory(QWidget):
             labelcolor="#e7edf5"
         )
 
+        peak = data.get('peak_vram_mib')
+        peak_text = f'{peak:.2f} MiB' if peak is not None else 'N/A (CPU)'
         self.details.setText(
             f'Best epoch: {data["best_epoch"]}\n'
             f'Training time: {data["seconds"]:.2f} s\n'
             f'Peak allocated VRAM: '
-            f'{data["peak_vram_mib"]:.2f} MiB'
+            f'{peak_text}'
         )
 
     def draw_importance(self, ax):
@@ -311,7 +351,7 @@ class AILaboratory(QWidget):
         )
 
         with rasterio.open(
-            directory / "forecast_ndvi.tif"
+            directory / f"forecast_{self.variable.currentData()}.tif"
         ) as src:
 
             values = (
@@ -376,7 +416,7 @@ class AILaboratory(QWidget):
             self.details.setText(
                 f'Date: {meta_a["forecast_date"]}\n'
                 f"Mean absolute model difference: "
-                f"{np.abs(finite).mean():.6f} NDVI\n"
+                f"{np.abs(finite).mean():.6f} {self.unit}\n"
                 "Model disagreement is not a calibrated "
                 "uncertainty estimate."
             )
@@ -394,8 +434,7 @@ class AILaboratory(QWidget):
 
             image = ax.imshow(
                 values,
-                cmap="RdYlGn",
-                vmin=-0.2, vmax=1,
+                cmap=self.scale[2], vmin=self.scale[0], vmax=self.scale[1],
                 extent=extent,
                 interpolation="nearest"
             )
@@ -409,7 +448,7 @@ class AILaboratory(QWidget):
                 f'{metadata["predicted_pixels"]:,}\n'
                 f'Spatial coverage: '
                 f'{metadata["prediction_coverage"]:.2%}\n'
-                f'Mean NDVI: {metadata["mean_ndvi"]:.5f}\n'
+                f'Mean {self.unit}: {metadata["mean_"+self.variable.currentData()]:.5f}\n'
                 "Retrospective forecast from December 2025. "
                 "Not yet verified against the actual target month."
             )
@@ -421,5 +460,53 @@ class AILaboratory(QWidget):
             image, ax=ax, shrink=0.8
         )
 
-        bar.set_label("NDVI", color="#bacbd8")
+        bar.set_label(self.unit, color="#bacbd8")
         bar.ax.tick_params(colors="#bacbd8")
+
+    def refresh_catalog(self):
+        self.model_jobs.start('models', lambda check: ModelRegistry(self.root, DatasetRegistry(self.root)))
+
+    def models_ready(self, kind, registry):
+        self.model_registry = registry
+        current_region, current_variable = self.region.currentData(), self.variable.currentData()
+        self.region.blockSignals(True); self.variable.blockSignals(True)
+        self.region.clear()
+        for region in sorted({model['region'] for model in registry.models}): self.region.addItem(region, region)
+        index = self.region.findData(current_region); self.region.setCurrentIndex(index if index >= 0 else 0)
+        self.region.blockSignals(False); self.variable.blockSignals(False)
+        self.models_region_changed()
+        index = self.variable.findData(current_variable)
+        if index >= 0: self.variable.setCurrentIndex(index)
+        self.render()
+
+    def models_region_changed(self, *_):
+        current = self.variable.currentData(); self.variable.blockSignals(True); self.variable.clear()
+        if self.model_registry:
+            for variable in sorted({model['variable'] for model in self.model_registry.models if model['region'] == self.region.currentData()}, key=lambda v: (v != 'ndvi', v != 'lst', v)):
+                self.variable.addItem(variable.upper(), variable)
+        index = self.variable.findData(current); self.variable.setCurrentIndex(index if index >= 0 else 0)
+        self.variable.blockSignals(False); self.render()
+
+    def models_error(self, error):
+        self.info.setText('Model discovery failed: '+error)
+
+    def export_results(self):
+        import sys
+        from datetime import datetime
+        if not self.model_registry: return
+        try: self.model_registry.find(self.region.currentData(), self.variable.currentData())
+        except FileNotFoundError as exc: self.details.setText(str(exc)); return
+        directory = QFileDialog.getExistingDirectory(self, 'Export evaluated predictive results')
+        if not directory: return
+        self.export_directory = Path(directory)/f'aurora_predictive_{datetime.now():%Y%m%d_%H%M%S_%f}'
+        self.cancel_export_button.setEnabled(True); self.export_button.setEnabled(False)
+        self.details.setText('Exporting scientific formats in background… Cancel is available.')
+        self.export_process.start(sys.executable, [str(self.root/'scripts/export_model_result.py'), '--root', str(self.root),
+            '--region', self.region.currentData(), '--variable', self.variable.currentData(), '--output', str(self.export_directory)])
+
+    def cancel_export(self):
+        request_cancel(self.export_directory); self.cancel_export_button.setEnabled(False)
+
+    def export_finished(self, code, *_):
+        self.cancel_export_button.setEnabled(False); self.export_button.setEnabled(True)
+        self.details.setText('Predictive export complete' if code == 0 else 'Predictive export cancelled or failed; partial bundle is not complete')

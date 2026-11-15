@@ -157,6 +157,8 @@ def main():
     start = perf_counter()
 
     with np.load(args.cube, allow_pickle=False) as data:
+        if "channels" in data and str(data["channels"][0]).lower() != "ndvi":
+            raise ValueError("Legacy NDVI command: use train_multivariable.py / forecast_saved.py for LST")
         X = data["X"]
         dates = data["dates"].astype("datetime64[M]")
 

@@ -1,7 +1,7 @@
 # AURORA — Earth System Intelligence Model
 NASA Space Apps Challenge 2026 | Ian & Yatz
 
-Modelo de regresión con imágenes satelitales: tendencias espaciales, magnitud y significancia; predicción NDVI opcional. No es un dashboard. Estado: inicialización, sin resultados científicos todavía.
+Entorno de investigación con observaciones satelitales reales: tendencias espaciales, predicción NDVI/LST y análisis multivariado. El estado actual, los resultados y los límites de validación se documentan en el informe AURORA 5.0 al final de esta página.
 
 ## Trabajo en equipo
 - main: integración revisada; no subir trabajo directo.
@@ -28,3 +28,24 @@ Leer docs/data-contract.md. Configurar Python 3.11/3.12, Earth Engine y proyecto
 3. ConvLSTM si tiempo y validación lo permiten.
 
 Fuente: https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13Q1
+
+## AURORA 5.0 — desarrollo local
+
+En `feature/model-core` hay predicción LST con XGBoost/ConvLSTM y tres referencias,
+selector mensual compartido, Multivariate Laboratory para NDVI/LST y catálogo
+local con lectura por ventanas. Los productos científicos existentes de NDVI se
+conservan. Hay 90 pruebas aprobadas en Python 3.14.4 / PySide6.
+
+Consultar [el informe de implementación, resultados y reproducción](docs/aurora5-report.md).
+Las estimaciones de enero de 2026 son retrospectivas y no observaciones verificadas.
+México sigue sujeto a disponibilidad de datos; la validación posterior del backend Zarr se documenta a continuación.
+
+## Global Intelligence Engine — validación local
+
+Lectura parcial NPZ/NPY/Zarr, estadística por bloques, catálogo configurable,
+trabajos cancelables y exportaciones CSV/JSON/GeoTIFF/PNG. Instalar las extensiones
+con `.venv/bin/python -m pip install -r requirements-global.txt`.
+La suite conserva las 90 pruebas anteriores y pasa 113 pruebas en total.
+Zarr está validado con observaciones reales de Querétaro; México a 5 km y la
+cobertura mundial a 50–100 km siguen pendientes de datos reales.
+Consultar el [informe, comandos, rendimiento y limitaciones](docs/global-intelligence-engine-report.md).

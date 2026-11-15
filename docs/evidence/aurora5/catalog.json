@@ -1,0 +1,109 @@
+{
+  "datasets": [
+    {
+      "id": "lst_samples",
+      "region": "lst_samples",
+      "variable": "lst",
+      "source": "MODIS/061/MOD11A2",
+      "unit": "degC",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        3,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2001-03",
+      "months": 3,
+      "mean_declared_coverage": 0.9734746474386817,
+      "storage": {
+        "format": "npz",
+        "path": "cube.npz"
+      }
+    },
+    {
+      "id": "queretaro",
+      "region": "queretaro",
+      "variable": "ndvi",
+      "source": "MODIS/061/MOD13Q1",
+      "unit": "1",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9473289317464454,
+      "storage": {
+        "format": "npz",
+        "path": "cube.npz"
+      }
+    },
+    {
+      "id": "queretaro_lst",
+      "region": "queretaro",
+      "variable": "lst",
+      "source": "MODIS/061/MOD11A2",
+      "unit": "degC",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9526710682535546,
+      "storage": {
+        "format": "npz",
+        "path": "cube.npz"
+      }
+    },
+    {
+      "id": "sample",
+      "region": "sample",
+      "variable": "ndvi",
+      "source": "MODIS/061/MOD13Q1",
+      "unit": "1",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        3,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2001-03",
+      "months": 3,
+      "mean_declared_coverage": 0.996843598876437,
+      "storage": {
+        "format": "npz",
+        "path": "cube.npz"
+      }
+    }
+  ],
+  "errors": {}
+}

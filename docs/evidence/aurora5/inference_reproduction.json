@@ -1,0 +1,27 @@
+{
+  "persistence": {
+    "max_absolute_difference": 0.0,
+    "predicted_pixels": 11064,
+    "mean_celsius": 18.679874420166016
+  },
+  "seasonal": {
+    "max_absolute_difference": 0.0,
+    "predicted_pixels": 11058,
+    "mean_celsius": 21.34613037109375
+  },
+  "climatology": {
+    "max_absolute_difference": 0.0,
+    "predicted_pixels": 11095,
+    "mean_celsius": 23.992225646972656
+  },
+  "xgboost": {
+    "max_absolute_difference": 0.0,
+    "predicted_pixels": 11095,
+    "mean_celsius": 20.407819747924805
+  },
+  "convlstm": {
+    "max_absolute_difference": 0.0,
+    "predicted_pixels": 11095,
+    "mean_celsius": 20.678815841674805
+  }
+}

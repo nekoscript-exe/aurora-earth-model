@@ -3,6 +3,10 @@
 import json
 import time
 import numpy as np
+from .temporal import TemporalSelector
+from aurora.temporal import select_interval
+from aurora.catalog import ObservationSeries, populate_regions, populate_variables, display_scale
+from .tasks import ReaderJobs
 
 from rasterio.features import rasterize, bounds as geometry_bounds
 from rasterio.transform import from_bounds
@@ -15,7 +19,7 @@ from PySide6.QtCore import Qt, QTimer, QRectF, QPointF, QVariantAnimation, QEasi
 from PySide6.QtGui import QPainter, QImage, QColor, QPen, QPainterPath, QLinearGradient
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel,
-    QPushButton, QComboBox, QSlider, QCheckBox, QSplitter, QScrollArea
+    QPushButton, QComboBox, QSlider, QCheckBox, QProgressBar, QSplitter, QScrollArea
 )
 
 
@@ -30,10 +34,11 @@ class ColorLegend(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.variable = "ndvi"
+        self.scales = dict(SCALES)
         self.setMinimumHeight(88)
 
     def paintEvent(self, event):
-        low, high, name, unit = SCALES[self.variable]
+        low, high, name, unit = self.scales[self.variable]
         painter = QPainter(self)
         painter.setPen(QColor("#bacbd8"))
         painter.drawText(0, 15, unit)
@@ -70,6 +75,7 @@ class Planet(QWidget):
 
         self.frame = None
         self.variable = "ndvi"
+        self.scales = dict(SCALES)
 
         self.mapping = None
         self.base = None
@@ -259,7 +265,7 @@ class Planet(QWidget):
             pos, rr, cc = self.mapping
             values = self.frame[rr, cc]
             valid = np.isfinite(values)
-            lower, upper, name, _ = SCALES[self.variable]
+            lower, upper, name, _ = self.scales[self.variable]
             colors = colormaps[name](np.clip(
                 (values[valid]-lower)/(upper-lower), 0, 1))[:, :3]*255
             flat = rgb.reshape(-1, 3)
@@ -446,19 +452,13 @@ class Planet(QWidget):
 
 class PlanetaryExplorer(QWidget):
 
-    DATASETS = {
-        ("queretaro", "ndvi"): "queretaro",
-        ("queretaro", "lst"): "queretaro_lst",
-        ("mexico", "ndvi"): "mexico",
-        ("mexico", "lst"): "mexico_lst"
-    }
-
     def __init__(self, root, parent=None):
         super().__init__(parent)
 
         from .theme import STYLE
         self.setStyleSheet(STYLE)
         self.root = root
+        self.reader_jobs = ReaderJobs(self, self.read_ready, self.read_error)
         self.values = None
         self.dates = None
 
@@ -524,20 +524,26 @@ class PlanetaryExplorer(QWidget):
         controls = QVBoxLayout()
 
         self.region = QComboBox()
-        self.region.addItem("Queretaro", "queretaro")
-        self.region.addItem("Mexico", "mexico")
+        self.registry = populate_regions(self.region, root)
 
         self.variable = QComboBox()
         self.variable.addItem("NDVI", "ndvi")
         self.variable.addItem("LST", "lst")
 
+        populate_variables(self.variable, self.registry, self.region.currentData(), preserve=False)
+
         load = QPushButton("Load observations")
-        load.clicked.connect(self.load_dataset)
+        load.clicked.connect(lambda _: self.load_dataset(asynchronous=True))
 
         for widget in [self.region, self.variable, load]:
             controls.addWidget(widget)
 
         layout.addLayout(controls)
+        self.read_progress = QProgressBar(); self.read_progress.setRange(0, 0); self.read_progress.hide()
+        self.cancel_read_button = QPushButton('Cancel loading'); self.cancel_read_button.setEnabled(False)
+        self.cancel_read_button.clicked.connect(self.cancel_read)
+        layout.addWidget(self.read_progress); layout.addWidget(self.cancel_read_button)
+
 
         settings = QVBoxLayout()
 
@@ -579,6 +585,11 @@ class PlanetaryExplorer(QWidget):
         layout.addWidget(self.legend)
 
         layout.addLayout(settings)
+
+        self.period = TemporalSelector()
+        layout.addWidget(self.period.create_toggle())
+        layout.addWidget(self.period)
+        self.period.changed.connect(self.apply_period)
 
         self.date = QLabel("No observations loaded")
         self.date.setWordWrap(True)
@@ -638,7 +649,7 @@ class PlanetaryExplorer(QWidget):
         self.details.setWordWrap(True)
         layout.addWidget(self.details)
 
-        self.region.currentIndexChanged.connect(self.reset)
+        self.region.currentIndexChanged.connect(self.region_changed)
         self.variable.currentIndexChanged.connect(self.reset)
         layout.addStretch(1)
         self.reset()
@@ -678,34 +689,52 @@ class PlanetaryExplorer(QWidget):
 
     def reset(self, *_):
 
+        self.reader_jobs.cancel_all()
+        self.set_read_busy(False)
         self.pause()
         self.values = None
         self.dates = None
+        self.period.set_dates([])
         self.set_temporal_controls(False)
-        self.legend.variable = self.variable.currentData()
+        variable = self.variable.currentData()
+        try: self.planet.scales[variable] = self.legend.scales[variable] = display_scale(self.registry.find(self.region.currentData(), variable).metadata)
+        except FileNotFoundError: pass
+        self.legend.variable = variable
         self.legend.update()
         self.planet.clear_layer()
         self.slider.setRange(0, 0)
         self.date.setText("No observations loaded")
         self.details.setText("Load the selected dataset.")
 
-    def load_dataset(self):
+    def load_dataset(self, asynchronous=False):
 
         self.reset()
 
         region = self.region.currentData()
         variable = self.variable.currentData()
 
-        directory = (
-            self.root / "data/processed" /
-            self.DATASETS[(region, variable)]
-        )
-
         try:
+            record = self.registry.find(region, variable)
+            self.planet.scales[variable] = self.legend.scales[variable] = display_scale(record.metadata)
+            if asynchronous:
+                self.details.setText("Opening observed data in background…")
+                def read(check):
+                    series = ObservationSeries(record.directory, variable, check=check)
+                    series[0]
+                    return series
+                self.set_read_busy(True)
+                self.reader_jobs.start('dataset', read)
+                return
+            self.attach_series(ObservationSeries(record.directory, variable))
+        except Exception as exc:
+            self.read_error(str(exc))
 
-            (self.values, self.dates, self.mask, metadata,
-             _) = load_observations(directory, variable)
-            self.provenance = f"{metadata['source']} · {metadata['grid']['crs']}"
+    def attach_series(self, series):
+            self.values = series
+            variable = self.variable.currentData()
+            self.dates, self.mask = self.values.dates, self.values.mask
+            metadata = self.values.metadata
+            self.provenance = f"{metadata['source']} · {metadata['grid']['crs']} · display stride {self.values.stride}"
             self.planet.set_dataset(
                 self.values[0], metadata, variable
             )
@@ -715,43 +744,52 @@ class PlanetaryExplorer(QWidget):
             self.slider.setValue(0)
             self.slider.blockSignals(False)
 
-            if region == "queretaro":
-                self.planet.focus(-99.9, 20.85, 48)
-            else:
-                self.planet.focus(-102.5, 23.6, 4)
+            grid = self.values.reader.grid
+            x, y = grid.affine @ (grid.width/2, grid.height/2)
+            from rasterio.warp import transform
+            lon, lat = transform(grid.crs, "EPSG:4326", [x], [y])
+            self.planet.focus(lon[0], lat[0], min(48, max(1, 8000/max(grid.width, grid.height))))
 
+            self.period.set_dates(self.dates)
             self.set_temporal_controls(True)
             self.render_frame(0)
 
-        except Exception as exc:
-            self.reset()
-            self.details.setText(f"Dataset unavailable: {exc}")
+
+    def region_changed(self, *_):
+        populate_variables(self.variable, self.registry, self.region.currentData())
+        self.reset()
+
+    def read_error(self, message):
+        self.reset(); self.details.setText(f"Dataset unavailable: {message}")
+
+    def read_ready(self, kind, value):
+        self.set_read_busy(False)
+        if kind == 'dataset': self.attach_series(value)
+        else: self.apply_frame(*value)
 
     def render_frame(self, index):
 
         if self.values is None:
             return
 
-        frame = self.values[index]
+        if self.values.reader.format == 'zarr' or self.mask.size > 262144:
+            series = self.values
+            self.set_read_busy(True)
+            self.reader_jobs.start('frame', lambda check: (index, series[index]))
+            return
+        self.apply_frame(index, self.values[index])
 
+    def apply_frame(self, index, frame):
         self.planet.set_frame(frame)
 
         finite = frame[np.isfinite(frame)]
-        coverage = finite.size / max(int(self.mask.sum()), 1)
+        weighted_mean, coverage = self.values.summary(frame)
+        mean = f"{weighted_mean:.4f}" if weighted_mean is not None else "N/A"
 
-        mean = (
-            f"{finite.mean():.4f}"
-            if finite.size else "N/A"
-        )
-
-        unit = (
-            "NDVI" if self.variable.currentData() == "ndvi"
-            else "°C"
-        )
+        unit = self.values.spec.identifier+" · "+self.values.spec.unit
 
         scale = (
-            "-0.2 to 1.0" if unit == "NDVI"
-            else "-10 to 70 °C"
+            f"{self.planet.scales[self.variable.currentData()][0]} to {self.planet.scales[self.variable.currentData()][1]}"
         )
 
         self.date.setText(
@@ -761,16 +799,28 @@ class PlanetaryExplorer(QWidget):
 
         self.details.setText(
             f"{self.provenance}\n{unit} | Valid pixels: {finite.size:,} | "
-            f"Coverage: {coverage:.2%} | Mean: {mean}\n"
+            f"Coverage: {coverage:.2%} | Mean: {mean} (area weighted)\n"
             f"Fixed scale: {scale} | "
             "Missing observations remain uncolored."
         )
 
+    def apply_period(self):
+        if self.values is None or not len(self.period.dates):
+            return
+        try:
+            selected = select_interval(self.dates, *self.period.interval())
+        except ValueError:
+            return
+        indices = np.flatnonzero(selected)
+        self.pause()
+        self.slider.setRange(int(indices[0]), int(indices[-1]))
+        self.slider.setValue(int(indices[0]))
+
     def step(self, amount):
 
-        if self.values is not None:
+        if self.values is not None and not self.reader_jobs.busy('frame'):
             self.slider.setValue(
-                (self.slider.value()+amount) % len(self.dates)
+                (self.slider.value()-self.slider.minimum()+amount) % (self.slider.maximum()-self.slider.minimum()+1)+self.slider.minimum()
             )
 
     def toggle_play(self):
@@ -783,3 +833,9 @@ class PlanetaryExplorer(QWidget):
         else:
             self.timer.start(self.speed.currentData())
             self.play.setText("Pause")
+
+    def set_read_busy(self, busy):
+        self.read_progress.setVisible(busy); self.cancel_read_button.setEnabled(busy)
+
+    def cancel_read(self):
+        self.reset(); self.details.setText('Read cancelled; no incomplete observation displayed.')

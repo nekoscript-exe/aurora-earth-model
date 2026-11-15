@@ -111,7 +111,7 @@ def validate(output):
     host.grab().save(str(output/'application.png'))
     host.resize(1000, 680); app.processEvents()
     host.grab().save(str(output/'application_minimum.png'))
-    assert host.tabs.count() == 8
+    assert host.tabs.count() == 9
     host.close()
     result = {'python': platform.python_version(), 'pyside6': qt_version,
               'dataset': meta['source'], 'crs': str(grid.crs),

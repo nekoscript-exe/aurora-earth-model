@@ -1,0 +1,12 @@
+{
+  "scientific_result_choices": 6,
+  "ui_tabs": 9,
+  "zarr_loads": [
+    "Planetary Explorer",
+    "Time Machine"
+  ],
+  "evaluated_predictive_views": 16,
+  "gui_descriptive_job": "outputs/global_engine/queretaro_lst_zarr_20261115_122545_524516",
+  "gui_cancelled_job": "outputs/global_engine/queretaro_lst_zarr_20261115_122547_385205",
+  "unhandled_qt_errors": []
+}

@@ -1,0 +1,30 @@
+Collecting zarr<4,>=3.1
+  Downloading zarr-3.4.2-py3-none-any.whl.metadata (5.8 kB)
+Collecting pyproj<4,>=3.7
+  Downloading pyproj-3.8.0-cp314-cp314-manylinux_2_28_x86_64.whl.metadata (40 kB)
+Collecting donfig>=0.8 (from zarr<4,>=3.1)
+  Downloading donfig-0.8.1.post1-py3-none-any.whl.metadata (5.0 kB)
+Collecting google-crc32c>=1.5 (from zarr<4,>=3.1)
+  Downloading google_crc32c-1.9.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.2 kB)
+Collecting msgspec>=0.19 (from zarr<4,>=3.1)
+  Downloading msgspec-0.22.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (6.0 kB)
+Collecting numcodecs!=0.17.0,>=0.16.6 (from zarr<4,>=3.1)
+  Downloading numcodecs-0.17.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (3.2 kB)
+Requirement already satisfied: numpy>=2 in ./.venv/lib/python3.14/site-packages (from zarr<4,>=3.1) (2.5.4)
+Requirement already satisfied: packaging>=22.0 in ./.venv/lib/python3.14/site-packages (from zarr<4,>=3.1) (26.3)
+Requirement already satisfied: typing-extensions>=4.14 in ./.venv/lib/python3.14/site-packages (from zarr<4,>=3.1) (4.16.0)
+Requirement already satisfied: certifi in ./.venv/lib/python3.14/site-packages (from pyproj<4,>=3.7) (2026.10.23)
+Collecting pyyaml (from donfig>=0.8->zarr<4,>=3.1)
+  Using cached pyyaml-6.0.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Downloading zarr-3.4.2-py3-none-any.whl (410 kB)
+Downloading pyproj-3.8.0-cp314-cp314-manylinux_2_28_x86_64.whl (9.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 28.9 MB/s eta 0:00:00
+Downloading donfig-0.8.1.post1-py3-none-any.whl (21 kB)
+Downloading google_crc32c-1.9.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (36 kB)
+Downloading msgspec-0.22.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (230 kB)
+Downloading numcodecs-0.17.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 32.2 MB/s eta 0:00:00
+Using cached pyyaml-6.0.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (794 kB)
+Installing collected packages: pyyaml, pyproj, numcodecs, msgspec, google-crc32c, donfig, zarr
+
+Successfully installed donfig-0.8.1.post1 google-crc32c-1.9.0 msgspec-0.22.0 numcodecs-0.17.1 pyproj-3.8.0 pyyaml-6.0.3 zarr-3.4.2

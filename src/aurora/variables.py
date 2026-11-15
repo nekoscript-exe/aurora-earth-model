@@ -49,7 +49,7 @@ VARIABLES = {
         scale_factor=0.02,
         offset=-273.15,
         description="Daytime temperature of the land surface.",
-        prediction_supported=False
+        prediction_supported=True
     )
 }
 

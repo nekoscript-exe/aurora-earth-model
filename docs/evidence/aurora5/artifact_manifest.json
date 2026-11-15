@@ -1,0 +1,425 @@
+{
+  "branch": "feature/model-core",
+  "files": {
+    "README.md": {
+      "bytes": 2476,
+      "sha256": "2341ad490f27779729482552cacdadc3fd9bd6a6b63cef2748ccbba549225be3"
+    },
+    "config/dataset_targets.json": {
+      "bytes": 251,
+      "sha256": "1d7a7c85a2c4a9bac47d2de4f15b2d1fcf0157cffebce1579bc2559ae4cf23ec"
+    },
+    "data/processed/queretaro/cube.npz": {
+      "bytes": 11981670,
+      "sha256": "3880fa9f837c767c581c522b704cb109d700ded303c4fee17c5346666b58ff9e"
+    },
+    "data/processed/queretaro_lst/cube.npz": {
+      "bytes": 7694047,
+      "sha256": "7fcd259175889b01fcb9c433a8d57986633891bf9c09de2e03ce6c3457b7ee36"
+    },
+    "docs/aurora5-report.md": {
+      "bytes": 23352,
+      "sha256": "422b5463a9c7154f31146c3accf298de1c54cddba7699b5e8bf5fbb552d62d31"
+    },
+    "docs/evidence/aurora5/catalog.json": {
+      "bytes": 2136,
+      "sha256": "82df2c0593a67da4e8568ec3777d466907af0f34552e561635acd9bbcef3f785"
+    },
+    "docs/evidence/aurora5/environment.json": {
+      "bytes": 225,
+      "sha256": "0b65e03788bb7f6365c8ad87cbcc97157eb6a14edff19450eb9e6ab038cf431c"
+    },
+    "docs/evidence/aurora5/history_resources.txt": {
+      "bytes": 832,
+      "sha256": "310c9a469bff6fe6132686258573817b66a5e7ca39beac7758e1ce0029ac1ba1"
+    },
+    "docs/evidence/aurora5/inference_reproduction.json": {
+      "bytes": 641,
+      "sha256": "d8581038157f322f0b197a3b0519e7b1b4d1588a87c3ddadb04a55ed0f50a6ce"
+    },
+    "docs/evidence/aurora5/inference_resources.txt": {
+      "bytes": 887,
+      "sha256": "b1dca4141707467c977f619f7e851f856534c7d0849c7a0162a10446b3a2aef6"
+    },
+    "docs/evidence/aurora5/lst_benchmark.json": {
+      "bytes": 897,
+      "sha256": "feb7abb6a1ea1f050d3ca14c9e90a1d4a9e7b731470511689a3ab57f7e6ceaf1"
+    },
+    "docs/evidence/aurora5/lst_metrics.json": {
+      "bytes": 3322,
+      "sha256": "918175e41acf849b58148e68cd25318f1fb39899d0d7296fada9f33838229a52"
+    },
+    "docs/evidence/aurora5/multivariate_report.json": {
+      "bytes": 9623,
+      "sha256": "2929dd82f9f0565b20492496ddcb65cae0f434c2959c4f119c3b5822fca0f4cd"
+    },
+    "docs/evidence/aurora5/multivariate_resources.txt": {
+      "bytes": 901,
+      "sha256": "35a6707ff1b21f7121e3dc1ee91d19b4c5f6023df1251205c690bfae0f3cfda7"
+    },
+    "docs/evidence/aurora5/ndvi_preservation.json": {
+      "bytes": 4056,
+      "sha256": "096983729765d41dc20d60879088ada2f09a2689f5d71bba2002ba75c924cc30"
+    },
+    "docs/evidence/aurora5/tests.txt": {
+      "bytes": 179,
+      "sha256": "9c5080c3d455a5ec0edf8e0010da81d2938eb6b1923e160206c32dbc6b13886d"
+    },
+    "docs/evidence/aurora5/training_resources.txt": {
+      "bytes": 883,
+      "sha256": "ac13c98eb75465897f1d8b54bfa42f791307349216e29f7bea35ad2a201057ae"
+    },
+    "docs/evidence/aurora5/validation.json": {
+      "bytes": 713,
+      "sha256": "6eb501789146ca0150b593352ce8497d6cef08bff3cb37e0a4f6e52106907680"
+    },
+    "docs/evidence/aurora5/visual/date_interval.png": {
+      "bytes": 152837,
+      "sha256": "cd780782c92966b3309362dc00d772904958b1da8c9e9bb2a6c04c3f454ed39a"
+    },
+    "docs/evidence/aurora5/visual/lst_planetary.png": {
+      "bytes": 203327,
+      "sha256": "eb389db05f263ba693d2c44433410ad009b74b3ca9ac501c6799deba2ecedacd"
+    },
+    "docs/evidence/aurora5/visual/lst_predictive_0.png": {
+      "bytes": 135803,
+      "sha256": "8d4315e00a472f61f91b6b4ffb780cd57d2e655b0c8c5527dba13f8b65182014"
+    },
+    "docs/evidence/aurora5/visual/lst_predictive_3.png": {
+      "bytes": 153087,
+      "sha256": "7b609f0d442d1f15e0103d6167ae5a63834fefc48136bea086e346202e99af27"
+    },
+    "docs/evidence/aurora5/visual/lst_predictive_6.png": {
+      "bytes": 143168,
+      "sha256": "3f297dc4f80fb25ec6e88b2519e0aee94150c0e403330eed712f1d72aa5ea7f7"
+    },
+    "docs/evidence/aurora5/visual/minimum_window.png": {
+      "bytes": 154533,
+      "sha256": "ecb71d1dc10c1d5c4375b3b487b37ee0e668794ef44b5f6c12d18b482e4e4486"
+    },
+    "docs/evidence/aurora5/visual/multivariate_0.png": {
+      "bytes": 184155,
+      "sha256": "93b17e528fc9a8c1eae4d47fce84d6e3042bbf81fcde232b67ed7f95af1c1e51"
+    },
+    "docs/evidence/aurora5/visual/multivariate_2.png": {
+      "bytes": 125950,
+      "sha256": "1ff5e0c2e52a80c7cca1417286fc49d2a0234dc825d324d6df8093549c7541c6"
+    },
+    "docs/evidence/aurora5/visual/multivariate_3.png": {
+      "bytes": 121311,
+      "sha256": "ee5cdc6bff63cf2c2695ebadabfe6d165ab9071881c17c9b3e18c45257642f2b"
+    },
+    "docs/evidence/aurora5/visual/multivariate_4.png": {
+      "bytes": 104943,
+      "sha256": "ad09a28118f24940fe43d1b71a8012627a1dbf589558021269970b610b1d2bea"
+    },
+    "outputs/aurora5/lst_reloaded_final/climatology.npz": {
+      "bytes": 37483,
+      "sha256": "6344d0020dd05aeebdf5af159f1ada64504754c9c0f4b42a077e1e55795790d4"
+    },
+    "outputs/aurora5/lst_reloaded_final/climatology_lst.tif": {
+      "bytes": 39755,
+      "sha256": "0964dbfd19a3fcdd473eb7cf373efcc5c1b9f0abf008c66158c6c7ab635a6014"
+    },
+    "outputs/aurora5/lst_reloaded_final/convlstm.npz": {
+      "bytes": 38561,
+      "sha256": "29c6ab18c4fd0182e42309832c35af7fbb2c1f0760c2a83c2b580d161a7a572d"
+    },
+    "outputs/aurora5/lst_reloaded_final/convlstm_lst.tif": {
+      "bytes": 40385,
+      "sha256": "a6e9b292b8015ee0762a7655b230a8e7b5ad905a22e60a46d922d6b01427d2a2"
+    },
+    "outputs/aurora5/lst_reloaded_final/metadata.json": {
+      "bytes": 156,
+      "sha256": "90c4a500002f07fe00650ae04f28301beae0bd1dd241bc18cfd57310af8c6f7a"
+    },
+    "outputs/aurora5/lst_reloaded_final/persistence.npz": {
+      "bytes": 24058,
+      "sha256": "fab7fd7a26bd10fb7853d930ec93089f7df1d3c90e6eeb447e80cdb181c80c0b"
+    },
+    "outputs/aurora5/lst_reloaded_final/persistence_lst.tif": {
+      "bytes": 28659,
+      "sha256": "a71cba58ba5ce8b2302a64c32fca7d4da1f40de2f1a2daea042b2953016c9bc8"
+    },
+    "outputs/aurora5/lst_reloaded_final/seasonal.npz": {
+      "bytes": 24579,
+      "sha256": "7bd6723858e491af3c1d2d141d5028e6154d2a14855ed0318192802bb9f32a40"
+    },
+    "outputs/aurora5/lst_reloaded_final/seasonal_lst.tif": {
+      "bytes": 28983,
+      "sha256": "20d83e7053ed59a6755c6effb8dbcedcf14c79d4257e3bb60900e2f503dcc9c8"
+    },
+    "outputs/aurora5/lst_reloaded_final/xgboost.npz": {
+      "bytes": 36561,
+      "sha256": "470a2d64daf2baf078c3e304ad682069550a449dc304354f506123069fdad122"
+    },
+    "outputs/aurora5/lst_reloaded_final/xgboost_lst.tif": {
+      "bytes": 39001,
+      "sha256": "824b95d7129f3ec6eb8e614f727a7ea8cbe6f6f37b951127d70522e5437f8c62"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/analysis.npz": {
+      "bytes": 9715583,
+      "sha256": "1c4dbb28a65f209b8b4f34c0b5213fbad7246cf7aa1f49e39a6ca93c4dacccd3"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/anomaly_pairs.tif": {
+      "bytes": 14824,
+      "sha256": "01b047d63e1e678e21f9da67dff45d02c09c746f00491ec708fe14d333a1db7b"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/anomaly_pearson.tif": {
+      "bytes": 42329,
+      "sha256": "25e601ace31493805c1eb9d9fe7df677559277d1db254de41392ee28917310dc"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/anomaly_q_ar1_diagnostic.tif": {
+      "bytes": 47199,
+      "sha256": "36cde3ab7a12c406f354297cc6eedfc41411f21ed82b8f15d44cce3aeab86883"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/anomaly_spearman.tif": {
+      "bytes": 42525,
+      "sha256": "3dd5d8d41b10fb450febb2b0efd164d6fdedea4c03f8ca6df6773ac37113d762"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/raw_pairs.tif": {
+      "bytes": 15040,
+      "sha256": "39e5e4b1ffa980597af5f28d83c2559b72ea792ea76105cbdc767bf3e1801527"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/raw_pearson.tif": {
+      "bytes": 42809,
+      "sha256": "ef615619cdd43682cfc1cd4ee2ff2252f0327d2885333a353fa70a377178863c"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/raw_q_ar1_diagnostic.tif": {
+      "bytes": 46409,
+      "sha256": "1c4d497cf12ad01ce1319e953e4f25951a820d4a787b27be44234c6476ce86e1"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/raw_spearman.tif": {
+      "bytes": 42971,
+      "sha256": "710a74085221f1baf1396b15e894558d8617ad329394ea39bd84151be799de00"
+    },
+    "outputs/aurora5/multivariate/queretaro_scientific/report.json": {
+      "bytes": 9623,
+      "sha256": "2929dd82f9f0565b20492496ddcb65cae0f434c2959c4f119c3b5822fca0f4cd"
+    },
+    "outputs/aurora5/queretaro_lst/climatology_model.npz": {
+      "bytes": 462535,
+      "sha256": "875e5ad5cb7d0672a3165135ab332a7a1cd72f9a0726bb6fe47f8de37a625304"
+    },
+    "outputs/aurora5/queretaro_lst/convlstm/best_model.pt": {
+      "bytes": 266745,
+      "sha256": "deb397e9c110f7b243924399e1f3627e07a7a772b3ca56faf09c105f81d3c4e4"
+    },
+    "outputs/aurora5/queretaro_lst/convlstm/metrics.json": {
+      "bytes": 3690,
+      "sha256": "c648d3a6da97805317215d37d5e0b0a5d534bbb691bd8305f3899a1178a0aceb"
+    },
+    "outputs/aurora5/queretaro_lst/final_benchmark.json": {
+      "bytes": 897,
+      "sha256": "feb7abb6a1ea1f050d3ca14c9e90a1d4a9e7b731470511689a3ab57f7e6ceaf1"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/climatology/forecast.npz": {
+      "bytes": 42267,
+      "sha256": "a906b605b5cd053304205a72c2140950a0426d41284dfab19702aaea517c0d5b"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/climatology/forecast_lst.tif": {
+      "bytes": 39755,
+      "sha256": "0964dbfd19a3fcdd473eb7cf373efcc5c1b9f0abf008c66158c6c7ab635a6014"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/climatology/forecast_metadata.json": {
+      "bytes": 253,
+      "sha256": "de5ce700c22b21e3262f5d13117505ba277e51ab1b4933eeeb7e5132bb6226fb"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/convlstm/forecast.npz": {
+      "bytes": 43345,
+      "sha256": "898e27e148cb178a5066b6565b75338a7c85dba024d20dac1e80dc95f50e7a35"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/convlstm/forecast_lst.tif": {
+      "bytes": 40385,
+      "sha256": "a6e9b292b8015ee0762a7655b230a8e7b5ad905a22e60a46d922d6b01427d2a2"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/convlstm/forecast_metadata.json": {
+      "bytes": 253,
+      "sha256": "a050b092e0e3c81c1893cea9f848cb182b355e50771117b9c183ffbed52e4158"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/persistence/forecast.npz": {
+      "bytes": 28861,
+      "sha256": "09f97648d05bf613e612fa79312e033464ef18ddd5ae5aadbcda13c4bca928e3"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/persistence/forecast_lst.tif": {
+      "bytes": 28659,
+      "sha256": "a71cba58ba5ce8b2302a64c32fca7d4da1f40de2f1a2daea042b2953016c9bc8"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/persistence/forecast_metadata.json": {
+      "bytes": 253,
+      "sha256": "3fef6c03e4f56e23d363cdf7388c1c5301fa53414d2d45b3ad82946064d56634"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/seasonal/forecast.npz": {
+      "bytes": 29382,
+      "sha256": "230185f9b4c3ebbe509034945aaf1697cd45b6be2cfd12f4ed3625931590f85c"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/seasonal/forecast_lst.tif": {
+      "bytes": 28983,
+      "sha256": "20d83e7053ed59a6755c6effb8dbcedcf14c79d4257e3bb60900e2f503dcc9c8"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/seasonal/forecast_metadata.json": {
+      "bytes": 252,
+      "sha256": "e719a5b10c6e1c61b4a3834322017811c0e2a2d551199cd4fac82f43fb96d9f4"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/xgboost/forecast.npz": {
+      "bytes": 41345,
+      "sha256": "befa8bb79f97fd4c373326c0d934caf5e3b7c74a3fa1b4620388c6908d84cceb"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/xgboost/forecast_lst.tif": {
+      "bytes": 39001,
+      "sha256": "824b95d7129f3ec6eb8e614f727a7ea8cbe6f6f37b951127d70522e5437f8c62"
+    },
+    "outputs/aurora5/queretaro_lst/forecast/xgboost/forecast_metadata.json": {
+      "bytes": 253,
+      "sha256": "3ed9886b4e4d2da02997bd2ec6f44c4241b109f114a053d0f678336ded5ef461"
+    },
+    "outputs/aurora5/queretaro_lst/metrics.json": {
+      "bytes": 3322,
+      "sha256": "918175e41acf849b58148e68cd25318f1fb39899d0d7296fada9f33838229a52"
+    },
+    "outputs/aurora5/queretaro_lst/normalization.json": {
+      "bytes": 60,
+      "sha256": "c214cd033ac0b030fec39020bf9f34953d4ce969053ac77f530a49433c30150d"
+    },
+    "outputs/aurora5/queretaro_lst/test_predictions.npz": {
+      "bytes": 10183886,
+      "sha256": "8bcdc315138c5e806a966be24cfcc59574f6dc896cf06e81aa99ec437ef28c65"
+    },
+    "outputs/aurora5/queretaro_lst/validation_predictions.npz": {
+      "bytes": 7691176,
+      "sha256": "1672a5fafe6b3ad23460fb0b1bdfccada18a218a82e801680f1d43d173c7bd1f"
+    },
+    "outputs/aurora5/queretaro_lst/xgboost/metrics.json": {
+      "bytes": 431,
+      "sha256": "990350c37ab306af7b6dfa15c467937f94f4b9c0670113834140fb0440af8126"
+    },
+    "outputs/aurora5/queretaro_lst/xgboost/model.ubj": {
+      "bytes": 503651,
+      "sha256": "8d63a5339034dcab398dc0046e3afaddb8994abadf19ca8d3e01b49ca5808232"
+    },
+    "scripts/analyze_multivariate.py": {
+      "bytes": 679,
+      "sha256": "051cb56a305bec23377945d24262dd984158e64dd3c281f673b74b7782d78d5a"
+    },
+    "scripts/catalog_datasets.py": {
+      "bytes": 434,
+      "sha256": "271da67e903a09eda30e66dc0d2b5aa424ef2cd4307da3ce4574f3b96b0c15d4"
+    },
+    "scripts/explore.py": {
+      "bytes": 5950,
+      "sha256": "10b9ac2384c068d46521d7bcb35283f440148010a046574cdb0ae4225f654095"
+    },
+    "scripts/forecast_saved.py": {
+      "bytes": 498,
+      "sha256": "583748fed58391e0073feb6ab924d2c367ee404bfddf1db22dcc7e6a4f21adf4"
+    },
+    "scripts/predict.py": {
+      "bytes": 6619,
+      "sha256": "0db3c43c02c3d9c0f5414c669e965c3a760a3b5a1f1dbed99af7e88e37505e6a"
+    },
+    "scripts/prepare_dataset_store.py": {
+      "bytes": 1082,
+      "sha256": "62da034d45d2408f44f163593b58525e2ac0a599b65212f63c0f1db577fe701f"
+    },
+    "scripts/train_deep.py": {
+      "bytes": 8610,
+      "sha256": "8f148eaa9f9a68612e7f7fa5e669aeaca25f9b29829c7c4740490ab3636f6c3d"
+    },
+    "scripts/train_multivariable.py": {
+      "bytes": 782,
+      "sha256": "d64a8b0bb7a9ce05d18d0cdc01ff06a5bbd88177b78ba339e84bea4613ce9818"
+    },
+    "scripts/validate_aurora5.py": {
+      "bytes": 3978,
+      "sha256": "151ba6565c381cb7af30286add013113005f4168025ed452ef5188d0c2bc778f"
+    },
+    "scripts/validate_planetary.py": {
+      "bytes": 6367,
+      "sha256": "195c8a3bf4cd8ebfa9b287f797277fbc55a67ba5121ae59b841d39b2a6fb361e"
+    },
+    "src/aurora/catalog.py": {
+      "bytes": 11251,
+      "sha256": "b16e92ed1a9db000c2042672e2fe73b195e41252b8db7f41e23252c959327ea1"
+    },
+    "src/aurora/desktop/ai_lab.py": {
+      "bytes": 11859,
+      "sha256": "cb9c5ae3082ecfba3891e73606a9fe68c6cf4eddeebf4def76c2d15b4b0fdd5b"
+    },
+    "src/aurora/desktop/geospatial.py": {
+      "bytes": 285,
+      "sha256": "c9c68bebc4385ef5e10b229f780c237f58ed158e2b527f25b8606cea1621d393"
+    },
+    "src/aurora/desktop/globe.py": {
+      "bytes": 28988,
+      "sha256": "1c98d09c280c767bce28480d026bc149fdf9a76edbca1c550625c62d01ff989b"
+    },
+    "src/aurora/desktop/multivariate_lab.py": {
+      "bytes": 8307,
+      "sha256": "bdc3a0059529f3a572357588d2f6a53ef27dec367e6a3c1af3f98ccbadd190bf"
+    },
+    "src/aurora/desktop/temporal.py": {
+      "bytes": 4981,
+      "sha256": "ef13413eb7184f56289839e1f18dfc0a984eab73a7c7529eb0d9b79d584cf643"
+    },
+    "src/aurora/desktop/time_machine.py": {
+      "bytes": 8977,
+      "sha256": "716e1c059712a92c07d217a9e03eef89a24990ba62c51e0155badb0c63465079"
+    },
+    "src/aurora/desktop/window.py": {
+      "bytes": 23873,
+      "sha256": "352288f746c88063447ccfde05c1769087847047e91fb294e8ae4394797866fe"
+    },
+    "src/aurora/geospatial.py": {
+      "bytes": 9331,
+      "sha256": "98795b7745d6f4a2fecfa7e3ad48374c18c027e35d6cf52f9f9b60afff0bb7a9"
+    },
+    "src/aurora/models/convlstm.py": {
+      "bytes": 1900,
+      "sha256": "0ee10af7cde8dd8e476c4ef532776d8bd2623c05c93bf670861ed2cab4d4f435"
+    },
+    "src/aurora/models/forecasting.py": {
+      "bytes": 15003,
+      "sha256": "2b51864fcc331a43f2d4e015d907c1ff94a669a185b18621e074b6e230f77163"
+    },
+    "src/aurora/multivariate.py": {
+      "bytes": 11814,
+      "sha256": "b6d9d15f76a29c3fccd55d2cd95679fd12323dfe589d1c9ee3aaafa92dcb6034"
+    },
+    "src/aurora/temporal.py": {
+      "bytes": 1740,
+      "sha256": "86d43c3f505eba93732ab647a8bb5a71052d535b0b3d60e87f1d98d625c70317"
+    },
+    "src/aurora/variables.py": {
+      "bytes": 1438,
+      "sha256": "054ecc390a0b31a98c3b4f6518d04a6984790616ef63a7b5fe3d7122be2bb94b"
+    },
+    "tests/test_aurora5_integration.py": {
+      "bytes": 3564,
+      "sha256": "094e85c8f99406703d448f4c8b1ebb48094069739a360dbac90775423a349827"
+    },
+    "tests/test_catalog.py": {
+      "bytes": 2907,
+      "sha256": "012d6d7e985991cbb2ce286873ba90721423e6a74513f46861a710fe9ad9eb97"
+    },
+    "tests/test_forecasting_multivariable.py": {
+      "bytes": 1516,
+      "sha256": "2751a263e0a32314d337bbe54f2ad3a0f8c803b09b52cebd6410692b02754385"
+    },
+    "tests/test_multivariate.py": {
+      "bytes": 1558,
+      "sha256": "9999e87ece0adf37e2a755c9746aba51fbbdcb71def73373ef60b2eb858f2e87"
+    },
+    "tests/test_planetary_explorer.py": {
+      "bytes": 6506,
+      "sha256": "9d8f0ca41c1db067260a6610cd3941c196264441cedf4f22f53301b3a6d43b43"
+    },
+    "tests/test_temporal.py": {
+      "bytes": 1214,
+      "sha256": "2cb2936e01cad8a5e30518dbfa4734ac3315000f88925c98475b30215fe65e12"
+    },
+    "tests/test_variables.py": {
+      "bytes": 953,
+      "sha256": "ec464ac49245f1bdc0de03f836ec8f4547a5916ff01ab8a9094d00ee225f3445"
+    }
+  }
+}

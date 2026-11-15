@@ -1,0 +1,410 @@
+{
+  "period": [
+    "2001-01",
+    "2025-12"
+  ],
+  "alignment": "exact; no resampling",
+  "datasets": {
+    "ndvi": "queretaro",
+    "lst": "queretaro_lst"
+  },
+  "common_regional_pixels": 11511,
+  "paired_observations": 3149060,
+  "climatology": {
+    "period": [
+      "2002-01",
+      "2018-12"
+    ],
+    "minimum_samples_per_calendar_month": 8,
+    "support": "coincident valid NDVI and LST only"
+  },
+  "minimum_pairs_per_map": 36,
+  "map_lags": [
+    -12,
+    -6,
+    -3,
+    -1,
+    0,
+    1,
+    3,
+    6,
+    12
+  ],
+  "coverage_sensitivity": {
+    "0.5": {
+      "raw": {
+        "pearson": -0.5135127016853782,
+        "spearman": -0.48180902719160207,
+        "months": 294
+      },
+      "anomaly": {
+        "pearson": -0.7583393915004424,
+        "spearman": -0.7256237139386327,
+        "months": 294
+      }
+    },
+    "0.7": {
+      "raw": {
+        "pearson": -0.5198783179412031,
+        "spearman": -0.49726508577221185,
+        "months": 284
+      },
+      "anomaly": {
+        "pearson": -0.7599823902899705,
+        "spearman": -0.7272069796808632,
+        "months": 280
+      }
+    },
+    "0.9": {
+      "raw": {
+        "pearson": -0.5315532872891268,
+        "spearman": -0.5554805496451354,
+        "months": 227
+      },
+      "anomaly": {
+        "pearson": -0.7004103658833946,
+        "spearman": -0.6752702779895738,
+        "months": 213
+      }
+    },
+    "0.95": {
+      "raw": {
+        "pearson": -0.5746124972884054,
+        "spearman": -0.6248990892295022,
+        "months": 188
+      },
+      "anomaly": {
+        "pearson": -0.6477141675437058,
+        "spearman": -0.6205342357261142,
+        "months": 171
+      }
+    }
+  },
+  "seasonal_coverage": [
+    {
+      "month": 1,
+      "paired_coverage": 0.9660637650942576
+    },
+    {
+      "month": 2,
+      "paired_coverage": 0.9692016332203979
+    },
+    {
+      "month": 3,
+      "paired_coverage": 0.9679193814612111
+    },
+    {
+      "month": 4,
+      "paired_coverage": 0.9616297454608634
+    },
+    {
+      "month": 5,
+      "paired_coverage": 0.9476570237164451
+    },
+    {
+      "month": 6,
+      "paired_coverage": 0.8255616366953349
+    },
+    {
+      "month": 7,
+      "paired_coverage": 0.8531526366084614
+    },
+    {
+      "month": 8,
+      "paired_coverage": 0.7871184084788462
+    },
+    {
+      "month": 9,
+      "paired_coverage": 0.8839927026322647
+    },
+    {
+      "month": 10,
+      "paired_coverage": 0.8581461211015551
+    },
+    {
+      "month": 11,
+      "paired_coverage": 0.9607471114586048
+    },
+    {
+      "month": 12,
+      "paired_coverage": 0.9615949960906959
+    }
+  ],
+  "seasonal_anomaly_sensitivity": {
+    "DJF": {
+      "pearson": -0.460234152632385,
+      "spearman": -0.42196301564722616,
+      "months": 75
+    },
+    "MAM": {
+      "pearson": -0.7512634191731941,
+      "spearman": -0.7247795163584637,
+      "months": 75
+    },
+    "JJA": {
+      "pearson": -0.9216632250578468,
+      "spearman": -0.9009518773135907,
+      "months": 61
+    },
+    "SON": {
+      "pearson": -0.7230586185430402,
+      "spearman": -0.7450127877237852,
+      "months": 69
+    }
+  },
+  "leave_one_month_out": [
+    {
+      "excluded_calendar_month": 1,
+      "pearson": -0.7694315680826388,
+      "spearman": -0.7405678265400648,
+      "months": 255
+    },
+    {
+      "excluded_calendar_month": 2,
+      "pearson": -0.7775269760863004,
+      "spearman": -0.7497213698471514,
+      "months": 255
+    },
+    {
+      "excluded_calendar_month": 3,
+      "pearson": -0.7693136430619691,
+      "spearman": -0.7315423807318203,
+      "months": 255
+    },
+    {
+      "excluded_calendar_month": 4,
+      "pearson": -0.7705028009654455,
+      "spearman": -0.7341897290412228,
+      "months": 255
+    },
+    {
+      "excluded_calendar_month": 5,
+      "pearson": -0.7432387977746803,
+      "spearman": -0.710539456924502,
+      "months": 255
+    },
+    {
+      "excluded_calendar_month": 6,
+      "pearson": -0.7326496622380266,
+      "spearman": -0.7090571435399021,
+      "months": 260
+    },
+    {
+      "excluded_calendar_month": 7,
+      "pearson": -0.7375248499845571,
+      "spearman": -0.70161000701294,
+      "months": 257
+    },
+    {
+      "excluded_calendar_month": 8,
+      "pearson": -0.7463197979933726,
+      "spearman": -0.7155351735214156,
+      "months": 262
+    },
+    {
+      "excluded_calendar_month": 9,
+      "pearson": -0.7590615823074195,
+      "spearman": -0.7238633664374264,
+      "months": 257
+    },
+    {
+      "excluded_calendar_month": 10,
+      "pearson": -0.7620544524983383,
+      "spearman": -0.7224193782333317,
+      "months": 259
+    },
+    {
+      "excluded_calendar_month": 11,
+      "pearson": -0.7669559029052384,
+      "spearman": -0.7314229678091709,
+      "months": 255
+    },
+    {
+      "excluded_calendar_month": 12,
+      "pearson": -0.7809877721653321,
+      "spearman": -0.7525757005558129,
+      "months": 255
+    }
+  ],
+  "stable_footprint_sensitivity": {
+    "pixels_with_90pct_pairs": 9339,
+    "pearson": -0.7666527533967011,
+    "spearman": -0.7283225143536126,
+    "months": 291
+  },
+  "detrended_regional_anomaly_sensitivity": {
+    "pearson": -0.7566030851579495,
+    "spearman": -0.7130885415812519,
+    "months": 280
+  },
+  "lag_profiles": [
+    {
+      "lag_months": -12,
+      "pearson": 0.020232981558821687,
+      "spearman": 0.03403847267253358,
+      "months": 255
+    },
+    {
+      "lag_months": -11,
+      "pearson": 0.003925944570639899,
+      "spearman": 0.009550189625506298,
+      "months": 253
+    },
+    {
+      "lag_months": -10,
+      "pearson": -0.015445711426638493,
+      "spearman": 0.002997402004591323,
+      "months": 253
+    },
+    {
+      "lag_months": -9,
+      "pearson": -0.04180531113812092,
+      "spearman": -0.005207127142195461,
+      "months": 255
+    },
+    {
+      "lag_months": -8,
+      "pearson": -0.05783718117282447,
+      "spearman": -0.03782205303381195,
+      "months": 255
+    },
+    {
+      "lag_months": -7,
+      "pearson": -0.12096635626794562,
+      "spearman": -0.11749724988420565,
+      "months": 255
+    },
+    {
+      "lag_months": -6,
+      "pearson": -0.11946799269919967,
+      "spearman": -0.11269974525243168,
+      "months": 255
+    },
+    {
+      "lag_months": -5,
+      "pearson": -0.14786105208039146,
+      "spearman": -0.16995715609078277,
+      "months": 255
+    },
+    {
+      "lag_months": -4,
+      "pearson": -0.14844900392690702,
+      "spearman": -0.16466906275450185,
+      "months": 257
+    },
+    {
+      "lag_months": -3,
+      "pearson": -0.25044446340048004,
+      "spearman": -0.2626003202421626,
+      "months": 258
+    },
+    {
+      "lag_months": -2,
+      "pearson": -0.3688540417496891,
+      "spearman": -0.36871241419806833,
+      "months": 261
+    },
+    {
+      "lag_months": -1,
+      "pearson": -0.5707206655071574,
+      "spearman": -0.5466854713799827,
+      "months": 263
+    },
+    {
+      "lag_months": 0,
+      "pearson": -0.7599823902899705,
+      "spearman": -0.7272069796808632,
+      "months": 280
+    },
+    {
+      "lag_months": 1,
+      "pearson": -0.5219879150938852,
+      "spearman": -0.4900536435671257,
+      "months": 263
+    },
+    {
+      "lag_months": 2,
+      "pearson": -0.344989119716665,
+      "spearman": -0.34079211128434606,
+      "months": 261
+    },
+    {
+      "lag_months": 3,
+      "pearson": -0.21648751452235068,
+      "spearman": -0.27049631945116515,
+      "months": 258
+    },
+    {
+      "lag_months": 4,
+      "pearson": -0.16708237898547962,
+      "spearman": -0.20197903470274184,
+      "months": 257
+    },
+    {
+      "lag_months": 5,
+      "pearson": -0.08293001397956527,
+      "spearman": -0.09563817160722557,
+      "months": 255
+    },
+    {
+      "lag_months": 6,
+      "pearson": -0.0035933245492685874,
+      "spearman": -0.034371381426586384,
+      "months": 255
+    },
+    {
+      "lag_months": 7,
+      "pearson": -0.03552149342883892,
+      "spearman": -0.056834761463640575,
+      "months": 255
+    },
+    {
+      "lag_months": 8,
+      "pearson": -0.030086405666516217,
+      "spearman": -0.05018309981472904,
+      "months": 255
+    },
+    {
+      "lag_months": 9,
+      "pearson": -0.0320459582226531,
+      "spearman": -0.05376042149143122,
+      "months": 255
+    },
+    {
+      "lag_months": 10,
+      "pearson": 0.010064858881671019,
+      "spearman": 0.015341214759222292,
+      "months": 253
+    },
+    {
+      "lag_months": 11,
+      "pearson": 0.04309320650263454,
+      "spearman": 0.058588279231894434,
+      "months": 253
+    },
+    {
+      "lag_months": 12,
+      "pearson": 0.0905921355190615,
+      "spearman": 0.09438397406206576,
+      "months": 255
+    }
+  ],
+  "lag_definition": "positive: NDVI(t) vs LST(t+lag)",
+  "regional_anomaly_pearson_ci95_block12": [
+    -0.8159383540924159,
+    -0.6853187797854106
+  ],
+  "bootstrap_replicates": 499,
+  "seed": 42,
+  "pixel_median_anomaly_r": -0.6171683434573716,
+  "seconds": 16.438844932999928,
+  "limits": [
+    "Association is not causation.",
+    "AR1 effective sample sizes and BH q maps are diagnostics, not calibrated spatial-temporal causal inference.",
+    "Lag1 uses consecutive calendar pairs; missing months are never compressed.",
+    "BH family covers raw and anomaly Pearson tests at all map lags; spatial dependence remains. Spearman maps have no significance claims.",
+    "Regional means use changing coincident support; coverage thresholds do not remove composition bias.",
+    "Regional bootstrap resamples paired 12-month circular blocks; stationarity is an approximation.",
+    "Equal pixel weighting suits this projected equal-resolution regional grid, not arbitrary global latitude-longitude grids."
+  ]
+}

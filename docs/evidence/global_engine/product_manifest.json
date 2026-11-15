@@ -1,0 +1,1165 @@
+{
+  "scope": "New final real-data products and verified export bundles",
+  "files": [
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/coverage.npy",
+      "bytes": 220376,
+      "sha256": "1b772ab69e6e75d6d629f2376ad8119ebd25d4773a3087d307fc3ceb2aecd7bd"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/coverage.tif",
+      "bytes": 13843,
+      "sha256": "2685632d05f24bbacfed19437b7b3ff9aecbd17a954579eb52a24b528b193ed2"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/fdr.sqlite",
+      "bytes": 376832,
+      "sha256": "3d4668aaeadf76c2b50c885c0f5510a0b195cc76729ceb7a5fc5bc1c8c20898d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/fdr_hac.sqlite",
+      "bytes": 368640,
+      "sha256": "54338f6b72d371294332e04f474578e00ff115c032f9be0103c9c0bf1bf355e8"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/manifest.json",
+      "bytes": 2475,
+      "sha256": "243cd90abe0836b59472fe2b435fb5c771c994fe13990cf51b77b6febdcb4573"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/metrics.json",
+      "bytes": 1762,
+      "sha256": "97bb3cfd8e329ff644da932bd0fd6feba91553b2e24fccda0212c1f64c5264e3"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/monthly_series.csv",
+      "bytes": 22874,
+      "sha256": "2deb4d3eccefd454ea3b04ae91931cb7a851368c2f3f7a6f0ac7a0970117afb1"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/spatial_statistics.csv",
+      "bytes": 2314528,
+      "sha256": "393823863881118d8d24a4fe56c148b0e0e78b783f0175b50e4234e0402e9074"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/summary.png",
+      "bytes": 128707,
+      "sha256": "ae213badf54d81d3213c84c4ff626f3022ad196792e033cef0b51d7ffef1267e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_change.npy",
+      "bytes": 220376,
+      "sha256": "d7a3710883faa9e65ecf47a60c3f571c420ce38ac87db686e572a85e92819ae8"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_change.tif",
+      "bytes": 87722,
+      "sha256": "9c6445bbdedc751ab8ee2e1eb36ae53e15caeb2e84b8c93eecd71a43683ac6c8"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_hac_p.npy",
+      "bytes": 220376,
+      "sha256": "22d1c73b4136f0ff8f88d5641569b520129bde2bbdcfb40254117ede59555d31"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_hac_p.tif",
+      "bytes": 85181,
+      "sha256": "880e24c009e5a2c6bc6238498c5e537c05dae700afea0fc4ca3828c470fcfe06"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_hac_q.npy",
+      "bytes": 220376,
+      "sha256": "07be28fe36d38f3c3cc2b030640b611aa5992d54a2e5cc740294ec5f5259a379"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_hac_q.tif",
+      "bytes": 29477,
+      "sha256": "e64d647460980711fa3a4b5068b024ed3b520a473a9103e2ed1c5a034c7d635c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_lag1.npy",
+      "bytes": 220376,
+      "sha256": "b0a2b8a458f02e822ea3edada4a7e1c28216bd2ec323cb992c49a40596ea7a8d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_lag1.tif",
+      "bytes": 87770,
+      "sha256": "aff684e824a5775b4d7f3e129e2f7ce7bd688afd2e4dc9f87aaa331682ab4b85"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_n.npy",
+      "bytes": 220376,
+      "sha256": "8ef548207bda2a6a18e8e7be27a456a082a6c67dc81ee345dd38f02673b2cbb8"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_n.tif",
+      "bytes": 3750,
+      "sha256": "631afee323e1bd46ee24772dfbb9d9b13c86e43de9829d3ab0c61eed5d248985"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_p.npy",
+      "bytes": 220376,
+      "sha256": "7b8914fbf6daee3ecd7af9d5dc7cb2623e664500a9aee729cb0ad7090c1ab322"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_p.tif",
+      "bytes": 87066,
+      "sha256": "5ad90b770099aaea7c6aa2ad8f88b6a2e06e3b8e332e8b095494d4e3e619e310"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_q.npy",
+      "bytes": 220376,
+      "sha256": "0a987fd42231321510035553ca8c6a9b74fc561b25a324c9444d1d7b48e6fd73"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_q.tif",
+      "bytes": 48004,
+      "sha256": "8253fb5733f3d6fcee2fbfeb05c2b87263a7225f5208bfea4ef079aa6cfadfb3"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_sen.npy",
+      "bytes": 220376,
+      "sha256": "fd60be96111ee410bfbf8d6c971bfbc22bad1be55dbde8600e11449c36b9a59c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_sen.tif",
+      "bytes": 85531,
+      "sha256": "ac03cb1a152e5bb4e7e03c961dbebd09ed56c0aa55eaec41c2c310243bd485aa"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_significant.npy",
+      "bytes": 220376,
+      "sha256": "91650d8e477b8d178d085fa3dd8f41762625108eaf908b7108a0c543087d698a"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_significant.tif",
+      "bytes": 2686,
+      "sha256": "0e4954f6b286dbfc7df2454b009c78e06d7ba892ff846c5f8385593bb399a81f"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_slope.npy",
+      "bytes": 220376,
+      "sha256": "1386afd3831f33af9d1b610ddb19b4a128907b022f0452d8c0fd0b436357045b"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_lst_final/trend_slope.tif",
+      "bytes": 87357,
+      "sha256": "4e833ee4dfaa8a5d614364e92447c453d7e14fcbe417324f9d619baef3022a7e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/coverage.npy",
+      "bytes": 220376,
+      "sha256": "463191c1edcf5ff2236238c95f834efc9ddd9108dc6129cae3c3776d8a6bf483"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/coverage.tif",
+      "bytes": 16254,
+      "sha256": "de974e07b9c9df32debe6faa07379b22bd5d62af0a90b773ff34cc4c83d2709e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/fdr.sqlite",
+      "bytes": 385024,
+      "sha256": "62381cacf484819e5ebaf0e0bc4e471aab046e6c59894b4dbf281b8c5b1306d8"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/fdr_hac.sqlite",
+      "bytes": 344064,
+      "sha256": "05fa0303ea5dc48945a7dea0211126cdffc19d18e7585cafb5930b2fcc257efc"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/manifest.json",
+      "bytes": 2441,
+      "sha256": "2e5fe56f9ff8aa5f31608c0366f75d2c6f5cdf147676f6a18ed0b727ac29b670"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/metrics.json",
+      "bytes": 1751,
+      "sha256": "8d2fade7317b5808a55f5c1fda6dfe43cd8334e57e433b7fa2ab39efaf113185"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/monthly_series.csv",
+      "bytes": 22149,
+      "sha256": "538a31047f3b9b4de6e602af37503fd00ec8990cc9f5367df2828d8b46c1cf10"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/spatial_statistics.csv",
+      "bytes": 2380530,
+      "sha256": "6661ef8ffea26793f5fc0f19417086ae5374ab2040c678d52767bf3c240e1aa8"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/summary.png",
+      "bytes": 126419,
+      "sha256": "23e71b78da45267aca105a3c4188b0618f707513253483a5a50a85d81940c34c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_change.npy",
+      "bytes": 220376,
+      "sha256": "64a7f963c8d90d4dbd098a2cea2d8e19ef9c8d9a6152242e7a16409f6cb3b4a3"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_change.tif",
+      "bytes": 89205,
+      "sha256": "3dae4771de44da1449d8d37aff28be0e58b3994ec4e8be50fa2e892060fa99af"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_hac_p.npy",
+      "bytes": 220376,
+      "sha256": "f93cda56e3e28bee9811049e5d38ecae8f797e051509cb4408a98d00587aff6d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_hac_p.tif",
+      "bytes": 80127,
+      "sha256": "2e453973fabae5ca44bb25d576463af40ed0830ded3612e66125e0850c67ea8e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_hac_q.npy",
+      "bytes": 220376,
+      "sha256": "d86d6bd464cf22a605093a379018b24329fa4439c2daecff3da08e82ee929ade"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_hac_q.tif",
+      "bytes": 72771,
+      "sha256": "2e7217b1568e6bc9e2956c5b39ff2e473f99cbd29db3ee02099181c821cf5d52"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_lag1.npy",
+      "bytes": 220376,
+      "sha256": "e0b4b9c8c1bc5f39d7dd2f7ea64b71549819c3cd6401398e6372507cbac91d9f"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_lag1.tif",
+      "bytes": 89123,
+      "sha256": "e969ef18ab5d1a6558b4ce87bb86893e72756fae52caabd8caf51bbbafdbd5bf"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_n.npy",
+      "bytes": 220376,
+      "sha256": "421a4315363bde62d4688d20bfa2735d9a3d7722d8ac941b179353f65211d2c1"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_n.tif",
+      "bytes": 4591,
+      "sha256": "e36d93b94e85d8dfd395793bce0ac678cc0f19075b0c8fdcd4eb6f24d6422b9e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_p.npy",
+      "bytes": 220376,
+      "sha256": "2ac8f3f5bf41dca9934d60f6e7a585888e9728e1f5e0a310bd2f8f2b1ea0b35d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_p.tif",
+      "bytes": 88620,
+      "sha256": "bf6bc52b34d0df921dc640102fbb90e325fd331b2e8b07264893ff36614336e2"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_q.npy",
+      "bytes": 220376,
+      "sha256": "bd69b3a9ff4e4bf3d5fbd7539c4202209d439c01523f123db8131c1d3eff87e0"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_q.tif",
+      "bytes": 81376,
+      "sha256": "accf33708bb4eb8581e949273477a1a9f4133300c9140c5796107cb7cab62292"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_sen.npy",
+      "bytes": 220376,
+      "sha256": "1bdcc41134b7aa721fb380cb7a1f1054fd51b3d2f66d32d3a6713339ab352e8c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_sen.tif",
+      "bytes": 88167,
+      "sha256": "655b7cec1c243fc31c8eff43e96a77147e539cd4ff1052240deb8e6274a692f1"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_significant.npy",
+      "bytes": 220376,
+      "sha256": "45036f19d9992cb9a5a31ed89e4a8d76cbb6aa519a657c4f90768170dd205131"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_significant.tif",
+      "bytes": 4612,
+      "sha256": "e91ea6d50c7a9efc6a105a5cae10dbcfcf6e48fe3cb423cd27e7b285b9255e05"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_slope.npy",
+      "bytes": 220376,
+      "sha256": "d71cc414c2c5a028a6f2d13b79285a9f3b46c7d0881f3a01841f78a24325036c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_ndvi_final/trend_slope.tif",
+      "bytes": 89271,
+      "sha256": "aef917860bec082ff23d5bdaaf77840ed38c9b37a3cb027627daa5689b598f90"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/analysis.npz",
+      "bytes": 1106790,
+      "sha256": "04190cd67b7a919a2c15714d6efc696e3fc8c7ce05dc9ebde447b1cb4deebe24"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-12_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "f71cab1f3a4281b23ef5cd407195c86a9af7a0c59effb2ee77101e5583326b95"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-12_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "17c398ebcf9e7fa74e7329f5070481103ffb7ad75b9db5dd055cf458575789d8"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-12_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "867e77ee48d549d1b3a9b2e3cde38d171d9a991c9549b795a03b67951759ff00"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-12_pairs.npy",
+      "bytes": 220376,
+      "sha256": "256dff80b3626d5573dcd1b0929fbbac9f726c941ab452598f63ab120d0bd226"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-12_pearson.npy",
+      "bytes": 220376,
+      "sha256": "f3148b2fc204a02f370dc58b7c3a9c78ffb45a1bc611f0890c4fcc299c8a6b50"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-12_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "fdeaab268ec1a5452ae56ce925c5b093c40584fc9480c7bc2a402b4246165f8e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-12_spearman.npy",
+      "bytes": 220376,
+      "sha256": "035a1d6405f3209cfd1524165e0bb3c915ff0a9003c1d0306131177086bab4dd"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-1_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "67816aec44b5113ae07eda5d6041b5d82253e49e861c56db3b2cf45666df6173"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-1_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "261609d3c674e90847ef446e4743df106b4c633365981077f0915c7227ef3bd9"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-1_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "cdf8282168a8e8712ed00a10b67e85d0cdac079451d36a39d22675082de4fbc9"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-1_pairs.npy",
+      "bytes": 220376,
+      "sha256": "e4f38c4ffd6337b2d6f8e00050010a364f5b2efaf580ec1af7410f4ab59fdc2d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-1_pearson.npy",
+      "bytes": 220376,
+      "sha256": "56b77356ffe539a258331db7a5673890148cef765c01264d879891e9ad496b56"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-1_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "9ce1eb1be8e2706d03f9839cc9c9d057c7c38e517c59a6803632d7e6b2d7f55e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-1_spearman.npy",
+      "bytes": 220376,
+      "sha256": "38144dd06e934119d2e5c8d0ffecd74a25c4eb1d7cbb11c0ee07978ce68a6381"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-3_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "a1c2e8715c52d38e03b3672e81734251d0d13dbe5e5c342a706ae7ee51c3de70"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-3_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "c20f44fa009b1e2a613b9af42f8dc83739751cffab6e93b7de9ae1b3c30d7688"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-3_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "2605920a0a4a47cfffa0879aba8c4b6dcefb4ec7550f13c64e93f9e3714dd295"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-3_pairs.npy",
+      "bytes": 220376,
+      "sha256": "4408a337482a8cfaf15748a160f19ff2d34cff14209c6f6805283619a6c85fae"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-3_pearson.npy",
+      "bytes": 220376,
+      "sha256": "e01553ac246dfbc2f94e4408e69ae3f0b4d1fc9b80b5b4ecc8863cb8afcdfda2"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-3_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "32b58060f202b2f7e984c286cb8a0b7a309002ddd5c9329c1a41c710e582618c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-3_spearman.npy",
+      "bytes": 220376,
+      "sha256": "4b25a9cd8ae3e83fd233ca583828901fb9df49d4fb0f88e41a10a42916c3cbf3"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-6_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "2089fbdf7504c2bd9088f2cc1b8dbb8bfffc399a96e717027f93971ec7f55d81"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-6_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "6491e1301a3d0ff89d3d7fff686ec7c788d5c15f3c5a72987bb6b83d84c6c130"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-6_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "17513940aca7be9d4ace9621bbb895061d7afde184818b58c7841160c0c84c03"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-6_pairs.npy",
+      "bytes": 220376,
+      "sha256": "ec1d388f91eac27719c4d4c4ac5559cf4e409c75a14349ae6df186f6aa5ad4d0"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-6_pearson.npy",
+      "bytes": 220376,
+      "sha256": "0c242070016ade1d1227580f90cdf437511e27f485231cd170c81e3328382746"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-6_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "15e6abb730e5384b2b8800c79b4c8637138f05b05ab52b8475e42cc4c2592f99"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_-6_spearman.npy",
+      "bytes": 220376,
+      "sha256": "77b62a2c225220d20ebc3c20d8799dd439610088b1d2e1e261dbe90a5982718e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_0_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "da15ed631b526a7e780d2b43c0beddf11a48781712f8f5e3cb3679e13fbdf942"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_0_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "f0fe5889615797fc06909ab07d99ed45b59c2d20ed26324b28b8094f189bb5ef"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_0_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "df6d52250fea96b1b7c680b6f075fe03c8d86e08da2547d763b38de851a02bad"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_0_pairs.npy",
+      "bytes": 220376,
+      "sha256": "691657cab995693c613cb830584ea87f69e3a6cee4ecfec420d808830155fea9"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_0_pearson.npy",
+      "bytes": 220376,
+      "sha256": "548e41f1ad3d269e26bef34d5fde2e9334460ca00e041fe611b042c57bb101c9"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_0_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "aedfbb5e625b9e56feb7ec7119010de4c9f520d9ad08d2aa0a788539940f2dc0"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_0_spearman.npy",
+      "bytes": 220376,
+      "sha256": "eac86244a74bc9ea183a4af8b477130e69fed6d35345f62407b89a1157fbee70"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_12_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "3fd4d35283ffcf2d9ccce1e0dcea4576d68bfd67729ae8a1495ddb3a9223ba58"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_12_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "9e50adab63c7f286988046e996726a5979fd52878c21ec77794cdc7dcab857ad"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_12_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "9ae3e5c186d9625dbe42ce44f69c7c2467d73feef38ea17383dcb7b81c1d660b"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_12_pairs.npy",
+      "bytes": 220376,
+      "sha256": "256dff80b3626d5573dcd1b0929fbbac9f726c941ab452598f63ab120d0bd226"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_12_pearson.npy",
+      "bytes": 220376,
+      "sha256": "d32b68a135eaebb25a9bd144a6054e4391a389a232b4f79cb537d091d3f3380c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_12_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "d5be3ad1d976e1d86c46724d28657145da948ae1da10e3644b9e7f5b7e15ec20"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_12_spearman.npy",
+      "bytes": 220376,
+      "sha256": "cc3df84a6a0107a10cc63c84b77654455cc47e122586b715c95c443f3d9d67bd"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_1_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "6580081ca2931802811fe2e84ad2fb37f6fdbca9f358d9267e3f3bbe47471de6"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_1_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "e8104a8c61d4c5cac4370781e68664656a925bf3d34270505126c4918fbc4981"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_1_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "d86ecbeee467b774060f63a6bafee9b581997faf6b175f73a7b75a6f5d62e726"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_1_pairs.npy",
+      "bytes": 220376,
+      "sha256": "e4f38c4ffd6337b2d6f8e00050010a364f5b2efaf580ec1af7410f4ab59fdc2d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_1_pearson.npy",
+      "bytes": 220376,
+      "sha256": "2dd18df021e9421f9ca0701a0f09cc90f094924e8d5ff40df6badd881807d818"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_1_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "0e37d9a43e3bb1c89494b02c9cae9d624aae80b82972c2ed2336370f0a684974"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_1_spearman.npy",
+      "bytes": 220376,
+      "sha256": "0c892a4a704c07ae94abc57d45654651c9f2a2a5cecb862a4e55e2160ce7a56c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_3_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "180812bdb14f007769e523a105d2a50726df5dcbbec7dd3e7b804ad49557db10"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_3_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "7a2941129b5e1344a205620dc1937d9bb3bbdbf34defd1e06a336e28cefb66e6"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_3_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "5b5e964b24f425c64c2426745bea0a6fef0e6fbed734321f35108f9f17b69289"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_3_pairs.npy",
+      "bytes": 220376,
+      "sha256": "4408a337482a8cfaf15748a160f19ff2d34cff14209c6f6805283619a6c85fae"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_3_pearson.npy",
+      "bytes": 220376,
+      "sha256": "7f45fa91a2051c53d7ef174441e7b67d9b237bc43920e372ebc32e23da8d6b96"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_3_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "251ec31b8e39008412851b7490b4c16f5c628f83b95459404d441471442fe06d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_3_spearman.npy",
+      "bytes": 220376,
+      "sha256": "a747b3ac8ec41e64e2af086ed5f74ea7552d17a75ac5717c98d19d64d6b4f6fd"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_6_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "8939a18bb7197376905b2636ccfa26775e64ac5c6377efaabff84935a14efb44"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_6_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "24f7d6be4303fcac2c13c2b6ec3d6c51f8d4e83fcf112dce6e32684a3d885fae"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_6_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "8d213bf472e60ef4861d39027851a01890ea51594ae7078b3bd330d3144cfcee"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_6_pairs.npy",
+      "bytes": 220376,
+      "sha256": "ec1d388f91eac27719c4d4c4ac5559cf4e409c75a14349ae6df186f6aa5ad4d0"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_6_pearson.npy",
+      "bytes": 220376,
+      "sha256": "04bfa3fe6dff2a5c91216c0878ab1a7ca2b8003e051ef3428a8c3aba5e197db2"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_6_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "3bdf8feb2b313d130586daaacd1034affeb9cfd6af81141b04f5f5d7660fb2b4"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_6_spearman.npy",
+      "bytes": 220376,
+      "sha256": "df1a09ce2b571c2093eeda1c893f6fce5a622ab6a5150441aec03e94a78137a6"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_effective_n_ar1.tif",
+      "bytes": 87011,
+      "sha256": "a5bfad848738d013c8dffd74c99709a1b1a05401c9423c65e1f9b164c31b9f67"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_p_ar1_diagnostic.tif",
+      "bytes": 90772,
+      "sha256": "b033b48893b58453eb02f2e13813ac90d2ff9d3ce3577273576eabd20a1d7ca2"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_p_iid_diagnostic.tif",
+      "bytes": 91727,
+      "sha256": "0c0c8f8ec99e60149942752cb10e107295693fff11cf82140173a744567402f1"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_pairs.tif",
+      "bytes": 15572,
+      "sha256": "a25a5b4c207959d3a74c409eba1ad73fb0df4107205e6535e02f259150b8281d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_pearson.tif",
+      "bytes": 87262,
+      "sha256": "da8b3b4a1561f6215dc6e5b3b8647a9d549fd9c348f919a2ba8d40163cfe305c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_q_ar1_diagnostic.tif",
+      "bytes": 89464,
+      "sha256": "c0e2d11d7d908f6145a1078312b605cdccf346df3c320ccb82eae29740387bc3"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/anomaly_spearman.tif",
+      "bytes": 87384,
+      "sha256": "12de8b70cc967b73f5e0ae58bb1867a28ff8017b669990676cafb0c98078e8b9"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/manifest.json",
+      "bytes": 7699,
+      "sha256": "c6bb0677b7706e14449c5a20d80790d4887cf56922e79d5f17ca3834e293b116"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/paired_fdr.sqlite",
+      "bytes": 6873088,
+      "sha256": "16bc889a04db2d56585dc803cd338f10e24fdb23da9d9a3c7572520c58260eb8"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/paired_monthly_series.csv",
+      "bytes": 39279,
+      "sha256": "73d08a07bc3fc8c10147463224c742d5425d17fece0d4880d010df93b9693746"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-12_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "a6f920a0f319679938974873e25962c4ccad3674a7027303cd54562c452abe33"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-12_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "f9c8546901d0f89070e91cf9a659d076d501d453c2ec9a1a36fc6043285d9619"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-12_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "77f0fdb8e216b62f83d1a45716963632bb1cb01391b259789725173871f112a7"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-12_pairs.npy",
+      "bytes": 220376,
+      "sha256": "f39e06b0db709b5e92687512f0c73d2627404a29c66d108c0f4076ba7e7e7abb"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-12_pearson.npy",
+      "bytes": 220376,
+      "sha256": "5cc8d42c7627e10737fc8a8b4262e716458fd4c3f622a945c44ef41c80fdf3cf"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-12_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "cffdda05cd876f53f929d7f9f0fe84e3a334f695964adecd191199520cb2a8e2"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-12_spearman.npy",
+      "bytes": 220376,
+      "sha256": "1a84ef34106950e65413f23d581b4832880c160e2bb4ab0bbee4520343c702f4"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-1_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "103116c230acd5ae4fa8e3a4ad46104103fba4913302e76c756dc02c4345ee79"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-1_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "de7b244658aec51003691953de2ee2ec2c90a3df9f180668185e59209d485805"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-1_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "8b6b0ad2d099231e544d67b329c81e9312aec6ad4eef3c5abed097e5175d5c55"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-1_pairs.npy",
+      "bytes": 220376,
+      "sha256": "de5db964d66883a889321c88580e30a83a985f0288920f077caf9c24586781c7"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-1_pearson.npy",
+      "bytes": 220376,
+      "sha256": "f15b224ee29a788c2fb7466b98986865b48606b7b81dfd8b4b811935aaf2fb4b"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-1_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "0eb36e999f0c1bdeec1031414e99abad2585f2ae631c6207675686fb60e2e17c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-1_spearman.npy",
+      "bytes": 220376,
+      "sha256": "de2444884d4e7d9e7cbf6078422916d362c89f54b7f4be49da97780ace96483e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-3_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "b80b265d3e24491941ff4b08866f5745be51d9cea63d09211265ad855b8752df"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-3_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "db6f323bd335b563d7acb064b9990c6f10a2fdf731937e0b834836db96dc595d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-3_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "006447412c4126ea100e6dab85c66e363cf0c9246c6b6136b8b238eb33ff6a47"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-3_pairs.npy",
+      "bytes": 220376,
+      "sha256": "7d31498958991dc6ff25a99a87e734860d29f7cec43d4e6a95b4e723926cf3dc"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-3_pearson.npy",
+      "bytes": 220376,
+      "sha256": "a6ceaafd8fc0e2459c6786925572039118012f4c52f40f9e66d3e21e08c185d3"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-3_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "ec9a690e05f039bd95387b4f3b592fb3d91cc0d949c474b55270418a89ba9bef"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-3_spearman.npy",
+      "bytes": 220376,
+      "sha256": "ed07dfa6cc8bf0d4c3593a1bb421d2ffbf1debda063246bb662e61136cf9c3ba"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-6_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "4623038f34fd18b466a75573544e844832b23667456f4de1860b5e8fb0788d3d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-6_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "b406fc8634fd8f94c996a956b00dd9e6aaa32282398fb15a0f2342e833b5ef11"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-6_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "7fb0efca86b89ee75031083989ac0d7c9602856fa1cbeb83bd5f9866f533382a"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-6_pairs.npy",
+      "bytes": 220376,
+      "sha256": "9799acac53736eff8b980fcd655f32ec594686cb1c9cd888995b89adeb32617e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-6_pearson.npy",
+      "bytes": 220376,
+      "sha256": "612cb8cdd37db07d2e62873004a5807a8e36442ddb48e7aa4006e1b36ea42f30"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-6_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "aab84b9da90eec163ddb113651a43e47440cedef5d49723396aff8d7796c2749"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_-6_spearman.npy",
+      "bytes": 220376,
+      "sha256": "379572a101c06fb9a029b2ac1fec94778bf68552ed6fcfa43f21fb903c03c2b4"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_0_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "2ab740429e1e74cd7c1665338cd049dcb3f5fe4a10108af6f9c080dd0523b97b"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_0_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "019d7c3746115673a80aabd429c0df193488fcc22acb3b40959739f8c1bf8e7a"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_0_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "1104f9a58426b8000cfa2a7bf8ce53e6bceefbe2cdaabef87ec1c9f05c53c89f"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_0_pairs.npy",
+      "bytes": 220376,
+      "sha256": "fdfe5a39099d925d62dafd189e400fe5087643d120d0ce433a4307fd17bc69fc"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_0_pearson.npy",
+      "bytes": 220376,
+      "sha256": "6130264f1aa8f36a7396b9c056f4eea2d4283c6a18b184c2fa12087bcdaa0527"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_0_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "501986977d85f885e28cbacff96f06d0270af59f3bdefa3d958c24924448e1d9"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_0_spearman.npy",
+      "bytes": 220376,
+      "sha256": "7a51a8af14235f17c0c7fa7739fc00614141f74528155fc61e8341d0fa766bb7"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_12_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "9083c89f0fc8ad3e1e05050e0add86e1249375ef16e0046165397a1310fbacb0"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_12_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "8a327f0349cc0cbba97b955b35cb9fa7f9cce94831b60e7e5cb4a20d0b8f5261"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_12_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "d8205c6fec6745f593c799fe2c7c6a1bd3fc54b4cacab38553cc00b200e6a43b"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_12_pairs.npy",
+      "bytes": 220376,
+      "sha256": "f39e06b0db709b5e92687512f0c73d2627404a29c66d108c0f4076ba7e7e7abb"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_12_pearson.npy",
+      "bytes": 220376,
+      "sha256": "f346f13f7029600f08d0dda31c69cd658f2ba1783d854309f4f1faccdccaac82"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_12_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "691e32de518148f3802fbaf69f5b8e6896c6524d09e6496a832eb56bf6251f50"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_12_spearman.npy",
+      "bytes": 220376,
+      "sha256": "819cc26f562d4aa3d8123fba8f03f13a4757cec06cb3cac5b82b51ecbd01e33f"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_1_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "9e38ddfcbb091c2e2ecd24391e636f2576d64b339c35ea6676920aeac9bfaa5d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_1_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "8f2d04efa2835ecfe79dfb5121ed0192f6d4abbc1e7c9dd5b68bafa2dfc061df"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_1_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "01009bd456b6ecd98ace076bd1d11f6742c9aaa3546c016e1b6c4017a9ebdd77"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_1_pairs.npy",
+      "bytes": 220376,
+      "sha256": "de5db964d66883a889321c88580e30a83a985f0288920f077caf9c24586781c7"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_1_pearson.npy",
+      "bytes": 220376,
+      "sha256": "eb2a5dd35f9929090558f02253d700c7d2dff409e733ddffa0419ced20cc106d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_1_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "57aeb2524b7805a206bb9ef462422dd5751b8e3948b19bf3eab2c5a1e6f8cdf0"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_1_spearman.npy",
+      "bytes": 220376,
+      "sha256": "89ca3c45a27e8bbf70cf0f9a883e055f0920235d8e403916058025386a1d8f22"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_3_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "dc51244be7b2508b25b1cd73ec9b870effd32dfb61f33ce0a87a22af24afa1ad"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_3_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "9d849fcdd70451c2e4ca44e2c848e6694fe27909e08da2b8f9f09c44659991c4"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_3_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "e663a234c0e1a6637713906201899face7d8cf5cf8e85eccd15c3b5739402d9f"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_3_pairs.npy",
+      "bytes": 220376,
+      "sha256": "7d31498958991dc6ff25a99a87e734860d29f7cec43d4e6a95b4e723926cf3dc"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_3_pearson.npy",
+      "bytes": 220376,
+      "sha256": "4bee9f640c41757d95e123d73564ab20fbf729b2453ff7dcaa12b6dc84476b03"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_3_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "1a1414ebdc74df479ba922da731c3a742e33c7e77376c0665be2f3313ce71e50"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_3_spearman.npy",
+      "bytes": 220376,
+      "sha256": "513cadfcd36791908b16c6e79ce2012aaedeac60d5ec6b3ed9597d25ccef30ce"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_6_effective_n_ar1.npy",
+      "bytes": 220376,
+      "sha256": "4d776d5bf451362cf950c62ad96c5d7458742610b07236f35af001a263569aab"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_6_p_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "c97ef321f7b0b0eccabea911a65f1745ce4ade8bb34ceba630dc15f96d085e39"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_6_p_iid_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "0719f106f386d5d2c2bba43675ae959766cbd512416e3a28099ec469ae4c0adc"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_6_pairs.npy",
+      "bytes": 220376,
+      "sha256": "9799acac53736eff8b980fcd655f32ec594686cb1c9cd888995b89adeb32617e"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_6_pearson.npy",
+      "bytes": 220376,
+      "sha256": "c9fd81e1151ab5d3d29858d3ced67ffb23642e0562f36476b1904cebd061e8a7"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_6_q_ar1_diagnostic.npy",
+      "bytes": 220376,
+      "sha256": "368722b0ad608f54797d47b13a060dc167a51ebc83a1ca9543547f31c1243f1d"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_6_spearman.npy",
+      "bytes": 220376,
+      "sha256": "d5d4f37f959bf464b5ea6eb44558935c9c1e9df1a4777f7ab62cbe0d8204d8e5"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_effective_n_ar1.tif",
+      "bytes": 87490,
+      "sha256": "eac2ee84a7283c7397aa23194d6e1120e4915afc41a08ba680900730710494f1"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_p_ar1_diagnostic.tif",
+      "bytes": 90005,
+      "sha256": "293299b17a29f8d48511e4160998324c131ee33ee9b2909fd0139e1075c6121a"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_p_iid_diagnostic.tif",
+      "bytes": 92204,
+      "sha256": "10434abd2f0ac1193674f5daa4470b7d3a09fec6f41aa400cb76af4593f8492c"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_pairs.tif",
+      "bytes": 15830,
+      "sha256": "6766d45ff26f68fcc527199f18c7a710db95466d920e9c7dbbe00d2b8177572b"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_pearson.tif",
+      "bytes": 88144,
+      "sha256": "6725a3d3bfb5b5e0d776009c5a6542c896435ac0f498693b157bdaf16e91cbad"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_q_ar1_diagnostic.tif",
+      "bytes": 89784,
+      "sha256": "2d81c9e64832909dfe633a4735209dffb71df3d369d76f4a44f15998fc55db46"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/raw_spearman.tif",
+      "bytes": 88150,
+      "sha256": "0ffc321fed7b4fb228bbf7b7c571f0931e7d9561d095ad5e174a810e77e8de66"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/report.json",
+      "bytes": 6833,
+      "sha256": "ab23e02b42802560e6b8baa0fc20f9c5c839e9797330ea52a918809f20fb7b56"
+    },
+    {
+      "path": "outputs/global_engine/queretaro_paired_final/summary.png",
+      "bytes": 101138,
+      "sha256": "8f3e113e58ee7cee2337c1a05cd0874476af650d1c95dcbce4724e9b87f0a86a"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/benchmark.csv",
+      "bytes": 537,
+      "sha256": "c46f2df8d3b2712a6ca97de236a24b2aff20a4aa9a1651eee4d9e3f884e9d851"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/benchmark.json",
+      "bytes": 897,
+      "sha256": "feb7abb6a1ea1f050d3ca14c9e90a1d4a9e7b731470511689a3ab57f7e6ceaf1"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/convlstm.png",
+      "bytes": 60959,
+      "sha256": "2c0ba9da562ebc2f42cb3f14ebf3f7aa4371490a869cc9bf4d227f6fc2d3bc92"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/convlstm_estimates.csv",
+      "bytes": 1033912,
+      "sha256": "ced4dce054f624c83e6dc83f1a9388ba219e118ac354c37af9aa30cb0626a273"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/convlstm_lst.tif",
+      "bytes": 40385,
+      "sha256": "a6e9b292b8015ee0762a7655b230a8e7b5ad905a22e60a46d922d6b01427d2a2"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/convlstm_metadata.json",
+      "bytes": 253,
+      "sha256": "a050b092e0e3c81c1893cea9f848cb182b355e50771117b9c183ffbed52e4158"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/export_status.json",
+      "bytes": 492,
+      "sha256": "35792ef0d33d331f605ae26ae2b1dde27f7acc8e00f067b3a94b5a6dc37c65b7"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/xgboost.png",
+      "bytes": 64256,
+      "sha256": "ea75c0e2de9e2eaca8904ffbca676609379b41a90c5b006e9d5ee3f26bb6dc21"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/xgboost_estimates.csv",
+      "bytes": 1033689,
+      "sha256": "537792b3e10a60e5c6b0a5784fb9b4aac092e1e24f396369f6c89fa755a3c735"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/xgboost_lst.tif",
+      "bytes": 39001,
+      "sha256": "824b95d7129f3ec6eb8e614f727a7ea8cbe6f6f37b951127d70522e5437f8c62"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_lst_predictive/xgboost_metadata.json",
+      "bytes": 253,
+      "sha256": "3ed9886b4e4d2da02997bd2ec6f44c4241b109f114a053d0f678336ded5ef461"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/coverage.tif",
+      "bytes": 16254,
+      "sha256": "de974e07b9c9df32debe6faa07379b22bd5d62af0a90b773ff34cc4c83d2709e"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/export_status.json",
+      "bytes": 401,
+      "sha256": "3cfd59c288cd727473e14f160e23597759aa3da2f28ddf62ca978ec54e8d9753"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/manifest.json",
+      "bytes": 2547,
+      "sha256": "9c90592dff84cae412e57beb124151defd5c148c33464c2daa8619a9655dbe7b"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/metrics.json",
+      "bytes": 1751,
+      "sha256": "8d2fade7317b5808a55f5c1fda6dfe43cd8334e57e433b7fa2ab39efaf113185"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/monthly_series.csv",
+      "bytes": 22149,
+      "sha256": "538a31047f3b9b4de6e602af37503fd00ec8990cc9f5367df2828d8b46c1cf10"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/spatial_statistics.csv",
+      "bytes": 2380530,
+      "sha256": "6661ef8ffea26793f5fc0f19417086ae5374ab2040c678d52767bf3c240e1aa8"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/summary.png",
+      "bytes": 126419,
+      "sha256": "23e71b78da45267aca105a3c4188b0618f707513253483a5a50a85d81940c34c"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_change.tif",
+      "bytes": 89205,
+      "sha256": "3dae4771de44da1449d8d37aff28be0e58b3994ec4e8be50fa2e892060fa99af"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_hac_p.tif",
+      "bytes": 80127,
+      "sha256": "2e453973fabae5ca44bb25d576463af40ed0830ded3612e66125e0850c67ea8e"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_hac_q.tif",
+      "bytes": 72771,
+      "sha256": "2e7217b1568e6bc9e2956c5b39ff2e473f99cbd29db3ee02099181c821cf5d52"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_lag1.tif",
+      "bytes": 89123,
+      "sha256": "e969ef18ab5d1a6558b4ce87bb86893e72756fae52caabd8caf51bbbafdbd5bf"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_n.tif",
+      "bytes": 4591,
+      "sha256": "e36d93b94e85d8dfd395793bce0ac678cc0f19075b0c8fdcd4eb6f24d6422b9e"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_p.tif",
+      "bytes": 88620,
+      "sha256": "bf6bc52b34d0df921dc640102fbb90e325fd331b2e8b07264893ff36614336e2"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_q.tif",
+      "bytes": 81376,
+      "sha256": "accf33708bb4eb8581e949273477a1a9f4133300c9140c5796107cb7cab62292"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_sen.tif",
+      "bytes": 88167,
+      "sha256": "655b7cec1c243fc31c8eff43e96a77147e539cd4ff1052240deb8e6274a692f1"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_significant.tif",
+      "bytes": 4612,
+      "sha256": "e91ea6d50c7a9efc6a105a5cae10dbcfcf6e48fe3cb423cd27e7b285b9255e05"
+    },
+    {
+      "path": "outputs/global_exports/queretaro_ndvi_scientific/trend_slope.tif",
+      "bytes": 89271,
+      "sha256": "aef917860bec082ff23d5bdaaf77840ed38c9b37a3cb027627daa5689b598f90"
+    }
+  ]
+}

@@ -27,7 +27,7 @@ def test_lst_registry():
 
     assert spec.unit == "degC"
     assert spec.slope_unit == "degC/year"
-    assert not spec.prediction_supported
+    assert spec.prediction_supported
 
 
 def test_lst_conversion():

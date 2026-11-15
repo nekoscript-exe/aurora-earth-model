@@ -1,0 +1,35 @@
+{
+  "historical_ndvi_files_unchanged": 35,
+  "tabs": [
+    "Home",
+    "Planetary Explorer",
+    "Time Machine",
+    "Predictive intelligence",
+    "Multivariate Laboratory",
+    "Scientific results",
+    "Spatial analysis",
+    "Temporal analysis",
+    "Execution log"
+  ],
+  "storage": {
+    "format": "npz",
+    "access": "streamed NPY members + memory mapping",
+    "reader_setup_seconds_warm_cache": 0.0014423920001718216,
+    "window_shape": [
+      12,
+      32,
+      32
+    ],
+    "window_median_ms": 0.018243998056277633,
+    "zarr_available": false
+  },
+  "ui_modes_verified": {
+    "lst_predictive": 8,
+    "ndvi_predictive": 8,
+    "multivariate": 4
+  },
+  "minimum_window": [
+    1000,
+    680
+  ]
+}

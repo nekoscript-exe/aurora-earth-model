@@ -18,6 +18,11 @@ from .report import render_report
 from .welcome import WelcomePage
 from .ai_lab import AILaboratory
 from .time_machine import TimeMachine
+from .temporal import TemporalSelector
+from .multivariate_lab import MultivariateLaboratory
+from aurora.catalog import populate_regions, populate_variables
+from .global_results import GlobalResultsMixin
+from aurora.jobs import fresh
 from .globe import PlanetaryExplorer
 from .pixel_lab import open_pixel_lab
 from PySide6.QtWidgets import QTextBrowser
@@ -25,7 +30,7 @@ from PySide6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout,
     QHBoxLayout, QLabel, QComboBox,
     QPushButton, QPlainTextEdit, QSpinBox,
-    QTabWidget, QMessageBox, QProgressBar
+    QTabWidget, QMessageBox, QProgressBar, QScrollArea
 )
 
 from matplotlib.figure import Figure
@@ -48,13 +53,6 @@ MAP_LAYERS = {
 
 
 ROOT = Path(__file__).resolve().parents[3]
-
-DATASETS = {
-    ("queretaro", "ndvi"): "queretaro",
-    ("queretaro", "lst"): "queretaro_lst",
-    ("mexico", "ndvi"): "mexico",
-    ("mexico", "lst"): "mexico_lst"
-}
 
 STYLE = """
 QWidget {
@@ -101,7 +99,7 @@ QProgressBar::chunk {
 """
 
 
-class AuroraWindow(QMainWindow):
+class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
     def __init__(self):
         super().__init__()
@@ -116,6 +114,7 @@ class AuroraWindow(QMainWindow):
             QIcon(str(ROOT / "assets/desktop/logo.svg"))
         )
 
+        self.root_path = ROOT
         self.process = QProcess(self)
         self.output_path = None
 
@@ -137,6 +136,7 @@ class AuroraWindow(QMainWindow):
 
         self.build_ui()
         self.check_dataset()
+        self.start_dataset_watch()
 
     def build_ui(self):
 
@@ -221,22 +221,15 @@ class AuroraWindow(QMainWindow):
         )
 
         self.region = QComboBox()
-        self.region.addItem("Queretaro", "queretaro")
-        self.region.addItem("Mexico", "mexico")
+        self.registry = populate_regions(self.region, ROOT)
+        populate_variables(self.variable, self.registry, self.region.currentData(), preserve=False)
 
-        self.start = QSpinBox()
-        self.start.setRange(2001, 2025)
-        self.start.setValue(2001)
-
-        self.end = QSpinBox()
-        self.end.setRange(2001, 2025)
-        self.end.setValue(2025)
+        self.temporal = TemporalSelector()
+        self.start, self.end = self.temporal.start, self.temporal.end
 
         for label, widget in [
             ("Environmental variable", self.variable),
-            ("Region of interest", self.region),
-            ("Start year", self.start),
-            ("End year", self.end)
+            ("Region of interest", self.region)
         ]:
             column = QVBoxLayout()
             column.addWidget(QLabel(label))
@@ -244,6 +237,7 @@ class AuroraWindow(QMainWindow):
             controls.addLayout(column)
 
         panel.addLayout(controls)
+        panel.addWidget(self.temporal)
 
         self.status = QLabel()
         self.status.setWordWrap(True)
@@ -260,6 +254,7 @@ class AuroraWindow(QMainWindow):
         self.progress.setValue(0)
         self.progress.setTextVisible(False)
         panel.addWidget(self.progress)
+        self.setup_global_controls(panel)
 
         panel.addStretch()
 
@@ -298,6 +293,9 @@ class AuroraWindow(QMainWindow):
             self.ai_lab, "Predictive intelligence"
         )
 
+
+        self.multivariate_lab = MultivariateLaboratory(ROOT, self)
+        self.tabs.addTab(self.multivariate_lab, "Multivariate Laboratory")
 
         self.summary = QTextBrowser()
         self.summary.setReadOnly(True)
@@ -369,18 +367,21 @@ class AuroraWindow(QMainWindow):
             self.log, "Execution log"
         )
 
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True); scroll.setFixedWidth(310)
+        scroll.setWidget(sidebar)
+        sidebar = scroll
         self.investigation_panel = sidebar
         explorer = self.planetary_explorer
-        explorer.setup_toggle.show()
-        explorer.setup_toggle.clicked.connect(
-            lambda checked: sidebar.setVisible(checked)
-        )
+        for page in (explorer, self.multivariate_lab):
+            page.setup_toggle.show()
+            page.setup_toggle.clicked.connect(lambda checked: sidebar.setVisible(checked))
 
         def sync_workspace(_):
             # The explorer already has dataset controls; give its globe the
             # full workspace, retaining an explicit way to reopen investigation.
-            explorer.setup_toggle.setChecked(False)
-            sidebar.setVisible(self.tabs.currentWidget() is not explorer)
+            for page in (explorer, self.multivariate_lab): page.setup_toggle.setChecked(False)
+            sidebar.setVisible(self.tabs.currentWidget() not in (explorer, self.multivariate_lab))
 
         self.tabs.currentChanged.connect(sync_workspace)
         workspace.addWidget(sidebar)
@@ -389,7 +390,7 @@ class AuroraWindow(QMainWindow):
         layout.addLayout(workspace, 1)
 
         footer = QLabel(
-            "AURORA v4.0  |  "
+            "AURORA v5.0  |  "
             "NASA Space Apps Challenge 2026"
         )
         footer.setStyleSheet("color: #718b9d;")
@@ -398,9 +399,7 @@ class AuroraWindow(QMainWindow):
         self.variable.currentIndexChanged.connect(
             self.check_dataset
         )
-        self.region.currentIndexChanged.connect(
-            self.check_dataset
-        )
+        self.region.currentIndexChanged.connect(self.region_changed_global)
 
     def check_dataset(self):
 
@@ -409,15 +408,17 @@ class AuroraWindow(QMainWindow):
             self.variable.currentData()
         )
 
-        directory = (
-            ROOT / "data/processed" / DATASETS[key]
-        )
+        try:
+            directory = self.registry.find(*key).directory
+            available = True
+        except FileNotFoundError:
+            directory, available = None, False
 
-        available = (
-            (directory / "cube.npz").is_file()
-            and
-            (directory / "cube_metadata.json").is_file()
-        )
+        if available and getattr(self, "_temporal_dataset", None) != directory:
+            self.temporal.set_dates(self.registry.find(*key).dates)
+        elif not available:
+            self.temporal.set_dates([])
+        self._temporal_dataset = directory
 
         running = self.process.state() != (
             QProcess.ProcessState.NotRunning
@@ -433,33 +434,25 @@ class AuroraWindow(QMainWindow):
             "Historical dataset unavailable"
         )
 
-        self.status.setStyleSheet(
-            "color: #80d9c7;"
-            if available else
-            "color: #e6b66b;"
-        )
+        self.status.setStyleSheet("color: #80d9c7;" if available else "color: #e6b66b;")
+        self.refresh_global_results()
 
     def run(self):
 
-        start = self.start.value()
-        end = self.end.value()
-
-        if end - start + 1 < 15:
-            QMessageBox.warning(
-                self,
-                "Invalid investigation",
-                "Select at least 15 calendar years."
-            )
+        try:
+            start, end = self.temporal.interval()
+        except ValueError as exc:
+            QMessageBox.warning(self, "Invalid investigation", str(exc))
             return
 
         region = self.region.currentData()
         variable = self.variable.currentData()
 
-        self.output_path = (
-            ROOT / "outputs/investigations" /
-            f"{region}_{variable}_{start}-01_{end}-12"
-        )
-
+        from datetime import datetime
+        record = self.registry.find(region, variable)
+        self.output_path = ROOT / "outputs/global_engine" / f"{record.identifier}_{datetime.now():%Y%m%d_%H%M%S_%f}"
+        self.cancel_button.setEnabled(True); self.export_button.setEnabled(False)
+        self._progress_buffer = ''
         self.log.clear()
         self.summary.setHtml(
             "<h2>Scientific investigation running...</h2>"
@@ -472,7 +465,7 @@ class AuroraWindow(QMainWindow):
 
         for widget in [
             self.variable, self.region,
-            self.start, self.end, self.run_button
+            self.temporal, self.run_button
         ]:
             widget.setEnabled(False)
 
@@ -487,12 +480,10 @@ class AuroraWindow(QMainWindow):
             sys.executable,
             [
                 "-u",
-                str(ROOT / "scripts/explore.py"),
-                "--variable", variable,
-                "--region", region,
-                "--start", f"{start}-01",
-                "--end", f"{end}-12",
-                "--run"
+                str(ROOT / "scripts/scientific_job.py"),
+                "--dataset", str(record.directory), "--output", str(self.output_path),
+                "--region", region, "--start", start, "--end", end,
+                "--memory-mib", "64", "--block-size", "32"
             ]
         )
 
@@ -502,6 +493,7 @@ class AuroraWindow(QMainWindow):
             self.process.readAllStandardOutput()
         ).decode("utf-8", errors="replace")
 
+        self.parse_progress(text)
         self.log.moveCursor(
             self.log.textCursor().MoveOperation.End
         )
@@ -515,7 +507,7 @@ class AuroraWindow(QMainWindow):
 
         for widget in [
             self.variable, self.region,
-            self.start, self.end
+            self.temporal
         ]:
             widget.setEnabled(True)
 
@@ -535,14 +527,17 @@ class AuroraWindow(QMainWindow):
 
     def finished(self, code, exit_status):
 
+        completed_output = self.output_path
         self.read_output()
+        self.cancel_button.setEnabled(False)
         self.restore_controls()
+        self.output_path = completed_output
 
         if (
             code != 0
             or exit_status != QProcess.ExitStatus.NormalExit
         ):
-            self.status.setText("Investigation failed")
+            self.status.setText("Investigation cancelled" if code == 2 else "Investigation failed")
             return
 
         try:
@@ -558,8 +553,28 @@ class AuroraWindow(QMainWindow):
 
     def load_results(self):
 
+        manifest = self.output_path / 'manifest.json'
+        if manifest.exists():
+            record = json.loads(manifest.read_text())
+            if record.get('status') != 'complete' or not fresh(record):
+                raise ValueError('Incomplete or stale scientific result')
+            record['directory'] = self.output_path
+            self.load_global_result(record)
+            return
         history = self.output_path / "history"
 
+        if (self.output_path / "descriptive.json").exists():
+            data = json.loads((self.output_path / "descriptive.json").read_text())
+            self.current_history = None
+            self.summary.setPlainText(json.dumps(data, indent=2))
+            self.map_figure.clear(); self.map_canvas.draw()
+            self.series_figure.clear()
+            ax = self.series_figure.add_subplot(111)
+            ax.plot(data["dates"], data["mean"], color="#69d9bd")
+            ax.set_title("Monthly observations · descriptive period")
+            ax.set_ylabel(data["unit"]); self.style_axes(ax)
+            self.series_canvas.draw()
+            return
         metrics = json.loads(
             (history / "metrics.json").read_text()
         )
@@ -598,8 +613,11 @@ class AuroraWindow(QMainWindow):
 
         if event.button != 1:
             return
+        if getattr(self, 'current_history', None) and (self.current_history/'manifest.json').exists():
+            self.inspect_global_pixel(event)
+            return
 
-        if not hasattr(self, "current_history"):
+        if not getattr(self, "current_history", None):
             return
 
         if self.process.state() != QProcess.ProcessState.NotRunning:
@@ -711,7 +729,7 @@ class AuroraWindow(QMainWindow):
 
     def refresh_map(self, *_):
 
-        if not hasattr(self, "current_history"):
+        if not getattr(self, "current_history", None):
             return
 
         if self.process.state() != (
@@ -719,10 +737,8 @@ class AuroraWindow(QMainWindow):
         ):
             return
 
-        self.draw_map(
-            self.current_history,
-            self.current_metrics
-        )
+        if (self.current_history/'manifest.json').exists(): self.draw_global_map()
+        else: self.draw_map(self.current_history, self.current_metrics)
 
     def draw_map(self, history, metrics):
 
@@ -891,3 +907,15 @@ class AuroraWindow(QMainWindow):
         self.style_axes(ax)
         self.series_figure.tight_layout()
         self.series_canvas.draw()
+
+    def closeEvent(self, event):
+        self._closing = True
+        for jobs in (self.io_jobs, self.planetary_explorer.reader_jobs, self.time_machine.reader_jobs, self.ai_lab.model_jobs):
+            jobs.cancel_all()
+        for process in (self.process, self.export_process, self.multivariate_lab.process, self.ai_lab.export_process):
+            if process.state() != QProcess.ProcessState.NotRunning:
+                process.terminate()
+                if not process.waitForFinished(1500): process.kill(); process.waitForFinished(500)
+        from PySide6.QtCore import QThreadPool
+        QThreadPool.globalInstance().waitForDone(1500)
+        super().closeEvent(event)

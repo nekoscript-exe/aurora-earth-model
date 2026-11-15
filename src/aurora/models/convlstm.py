@@ -53,8 +53,11 @@ class ConvLSTMCell(nn.Module):
 
 class AuroraConvLSTM(nn.Module):
 
-    def __init__(self):
+    def __init__(self, output_activation="tanh"):
         super().__init__()
+        if output_activation not in ("tanh", "linear"):
+            raise ValueError("Unknown output activation")
+        self.output_activation = output_activation
 
         self.layer1 = ConvLSTMCell(2, 16)
         self.layer2 = ConvLSTMCell(16, 32)
@@ -77,6 +80,5 @@ class AuroraConvLSTM(nn.Module):
                 state1[0], state2
             )
 
-        return torch.tanh(
-            self.head(state2[0])
-        )
+        output = self.head(state2[0])
+        return torch.tanh(output) if self.output_activation == "tanh" else output

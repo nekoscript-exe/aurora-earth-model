@@ -1,0 +1,3 @@
+# Tested extensions for Python 3.14.4; base model/desktop requirements remain separate.
+zarr==3.4.2
+pyproj==3.8.0
