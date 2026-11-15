@@ -1,0 +1,888 @@
+{
+  "AURORA Predictive Intelligence Laboratory.": [
+    "ai_lab.py:1"
+  ],
+  "Historical predictive experiment": [
+    "ai_lab.py:47"
+  ],
+  "Seasonal persistence": [
+    "ai_lab.py:227"
+  ],
+  "ConvLSTM learning curves": [
+    "ai_lab.py:311"
+  ],
+  "N/A (CPU)": [
+    "ai_lab.py:319"
+  ],
+  "XGBoost feature importance": [
+    "ai_lab.py:347",
+    "ai_lab.py:71",
+    "ai_lab.py:165"
+  ],
+  "Relative importance (%)": [
+    "ai_lab.py:348"
+  ],
+  "Feature importance describes model behavior. It does not establish environmental causality.": [
+    "ai_lab.py:351"
+  ],
+  "Prediction difference": [
+    "ai_lab.py:391",
+    "ai_lab.py:69"
+  ],
+  "Export evaluated predictive results": [
+    "ai_lab.py:512"
+  ],
+  "Predictive Intelligence": [
+    "ai_lab.py:38"
+  ],
+  "Model benchmark": [
+    "ai_lab.py:64",
+    "ai_lab.py:201",
+    "ai_lab.py:156"
+  ],
+  "MAE comparison": [
+    "ai_lab.py:65",
+    "ai_lab.py:202",
+    "ai_lab.py:157"
+  ],
+  "R² comparison": [
+    "ai_lab.py:66",
+    "ai_lab.py:203",
+    "ai_lab.py:158"
+  ],
+  "XGBoost prediction": [
+    "ai_lab.py:67",
+    "ai_lab.py:440"
+  ],
+  "ConvLSTM prediction": [
+    "ai_lab.py:68"
+  ],
+  "ConvLSTM training history": [
+    "ai_lab.py:70",
+    "ai_lab.py:162"
+  ],
+  "Refresh results": [
+    "ai_lab.py:76"
+  ],
+  "No evaluated model selected": [
+    "ai_lab.py:194",
+    "ai_lab.py:272",
+    "ai_lab.py:330",
+    "ai_lab.py:358"
+  ],
+  "Undefined scores are not replaced with zero.": [
+    "ai_lab.py:211"
+  ],
+  "Predictive model comparison / ": [
+    "ai_lab.py:254"
+  ],
+  "Held-out test: ": [
+    "ai_lab.py:262"
+  ],
+  "\nComparable observations: ": [
+    "ai_lab.py:262"
+  ],
+  "\nRolling one-month-ahead evaluation. Models compared over common valid targets.": [
+    "ai_lab.py:264"
+  ],
+  "Training RMSE": [
+    "ai_lab.py:293"
+  ],
+  "Validation RMSE": [
+    "ai_lab.py:299"
+  ],
+  "Best checkpoint": [
+    "ai_lab.py:306"
+  ],
+  " MiB": [
+    "ai_lab.py:319"
+  ],
+  "Best epoch: ": [
+    "ai_lab.py:321"
+  ],
+  "\nTraining time: ": [
+    "ai_lab.py:321"
+  ],
+  " s\nPeak allocated VRAM: ": [
+    "ai_lab.py:322"
+  ],
+  "XGBoost minus ConvLSTM": [
+    "ai_lab.py:427"
+  ],
+  "Model discovery failed: ": [
+    "ai_lab.py:504"
+  ],
+  "Predictive export complete": [
+    "ai_lab.py:525"
+  ],
+  "Predictive export cancelled or failed; partial bundle is not complete": [
+    "ai_lab.py:525"
+  ],
+  "trained and held-out evaluated": [
+    "ai_lab.py:146"
+  ],
+  "No current trained/evaluated models": [
+    "ai_lab.py:146"
+  ],
+  "Predictive results unavailable": [
+    "ai_lab.py:177"
+  ],
+  " undefined for this target population": [
+    "ai_lab.py:210"
+  ],
+  "Prediction grids differ": [
+    "ai_lab.py:402"
+  ],
+  "Prediction dates differ": [
+    "ai_lab.py:405"
+  ],
+  "No comparable predictions": [
+    "ai_lab.py:412"
+  ],
+  "Date: ": [
+    "ai_lab.py:430"
+  ],
+  "\nMean absolute model difference: ": [
+    "ai_lab.py:430"
+  ],
+  "\nModel disagreement is not a calibrated uncertainty estimate.": [
+    "ai_lab.py:432"
+  ],
+  "Predicted pixels: ": [
+    "ai_lab.py:460"
+  ],
+  "\nSpatial coverage: ": [
+    "ai_lab.py:461"
+  ],
+  "\nMean ": [
+    "ai_lab.py:463"
+  ],
+  "\nRetrospective forecast from December 2025. Not yet verified against the actual target month.": [
+    "ai_lab.py:464"
+  ],
+  "Functional integration of complete, fresh scientific job products.": [
+    "global_results.py:1"
+  ],
+  "Completed results; stale results cannot be presented as current": [
+    "global_results.py:29"
+  ],
+  "Export CSV / JSON / GeoTIFF / PNG": [
+    "global_results.py:34"
+  ],
+  "Native y": [
+    "global_results.py:138"
+  ],
+  "Export scientific bundle into a new subdirectory": [
+    "global_results.py:180"
+  ],
+  "Native pixel observations": [
+    "global_results.py:225"
+  ],
+  "Refresh datasets / results": [
+    "global_results.py:31"
+  ],
+  "Cancel operation": [
+    "global_results.py:32"
+  ],
+  "Catalog refresh deferred until active scientific/export jobs finish": [
+    "global_results.py:51"
+  ],
+  "Result is stale: source changed. Recompute before presenting current results.": [
+    "global_results.py:92"
+  ],
+  "Native x · ": [
+    "global_results.py:138"
+  ],
+  "Area-weighted monthly observations · ": [
+    "global_results.py:153"
+  ],
+  " · no gap filling": [
+    "global_results.py:153"
+  ],
+  "Cancelling export…": [
+    "global_results.py:159"
+  ],
+  "Export complete": [
+    "global_results.py:194"
+  ],
+  "Export cancelled or failed; partial export not published": [
+    "global_results.py:194"
+  ],
+  "Native row ": [
+    "global_results.py:209"
+  ],
+  ", column ": [
+    "global_results.py:209"
+  ],
+  "; observation coverage ": [
+    "global_results.py:209"
+  ],
+  ". Area-weighted regional summaries are separate.": [
+    "global_results.py:209"
+  ],
+  "Observed pixel ": [
+    "global_results.py:228"
+  ],
+  " · gaps preserved": [
+    "global_results.py:228"
+  ],
+  "Available scientific results": [
+    "global_results.py:35"
+  ],
+  "No fresh completed results for ": [
+    "global_results.py:84"
+  ],
+  ". Stale results excluded: ": [
+    "global_results.py:84"
+  ],
+  ". Run a scientific investigation.": [
+    "global_results.py:84"
+  ],
+  "Cancelling at a safe block boundary…": [
+    "global_results.py:161"
+  ],
+  "Outside the observed regional footprint": [
+    "global_results.py:208"
+  ],
+  "Source changed; recompute results.": [
+    "global_results.py:212"
+  ],
+  "Individual satellite pixel investigation.": [
+    "pixel_lab.py:1"
+  ],
+  "Insufficient data for regression.": [
+    "pixel_lab.py:97"
+  ],
+  "AURORA — Pixel Laboratory": [
+    "pixel_lab.py:48"
+  ],
+  "Monthly satellite observations": [
+    "pixel_lab.py:82"
+  ],
+  "Annual linear regression": [
+    "pixel_lab.py:93"
+  ],
+  "Nominal OLS inference. Temporal dependence may affect statistical significance. The confidence band is not a prediction interval.": [
+    "pixel_lab.py:165"
+  ],
+  " / Individual pixel investigation": [
+    "pixel_lab.py:53"
+  ],
+  "Annual composites": [
+    "pixel_lab.py:90"
+  ],
+  "Annual slope: ": [
+    "pixel_lab.py:138"
+  ],
+  "/year | p = ": [
+    "pixel_lab.py:138"
+  ],
+  " | R² = ": [
+    "pixel_lab.py:140"
+  ],
+  " | Valid years: ": [
+    "pixel_lab.py:141"
+  ],
+  "Latitude: ": [
+    "pixel_lab.py:62"
+  ],
+  "° | Longitude: ": [
+    "pixel_lab.py:62"
+  ],
+  "° | Pixel [": [
+    "pixel_lab.py:62"
+  ],
+  "OLS trend": [
+    "pixel_lab.py:125",
+    "window.py:47"
+  ],
+  "Nominal 95% confidence band": [
+    "pixel_lab.py:134"
+  ],
+  "Monthly calendar/text fields and linked interval timeline.": [
+    "temporal.py:1"
+  ],
+  "Interval start month": [
+    "temporal.py:26"
+  ],
+  "Interval end month": [
+    "temporal.py:26"
+  ],
+  "Calendar or manual date; endpoints include their entire observation month": [
+    "temporal.py:21"
+  ],
+  "Dataset unavailable": [
+    "temporal.py:36",
+    "temporal.py:48"
+  ],
+  "Date interval": [
+    "temporal.py:97",
+    "temporal.py:103"
+  ],
+  " months · ": [
+    "temporal.py:90"
+  ],
+  " · dates": [
+    "temporal.py:102"
+  ],
+  "AURORA Desktop — Scientific investigation interface.": [
+    "window.py:1"
+  ],
+  "Theil-Sen trend": [
+    "window.py:48"
+  ],
+  "Statistical significance": [
+    "window.py:49",
+    "window.py:777",
+    "window.py:871"
+  ],
+  "Estimated change": [
+    "window.py:50",
+    "window.py:818"
+  ],
+  "Satellite coverage": [
+    "window.py:51",
+    "window.py:832",
+    "window.py:789"
+  ],
+  "AURORA — Earth System Intelligence": [
+    "window.py:108"
+  ],
+  "A U R O R A": [
+    "window.py:150"
+  ],
+  "Run scientific investigation": [
+    "window.py:245"
+  ],
+  "SATELLITE OBSERVATIONS\nNASA Terra / MODIS\n\nStatistical trend detection\nGeospatial analysis": [
+    "window.py:260"
+  ],
+  "Time Machine": [
+    "window.py:284"
+  ],
+  "Predictive intelligence": [
+    "window.py:291"
+  ],
+  "Scientific results": [
+    "window.py:319"
+  ],
+  "Click to inspect a pixel. Double-click to explore its history.": [
+    "window.py:337"
+  ],
+  "Spatial analysis": [
+    "window.py:359"
+  ],
+  "Temporal analysis": [
+    "window.py:362"
+  ],
+  "Execution log": [
+    "window.py:365"
+  ],
+  "AURORA v5.0  |  NASA Space Apps Challenge 2026": [
+    "window.py:391"
+  ],
+  "<h2>Scientific investigation running...</h2>": [
+    "window.py:456"
+  ],
+  "Scientific investigation running...": [
+    "window.py:472"
+  ],
+  "OLS / BH-FDR nominal significance": [
+    "window.py:787"
+  ],
+  "Northing (km)": [
+    "window.py:858"
+  ],
+  "Regional monthly time series": [
+    "window.py:902"
+  ],
+  "EARTH SYSTEM INTELLIGENCE  /  Scientific Investigation Environment": [
+    "window.py:157"
+  ],
+  "RESEARCH EDITION": [
+    "window.py:179"
+  ],
+  "Investigation setup": [
+    "window.py:198",
+    "globe.py:483",
+    "multivariate_lab.py:37"
+  ],
+  "Configure an environmental investigation using historical satellite observations.": [
+    "window.py:205"
+  ],
+  "Vegetation activity — NDVI": [
+    "window.py:215"
+  ],
+  "Land surface temperature — LST": [
+    "window.py:218"
+  ],
+  "Environmental variable": [
+    "window.py:229"
+  ],
+  "Region of interest": [
+    "window.py:230"
+  ],
+  "Planetary Explorer": [
+    "window.py:278",
+    "globe.py:476"
+  ],
+  "Multivariate Laboratory": [
+    "window.py:296"
+  ],
+  "Historical dataset available": [
+    "window.py:430"
+  ],
+  "Historical dataset unavailable": [
+    "window.py:432"
+  ],
+  "Investigation completed": [
+    "window.py:547"
+  ],
+  "No scientific result selected": [
+    "window.py:553"
+  ],
+  "Monthly observations · descriptive period": [
+    "window.py:573"
+  ],
+  "Valid observations (%)": [
+    "window.py:794"
+  ],
+  "Easting — ": [
+    "window.py:844"
+  ],
+  "Easting (km) — ": [
+    "window.py:857"
+  ],
+  "Monthly observations": [
+    "window.py:899"
+  ],
+  "Temperature (°C)": [
+    "window.py:905"
+  ],
+  "Scientific map layer": [
+    "window.py:331"
+  ],
+  "Invalid investigation": [
+    "window.py:443"
+  ],
+  "Execution error": [
+    "window.py:522"
+  ],
+  "Incomplete or stale scientific result": [
+    "window.py:559"
+  ],
+  "No evaluated trend at this location.": [
+    "window.py:688"
+  ],
+  "PIXEL [": [
+    "window.py:709"
+  ],
+  "]  |  Lat: ": [
+    "window.py:709"
+  ],
+  "°  Lon: ": [
+    "window.py:710"
+  ],
+  "°\nOLS: ": [
+    "window.py:711"
+  ],
+  "  |  Sen: ": [
+    "window.py:712"
+  ],
+  "  |  Change: ": [
+    "window.py:713"
+  ],
+  "\np: ": [
+    "window.py:714"
+  ],
+  "  |  q: ": [
+    "window.py:715"
+  ],
+  "  |  Coverage: ": [
+    "window.py:716",
+    "time_machine.py:377"
+  ],
+  "  |  Valid years: ": [
+    "window.py:717"
+  ],
+  "Not significant": [
+    "window.py:874",
+    "report.py:41"
+  ],
+  "Investigation cancelled": [
+    "window.py:536"
+  ],
+  "Investigation failed": [
+    "window.py:536"
+  ],
+  "Result loading failed": [
+    "window.py:543"
+  ],
+  "Pixel inspection failed: ": [
+    "window.py:730"
+  ],
+  "Temperature change (°C)": [
+    "window.py:821"
+  ],
+  "AURORA — Interactive planetary observation explorer.": [
+    "globe.py:1"
+  ],
+  "Same fixed scale as the raster; tails are clipped, never rescaled per date.": [
+    "globe.py:35"
+  ],
+  "NDVI · dimensionless": [
+    "globe.py:29"
+  ],
+  "LST · °C": [
+    "globe.py:30"
+  ],
+  "NoData / QA / outside region: transparent": [
+    "globe.py:55"
+  ],
+  "Drag: rotate · Wheel: zoom · Double-click: place a WGS84 pin": [
+    "globe.py:64"
+  ],
+  "Toggle the scientific investigation controls": [
+    "globe.py:485"
+  ],
+  "Double-click to place a pin · Lighting is illustrative": [
+    "globe.py:529"
+  ],
+  "Auto rotate": [
+    "globe.py:559"
+  ],
+  "Country / state boundaries": [
+    "globe.py:583"
+  ],
+  "Geographic markers": [
+    "globe.py:586"
+  ],
+  "Previous observation": [
+    "globe.py:618"
+  ],
+  "Next observation": [
+    "globe.py:625"
+  ],
+  "Geography: Natural Earth | Scientific observations: NASA Terra / MODIS": [
+    "globe.py:655"
+  ],
+  " · display stride ": [
+    "globe.py:746"
+  ],
+  " to ": [
+    "globe.py:806"
+  ],
+  "Read cancelled; no incomplete observation displayed.": [
+    "globe.py:855",
+    "time_machine.py:391"
+  ],
+  "Mexico City": [
+    "globe.py:88"
+  ],
+  "Frame shape changed within dataset": [
+    "globe.py:232"
+  ],
+  "Render dimensions have not been initialized": [
+    "globe.py:244"
+  ],
+  "Land rasterization did not produce an array": [
+    "globe.py:297"
+  ],
+  "LAT ": [
+    "globe.py:454"
+  ],
+  "°  |  LON ": [
+    "globe.py:454"
+  ],
+  "°  |  ZOOM ": [
+    "globe.py:455"
+  ],
+  "Drag to rotate · Scroll to zoom · Explore satellite history": [
+    "globe.py:491"
+  ],
+  "Load observations": [
+    "globe.py:544"
+  ],
+  "Cancel loading": [
+    "globe.py:552",
+    "time_machine.py:72"
+  ],
+  "Clear user pins": [
+    "globe.py:589"
+  ],
+  "No observations loaded": [
+    "globe.py:603",
+    "globe.py:715"
+  ],
+  "Load the selected dataset.": [
+    "globe.py:716"
+  ],
+  "Dataset unavailable: ": [
+    "globe.py:773"
+  ],
+  " | Valid pixels: ": [
+    "globe.py:815"
+  ],
+  " | Coverage: ": [
+    "globe.py:815"
+  ],
+  " | Mean: ": [
+    "globe.py:816"
+  ],
+  " (area weighted)\nFixed scale: ": [
+    "globe.py:816"
+  ],
+  " | Missing observations remain uncolored.": [
+    "globe.py:817"
+  ],
+  "Pin ": [
+    "globe.py:406",
+    "globe.py:405"
+  ],
+  " · WGS84 · ": [
+    "globe.py:406"
+  ],
+  "Regional land rasterization did not produce an array": [
+    "globe.py:320"
+  ],
+  "Paired observation laboratory; analysis runs outside the UI process.": [
+    "multivariate_lab.py:1"
+  ],
+  "Computing native blocks, paired climatologies and global FDR…": [
+    "multivariate_lab.py:98"
+  ],
+  "Paired monthly regional means": [
+    "multivariate_lab.py:154"
+  ],
+  "Observed monthly anomalies": [
+    "multivariate_lab.py:160"
+  ],
+  "Y lag (months)": [
+    "multivariate_lab.py:166"
+  ],
+  "Anomaly correlation": [
+    "multivariate_lab.py:166"
+  ],
+  "Exploratory lag profile": [
+    "multivariate_lab.py:166"
+  ],
+  "Multivariate Laboratory · NDVI × LST": [
+    "multivariate_lab.py:29"
+  ],
+  "Pearson raw": [
+    "multivariate_lab.py:34",
+    "multivariate_lab.py:132"
+  ],
+  "Spearman anomaly": [
+    "multivariate_lab.py:34",
+    "multivariate_lab.py:133"
+  ],
+  "Lag profiles": [
+    "multivariate_lab.py:34",
+    "multivariate_lab.py:134"
+  ],
+  "Coverage sensitivity": [
+    "multivariate_lab.py:34",
+    "multivariate_lab.py:138"
+  ],
+  "Run paired analysis": [
+    "multivariate_lab.py:35"
+  ],
+  "Cancel paired analysis": [
+    "multivariate_lab.py:41"
+  ],
+  "Coincident observations only · Association does not establish causation.": [
+    "multivariate_lab.py:47"
+  ],
+  "Run an analysis with aligned real datasets": [
+    "multivariate_lab.py:118"
+  ],
+  "Incomplete or stale result; run a fresh analysis.": [
+    "multivariate_lab.py:123"
+  ],
+  "AR1/BH are diagnostics. Association is not causation.": [
+    "multivariate_lab.py:143"
+  ],
+  "Regional ": [
+    "multivariate_lab.py:154",
+    "multivariate_lab.py:154"
+  ],
+  " anomaly": [
+    "multivariate_lab.py:158"
+  ],
+  "upper left": [
+    "multivariate_lab.py:167"
+  ],
+  "Cancellation requested; partial products will not be published.": [
+    "multivariate_lab.py:172"
+  ],
+  "Anomaly Pearson r": [
+    "multivariate_lab.py:128",
+    "multivariate_lab.py:138"
+  ],
+  " anomaly · ": [
+    "multivariate_lab.py:160"
+  ],
+  "Observed NDVI–LST Pearson r": [
+    "multivariate_lab.py:132"
+  ],
+  " coincident observations · ": [
+    "multivariate_lab.py:140"
+  ],
+  "\nClimatology: ": [
+    "multivariate_lab.py:140"
+  ],
+  " · ≥8 pairs per calendar month. Positive lag: X(t) vs Y(t+lag).\n": [
+    "multivariate_lab.py:141"
+  ],
+  "Native blocks, area weighting and global FDR. ": [
+    "multivariate_lab.py:142"
+  ],
+  "Historical legacy result: source freshness not independently established. ": [
+    "multivariate_lab.py:142"
+  ],
+  "Monthly anomaly Spearman ρ": [
+    "multivariate_lab.py:133"
+  ],
+  "Minimum paired regional coverage": [
+    "multivariate_lab.py:138"
+  ],
+  "Compatibility imports; geospatial logic now belongs to the shared core.": [
+    "geospatial.py:1"
+  ],
+  "AURORA animated welcome experience.": [
+    "welcome.py:1"
+  ],
+  "Discover a changing planet.": [
+    "welcome.py:233"
+  ],
+  "Explore the past. Understand the present. Model what comes next.": [
+    "welcome.py:241"
+  ],
+  "25 years": [
+    "welcome.py:254"
+  ],
+  "Historical NDVI": [
+    "welcome.py:254"
+  ],
+  "Satellite observations": [
+    "welcome.py:255"
+  ],
+  "Predictive models": [
+    "welcome.py:256"
+  ],
+  "Begin scientific investigation": [
+    "welcome.py:275"
+  ],
+  "AURORA — Historical satellite playback.": [
+    "time_machine.py:1"
+  ],
+  "Load selected satellite dataset": [
+    "time_machine.py:201"
+  ],
+  "Select Load satellite imagery to continue.": [
+    "time_machine.py:205"
+  ],
+  "Earth Time Machine": [
+    "time_machine.py:40"
+  ],
+  "Explore historical satellite observations.": [
+    "time_machine.py:49"
+  ],
+  "Vegetation — NDVI": [
+    "time_machine.py:58"
+  ],
+  "Temperature — LST": [
+    "time_machine.py:59"
+  ],
+  "Load satellite imagery": [
+    "time_machine.py:63"
+  ],
+  "No dataset loaded": [
+    "time_machine.py:92"
+  ],
+  " of ": [
+    "time_machine.py:360"
+  ],
+  "Valid pixels: ": [
+    "time_machine.py:377"
+  ],
+  "  |  Area-weighted mean: ": [
+    "time_machine.py:378"
+  ],
+  "\nDisplay stride ": [
+    "time_machine.py:379"
+  ],
+  "; statistics on displayed samples. Historical satellite observations. Fixed color scale. Missing data is not zero.": [
+    "time_machine.py:380"
+  ],
+  "Read cancelled": [
+    "tasks.py:28"
+  ],
+  "AURORA scientific report renderer.": [
+    "report.py:1"
+  ],
+  "Vegetation dynamics": [
+    "report.py:11"
+  ],
+  "Land surface temperature": [
+    "report.py:13"
+  ],
+  "\n    </p>\n\n    <table width=\"100%\" cellspacing=\"8\">\n        <tr>\n            ": [
+    "report.py:114"
+  ],
+  "\n        </tr>\n        <tr>\n            ": [
+    "report.py:120"
+  ],
+  "\n        </tr>\n    </table>\n\n    <h2>Spatial trend distribution</h2>\n\n    <p>": [
+    "report.py:124"
+  ],
+  " regional pixels.</p>\n\n    <table width=\"100%\">\n        ": [
+    "report.py:130"
+  ],
+  "\n            </span>\n        </td>\n        ": [
+    "report.py:33"
+  ],
+  "Not evaluated": [
+    "report.py:42"
+  ],
+  "%</td>\n        </tr>\n        ": [
+    "report.py:57"
+  ],
+  "Nominal statistical significance detected.": [
+    "report.py:68"
+  ],
+  "Not statistically significant at 5%.": [
+    "report.py:70"
+  ],
+  "\n        </h2>\n\n        <p>Estimated change:\n        ": [
+    "report.py:75"
+  ],
+  "</p>\n\n        <p>p-value: ": [
+    "report.py:79"
+  ],
+  "</p>\n        <p>R²: ": [
+    "report.py:81"
+  ],
+  "</p>\n\n        <p>Nominal 95% confidence interval:\n        [": [
+    "report.py:82"
+  ],
+  "\n        </p>\n        ": [
+    "report.py:88"
+  ],
+  "Historical months": [
+    "report.py:119"
+  ],
+  "Data coverage": [
+    "report.py:120"
+  ],
+  "Evaluated pixels": [
+    "report.py:123"
+  ],
+  "Analysis time": [
+    "report.py:124"
+  ],
+  " s": [
+    "report.py:124"
+  ]
+}

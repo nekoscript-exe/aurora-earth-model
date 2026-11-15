@@ -1,13 +1,14 @@
 """AURORA Predictive Intelligence Laboratory."""
 
-from .i18n import tr
+from .i18n import error_text, localized_label, localized_button, add_choices, tr
 
 import json
 from pathlib import Path
 
 import numpy as np
 import rasterio
-from aurora.catalog import populate_regions, DatasetRegistry, display_scale
+from aurora.catalog import DatasetRegistry, display_scale
+from .dataset_controls import populate_regions
 from aurora.model_catalog import ModelRegistry
 from aurora.jobs import request_cancel
 from .tasks import ReaderJobs
@@ -19,8 +20,8 @@ from PySide6.QtWidgets import (
 )
 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
-from matplotlib.backends.backend_qt import NavigationToolbar2QT
+from .canvas import FigureCanvasQTAgg
+from .toolbar import NavigationToolbar2QT
 
 
 class AILaboratory(QWidget):
@@ -35,7 +36,7 @@ class AILaboratory(QWidget):
 
         layout = QVBoxLayout(self)
 
-        title = QLabel(tr('Predictive Intelligence'))
+        title = localized_label('Predictive Intelligence')
         title.setStyleSheet(
             "font-size:26px;font-weight:bold;"
             "color:#b99de8;"
@@ -43,7 +44,7 @@ class AILaboratory(QWidget):
 
         layout.addWidget(title)
 
-        self.info = QLabel(
+        self.info = localized_label(
             "Historical predictive experiment"
         )
 
@@ -60,7 +61,7 @@ class AILaboratory(QWidget):
         controls.addWidget(self.variable)
         self.view = QComboBox()
 
-        self.view.addItems([
+        add_choices(self.view, [
             "Model benchmark",
             "MAE comparison",
             "R² comparison",
@@ -73,13 +74,13 @@ class AILaboratory(QWidget):
 
         controls.addWidget(self.view, 1)
 
-        refresh = QPushButton(tr('Refresh results'))
+        refresh = localized_button('Refresh results')
         refresh.clicked.connect(self.render_results)
 
         controls.addWidget(refresh)
-        self.export_button = QPushButton(tr('Export')); self.export_button.clicked.connect(self.export_results)
+        self.export_button = localized_button('Export'); self.export_button.clicked.connect(self.export_results)
         controls.addWidget(self.export_button)
-        self.cancel_export_button = QPushButton(tr('Cancel')); self.cancel_export_button.setEnabled(False)
+        self.cancel_export_button = localized_button('Cancel'); self.cancel_export_button.setEnabled(False)
         self.cancel_export_button.clicked.connect(self.cancel_export); controls.addWidget(self.cancel_export_button)
         self.export_process = QProcess(self); self.export_process.finished.connect(self.export_finished)
 
@@ -95,7 +96,7 @@ class AILaboratory(QWidget):
         layout.addWidget(self.toolbar)
         layout.addWidget(self.canvas, 1)
 
-        self.details = QLabel()
+        self.details = localized_label()
         self.details.setWordWrap(True)
 
         self.details.setStyleSheet(
@@ -143,12 +144,12 @@ class AILaboratory(QWidget):
             self.unit = model['unit']
             self.scale = display_scale(self.registry.find(region, variable).metadata)
         else: self.directory = self.root/'outputs/NO_TRAINED_EVALUATED_MODELS'
-        self.info.setText(f"{str(variable).upper()} / {region} · "+('trained and held-out evaluated' if model else 'No current trained/evaluated models'))
+        self.info.setText(tr(f"{str(variable).upper()} / {region} · "+('trained and held-out evaluated' if model else 'No current trained/evaluated models')))
         self.figure.clear()
 
         ax = self.figure.add_subplot(111)
 
-        mode = self.view.currentText()
+        mode = self.view.currentData()
 
         try:
 
@@ -174,13 +175,13 @@ class AILaboratory(QWidget):
 
             ax.text(
                 0.5, 0.5,
-                "Predictive results unavailable",
+                tr("Predictive results unavailable"),
                 ha="center", va="center",
                 transform=ax.transAxes,
                 color="#efbd76"
             )
 
-            self.details.setText(str(exc))
+            self.details.setText(error_text(exc))
 
         self.style_plot(ax)
 
@@ -207,8 +208,8 @@ class AILaboratory(QWidget):
 
         names = [name for name in results if results[name].get(field) is not None and np.isfinite(results[name][field])]
         if not names:
-            ax.text(.5, .5, field.upper()+' undefined for this target population', ha='center', color='#efbd76')
-            self.details.setText('Undefined scores are not replaced with zero.'); return
+            ax.text(.5, .5, tr(field.upper()+' undefined for this target population'), ha='center', color='#efbd76')
+            self.details.setText(tr('Undefined scores are not replaced with zero.')); return
 
         names.sort(
             key=lambda name: results[name][field],
@@ -251,19 +252,19 @@ class AILaboratory(QWidget):
         ax.margins(x=0.2)
 
         ax.set_title(
-            f"Predictive model comparison / {field.upper()}"
+            tr(f"Predictive model comparison / {field.upper()}")
         )
 
-        ax.set_xlabel(field.upper() + (f" ({self.unit})" if field != "r2" else ""))
+        ax.set_xlabel(tr(field.upper() + (f" ({self.unit})" if field != "r2" else "")))
 
         period = data["period"]
 
         self.details.setText(
-            f"Held-out test: {period[0]} — {period[1]}\n"
+            tr(f"Held-out test: {period[0]} — {period[1]}\n"
             f"Comparable observations: "
             f'{data["comparable_observations"]:,}\n'
             "Rolling one-month-ahead evaluation. "
-            "Models compared over common valid targets."
+            "Models compared over common valid targets.")
         )
 
     def draw_training(self, ax):
@@ -290,25 +291,25 @@ class AILaboratory(QWidget):
         ax.plot(
             epochs, train,
             "o-", color="#69d9bd",
-            label="Training RMSE"
+            label=tr("Training RMSE")
         )
 
         ax.plot(
             epochs, validation,
             "o-", color="#b99de8",
-            label="Validation RMSE"
+            label=tr("Validation RMSE")
         )
 
         ax.axvline(
             data["best_epoch"],
             color="#efbd76",
             linestyle="--",
-            label="Best checkpoint"
+            label=tr("Best checkpoint")
         )
 
-        ax.set_xlabel("Epoch")
-        ax.set_ylabel("RMSE")
-        ax.set_title("ConvLSTM learning curves")
+        ax.set_xlabel(tr("Epoch"))
+        ax.set_ylabel(tr("RMSE"))
+        ax.set_title(tr("ConvLSTM learning curves"))
 
         ax.legend(
             facecolor="#14202d",
@@ -318,10 +319,10 @@ class AILaboratory(QWidget):
         peak = data.get('peak_vram_mib')
         peak_text = f'{peak:.2f} MiB' if peak is not None else 'N/A (CPU)'
         self.details.setText(
-            f'Best epoch: {data["best_epoch"]}\n'
+            tr(f'Best epoch: {data["best_epoch"]}\n'
             f'Training time: {data["seconds"]:.2f} s\n'
             f'Peak allocated VRAM: '
-            f'{peak_text}'
+            f'{peak_text}')
         )
 
     def draw_importance(self, ax):
@@ -344,12 +345,12 @@ class AILaboratory(QWidget):
             color="#69d9bd"
         )
 
-        ax.set_title("XGBoost feature importance")
-        ax.set_xlabel("Relative importance (%)")
+        ax.set_title(tr("XGBoost feature importance"))
+        ax.set_xlabel(tr("Relative importance (%)"))
 
         self.details.setText(
-            "Feature importance describes model behavior. "
-            "It does not establish environmental causality."
+            tr("Feature importance describes model behavior. "
+            "It does not establish environmental causality.")
         )
 
     def read_prediction(self, engine):
@@ -424,14 +425,14 @@ class AILaboratory(QWidget):
                 extent=extent
             )
 
-            ax.set_title("XGBoost minus ConvLSTM")
+            ax.set_title(tr("XGBoost minus ConvLSTM"))
 
             self.details.setText(
-                f'Date: {meta_a["forecast_date"]}\n'
+                tr(f'Date: {meta_a["forecast_date"]}\n'
                 f"Mean absolute model difference: "
                 f"{np.abs(finite).mean():.6f} {self.unit}\n"
                 "Model disagreement is not a calibrated "
-                "uncertainty estimate."
+                "uncertainty estimate.")
             )
 
         else:
@@ -453,17 +454,17 @@ class AILaboratory(QWidget):
             )
 
             ax.set_title(
-                f'{mode} / {metadata["forecast_date"]}'
+                tr(f'{mode} / {metadata["forecast_date"]}')
             )
 
             self.details.setText(
-                f'Predicted pixels: '
+                tr(f'Predicted pixels: '
                 f'{metadata["predicted_pixels"]:,}\n'
                 f'Spatial coverage: '
                 f'{metadata["prediction_coverage"]:.2%}\n'
                 f'Mean {self.unit}: {metadata["mean_"+self.variable.currentData()]:.5f}\n'
                 "Retrospective forecast from December 2025. "
-                "Not yet verified against the actual target month."
+                "Not yet verified against the actual target month.")
             )
 
         ax.set_xticks([])
@@ -473,7 +474,7 @@ class AILaboratory(QWidget):
             image, ax=ax, shrink=0.8
         )
 
-        bar.set_label(self.unit, color="#bacbd8")
+        bar.set_label(tr(self.unit), color="#bacbd8")
         bar.ax.tick_params(colors="#bacbd8")
 
     def refresh_catalog(self):
@@ -484,7 +485,7 @@ class AILaboratory(QWidget):
         current_region, current_variable = self.region.currentData(), self.variable.currentData()
         self.region.blockSignals(True); self.variable.blockSignals(True)
         self.region.clear()
-        for region in sorted({model['region'] for model in registry.models}): self.region.addItem(region, region)
+        for region in sorted({model['region'] for model in registry.models}): self.region.addItem(tr(region), region)
         index = self.region.findData(current_region); self.region.setCurrentIndex(index if index >= 0 else 0)
         self.region.blockSignals(False); self.variable.blockSignals(False)
         self.models_region_changed()
@@ -496,24 +497,24 @@ class AILaboratory(QWidget):
         current = self.variable.currentData(); self.variable.blockSignals(True); self.variable.clear()
         if self.model_registry:
             for variable in sorted({model['variable'] for model in self.model_registry.models if model['region'] == self.region.currentData()}, key=lambda v: (v != 'ndvi', v != 'lst', v)):
-                self.variable.addItem(variable.upper(), variable)
+                self.variable.addItem(tr(variable.upper()), variable)
         index = self.variable.findData(current); self.variable.setCurrentIndex(index if index >= 0 else 0)
         self.variable.blockSignals(False); self.render_results()
 
     def models_error(self, error):
-        self.info.setText('Model discovery failed: '+error)
+        self.info.setText(tr('Model discovery failed: '+error))
 
     def export_results(self):
         import sys
         from datetime import datetime
         if not self.model_registry: return
         try: self.model_registry.find(self.region.currentData(), self.variable.currentData())
-        except FileNotFoundError as exc: self.details.setText(str(exc)); return
-        directory = QFileDialog.getExistingDirectory(self, 'Export evaluated predictive results')
+        except FileNotFoundError as exc: self.details.setText(error_text(exc)); return
+        directory = QFileDialog.getExistingDirectory(self, tr('Export evaluated predictive results'))
         if not directory: return
         self.export_directory = Path(directory)/f'aurora_predictive_{datetime.now():%Y%m%d_%H%M%S_%f}'
         self.cancel_export_button.setEnabled(True); self.export_button.setEnabled(False)
-        self.details.setText('Exporting scientific formats in background… Cancel is available.')
+        self.details.setText(tr('Exporting scientific formats in background… Cancel is available.'))
         self.export_process.start(sys.executable, [str(self.root/'scripts/export_model_result.py'), '--root', str(self.root),
             '--region', self.region.currentData(), '--variable', self.variable.currentData(), '--output', str(self.export_directory)])
 
@@ -522,4 +523,4 @@ class AILaboratory(QWidget):
 
     def export_finished(self, code, *_):
         self.cancel_export_button.setEnabled(False); self.export_button.setEnabled(True)
-        self.details.setText('Predictive export complete' if code == 0 else 'Predictive export cancelled or failed; partial bundle is not complete')
+        self.details.setText(tr('Predictive export complete' if code == 0 else 'Predictive export cancelled or failed; partial bundle is not complete'))

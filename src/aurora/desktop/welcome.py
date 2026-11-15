@@ -1,6 +1,6 @@
 """AURORA animated welcome experience."""
 
-from .i18n import tr
+from .i18n import localized_label, localized_button
 
 import math
 import random
@@ -230,15 +230,15 @@ class WelcomePage(QWidget):
 
         layout.addWidget(EarthView(), 1)
 
-        title = QLabel(tr('Discover a changing planet.'))
+        title = localized_label('Discover a changing planet.')
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         title.setStyleSheet(
             "font-size:30px; font-weight:bold;"
             "color:#e7edf5;"
         )
 
-        subtitle = QLabel(
-            tr('Explore the past. Understand the present. Model what comes next.')
+        subtitle = localized_label(
+            'Explore the past. Understand the present. Model what comes next.'
         )
 
         subtitle.setWordWrap(True)
@@ -256,7 +256,7 @@ class WelcomePage(QWidget):
             ("02", "Predictive models")
         ]:
 
-            card = QLabel(
+            card = localized_label(
                 f'<center><span style="font-size:24px;'
                 f'color:#69d9bd;"><b>{value}</b></span>'
                 f'<br><span style="color:#8da5ba;">'
@@ -272,7 +272,7 @@ class WelcomePage(QWidget):
 
         layout.addLayout(features)
 
-        button = QPushButton(tr('Begin scientific investigation'))
+        button = localized_button('Begin scientific investigation')
         button.clicked.connect(launch)
 
         layout.addWidget(button)

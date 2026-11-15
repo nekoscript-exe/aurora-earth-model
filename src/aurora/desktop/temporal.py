@@ -1,6 +1,6 @@
 """Monthly calendar/text fields and linked interval timeline."""
 
-from .i18n import tr
+from .i18n import localized_label, localized_button, tr
 import numpy as np
 from PySide6.QtCore import Qt, QDate, Signal
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QDateEdit, QSlider, QLabel, QPushButton
@@ -18,22 +18,22 @@ class TemporalSelector(QWidget):
         self.start, self.end = QDateEdit(), QDateEdit()
         for label, edit in [('Start', self.start), ('End', self.end)]:
             edit.setKeyboardTracking(False); edit.setCalendarPopup(True); edit.setDisplayFormat('yyyy-MM-dd')
-            edit.setToolTip('Calendar or manual date; endpoints include their entire observation month')
-            col = QVBoxLayout(); col.addWidget(QLabel(label)); col.addWidget(edit); row.addLayout(col)
+            edit.setToolTip(tr('Calendar or manual date; endpoints include their entire observation month'))
+            col = QVBoxLayout(); col.addWidget(localized_label(label)); col.addWidget(edit); row.addLayout(col)
             edit.dateChanged.connect(self.update_dates)
         layout.addLayout(row)
         self.low, self.high = QSlider(Qt.Orientation.Horizontal), QSlider(Qt.Orientation.Horizontal)
-        self.low.setToolTip('Interval start month'); self.high.setToolTip('Interval end month')
+        self.low.setToolTip(tr('Interval start month')); self.high.setToolTip(tr('Interval end month'))
         for slider in (self.low, self.high):
             layout.addWidget(slider)
         self.low.valueChanged.connect(self.update_sliders)
         self.high.valueChanged.connect(self.update_sliders)
         quick = QHBoxLayout(); self.quick = {}
         for years in (5, 10, 15, 25):
-            button = QPushButton(f'{years}y'); self.quick[years] = button
+            button = localized_button(f'{years}y'); self.quick[years] = button
             button.clicked.connect(lambda _, y=years: self.apply_quick(y)); quick.addWidget(button)
         layout.addLayout(quick)
-        self.status = QLabel(tr('Dataset unavailable')); self.status.setWordWrap(True); layout.addWidget(self.status)
+        self.status = localized_label('Dataset unavailable'); self.status.setWordWrap(True); layout.addWidget(self.status)
         self.setEnabled(False)
 
     @staticmethod
@@ -74,7 +74,7 @@ class TemporalSelector(QWidget):
         try:
             start, end = self.interval(); self.set_interval(start, end)
         except ValueError as exc:
-            self.status.setText(str(exc)); self.changed.emit()
+            self.status.setText(tr(str(exc))); self.changed.emit()
 
     def update_sliders(self, *_):
         if not len(self.dates):
@@ -87,19 +87,19 @@ class TemporalSelector(QWidget):
     def update_status(self):
         selected = select_interval(self.dates, *self.interval())
         eligible = trend_eligibility(self.dates[selected])
-        self.status.setText(f'{selected.sum()} months · '+eligible['interpretation'])
+        self.status.setText(tr(f'{selected.sum()} months · '+eligible['interpretation']))
         self.changed.emit()
 
     def apply_quick(self, years):
         self.set_interval(*quick_period(self.dates, years))
 
     def create_toggle(self):
-        button = QPushButton(tr('Date interval'))
+        button = localized_button('Date interval')
         button.setCheckable(True)
         self.hide()
         button.toggled.connect(lambda enabled: self.setVisible(enabled))
         def refresh():
-            try: start, end = self.interval(); button.setText(f'{start} — {end} · dates')
+            try: start, end = self.interval(); button.setText(tr(f'{start} — {end} · dates'))
             except ValueError: button.setText(tr('Date interval'))
         self.changed.connect(refresh)
         return button

@@ -1,11 +1,12 @@
 """AURORA — Historical satellite playback."""
 
-from .i18n import tr
+from .i18n import error_text, localized_label, localized_button, tr
 
 import numpy as np
 from .temporal import TemporalSelector
 from aurora.temporal import select_interval
-from aurora.catalog import ObservationSeries, populate_regions, populate_variables, display_scale
+from aurora.catalog import ObservationSeries, display_scale
+from .dataset_controls import populate_regions, populate_variables
 from .tasks import ReaderJobs
 
 from PySide6.QtCore import Qt, QTimer
@@ -15,8 +16,8 @@ from PySide6.QtWidgets import (
 )
 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
-from matplotlib.backends.backend_qt import NavigationToolbar2QT
+from .canvas import FigureCanvasQTAgg
+from .toolbar import NavigationToolbar2QT
 
 
 class TimeMachine(QWidget):
@@ -37,7 +38,7 @@ class TimeMachine(QWidget):
 
         layout = QVBoxLayout(self)
 
-        title = QLabel(tr('Earth Time Machine'))
+        title = localized_label('Earth Time Machine')
         title.setStyleSheet(
             "font-size:27px;font-weight:bold;"
             "color:#69d9bd;"
@@ -45,7 +46,7 @@ class TimeMachine(QWidget):
 
         layout.addWidget(title)
 
-        layout.addWidget(QLabel(
+        layout.addWidget(localized_label(
             "Explore historical satellite observations."
         ))
 
@@ -60,7 +61,7 @@ class TimeMachine(QWidget):
 
         populate_variables(self.variable, self.registry, self.region.currentData(), preserve=False)
 
-        load = QPushButton(tr('Load satellite imagery'))
+        load = localized_button('Load satellite imagery')
         load.clicked.connect(lambda _: self.load_dataset(asynchronous=True))
 
         controls.addWidget(self.region)
@@ -69,7 +70,7 @@ class TimeMachine(QWidget):
 
         layout.addLayout(controls)
         self.read_progress = QProgressBar(); self.read_progress.setRange(0, 0); self.read_progress.hide()
-        self.cancel_read_button = QPushButton(tr('Cancel loading')); self.cancel_read_button.setEnabled(False)
+        self.cancel_read_button = localized_button('Cancel loading'); self.cancel_read_button.setEnabled(False)
         self.cancel_read_button.clicked.connect(self.cancel_read)
         layout.addWidget(self.read_progress); layout.addWidget(self.cancel_read_button)
 
@@ -89,7 +90,7 @@ class TimeMachine(QWidget):
         layout.addWidget(self.period)
         self.period.changed.connect(self.apply_period)
 
-        self.date_label = QLabel(tr('No dataset loaded'))
+        self.date_label = localized_label('No dataset loaded')
 
         self.date_label.setStyleSheet(
             "font-size:25px;font-weight:bold;"
@@ -109,9 +110,9 @@ class TimeMachine(QWidget):
 
         playback = QHBoxLayout()
 
-        self.previous = QPushButton(tr('Previous'))
-        self.play = QPushButton(tr('Play'))
-        self.next = QPushButton(tr('Next'))
+        self.previous = localized_button('Previous')
+        self.play = localized_button('Play')
+        self.next = localized_button('Next')
 
         self.previous.clicked.connect(
             lambda: self.step(-1)
@@ -134,7 +135,7 @@ class TimeMachine(QWidget):
             ("4x", 125),
             ("8x", 63)
         ]:
-            self.speed.addItem(label, interval)
+            self.speed.addItem(tr(label), interval)
 
         self.speed.setCurrentIndex(1)
         self.speed.currentIndexChanged.connect(
@@ -149,7 +150,7 @@ class TimeMachine(QWidget):
 
         layout.addLayout(playback)
 
-        self.details = QLabel()
+        self.details = localized_label()
         self.details.setWordWrap(True)
         self.details.setStyleSheet(
             "background:#14202d;color:#a9c7dd;"
@@ -198,11 +199,11 @@ class TimeMachine(QWidget):
         if self.isVisible(): self.draw_visible()
 
         self.date_label.setText(
-            "Load selected satellite dataset"
+            tr("Load selected satellite dataset")
         )
 
         self.details.setText(
-            "Select Load satellite imagery to continue."
+            tr("Select Load satellite imagery to continue.")
         )
 
     def update_speed(self, *_):
@@ -262,7 +263,7 @@ class TimeMachine(QWidget):
         try:
             record = self.registry.find(*key)
             if asynchronous:
-                self.details.setText('Opening observed data in background…')
+                self.details.setText(tr('Opening observed data in background…'))
                 variable = self.variable.currentData()
                 def read(check):
                     series = ObservationSeries(record.directory, variable, check=check); series[0]; return series
@@ -303,7 +304,7 @@ class TimeMachine(QWidget):
                 extend="both"
             )
 
-            bar.set_label(self.unit, color="#bacbd8")
+            bar.set_label(tr(self.unit), color="#bacbd8")
             bar.ax.tick_params(colors="#bacbd8")
 
             self.figure.tight_layout()
@@ -327,7 +328,7 @@ class TimeMachine(QWidget):
         populate_variables(self.variable, self.registry, self.region.currentData()); self.reset_dataset()
 
     def read_error(self, message):
-        self.reset_dataset(); self.details.setText(message)
+        self.reset_dataset(); self.details.setText(error_text(message))
 
     def read_ready(self, kind, value):
         self.set_read_busy(False)
@@ -356,13 +357,13 @@ class TimeMachine(QWidget):
         date = str(self.dates[index])
 
         self.date_label.setText(
-            f"{date}  /  {index + 1:03d}"
-            f" of {len(self.dates):03d}"
+            tr(f"{date}  /  {index + 1:03d}"
+            f" of {len(self.dates):03d}")
         )
 
         self.ax.set_title(
-            f"{self.variable_name} | "
-            f"{self.region.currentText()} | {date}",
+            tr(f"{self.variable_name} | "
+            f"{self.region.currentText()} | {date}"),
             color="#e7edf5",
             fontsize=14,
             pad=15
@@ -374,12 +375,12 @@ class TimeMachine(QWidget):
         mean = f"{weighted_mean:.4f} {self.unit}" if weighted_mean is not None else "N/A"
 
         self.details.setText(
-            f"Valid pixels: {finite.size:,}  |  "
+            tr(f"Valid pixels: {finite.size:,}  |  "
             f"Coverage: {coverage:.2%}  |  "
             f"Area-weighted mean: {mean}\n"
             f"Display stride {self.values.stride}; statistics on displayed samples. "
             "Historical satellite observations. "
-            "Fixed color scale. Missing data is not zero."
+            "Fixed color scale. Missing data is not zero.")
         )
 
         if self.isVisible(): self.draw_visible()
@@ -388,7 +389,7 @@ class TimeMachine(QWidget):
         self.read_progress.setVisible(busy); self.cancel_read_button.setEnabled(busy)
 
     def cancel_read(self):
-        self.reset_dataset(); self.details.setText('Read cancelled; no incomplete observation displayed.')
+        self.reset_dataset(); self.details.setText(tr('Read cancelled; no incomplete observation displayed.'))
 
     def ensure_figure_size(self):
         self.figure.set_size_inches(max(self.canvas.width(), 320)/self.figure.dpi,

@@ -1,5 +1,6 @@
 """Individual satellite pixel investigation."""
 
+from .i18n import localized_label, tr
 from typing import cast
 from aurora.scientific_types import LinearRegressionResult
 
@@ -12,8 +13,8 @@ from PySide6.QtWidgets import (
 )
 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
-from matplotlib.backends.backend_qt import NavigationToolbar2QT
+from .canvas import FigureCanvasQTAgg
+from .toolbar import NavigationToolbar2QT
 
 
 def open_pixel_lab(parent, cube, row, col, lat, lon):
@@ -45,12 +46,12 @@ def open_pixel_lab(parent, cube, row, col, lat, lon):
     annual = np.asarray(annual, dtype=float)
 
     dialog = QDialog(parent)
-    dialog.setWindowTitle("AURORA — Pixel Laboratory")
+    dialog.setWindowTitle(tr("AURORA — Pixel Laboratory"))
     dialog.resize(1050, 740)
 
     layout = QVBoxLayout(dialog)
 
-    title = QLabel(f"{variable} / Individual pixel investigation")
+    title = localized_label(f"{variable} / Individual pixel investigation")
 
     title.setStyleSheet(
         "font-size:24px;font-weight:bold;color:#69d9bd;"
@@ -58,7 +59,7 @@ def open_pixel_lab(parent, cube, row, col, lat, lon):
 
     layout.addWidget(title)
 
-    layout.addWidget(QLabel(
+    layout.addWidget(localized_label(
         f"Latitude: {lat:.5f}° | Longitude: {lon:.5f}°"
         f" | Pixel [{row}, {col}]"
     ))
@@ -79,20 +80,20 @@ def open_pixel_lab(parent, cube, row, col, lat, lon):
         linewidth=0.9
     )
 
-    monthly.set_title("Monthly satellite observations")
-    monthly.set_ylabel(unit)
+    monthly.set_title(tr("Monthly satellite observations"))
+    monthly.set_ylabel(tr(unit))
 
     yearly.plot(
         years, annual,
         "o-", color="#8db7ec",
         markersize=4,
         linewidth=1,
-        label="Annual composites"
+        label=tr("Annual composites")
     )
 
-    yearly.set_title("Annual linear regression")
-    yearly.set_ylabel(unit)
-    yearly.set_xlabel("Year")
+    yearly.set_title(tr("Annual linear regression"))
+    yearly.set_ylabel(tr(unit))
+    yearly.set_xlabel(tr("Year"))
 
     summary = "Insufficient data for regression."
 
@@ -122,7 +123,7 @@ def open_pixel_lab(parent, cube, row, col, lat, lon):
             years, fitted,
             color="#efbd76",
             linewidth=2,
-            label="OLS trend"
+            label=tr("OLS trend")
         )
 
         yearly.fill_between(
@@ -131,7 +132,7 @@ def open_pixel_lab(parent, cube, row, col, lat, lon):
             fitted + margin,
             color="#efbd76",
             alpha=0.18,
-            label="Nominal 95% confidence band"
+            label=tr("Nominal 95% confidence band")
         )
 
         summary = (
@@ -152,7 +153,7 @@ def open_pixel_lab(parent, cube, row, col, lat, lon):
         fontsize=9
     )
 
-    info = QLabel(summary)
+    info = localized_label(summary)
     info.setWordWrap(True)
     info.setStyleSheet(
         "background:#14202d;color:#69d9bd;"
@@ -161,7 +162,7 @@ def open_pixel_lab(parent, cube, row, col, lat, lon):
 
     layout.addWidget(info)
 
-    warning = QLabel(
+    warning = localized_label(
         "Nominal OLS inference. Temporal dependence "
         "may affect statistical significance. "
         "The confidence band is not a prediction interval."

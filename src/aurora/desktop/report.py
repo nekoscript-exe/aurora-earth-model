@@ -1,6 +1,7 @@
 """AURORA scientific report renderer."""
 
 from html import escape
+from .i18n import tr
 
 
 def render_report(metrics, regional):
@@ -96,7 +97,7 @@ def render_report(metrics, regional):
         </p>
         """
 
-    return f"""
+    return tr(f"""
     <html>
     <body style="
         background-color:#080e17;
@@ -157,4 +158,4 @@ def render_report(metrics, regional):
 
     </body>
     </html>
-    """
+    """)

@@ -1,6 +1,6 @@
 """Functional integration of complete, fresh scientific job products."""
 
-from .i18n import tr
+from .i18n import localized_label, localized_button, tr, metadata_text
 from typing import TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
@@ -17,23 +17,24 @@ from affine import Affine
 from PySide6.QtCore import QProcess, QFileSystemWatcher, QTimer
 from PySide6.QtWidgets import QFileDialog, QLabel, QComboBox, QPushButton, QDialog, QVBoxLayout
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from .canvas import FigureCanvasQTAgg
 from aurora.jobs import ResultRegistry, fresh, request_cancel
-from aurora.catalog import CubeReader, populate_regions, populate_variables
+from aurora.catalog import CubeReader
+from .dataset_controls import populate_regions, populate_variables
 from .tasks import ReaderJobs
 
 
 class GlobalResultsMixin:
     def setup_global_controls(self, panel):
         self = cast("AuroraWindow", self)
-        self.result_selector = QComboBox(); self.result_selector.setToolTip('Completed results; stale results cannot be presented as current')
+        self.result_selector = QComboBox(); self.result_selector.setToolTip(tr('Completed results; stale results cannot be presented as current'))
         self.result_selector.currentIndexChanged.connect(self.select_global_result)
-        self.refresh_button = QPushButton(tr('Refresh datasets / results')); self.refresh_button.clicked.connect(self.refresh_catalogs)
-        self.cancel_button = QPushButton(tr('Cancel operation')); self.cancel_button.setEnabled(False)
+        self.refresh_button = localized_button('Refresh datasets / results'); self.refresh_button.clicked.connect(self.refresh_catalogs)
+        self.cancel_button = localized_button('Cancel operation'); self.cancel_button.setEnabled(False)
         self.cancel_button.clicked.connect(self.cancel_operation)
-        self.export_button = QPushButton('Export CSV / JSON / GeoTIFF / PNG'); self.export_button.clicked.connect(self.export_global_result)
-        for widget in (self.refresh_button, QLabel(tr('Available scientific results')), self.result_selector, self.export_button, self.cancel_button): panel.addWidget(widget)
-        self.io_jobs = ReaderJobs(self, self.main_io_result, lambda error: self.pixel_info.setText(error))
+        self.export_button = localized_button('Export results'); self.export_button.clicked.connect(self.export_global_result); self.export_button.setToolTip(tr('Export CSV / JSON / GeoTIFF / PNG'))
+        for widget in (self.refresh_button, localized_label('Available scientific results'), self.result_selector, self.export_button, self.cancel_button): panel.addWidget(widget)
+        self.io_jobs = ReaderJobs(self, self.main_io_result, lambda error: self.pixel_info.setText(tr(error)))
         self._progress_buffer = ''; self.export_process = QProcess(self)
         self.export_process.setProcessChannelMode(QProcess.ProcessChannelMode.MergedChannels)
         self.export_process.readyReadStandardOutput.connect(self.read_export_progress)
@@ -48,7 +49,7 @@ class GlobalResultsMixin:
         self = cast("AuroraWindow", self)
         processes = (self.process, self.export_process, self.multivariate_lab.process, self.ai_lab.export_process)
         if any(process.state() != QProcess.ProcessState.NotRunning for process in processes):
-            self.status.setText('Catalog refresh deferred until active scientific/export jobs finish')
+            self.status.setText(tr('Catalog refresh deferred until active scientific/export jobs finish'))
             if hasattr(self, 'catalog_refresh_timer'): self.catalog_refresh_timer.start(1000)
             return
         pages = [self, self.planetary_explorer, self.time_machine]
@@ -75,13 +76,13 @@ class GlobalResultsMixin:
         region, variable = self.region.currentData(), self.variable.currentData()
         for record in catalog.available(region, variable, 'statistics'):
             label = f"{record['region']} · {variable} · {' — '.join(record['period'])} · {record['inputs'][0]['directory'].split('/')[-1]}"
-            self.result_selector.addItem(label, record)
+            self.result_selector.addItem(tr(label), record)
         stale = sum(r['status'] == 'complete' and r['stale'] and r['region'] == region and r.get('variable') == variable for r in catalog.results)
         self.result_selector.blockSignals(False)
         if self.result_selector.count(): self.select_global_result()
         else:
             self.export_button.setEnabled(False); self.current_history = None
-            self.summary.setPlainText(f'No fresh completed results for {region}/{variable}. Stale results excluded: {stale}. Run a scientific investigation.')
+            self.summary.setPlainText(tr(f'No fresh completed results for {region}/{variable}. Stale results excluded: {stale}. Run a scientific investigation.'))
             self.map_figure.clear(); self.map_canvas.draw_idle(); self.series_figure.clear(); self.series_canvas.draw_idle()
 
     def select_global_result(self, *_):
@@ -89,19 +90,19 @@ class GlobalResultsMixin:
         record = self.result_selector.currentData()
         if record is None: return
         if not fresh(record):
-            self.export_button.setEnabled(False); self.summary.setPlainText('Result is stale: source changed. Recompute before presenting current results.'); return
+            self.export_button.setEnabled(False); self.summary.setPlainText(tr('Result is stale: source changed. Recompute before presenting current results.')); return
         self.output_path = Path(record['directory']); self.load_global_result(record)
         self.export_button.setEnabled(True)
 
     def load_global_result(self, record):
         self = cast("AuroraWindow", self)
         self.current_history = Path(record['directory']); self.current_metrics = record
-        self.summary.setPlainText(json.dumps({k: v for k, v in record.items() if k != 'directory'}, indent=2, default=str))
+        self.summary.setPlainText(metadata_text({k: v for k, v in record.items() if k != 'directory'}))
         from .window import MAP_LAYERS
-        selected = self.layer_selector.currentText(); self.layer_selector.blockSignals(True); self.layer_selector.clear()
+        selected = self.layer_selector.currentData(); self.layer_selector.blockSignals(True); self.layer_selector.clear()
         for label, file in MAP_LAYERS.items():
-            if (self.current_history/file).exists(): self.layer_selector.addItem(label)
-        index = self.layer_selector.findText(selected); self.layer_selector.setCurrentIndex(index if index >= 0 else 0)
+            if (self.current_history/file).exists(): self.layer_selector.addItem(tr(label), label)
+        index = self.layer_selector.findData(selected); self.layer_selector.setCurrentIndex(index if index >= 0 else 0)
         self.layer_selector.blockSignals(False)
         self.draw_global_map(); self.draw_global_series()
 
@@ -113,7 +114,7 @@ class GlobalResultsMixin:
         if history is None:
             return
 
-        filename = MAP_LAYERS.get(self.layer_selector.currentText())
+        filename = MAP_LAYERS.get(self.layer_selector.currentData())
 
         if filename is None:
             return
@@ -135,8 +136,8 @@ class GlobalResultsMixin:
         image = ax.pcolormesh(east, north, values, shading='flat', cmap='viridis')
         ax.set_aspect('equal')
         period = ' — '.join(self.current_metrics['period'])
-        ax.set_title(f"{self.current_metrics['region']} · {self.current_metrics['variable']} · {self.layer_selector.currentText()}\n{period}"); ax.set_xlabel(f'Native x · {crs}'); ax.set_ylabel('Native y')
-        self.map_figure.colorbar(image, ax=ax, label=unit)
+        ax.set_title(tr(f"{self.current_metrics['region']} · {self.current_metrics['variable']} · {self.layer_selector.currentData()}\n{period}")); ax.set_xlabel(tr(f'Native x · {crs}')); ax.set_ylabel(tr('Native y'))
+        self.map_figure.colorbar(image, ax=ax, label=tr(unit))
         self.style_axes(ax); self.map_figure.tight_layout(); self.map_canvas.draw_idle()
         self.map_toolbar.update()
 
@@ -150,15 +151,15 @@ class GlobalResultsMixin:
         data = pd.read_csv(history/'monthly_series.csv', parse_dates=['date'])
         self.series_figure.clear(); ax = self.series_figure.add_subplot(111)
         ax.plot(data['date'], data['mean'], color='#69d9bd')
-        ax.set_title(f"Area-weighted monthly observations · {self.current_metrics['region']}\n{' — '.join(self.current_metrics['period'])} · no gap filling"); ax.set_ylabel(self.current_metrics['unit'])
+        ax.set_title(tr(f"Area-weighted monthly observations · {self.current_metrics['region']}\n{' — '.join(self.current_metrics['period'])} · no gap filling")); ax.set_ylabel(tr(self.current_metrics['unit']))
         self.style_axes(ax); self.series_figure.tight_layout(); self.series_canvas.draw_idle()
 
     def cancel_operation(self):
         self = cast("AuroraWindow", self)
         if self.export_process.state() != QProcess.ProcessState.NotRunning:
-            request_cancel(self._export_directory); self.status.setText('Cancelling export…')
+            request_cancel(self._export_directory); self.status.setText(tr('Cancelling export…'))
         elif self.process.state() != QProcess.ProcessState.NotRunning and self.output_path:
-            request_cancel(self.output_path); self.status.setText('Cancelling at a safe block boundary…')
+            request_cancel(self.output_path); self.status.setText(tr('Cancelling at a safe block boundary…'))
         self.cancel_button.setEnabled(False)
 
     def parse_progress(self, text):
@@ -170,14 +171,14 @@ class GlobalResultsMixin:
                 data = json.loads(line)
                 if data.get('event') == 'progress':
                     self.progress.setRange(0, 1000); self.progress.setValue(int(1000*data['done']/max(data['total'], 1)))
-                    self.status.setText(f"{data['phase']} · {data['done']}/{data['total']}")
+                    self.status.setText(tr(f"{data['phase']} · {data['done']}/{data['total']}"))
             except (ValueError, KeyError): pass
 
     def export_global_result(self):
         self = cast("AuroraWindow", self)
         record = self.result_selector.currentData()
         if record is None or not fresh(record): return
-        directory = QFileDialog.getExistingDirectory(self, 'Export scientific bundle into a new subdirectory')
+        directory = QFileDialog.getExistingDirectory(self, tr('Export scientific bundle into a new subdirectory'))
         if not directory: return
         self._export_directory = Path(directory)/f'aurora_export_{datetime.now():%Y%m%d_%H%M%S_%f}'
         import sys
@@ -191,7 +192,7 @@ class GlobalResultsMixin:
     def export_finished(self, code, *_):
         self = cast("AuroraWindow", self)
         self.cancel_button.setEnabled(False); self.export_button.setEnabled(True); self.check_dataset()
-        self.status.setText('Export complete' if code == 0 else 'Export cancelled or failed; partial export not published')
+        self.status.setText(tr('Export complete' if code == 0 else 'Export cancelled or failed; partial export not published'))
 
     def inspect_global_pixel(self, event):
         self = cast("AuroraWindow", self)
@@ -205,11 +206,11 @@ class GlobalResultsMixin:
             row, col = src.index(event.xdata, event.ydata)
             if not (0 <= row < src.height and 0 <= col < src.width): return
             coverage = src.read(1, window=Window.from_slices((row, row+1), (col, col+1)), masked=True)[0, 0]
-            if np.ma.is_masked(coverage): self.pixel_info.setText('Outside the observed regional footprint'); return
-        self.pixel_info.setText(f'Native row {row}, column {col}; observation coverage {coverage:.2%}. Area-weighted regional summaries are separate.')
+            if np.ma.is_masked(coverage): self.pixel_info.setText(tr('Outside the observed regional footprint')); return
+        self.pixel_info.setText(tr(f'Native row {row}, column {col}; observation coverage {coverage:.2%}. Area-weighted regional summaries are separate.'))
         if event.dblclick:
             if not fresh(self.current_metrics):
-                self.pixel_info.setText('Source changed; recompute results.'); return
+                self.pixel_info.setText(tr('Source changed; recompute results.')); return
             directory = self.current_metrics['inputs'][0]['directory']; unit = self.current_metrics['unit']
             def read(check):
                 with CubeReader(directory, check=check) as reader:
@@ -222,10 +223,10 @@ class GlobalResultsMixin:
             if kind == 'results':
                 self.apply_result_catalog(payload); return
             row, col, dates, values, unit = payload
-            dialog = QDialog(self); dialog.setWindowTitle('Native pixel observations'); layout = QVBoxLayout(dialog)
+            dialog = QDialog(self); dialog.setWindowTitle(tr('Native pixel observations')); layout = QVBoxLayout(dialog)
             figure = Figure(); canvas = FigureCanvasQTAgg(figure); layout.addWidget(canvas)
-            axis = figure.add_subplot(111); axis.plot(dates, values); axis.set_ylabel(unit)
-            axis.set_title(f'Observed pixel {row},{col} · gaps preserved'); figure.autofmt_xdate(); canvas.draw()
+            axis = figure.add_subplot(111); axis.plot(dates, values); axis.set_ylabel(tr(unit))
+            axis.set_title(tr(f'Observed pixel {row},{col} · gaps preserved')); figure.autofmt_xdate(); canvas.draw()
             dialog.resize(800, 450); dialog.show(); self._pixel_dialog = dialog
 
     def start_dataset_watch(self):

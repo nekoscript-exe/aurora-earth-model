@@ -1,0 +1,100 @@
+{
+  "base_commit": "0c8eb08",
+  "files": [
+    {
+      "path": "scripts/validate_i18n.py",
+      "bytes": 8495,
+      "sha256": "1e7fc85a037f05ad05584cde0e7c957e278e0dd295f499a86f63002d285e6d69"
+    },
+    {
+      "path": "src/aurora/desktop/__init__.py",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "src/aurora/desktop/ai_lab.py",
+      "bytes": 16702,
+      "sha256": "b7c052bb66d09f585fa02c74a6bdb3e7eb6f3300ac3236379d60a783f697c948"
+    },
+    {
+      "path": "src/aurora/desktop/canvas.py",
+      "bytes": 2025,
+      "sha256": "5577ed440681c2b44951ab7494f01b0f53a88c9766da5d370fc56e19d1e5e6a3"
+    },
+    {
+      "path": "src/aurora/desktop/dataset_controls.py",
+      "bytes": 752,
+      "sha256": "89c56cf173c79eafdcd7cfc4c694e3eb734923a0d8ad456b1e8aeb5f17110909"
+    },
+    {
+      "path": "src/aurora/desktop/global_results.py",
+      "bytes": 15547,
+      "sha256": "eecef3196b6afc4712ba17911e0d029574f069cc32cd942f2eaa1fe30485852e"
+    },
+    {
+      "path": "src/aurora/desktop/globe.py",
+      "bytes": 32568,
+      "sha256": "9a3635e1cfabf0a2b6edd1b6d1d053ba87559789521b4bbca66c77e956f28796"
+    },
+    {
+      "path": "src/aurora/desktop/i18n.py",
+      "bytes": 11218,
+      "sha256": "da4857e7407b6ee868a894295fc551e091240963636aab39ca560ec3c37a901a"
+    },
+    {
+      "path": "src/aurora/desktop/multivariate_lab.py",
+      "bytes": 12987,
+      "sha256": "e66fdbfb8a83a87bef39ebac965b41935b39a4323e7508f831f21110f3f3dda3"
+    },
+    {
+      "path": "src/aurora/desktop/pixel_lab.py",
+      "bytes": 4339,
+      "sha256": "c7adf875dbd83b7a308e5df51ff56e78c4e5f75b51e638b3124014cfe794d2d7"
+    },
+    {
+      "path": "src/aurora/desktop/report.py",
+      "bytes": 3825,
+      "sha256": "950daaf26057acfe20bb734cf0403609ac6eb992b1b018595468f7c2e66f7d30"
+    },
+    {
+      "path": "src/aurora/desktop/temporal.py",
+      "bytes": 5189,
+      "sha256": "ab31866bbd06494b0bb53f5f555f7c8cbcd8943757f9ef2fe01856b5f79a9b06"
+    },
+    {
+      "path": "src/aurora/desktop/time_machine.py",
+      "bytes": 12160,
+      "sha256": "2ff32a23f037a39529645a08ce414e2d7cb795f736bedc448037d3f02ffa8cf1"
+    },
+    {
+      "path": "src/aurora/desktop/toolbar.py",
+      "bytes": 437,
+      "sha256": "43bed75d08c032f177ee09a5d5002465fc05a0e55b9faf083e39accf65047f5c"
+    },
+    {
+      "path": "src/aurora/desktop/translations/aurora_es.qm",
+      "bytes": 67149,
+      "sha256": "180ac8aa20282a13b03c821b46d77b3cf31c139db83de8c6a1fded772e1014c1"
+    },
+    {
+      "path": "src/aurora/desktop/translations/aurora_es.ts",
+      "bytes": 95505,
+      "sha256": "3bae87035f6e24217d906e92e085430307da97115aef350037e05a4ca915d660"
+    },
+    {
+      "path": "src/aurora/desktop/welcome.py",
+      "bytes": 7148,
+      "sha256": "0aba4da34a5b106283d4b9419a18f135b16df08c2985bcb210d1ea12be7ca209"
+    },
+    {
+      "path": "src/aurora/desktop/window.py",
+      "bytes": 28056,
+      "sha256": "d836c3b56f4cdfa11b17aea29ab8810715687c3067463e3813f6223dc317d959"
+    },
+    {
+      "path": "tests/test_i18n.py",
+      "bytes": 13302,
+      "sha256": "00ee6807ec97d5a5d255993ca42b23e4207108a2aa9d13b65b5983a01b3fb6a2"
+    }
+  ]
+}

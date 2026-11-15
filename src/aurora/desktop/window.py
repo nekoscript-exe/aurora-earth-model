@@ -1,6 +1,6 @@
 """AURORA Desktop — Scientific investigation interface."""
 
-from .i18n import tr
+from .i18n import error_text, localized_label, localized_button, add_choices, tr, tr_items, LanguageController, active_language, metadata_text, log_text
 
 import json
 import sys
@@ -22,7 +22,7 @@ from .ai_lab import AILaboratory
 from .time_machine import TimeMachine
 from .temporal import TemporalSelector
 from .multivariate_lab import MultivariateLaboratory
-from aurora.catalog import populate_regions, populate_variables
+from .dataset_controls import populate_regions, populate_variables
 from .global_results import GlobalResultsMixin
 from aurora.jobs import fresh
 from .globe import PlanetaryExplorer
@@ -37,11 +37,11 @@ from PySide6.QtWidgets import (
 
 from matplotlib.figure import Figure
 from matplotlib.ticker import MaxNLocator, FuncFormatter
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from .canvas import FigureCanvasQTAgg
 from matplotlib.colors import (
     TwoSlopeNorm, ListedColormap, BoundaryNorm
 )
-from matplotlib.backends.backend_qt import NavigationToolbar2QT
+from .toolbar import NavigationToolbar2QT
 
 MAP_LAYERS = {
     "OLS trend": "trend_slope.tif",
@@ -105,7 +105,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         super().__init__()
 
         self.setWindowTitle(
-            "AURORA — Earth System Intelligence"
+            tr("AURORA — Earth System Intelligence")
         )
         self.resize(1280, 820)
         self.setStyleSheet(AURORA_STYLE)
@@ -135,8 +135,17 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         )
 
         self.build_ui()
+        names = ['Home', 'Planetary Explorer', 'Time Machine', 'Predictive intelligence',
+                 'Multivariate Laboratory', 'Scientific results', 'Spatial analysis', 'Temporal analysis', 'Execution log']
+        for index, name in enumerate(names):
+            self.tabs.setTabText(index, name)
+        self.language_controller = LanguageController(self)
+        self.language_selector.currentIndexChanged.connect(self.change_interface_language)
         self.check_dataset()
         self.start_dataset_watch()
+
+    def change_interface_language(self, *_):
+        self.language_controller.change(self.language_selector.currentData())
 
     def build_ui(self):
 
@@ -147,14 +156,14 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         layout.setContentsMargins(24, 20, 24, 20)
         layout.setSpacing(14)
 
-        title = QLabel("A U R O R A")
+        title = localized_label("A U R O R A")
         title.setStyleSheet(
             "font-size: 32px; font-weight: bold;"
             "color: #80d9c7;"
         )
 
-        subtitle = QLabel(
-            tr('EARTH SYSTEM INTELLIGENCE  /  Scientific Investigation Environment')
+        subtitle = localized_label(
+            'EARTH SYSTEM INTELLIGENCE  /  Scientific Investigation Environment'
         )
 
         title.setObjectName("brand")
@@ -162,7 +171,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         header = QHBoxLayout()
 
-        logo = QLabel()
+        logo = localized_label()
         logo.setPixmap(
             QPixmap(str(ROOT / "assets/desktop/logo.svg"))
             .scaled(66, 66)
@@ -176,10 +185,18 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         header.addLayout(branding)
         header.addStretch()
 
-        edition = QLabel(tr('RESEARCH EDITION'))
+        edition = localized_label('RESEARCH EDITION')
         edition.setStyleSheet(
             "color: #69d9bd; font-size: 11px;"
         )
+        header.addWidget(localized_label('Language'))
+        self.language_selector = QComboBox()
+        self.language_selector.setObjectName('interfaceLanguage')
+        self.language_selector.addItem('English', 'en')
+        self.language_selector.addItem('Español', 'es')
+        self.language_selector.setCurrentIndex(self.language_selector.findData(active_language()))
+        self.language_selector.setToolTip(tr('Choose the interface language. Applied immediately; saved for the next launch.'))
+        header.addWidget(self.language_selector)
         header.addWidget(edition)
 
         layout.addLayout(header)
@@ -195,14 +212,14 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         panel.setContentsMargins(18, 20, 18, 20)
         panel.setSpacing(16)
 
-        heading = QLabel(tr('Investigation setup'))
+        heading = localized_label('Investigation setup')
         heading.setStyleSheet(
             "font-size: 19px; font-weight: bold;"
         )
         panel.addWidget(heading)
 
-        description = QLabel(
-            tr('Configure an environmental investigation using historical satellite observations.')
+        description = localized_label(
+            'Configure an environmental investigation using historical satellite observations.'
         )
         description.setWordWrap(True)
         description.setStyleSheet("color: #8da5ba;")
@@ -230,18 +247,18 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             ("Region of interest", self.region)
         ]:
             column = QVBoxLayout()
-            column.addWidget(QLabel(label))
+            column.addWidget(localized_label(label))
             column.addWidget(widget)
             controls.addLayout(column)
 
         panel.addLayout(controls)
         panel.addWidget(self.temporal)
 
-        self.status = QLabel()
+        self.status = localized_label()
         self.status.setWordWrap(True)
         panel.addWidget(self.status)
 
-        self.run_button = QPushButton(
+        self.run_button = localized_button(
             "Run scientific investigation"
         )
         self.run_button.clicked.connect(self.run)
@@ -256,7 +273,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         panel.addStretch()
 
-        source = QLabel(
+        source = localized_label(
             "SATELLITE OBSERVATIONS\n"
             "NASA Terra / MODIS\n\n"
             "Statistical trend detection\n"
@@ -281,14 +298,14 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         self.time_machine = TimeMachine(ROOT, self)
 
         self.tabs.addTab(
-            self.time_machine, "Time Machine"
+            self.time_machine, tr("Time Machine")
         )
 
 
         self.ai_lab = AILaboratory(ROOT, self)
 
         self.tabs.addTab(
-            self.ai_lab, "Predictive intelligence"
+            self.ai_lab, tr("Predictive intelligence")
         )
 
 
@@ -316,24 +333,24 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         )
 
         self.tabs.addTab(
-            self.summary, "Scientific results"
+            self.summary, tr("Scientific results")
         )
         self.map_panel = QWidget()
         map_layout = QVBoxLayout(self.map_panel)
 
         self.layer_selector = QComboBox()
-        self.layer_selector.addItems(list(MAP_LAYERS))
+        add_choices(self.layer_selector, list(MAP_LAYERS))
 
         self.map_toolbar = NavigationToolbar2QT(
             self.map_canvas, self
         )
 
-        map_layout.addWidget(QLabel(tr('Scientific map layer')))
+        map_layout.addWidget(localized_label('Scientific map layer'))
         map_layout.addWidget(self.layer_selector)
         map_layout.addWidget(self.map_toolbar)
         map_layout.addWidget(self.map_canvas, 1)
 
-        self.pixel_info = QLabel(
+        self.pixel_info = localized_label(
             "Click to inspect a pixel. Double-click to explore its history."
         )
         self.pixel_info.setWordWrap(True)
@@ -356,13 +373,13 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         )
 
         self.tabs.addTab(
-            self.map_panel, "Spatial analysis"
+            self.map_panel, tr("Spatial analysis")
         )
         self.tabs.addTab(
-            self.series_canvas, "Temporal analysis"
+            self.series_canvas, tr("Temporal analysis")
         )
         self.tabs.addTab(
-            self.log, "Execution log"
+            self.log, tr("Execution log")
         )
 
         scroll = QScrollArea()
@@ -387,7 +404,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         layout.addLayout(workspace, 1)
 
-        footer = QLabel(
+        footer = localized_label(
             "AURORA v5.0  |  "
             "NASA Space Apps Challenge 2026"
         )
@@ -427,9 +444,9 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         )
 
         self.status.setText(
-            "Historical dataset available"
+            tr("Historical dataset available"
             if available else
-            "Historical dataset unavailable"
+            "Historical dataset unavailable")
         )
 
         self.status.setStyleSheet("color: #80d9c7;" if available else "color: #e6b66b;")
@@ -440,7 +457,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         try:
             start, end = self.temporal.interval()
         except ValueError as exc:
-            QMessageBox.warning(self, "Invalid investigation", str(exc))
+            QMessageBox.warning(self, tr("Invalid investigation"), error_text(exc))
             return
 
         region = self.region.currentData()
@@ -451,9 +468,10 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         self.output_path = ROOT / "outputs/global_engine" / f"{record.identifier}_{datetime.now():%Y%m%d_%H%M%S_%f}"
         self.cancel_button.setEnabled(True); self.export_button.setEnabled(False)
         self._progress_buffer = ''
+        self._log_buffer = ''
         self.log.clear()
         self.summary.setHtml(
-            "<h2>Scientific investigation running...</h2>"
+            tr("<h2>Scientific investigation running...</h2>")
         )
         self.map_figure.clear()
         self.series_figure.clear()
@@ -469,7 +487,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         self.progress.setRange(0, 0)
         self.status.setText(
-            "Scientific investigation running..."
+            tr("Scientific investigation running...")
         )
 
         self.process.setWorkingDirectory(str(ROOT))
@@ -494,8 +512,16 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             self.log.textCursor().MoveOperation.End
         )
 
-        self.log.insertPlainText(text)
+        self.append_worker_log(text)
         self.log.ensureCursorVisible()
+
+    def append_worker_log(self, text, final=False):
+        self._log_buffer = getattr(self, '_log_buffer', '') + text
+        lines = self._log_buffer.splitlines(keepends=True)
+        self._log_buffer = ''
+        if lines and not lines[-1].endswith('\n') and not final:
+            self._log_buffer = lines.pop()
+        self.log.insertPlainText(log_text(''.join(lines)))
 
     def restore_controls(self):
 
@@ -512,7 +538,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
     def process_error(self, error):
 
         self.log.appendPlainText(
-            self.process.errorString()
+            error_text(self.process.errorString())
         )
 
         if self.process.state() == (
@@ -525,6 +551,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         completed_output = self.output_path
         self.read_output()
+        self.append_worker_log("", final=True)
         self.cancel_button.setEnabled(False)
         self.restore_controls()
         self.output_path = completed_output
@@ -533,13 +560,13 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             code != 0
             or exit_status != QProcess.ExitStatus.NormalExit
         ):
-            self.status.setText(tr('Investigation cancelled') if code == 2 else tr('Investigation failed'))
+            self.status.setText(tr(tr('Investigation cancelled') if code == 2 else tr('Investigation failed')))
             return
 
         try:
             self.load_results()
         except Exception as exc:
-            self.log.appendPlainText(str(exc))
+            self.log.appendPlainText(error_text(exc))
             self.status.setText(tr('Result loading failed'))
             return
 
@@ -565,13 +592,13 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         if (self.output_path / "descriptive.json").exists():
             data = json.loads((self.output_path / "descriptive.json").read_text())
             self.current_history = None
-            self.summary.setPlainText(json.dumps(data, indent=2))
+            self.summary.setPlainText(metadata_text(data))
             self.map_figure.clear(); self.map_canvas.draw()
             self.series_figure.clear()
             ax = self.series_figure.add_subplot(111)
             ax.plot(data["dates"], data["mean"], color="#69d9bd")
-            ax.set_title("Monthly observations · descriptive period")
-            ax.set_ylabel(data["unit"]); self.style_axes(ax)
+            ax.set_title(tr("Monthly observations · descriptive period"))
+            ax.set_ylabel(tr(data["unit"])); self.style_axes(ax)
             self.series_canvas.draw()
             return
         metrics = json.loads(
@@ -588,7 +615,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         }
 
         self.summary.setHtml(
-            render_report(metrics, regional)
+            tr(render_report(metrics, regional))
         )
 
         self.current_history = history
@@ -685,7 +712,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
             if values["OLS"] is None:
                 self.pixel_info.setText(
-                    "No evaluated trend at this location."
+                    tr("No evaluated trend at this location.")
                 )
                 return
 
@@ -706,7 +733,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             unit = self.current_metrics["slope_unit"]
 
             self.pixel_info.setText(
-                f"PIXEL [{row}, {col}]  |  "
+                tr(f"PIXEL [{row}, {col}]  |  "
                 f"Lat: {lat[0]:.5f}°  "
                 f"Lon: {lon[0]:.5f}°\n"
                 f"OLS: {fmt('OLS')} {unit}  |  "
@@ -715,7 +742,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
                 f"p: {fmt('p')}  |  "
                 f"q: {fmt('q')}  |  "
                 f"Coverage: {coverage_text}  |  "
-                f"Valid years: {fmt('years', 0)}"
+                f"Valid years: {fmt('years', 0)}")
             )
 
             if event.dblclick:
@@ -727,7 +754,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         except Exception as exc:
             self.pixel_info.setText(
-                f"Pixel inspection failed: {exc}"
+                tr("Pixel inspection failed: ")+error_text(exc)
             )
 
     def refresh_map(self, *_):
@@ -745,7 +772,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
     def draw_map(self, history, metrics):
 
-        layer = self.layer_selector.currentText()
+        layer = self.layer_selector.currentData()
         variable = metrics["variable"]
 
         with rasterio.open(
@@ -835,14 +862,14 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         image = ax.imshow(data, **options)
 
         ax.set_title(
-            f"{variable} | {layer}",
+            tr(f"{variable} | {layer}"),
             fontsize=15,
             fontweight="bold",
             pad=18
         )
 
-        ax.set_xlabel(f"Easting — {crs}")
-        ax.set_ylabel("Northing")
+        ax.set_xlabel(tr(f"Easting — {crs}"))
+        ax.set_ylabel(tr("Northing"))
 
         ax.xaxis.set_major_locator(MaxNLocator(4))
         ax.yaxis.set_major_locator(MaxNLocator(5))
@@ -854,8 +881,8 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         ax.xaxis.set_major_formatter(formatter)
         ax.yaxis.set_major_formatter(formatter)
 
-        ax.set_xlabel(f"Easting (km) — {crs}")
-        ax.set_ylabel("Northing (km)")
+        ax.set_xlabel(tr(f"Easting (km) — {crs}"))
+        ax.set_ylabel(tr("Northing (km)"))
 
 
         colorbar = self.map_figure.colorbar(
@@ -865,14 +892,14 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         )
 
         colorbar.set_label(
-            label, color="#bacbd8"
+            tr(label), color="#bacbd8"
         )
 
         if layer == "Statistical significance":
             colorbar.set_ticks([0, 1])
-            colorbar.set_ticklabels([
+            colorbar.set_ticklabels(tr_items([
                 "Not significant", "Significant"
-            ])
+            ]))
 
         colorbar.ax.tick_params(colors="#bacbd8")
 
@@ -896,13 +923,13 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             monthly["mean"],
             color="#6bd5bd",
             linewidth=1.2,
-            label="Monthly observations"
+            label=tr("Monthly observations")
         )
 
-        ax.set_title("Regional monthly time series")
+        ax.set_title(tr("Regional monthly time series"))
         ax.set_ylabel(
-            "NDVI" if metrics["variable"] == "NDVI"
-            else "Temperature (°C)"
+            tr("NDVI" if metrics["variable"] == "NDVI"
+            else "Temperature (°C)")
         )
 
         ax.grid(alpha=0.15)

@@ -1,13 +1,14 @@
 """AURORA — Interactive planetary observation explorer."""
 
-from .i18n import tr
+from .i18n import error_text, localized_label, localized_button, tr
 
 import json
 import time
 import numpy as np
 from .temporal import TemporalSelector
 from aurora.temporal import select_interval
-from aurora.catalog import ObservationSeries, populate_regions, populate_variables, display_scale
+from aurora.catalog import ObservationSeries, display_scale
+from .dataset_controls import populate_regions, populate_variables
 from .tasks import ReaderJobs
 
 from rasterio.features import rasterize, bounds as geometry_bounds
@@ -43,16 +44,16 @@ class ColorLegend(QWidget):
         low, high, name, unit = self.scales[self.variable]
         painter = QPainter(self)
         painter.setPen(QColor("#bacbd8"))
-        painter.drawText(0, 15, unit)
+        painter.drawText(0, 15, tr(unit))
         gradient = QLinearGradient(0, 0, self.width(), 0)
         for t in np.linspace(0, 1, 33):
             color = colormaps[name](t)
             gradient.setColorAt(float(t), QColor.fromRgbF(*color[:3]))
         painter.fillRect(QRectF(0, 25, self.width(), 16), gradient)
-        painter.drawText(0, 57, f"≤ {low:g}")
-        painter.drawText(self.width()//2-20, 57, f"{(low+high)/2:g}")
-        painter.drawText(self.width()-50, 57, f"≥ {high:g}")
-        painter.drawText(0, 79, "NoData / QA / outside region: transparent")
+        painter.drawText(0, 57, tr(f"≤ {low:g}"))
+        painter.drawText(self.width()//2-20, 57, tr(f"{(low+high)/2:g}"))
+        painter.drawText(self.width()-50, 57, tr(f"≥ {high:g}"))
+        painter.drawText(0, 79, tr("NoData / QA / outside: transparent"))
 
 
 class Planet(QWidget):
@@ -61,7 +62,7 @@ class Planet(QWidget):
         super().__init__(parent)
 
         self.setMinimumSize(320, 300)
-        self.setToolTip("Drag: rotate · Wheel: zoom · Double-click: place a WGS84 pin")
+        self.setToolTip(tr("Drag: rotate · Wheel: zoom · Double-click: place a WGS84 pin"))
         self.setCursor(Qt.CursorShape.OpenHandCursor)
 
         self.lon = -100.0
@@ -403,7 +404,7 @@ class Planet(QWidget):
             (self.height()/2-event.position().y())/scale, self.lon, self.lat)
         if visible:
             self.pins.append((f"Pin {len(self.pins)+1}", float(lon), float(lat)))
-            self.setToolTip(f"Pin {len(self.pins)} · WGS84 · {float(lat):.5f}°, {float(lon):.5f}°")
+            self.setToolTip(tr(f"Pin {len(self.pins)} · WGS84 · {float(lat):.5f}°, {float(lon):.5f}°"))
             self.update()
 
     def paintEvent(self, event):
@@ -439,21 +440,21 @@ class Planet(QWidget):
                     painter.drawEllipse(QPointF(float(x), float(y)), 4, 4)
                     painter.setPen(QColor("#e7edf5"))
                     for offset in (-8, 22, -28):
-                        box = QRectF(painter.fontMetrics().boundingRect(label))
+                        box = QRectF(painter.fontMetrics().boundingRect(tr(label)))
                         box.moveBottomLeft(QPointF(float(x)+8, float(y)+offset))
                         if self.rect().contains(box.toRect()) and not any(
                                 box.intersects(other) for other in label_boxes):
                             painter.fillRect(box.adjusted(-2, -1, 2, 1), QColor(8, 14, 23, 190))
-                            painter.drawText(box, Qt.AlignmentFlag.AlignLeft, label)
+                            painter.drawText(box, Qt.AlignmentFlag.AlignLeft, tr(label))
                             label_boxes.append(box)
                             break
         painter.setPen(Qt.GlobalColor.white)
 
         painter.drawText(
             14, self.height()-14,
-            f"LAT {self.lat:.3f}°  |  "
+            tr(f"LAT {self.lat:.3f}°  |  "
             f"LON {self.lon:.3f}°  |  "
-            f"ZOOM {self.zoom:.1f}x"
+            f"ZOOM {self.zoom:.1f}x")
         )
 
         painter.end()
@@ -473,21 +474,21 @@ class PlanetaryExplorer(QWidget):
 
         layout = QVBoxLayout(self)
 
-        title = QLabel(tr('Planetary Explorer'))
+        title = localized_label('Planetary Explorer')
         title.setStyleSheet(
             "font-size:27px;font-weight:bold;color:#69d9bd;"
         )
         title_row = QHBoxLayout()
         title_row.addWidget(title)
         title_row.addStretch()
-        self.setup_toggle = QPushButton(tr('Investigation setup'))
+        self.setup_toggle = localized_button('Investigation setup')
         self.setup_toggle.setCheckable(True)
-        self.setup_toggle.setToolTip("Toggle the scientific investigation controls")
+        self.setup_toggle.setToolTip(tr("Toggle the scientific investigation controls"))
         self.setup_toggle.hide()  # Enabled by the host window.
         title_row.addWidget(self.setup_toggle)
         layout.addLayout(title_row)
 
-        layout.addWidget(QLabel(
+        layout.addWidget(localized_label(
             "Drag to rotate · Scroll to zoom · Explore satellite history"
         ))
 
@@ -517,7 +518,7 @@ class PlanetaryExplorer(QWidget):
             ("Mexico", -102.5, 23.6, 4),
             ("Queretaro", -99.9, 20.85, 48)
         ]:
-            button = QPushButton(name)
+            button = localized_button(name)
             button.clicked.connect(
                 lambda _, a=lon,b=lat,c=zoom:
                     self.planet.focus(a,b,c)
@@ -526,7 +527,7 @@ class PlanetaryExplorer(QWidget):
 
         scene_layout.addLayout(navigation)
         scene_layout.addWidget(self.planet, 1)
-        hint = QLabel("Double-click to place a pin · Lighting is illustrative")
+        hint = localized_label("Double-click to place a pin · Lighting is illustrative")
         hint.setWordWrap(True)
         scene_layout.addWidget(hint)
 
@@ -536,12 +537,12 @@ class PlanetaryExplorer(QWidget):
         self.registry = populate_regions(self.region, root)
 
         self.variable = QComboBox()
-        self.variable.addItem("NDVI", "ndvi")
-        self.variable.addItem("LST", "lst")
+        self.variable.addItem(tr("NDVI"), "ndvi")
+        self.variable.addItem(tr("LST"), "lst")
 
         populate_variables(self.variable, self.registry, self.region.currentData(), preserve=False)
 
-        load = QPushButton(tr('Load observations'))
+        load = localized_button('Load observations')
         load.clicked.connect(lambda _: self.load_dataset(asynchronous=True))
 
         for widget in [self.region, self.variable, load]:
@@ -549,21 +550,21 @@ class PlanetaryExplorer(QWidget):
 
         layout.addLayout(controls)
         self.read_progress = QProgressBar(); self.read_progress.setRange(0, 0); self.read_progress.hide()
-        self.cancel_read_button = QPushButton(tr('Cancel loading')); self.cancel_read_button.setEnabled(False)
+        self.cancel_read_button = localized_button('Cancel loading'); self.cancel_read_button.setEnabled(False)
         self.cancel_read_button.clicked.connect(self.cancel_read)
         layout.addWidget(self.read_progress); layout.addWidget(self.cancel_read_button)
 
 
         settings = QVBoxLayout()
 
-        rotation = QCheckBox("Auto rotate")
+        rotation = QCheckBox(tr("Auto rotate"))
         rotation.toggled.connect(self.planet.set_rotation)
 
-        grid = QCheckBox("Grid")
+        grid = QCheckBox(tr("Grid"))
         grid.setChecked(True)
         grid.toggled.connect(self.set_grid)
 
-        light = QCheckBox("Lighting")
+        light = QCheckBox(tr("Lighting"))
         light.setChecked(True)
         light.toggled.connect(self.set_light)
 
@@ -572,21 +573,21 @@ class PlanetaryExplorer(QWidget):
         self.opacity.setValue(90)
         self.opacity.valueChanged.connect(self.set_opacity)
 
-        for widget in [rotation, grid, light, QLabel(tr('Opacity'))]:
+        for widget in [rotation, grid, light, localized_label('Opacity')]:
             settings.addWidget(widget)
 
-        self.opacity_value = QLabel("90%")
+        self.opacity_value = localized_label("90%")
         opacity_row = QHBoxLayout()
         opacity_row.addWidget(self.opacity, 1)
         opacity_row.addWidget(self.opacity_value)
         settings.addLayout(opacity_row)
-        borders = QCheckBox("Country / state boundaries")
+        borders = QCheckBox(tr("Country / state boundaries"))
         borders.setChecked(True)
         borders.toggled.connect(lambda enabled: self.set_overlay("borders", enabled))
-        markers = QCheckBox("Geographic markers")
+        markers = QCheckBox(tr("Geographic markers"))
         markers.setChecked(True)
         markers.toggled.connect(lambda enabled: self.set_overlay("markers", enabled))
-        clear_pins = QPushButton(tr('Clear user pins'))
+        clear_pins = localized_button('Clear user pins')
         clear_pins.clicked.connect(self.clear_pins)
         for widget in (borders, markers, clear_pins):
             settings.addWidget(widget)
@@ -600,7 +601,7 @@ class PlanetaryExplorer(QWidget):
         layout.addWidget(self.period)
         self.period.changed.connect(self.apply_period)
 
-        self.date = QLabel(tr('No observations loaded'))
+        self.date = localized_label('No observations loaded')
         self.date.setWordWrap(True)
         self.date.setStyleSheet(
             "font-size:20px;font-weight:bold;color:#69d9bd;"
@@ -614,15 +615,15 @@ class PlanetaryExplorer(QWidget):
 
         playback = QHBoxLayout()
 
-        self.previous = previous = QPushButton("‹")
-        previous.setToolTip("Previous observation")
+        self.previous = previous = localized_button("‹")
+        previous.setToolTip(tr("Previous observation"))
         previous.clicked.connect(lambda: self.step(-1))
 
-        self.play = QPushButton(tr('Play'))
+        self.play = localized_button('Play')
         self.play.clicked.connect(self.toggle_play)
 
-        self.following = following = QPushButton("›")
-        following.setToolTip("Next observation")
+        self.following = following = localized_button("›")
+        following.setToolTip(tr("Next observation"))
         following.clicked.connect(lambda: self.step(1))
 
         self.speed = QComboBox()
@@ -631,7 +632,7 @@ class PlanetaryExplorer(QWidget):
             ("0.5x",1000), ("1x",500),
             ("2x",250), ("4x",125)
         ]:
-            self.speed.addItem(label,ms)
+            self.speed.addItem(tr(label),ms)
 
         self.speed.setCurrentIndex(1)
 
@@ -651,7 +652,7 @@ class PlanetaryExplorer(QWidget):
 
         layout.addLayout(playback)
 
-        self.details = QLabel(
+        self.details = localized_label(
             "Geography: Natural Earth | "
             "Scientific observations: NASA Terra / MODIS"
         )
@@ -676,7 +677,7 @@ class PlanetaryExplorer(QWidget):
             widget.setEnabled(enabled)
 
     def set_opacity(self, value):
-        self.opacity_value.setText(f"{value}%")
+        self.opacity_value.setText(tr(f"{value}%"))
         self.planet.opacity = value / 100
         self.planet.invalidate()
 
@@ -726,7 +727,7 @@ class PlanetaryExplorer(QWidget):
             record = self.registry.find(region, variable)
             self.planet.scales[variable] = self.legend.scales[variable] = display_scale(record.metadata)
             if asynchronous:
-                self.details.setText("Opening observed data in background…")
+                self.details.setText(tr("Opening observed data in background…"))
                 def read(check):
                     series = ObservationSeries(record.directory, variable, check=check)
                     series[0]
@@ -770,7 +771,7 @@ class PlanetaryExplorer(QWidget):
         self.reset()
 
     def read_error(self, message):
-        self.reset(); self.details.setText(f"Dataset unavailable: {message}")
+        self.reset(); self.details.setText(tr("Dataset unavailable: ")+error_text(message))
 
     def read_ready(self, kind, value):
         self.set_read_busy(False)
@@ -807,15 +808,15 @@ class PlanetaryExplorer(QWidget):
         )
 
         self.date.setText(
-            f"{self.dates[index]}  |  "
-            f"{index+1}/{len(self.dates)}"
+            tr(f"{self.dates[index]}  |  "
+            f"{index+1}/{len(self.dates)}")
         )
 
         self.details.setText(
-            f"{self.provenance}\n{unit} | Valid pixels: {finite.size:,} | "
+            tr(f"{self.provenance}\n{unit} | Valid pixels: {finite.size:,} | "
             f"Coverage: {coverage:.2%} | Mean: {mean} (area weighted)\n"
             f"Fixed scale: {scale} | "
-            "Missing observations remain uncolored."
+            "Missing observations remain uncolored.")
         )
 
     def apply_period(self):
@@ -852,4 +853,4 @@ class PlanetaryExplorer(QWidget):
         self.read_progress.setVisible(busy); self.cancel_read_button.setEnabled(busy)
 
     def cancel_read(self):
-        self.reset(); self.details.setText('Read cancelled; no incomplete observation displayed.')
+        self.reset(); self.details.setText(tr('Read cancelled; no incomplete observation displayed.'))

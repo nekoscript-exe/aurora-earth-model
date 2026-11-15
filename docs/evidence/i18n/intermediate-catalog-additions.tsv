@@ -1,0 +1,444 @@
+Historical predictive experiment	Experimento predictivo histórico
+Seasonal persistence	Persistencia estacional
+ConvLSTM learning curves	Curvas de aprendizaje de ConvLSTM
+N/A (CPU)	N/D (CPU)
+XGBoost feature importance	Importancia de características de XGBoost
+Relative importance (%)	Importancia relativa (%)
+Feature importance describes model behavior. It does not establish environmental causality.	La importancia de las características describe el comportamiento del modelo. No establece causalidad ambiental.
+Prediction difference	Diferencia entre predicciones
+Export evaluated predictive results	Exportar resultados predictivos evaluados
+Model benchmark	Comparación de modelos
+MAE comparison	Comparación de MAE
+R² comparison	Comparación de R²
+XGBoost prediction	Predicción de XGBoost
+ConvLSTM prediction	Predicción de ConvLSTM
+ConvLSTM training history	Historial de entrenamiento de ConvLSTM
+No evaluated model selected	No se ha seleccionado un modelo evaluado
+Undefined scores are not replaced with zero.	Los valores indefinidos no se sustituyen por cero.
+Predictive model comparison / 	Comparación de modelos predictivos / 
+Held-out test: 	Prueba independiente: 
+Comparable observations: 	Observaciones comparables: 
+Rolling one-month-ahead evaluation. Models compared over common valid targets.	Evaluación móvil a un mes. Modelos comparados sobre los mismos objetivos válidos.
+Training RMSE	RMSE de entrenamiento
+Validation RMSE	RMSE de validación
+Best checkpoint	Mejor punto de control
+Best epoch: 	Mejor época: 
+Training time: 	Tiempo de entrenamiento: 
+Peak allocated VRAM: 	Pico de VRAM asignada: 
+XGBoost minus ConvLSTM	XGBoost menos ConvLSTM
+Model discovery failed: 	Error al buscar modelos: 
+Predictive export complete	Exportación predictiva completada
+Predictive export cancelled or failed; partial bundle is not complete	Exportación predictiva cancelada o fallida; el paquete parcial está incompleto
+trained and held-out evaluated	entrenado y evaluado con prueba independiente
+No current trained/evaluated models	No hay modelos entrenados y evaluados vigentes
+Predictive results unavailable	Resultados predictivos no disponibles
+ undefined for this target population	 indefinido para esta población objetivo
+Prediction grids differ	Las mallas de predicción son diferentes
+Prediction dates differ	Las fechas de predicción son diferentes
+No comparable predictions	No hay predicciones comparables
+Date: 	Fecha: 
+Mean absolute model difference: 	Diferencia absoluta media entre modelos: 
+Model disagreement is not a calibrated uncertainty estimate.	La discrepancia entre modelos no es una estimación calibrada de incertidumbre.
+Predicted pixels: 	Píxeles predichos: 
+Spatial coverage: 	Cobertura espacial: 
+Mean 	Media de 
+Retrospective forecast from December 2025. Not yet verified against the actual target month.	Predicción retrospectiva desde diciembre de 2025. Aún no verificada con observaciones del mes objetivo.
+Completed results; stale results cannot be presented as current	Resultados completos; los resultados desactualizados no se pueden presentar como vigentes
+Export CSV / JSON / GeoTIFF / PNG	Exportar CSV / JSON / GeoTIFF / PNG
+Native y	Coordenada y nativa
+Export scientific bundle into a new subdirectory	Exportar paquete científico en un subdirectorio nuevo
+Native pixel observations	Observaciones del píxel nativo
+Catalog refresh deferred until active scientific/export jobs finish	Actualización del catálogo aplazada hasta que finalicen los trabajos científicos o de exportación activos
+Result is stale: source changed. Recompute before presenting current results.	Resultado desactualizado: cambió la fuente. Vuelve a calcular antes de presentar resultados vigentes.
+Native x · 	Coordenada x nativa · 
+Area-weighted monthly observations · 	Observaciones mensuales ponderadas por área · 
+ · no gap filling	 · sin rellenar datos ausentes
+Cancelling export…	Cancelando exportación…
+Export complete	Exportación completada
+Export cancelled or failed; partial export not published	Exportación cancelada o fallida; el producto parcial no se publicó
+Native row 	Fila nativa 
+, column 	, columna 
+; observation coverage 	; cobertura de observaciones 
+. Area-weighted regional summaries are separate.	. Los resúmenes regionales ponderados por área se presentan por separado.
+Observed pixel 	Píxel observado 
+ · gaps preserved	 · ausencias conservadas
+No fresh completed results for 	No hay resultados completos vigentes para 
+. Stale results excluded: 	. Resultados desactualizados excluidos: 
+. Run a scientific investigation.	. Ejecuta una investigación científica.
+Cancelling at a safe block boundary…	Cancelando al finalizar un bloque seguro…
+Outside the observed regional footprint	Fuera de la huella regional observada
+Source changed; recompute results.	La fuente cambió; vuelve a calcular los resultados.
+Insufficient data for regression.	Datos insuficientes para la regresión.
+AURORA — Pixel Laboratory	AURORA — Laboratorio de píxeles
+Monthly satellite observations	Observaciones satelitales mensuales
+Annual linear regression	Regresión lineal anual
+Nominal OLS inference. Temporal dependence may affect statistical significance. The confidence band is not a prediction interval.	Inferencia OLS nominal. La dependencia temporal puede afectar la significancia estadística. La banda de confianza no es un intervalo de predicción.
+ / Individual pixel investigation	 / Investigación de un píxel individual
+Annual composites	Compuestos anuales
+Annual slope: 	Pendiente anual: 
+ | Valid years: 	 | Años válidos: 
+Latitude: 	Latitud: 
+° | Longitude: 	° | Longitud: 
+Interval start month	Mes inicial del intervalo
+Interval end month	Mes final del intervalo
+Calendar or manual date; endpoints include their entire observation month	Calendario o fecha manual; los extremos incluyen todo el mes de observación
+ months · 	 meses · 
+ · dates	 · fechas
+AURORA — Earth System Intelligence	AURORA — Inteligencia del sistema terrestre
+Run scientific investigation	Ejecutar investigación científica
+SATELLITE OBSERVATIONS\nNASA Terra / MODIS\n\nStatistical trend detection\nGeospatial analysis	OBSERVACIONES SATELITALES\nNASA Terra / MODIS\n\nDetección estadística de tendencias\nAnálisis geoespacial
+Time Machine	Máquina del tiempo
+Predictive intelligence	Inteligencia predictiva
+Scientific results	Resultados científicos
+Click to inspect a pixel. Double-click to explore its history.	Haz clic para inspeccionar un píxel. Haz doble clic para explorar su historia.
+Spatial analysis	Análisis espacial
+Temporal analysis	Análisis temporal
+Execution log	Registro de ejecución
+Scientific investigation running...	Investigación científica en curso...
+OLS / BH-FDR nominal significance	Significancia nominal OLS / BH-FDR
+Northing (km)	Coordenada norte (km)
+Northing	Coordenada norte
+Regional monthly time series	Serie temporal mensual regional
+Historical dataset available	Datos históricos disponibles
+Historical dataset unavailable	Datos históricos no disponibles
+No scientific result selected	No se ha seleccionado un resultado científico
+Monthly observations · descriptive period	Observaciones mensuales · periodo descriptivo
+Valid observations (%)	Observaciones válidas (%)
+Easting — 	Coordenada este — 
+Easting (km) — 	Coordenada este (km) — 
+Monthly observations	Observaciones mensuales
+Temperature (°C)	Temperatura (°C)
+Invalid investigation	Investigación no válida
+Incomplete or stale scientific result	Resultado científico incompleto o desactualizado
+No evaluated trend at this location.	No hay una tendencia evaluada en esta ubicación.
+PIXEL [	PÍXEL [
+]  |  Lat: 	]  |  Latitud: 
+°  Lon: 	°  Longitud: 
+  |  Change: 	  |  Cambio: 
+  |  Coverage: 	  |  Cobertura: 
+  |  Valid years: 	  |  Años válidos: 
+Pixel inspection failed: 	Error al inspeccionar el píxel: 
+Temperature change (°C)	Cambio de temperatura (°C)
+NDVI · dimensionless	NDVI · adimensional
+NoData / QA / outside region: transparent	Sin datos / QA / fuera de la región: transparente
+Drag: rotate · Wheel: zoom · Double-click: place a WGS84 pin	Arrastrar: girar · Rueda: acercar · Doble clic: colocar un marcador WGS84
+Toggle the scientific investigation controls	Mostrar u ocultar los controles de investigación científica
+Double-click to place a pin · Lighting is illustrative	Doble clic para colocar un marcador · La iluminación es ilustrativa
+Auto rotate	Rotación automática
+Country / state boundaries	Fronteras nacionales y estatales
+Geographic markers	Marcadores geográficos
+Previous observation	Observación anterior
+Next observation	Observación siguiente
+Geography: Natural Earth | Scientific observations: NASA Terra / MODIS	Geografía: Natural Earth | Observaciones científicas: NASA Terra / MODIS
+ · display stride 	 · paso de visualización 
+ to 	 a 
+Read cancelled; no incomplete observation displayed.	Lectura cancelada; no se muestra ninguna observación incompleta.
+Mexico City	Ciudad de México
+Frame shape changed within dataset	La forma del cuadro cambió dentro del conjunto de datos
+Render dimensions have not been initialized	Las dimensiones de representación no se han inicializado
+Land rasterization did not produce an array	La rasterización terrestre no produjo una matriz
+LAT 	LAT 
+°  |  LON 	°  |  LON 
+°  |  ZOOM 	°  |  AUMENTO 
+Drag to rotate · Scroll to zoom · Explore satellite history	Arrastra para girar · Desplázate para acercar · Explora la historia satelital
+Dataset unavailable: 	Datos no disponibles: 
+ | Valid pixels: 	 | Píxeles válidos: 
+ | Coverage: 	 | Cobertura: 
+ | Mean: 	 | Media: 
+ (area weighted)\nFixed scale: 	 (ponderada por área)\nEscala fija: 
+ | Missing observations remain uncolored.	 | Las observaciones ausentes no se colorean.
+Pin 	Marcador 
+Regional land rasterization did not produce an array	La rasterización terrestre regional no produjo una matriz
+Computing native blocks, paired climatologies and global FDR…	Calculando bloques nativos, climatologías emparejadas y FDR global…
+Paired monthly regional means	Medias regionales mensuales emparejadas
+Observed monthly anomalies	Anomalías mensuales observadas
+Y lag (months)	Desfase de Y (meses)
+Anomaly correlation	Correlación de anomalías
+Exploratory lag profile	Perfil exploratorio de desfases
+Overview	Resumen
+Pearson raw	Pearson observado
+Spearman anomaly	Spearman de anomalías
+Lag profiles	Perfiles de desfase
+Coverage sensitivity	Sensibilidad a la cobertura
+Run an analysis with aligned real datasets	Ejecuta un análisis con datos reales alineados
+Incomplete or stale result; run a fresh analysis.	Resultado incompleto o desactualizado; ejecuta un análisis nuevo.
+AR1/BH are diagnostics. Association is not causation.	AR1/BH son diagnósticos. La asociación no implica causalidad.
+Regional 	Regional 
+ anomaly	 anomalía
+Cancellation requested; partial products will not be published.	Cancelación solicitada; los productos parciales no se publicarán.
+Anomaly Pearson r	r de Pearson de anomalías
+ anomaly · 	 anomalía · 
+Observed NDVI–LST Pearson r	r de Pearson de NDVI–LST observado
+ coincident observations · 	 observaciones coincidentes · 
+Climatology: 	Climatología: 
+ · ≥8 pairs per calendar month. Positive lag: X(t) vs Y(t+lag).\n	 · ≥8 pares por mes calendario. Desfase positivo: X(t) frente a Y(t+desfase).\n
+Native blocks, area weighting and global FDR. 	Bloques nativos, ponderación por área y FDR global. 
+Historical legacy result: source freshness not independently established. 	Resultado histórico: la vigencia de la fuente no se ha comprobado de forma independiente. 
+Monthly anomaly Spearman ρ	ρ de Spearman de anomalías mensuales
+Minimum paired regional coverage	Cobertura regional emparejada mínima
+Load selected satellite dataset	Cargar los datos satelitales seleccionados
+Select Load satellite imagery to continue.	Selecciona Cargar imágenes satelitales para continuar.
+Explore historical satellite observations.	Explora las observaciones satelitales históricas.
+ of 	 de 
+Valid pixels: 	Píxeles válidos: 
+  |  Area-weighted mean: 	  |  Media ponderada por área: 
+Display stride 	Paso de visualización 
+; statistics on displayed samples. Historical satellite observations. Fixed color scale. Missing data is not zero.	; estadísticas de las muestras mostradas. Observaciones satelitales históricas. Escala de color fija. Los datos ausentes no son cero.
+Read cancelled	Lectura cancelada
+Vegetation dynamics	Dinámica de la vegetación
+Land surface temperature	Temperatura superficial terrestre
+Not evaluated	No evaluado
+Nominal statistical significance detected.	Se detectó significancia estadística nominal.
+Not statistically significant at 5%.	Sin significancia estadística al 5%.
+Estimated change:	Cambio estimado:
+p-value:	valor p:
+Nominal 95% confidence interval:	Intervalo de confianza nominal del 95%:
+Historical months	Meses históricos
+Data coverage	Cobertura de datos
+Evaluated pixels	Píxeles evaluados
+Analysis time	Tiempo de análisis
+Scientific limitations	Limitaciones científicas
+Spatial trend distribution	Distribución espacial de tendencias
+Regional trend analysis	Análisis de la tendencia regional
+AURORA / SCIENTIFIC REPORT	AURORA / INFORME CIENTÍFICO
+ regional pixels.	 píxeles regionales.
+OLS with Benjamini-Hochberg correction. Nominal significance threshold: 5%.	OLS con corrección de Benjamini-Hochberg. Umbral de significancia nominal: 5%.
+Temporal dependence may inflate significance. Spatial sampling and missing observations may influence the estimated trends. Statistical associations do not establish causality.	La dependencia temporal puede aumentar la significancia. El muestreo espacial y las observaciones ausentes pueden influir en las tendencias estimadas. Las asociaciones estadísticas no establecen causalidad.
+Insufficient observations for regional regression.	Observaciones insuficientes para la regresión regional.
+Increasing	En aumento
+Decreasing	En disminución
+Significant	Significativo
+Start	Inicio
+End	Fin
+Year	Año
+Epoch	Época
+Climatology	Climatología
+Persistence	Persistencia
+Lighting	Iluminación
+Grid	Cuadrícula
+Focus region	Centrar región
+Reset view	Restablecer vista
+Reset camera	Restablecer cámara
+Boundaries	Fronteras
+Markers	Marcadores
+Sunlight	Luz solar
+Rotation	Rotación
+Unavailable	No disponible
+unavailable	no disponible
+Not available	No disponible
+N/A	N/D
+Cancelled	Cancelado
+Failed	Fallido
+Ready	Listo
+Language preference saved	Preferencia de idioma guardada
+Choose the interface language. Applied immediately; saved for the next launch.	Elige el idioma de la interfaz. Se aplica de inmediato y se guarda para el próximo inicio.
+English	English
+Español	Español
+Home	Inicio
+Back	Atrás
+Forward	Adelante
+Pan	Desplazar
+Zoom	Acercar
+Subplots	Subgráficos
+Customize	Personalizar
+Save	Guardar
+Reset original view	Restablecer vista original
+Back to previous view	Volver a la vista anterior
+Forward to next view	Avanzar a la siguiente vista
+Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect	Botón izquierdo: desplazar; derecho: acercar\nx/y fija el eje; CTRL fija la proporción
+Zoom to rectangle\nx/y fixes axis	Acercar a un rectángulo\nx/y fija el eje
+Configure subplots	Configurar subgráficos
+Edit axis, curve and image parameters	Editar parámetros de ejes, curvas e imágenes
+Save the figure	Guardar la figura
+Figure options	Opciones de la figura
+Choose a figure axis	Seleccionar un eje de la figura
+Select axes	Seleccionar ejes
+File name:	Nombre de archivo:
+Files of type:	Tipo de archivo:
+Save the figure	Guardar la figura
+Cancel	Cancelar
+OK	Aceptar
+Apply	Aplicar
+Close	Cerrar
+Help	Ayuda
+Axes	Ejes
+Curves	Curvas
+Images, etc.	Imágenes, etc.
+Title	Título
+Min	Mínimo
+Max	Máximo
+Label	Etiqueta
+Scale	Escala
+Linear	Lineal
+Log	Logarítmica
+Color	Color
+Line style	Estilo de línea
+Draw style	Estilo de trazado
+Width	Ancho
+Marker	Marcador
+Size	Tamaño
+Face color	Color de relleno
+Edge color	Color del borde
+Interpolation	Interpolación
+Colormap	Mapa de colores
+Lower limit	Límite inferior
+Upper limit	Límite superior
+Restore original view	Restablecer vista original
+Export	Exportar
+Reset	Restablecer
+Top	Superior
+Bottom	Inferior
+Left	Izquierdo
+Right	Derecho
+Spacing	Separación
+Tight layout	Ajustar distribución
+Reset all	Restablecer todo
+Tool	Herramienta
+Expected YYYY-MM or a valid YYYY-MM-DD	Se esperaba AAAA-MM o una fecha AAAA-MM-DD válida
+Calendar must be nonempty and strictly increasing	El calendario no debe estar vacío y debe ser estrictamente creciente
+Invalid interval or outside dataset availability	El intervalo no es válido o queda fuera de los datos disponibles
+Quick period exceeds available observations	El periodo rápido supera las observaciones disponibles
+trend eligibility still requires pixel-level coverage	la validez de la tendencia aún requiere cobertura por píxel
+descriptive exploration only; insufficient long-term evidence	sólo exploración descriptiva; evidencia insuficiente a largo plazo
+No registered observations for 	No hay observaciones registradas para 
+No registered dataset for 	No hay un conjunto de datos registrado para 
+Operation failed. Check the execution log for technical details.	La operación falló. Consulta los detalles técnicos en el registro de ejecución.
+Technical details	Detalles técnicos
+Progress	Progreso
+Error	Error
+Warning	Advertencia
+Information	Información
+None	No disponible
+True	Sí
+False	No
+schema	Esquema
+status	Estado
+created utc	Creación UTC
+kind	Tipo
+parameters	Parámetros
+memory mib	Memoria (MiB)
+requested block size	Tamaño de bloque solicitado
+min months per year	Meses mínimos por año
+min valid years	Años válidos mínimos
+alpha	Nivel alfa
+observation kind	Tipo de observaciones
+inputs	Entradas
+directory	Directorio
+fingerprint	Huella de integridad
+scheme	Esquema de verificación
+variable	Variable
+unit	Unidad
+slope unit	Unidad de pendiente
+source	Fuente
+period	Periodo
+grid	Malla
+transform	Transformación
+width	Ancho
+height	Alto
+nodata	Sin datos
+fields	Campos
+coverage	Cobertura
+trend slope	Pendiente de tendencia
+trend p	Valor p de tendencia
+trend q	Valor q de tendencia
+trend change	Cambio estimado
+trend n	Número de años
+trend lag1	Autocorrelación de primer orden
+trend significant	Tendencia significativa
+trend sen	Pendiente de Sen
+trend hac p	Valor p de HAC
+trend hac q	Valor q de HAC
+region pixels	Píxeles regionales
+region area m2	Área regional (m²)
+area methods	Métodos de cálculo de área
+export precision	Precisión de exportación
+eligibility	Validez de la tendencia
+eligible	Válido
+eligible calendar years	Años calendario válidos
+minimum years	Años mínimos
+minimum months per year	Meses mínimos por año
+interpretation	Interpretación
+fdr test count	Número de pruebas FDR
+methodology	Metodología
+actual block size	Tamaño de bloque efectivo
+estimated block working bytes	Memoria de trabajo estimada por bloque (bytes)
+memory budget bytes	Presupuesto de memoria (bytes)
+seconds	Segundos
+region	Región
+start	Inicio
+end	Fin
+statistics	Estadística
+complete	Completo
+running	En ejecución
+failed	Fallido
+cancelled	Cancelado
+satellite	Satelital
+ellipsoidal geodesic polygon with 8 segments per cell edge (approximation)	Polígono geodésico elipsoidal con 8 segmentos por borde de celda (aproximación)
+float64 statistics GeoTIFF/NPY; float64 decimal CSV	Estadísticas float64 en GeoTIFF/NPY; decimales float64 en CSV
+Native-grid annual mean with at least 9 observed months	Media anual en malla nativa con al menos 9 meses observados
+OLS/Sen require 15 valid years per pixel; HAC requires complete consecutive annual series	OLS/Sen requieren 15 años válidos por píxel; HAC requiere series anuales consecutivas completas
+BH applied to the entire regional family, independently for OLS and HAC, never per block	BH aplicado a toda la familia regional, independientemente para OLS y HAC, nunca por bloque
+Area-weighted means and observed-area coverage; no filling or resampling of observations	Medias ponderadas por área y cobertura de área observada; sin rellenar ni remuestrear observaciones
+Nominal significance does not remove all temporal or spatial dependence; no causal inference	La significancia nominal no elimina toda dependencia temporal o espacial; sin inferencia causal
+event	Evento
+phase	Fase
+done	Completado
+total	Total
+message	Mensaje
+progress	Progreso
+open-source	Apertura de la fuente
+native-grid-blocks	Bloques de malla nativa
+global-fdr	Corrección FDR global
+paired-native-blocks	Bloques nativos emparejados
+global-paired-fdr	Corrección FDR global de pares
+export	Exportación
+copy	Copia
+Source changed during calculation; result not published as complete	La fuente cambió durante el cálculo; el resultado no se publicó como completo
+No observed dataset for 	No hay datos observados para 
+Storage must remain inside the dataset directory	El almacenamiento debe permanecer dentro del directorio del conjunto de datos
+NPZ cache disk budget exhausted; convert to chunked Zarr or use another cache location	Se agotó el presupuesto de disco de la caché NPZ; convierte a Zarr por bloques o usa otra ubicación de caché
+Zarr is optional and not installed; use NPY or NPZ	Zarr es opcional y no está instalado; usa NPY o NPZ
+Expected Zarr array: 	Se esperaba una matriz Zarr: 
+Zarr X fill value must be NaN, never an observed zero	El valor de relleno de X en Zarr debe ser NaN, nunca un cero observado
+Missing Zarr validity chunks must be false	Los bloques ausentes de validez Zarr deben ser falsos
+Missing Zarr regional mask chunks must be false	Los bloques ausentes de máscara regional Zarr deben ser falsos
+Unsupported storage format	Formato de almacenamiento no compatible
+Scientific cube values must be float32 in physical units	Los valores del cubo científico deben ser float32 en unidades físicas
+Invalid observed cube shape	Forma del cubo de observaciones no válida
+Invalid validity array	Matriz de validez no válida
+Invalid regional mask	Máscara regional no válida
+Invalid observation calendar	Calendario de observaciones no válido
+Shape differs from dataset metadata	La forma difiere de los metadatos del conjunto de datos
+Cube channel differs from metadata variable	El canal del cubo difiere de la variable de los metadatos
+Reader is closed	El lector está cerrado
+Stored Zarr chunks exceed decode budget; rechunk the source	Los bloques Zarr almacenados superan el presupuesto de decodificación; reorganiza la fuente en bloques
+Requested window exceeds memory budget; read temporal/spatial blocks	La ventana solicitada supera el presupuesto de memoria; lee bloques temporales o espaciales
+Series time slice must be contiguous	La selección temporal de la serie debe ser contigua
+Time series block exceeds budget	El bloque de la serie temporal supera el presupuesto
+Invalid calendar	Calendario no válido
+Region id must be a string	El identificador de región debe ser una cadena de texto
+Dataset identity, channel or units disagree	La identidad, el canal o las unidades del conjunto de datos no coinciden
+Observed values outside documented physical range	Valores observados fuera del intervalo físico documentado
+Source/unit inconsistent with variable registry	Fuente o unidad incompatible con el registro de variables
+Canonical variable units disagree; convert explicitly or register a distinct variable identifier	Las unidades de la variable canónica no coinciden; convierte de forma explícita o registra otro identificador de variable
+Explicit physical range, source and unit required	Se requiere un intervalo físico, fuente y unidad explícitos
+Stale predictive run	Ejecución predictiva desactualizada
+Export cancelled before start	Exportación cancelada antes de comenzar
+Predictive export cancelled	Exportación predictiva cancelada
+Source or model artifacts changed during export	La fuente o los archivos del modelo cambiaron durante la exportación
+Need memory_mib >=8 and positive block size	Se requiere memory_mib >=8 y un tamaño de bloque positivo
+Even one complete time series exceeds the requested budget	Una sola serie temporal completa supera el presupuesto solicitado
+Invalid p-value	Valor p no válido
+Non-observational input requires explicit --allow-synthetic	Una entrada sin observaciones requiere --allow-synthetic explícito
+Calendar has gaps; provide explicit monthly missing frames, never compressed time	El calendario tiene ausencias; proporciona cuadros mensuales ausentes explícitos, nunca tiempo comprimido
+Observed physical range violated	Se incumplió el intervalo físico observado
+Empty regional mask	Máscara regional vacía
+Estimated result/scratch disk exceeds budget; use a coarser native dataset or explicitly increase AURORA_RESULT_DISK_LIMIT_GIB	El disco estimado de resultados o temporales supera el presupuesto; usa datos nativos de menor resolución o aumenta explícitamente AURORA_RESULT_DISK_LIMIT_GIB
+Only complete fresh results can be exported	Sólo se pueden exportar resultados completos vigentes
+Source changed during export	La fuente cambió durante la exportación
+Export cancelled	Exportación cancelada
+Read cancelled	Lectura cancelada
+Dataset unavailable	Datos no disponibles
+Opening observed data in background…	Abriendo observaciones en segundo plano…
+Loading observed data in background…	Cargando observaciones en segundo plano…
+Discovering evaluated predictive models…	Buscando modelos predictivos evaluados…

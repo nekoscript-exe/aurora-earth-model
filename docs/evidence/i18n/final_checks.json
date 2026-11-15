@@ -1,0 +1,65 @@
+[
+  {
+    "command": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "environment": {},
+    "exit_code": 0,
+    "stdout": "feature/model-core\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "--short",
+      "HEAD"
+    ],
+    "environment": {},
+    "exit_code": 0,
+    "stdout": "0c8eb08\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "scripts",
+      "tests"
+    ],
+    "environment": {},
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "environment": {
+      "PIP_CACHE_DIR": "/tmp/aurora-i18n-pip-cache"
+    },
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "environment": {},
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]
