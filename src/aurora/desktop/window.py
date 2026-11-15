@@ -17,6 +17,7 @@ from .theme import STYLE as AURORA_STYLE
 from .report import render_report
 from .welcome import WelcomePage
 from .ai_lab import AILaboratory
+from .time_machine import TimeMachine
 from .pixel_lab import open_pixel_lab
 from PySide6.QtWidgets import QTextBrowser
 from PySide6.QtWidgets import (
@@ -276,6 +277,13 @@ class AuroraWindow(QMainWindow):
 
         self.welcome = WelcomePage(self.run_button.click)
         self.tabs.addTab(self.welcome, "Home")
+
+        self.time_machine = TimeMachine(ROOT, self)
+
+        self.tabs.addTab(
+            self.time_machine, "Time Machine"
+        )
+
 
         self.ai_lab = AILaboratory(ROOT, self)
 
