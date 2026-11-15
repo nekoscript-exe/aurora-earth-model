@@ -26,16 +26,12 @@ Fecha: Noviembre 14, 2026 · Revisora: Sophia · Decisiones de corrección: Ian.
 | Regional: pendiente, p, R², IC 95 % | `regional_trend.json` | idénticos con `linregress` |
 | Regional: media anual | media de meses con cobertura ≥ 0.7 | dif. 5.6e-17 |
 
-## 3. Parte B — tres píxeles con `linregress` (PENDIENTE)
-Requiere `manifest.csv` y los TIFF mensuales (`data/raw`) de Yatz.
-Regla de selección (documentada, determinista): en cada clase (aumento, disminución, sin evidencia), el píxel con serie
-completa cuya pendiente está más cerca de la mediana de su clase. Tolerancia propuesta: 1e-6 NDVI/año.
-
-| Clase | Fila | Col | Años | Pend. linregress | Pend. Ian | Dif. | p linregress | p Ian | ¿OK? |
-|---|---|---|---|---|---|---|---|---|---|
-| Aumento | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Disminución | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Sin evidencia | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+## 3. Parte B — tres píxeles con linregress (NO COMPLETADA)
+No se completó porque no se recibieron a tiempo los TIFF mensuales ni las series de los píxeles.
+Píxeles elegidos con la regla documentada (ver `docs/evidence/science/pixels_selected.csv`):
+(fila 73, col 104) aumento; (91, 12) disminución; (125, 48) sin evidencia.
+`scripts/validate_independent.py` queda listo para ejecutarse con `--pixel-csv` o `--manifest`.
+No se registró ningún valor sin calcular.
 
 ## 4. Revisión de interpretación
 - [x] p y q no se presentan como probabilidad de cambio (ver `scientific_report.md`, 6.6).

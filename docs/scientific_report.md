@@ -164,7 +164,7 @@ Resumen de `docs/validation_report.md` (17 de 17 comprobaciones de coherencia co
 - Los conteos por categoría de `metrics.json` coinciden con los mapas.
 - La q recalculada con Benjamini–Hochberg desde p coincide con `trend_q.tif` (dif. máx. 6.6e-8, precisión Float32).
 - La serie regional recalculada con `scipy.stats.linregress` reproduce pendiente, p, R² e IC de `regional_trend.json`.
-- [PENDIENTE: validación de 3 píxeles con las series mensuales completas (`data/raw`)].
+- La validación de 3 píxeles no se completó por falta de datos; se declara como limitación.
 Incertidumbres que se mantienen: autocorrelación temporal y espacial (las pruebas por píxel no son independientes),
 período corto (≤ 25 años) y exclusión de meses nublados.
 
