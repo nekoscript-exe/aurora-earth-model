@@ -1,0 +1,68 @@
+{
+  "python": "3.14.4",
+  "pyside6": "6.12.0",
+  "dataset": "MODIS/061/MOD13Q1",
+  "crs": "EPSG:32614",
+  "cube_shape": [
+    300,
+    171,
+    161
+  ],
+  "compared_geotiffs": 300,
+  "regional_mask_equal": true,
+  "raster_values_equal": true,
+  "camera_checks": [
+    {
+      "center": [
+        -99.9,
+        20.85
+      ],
+      "zoom": 48,
+      "mapped_pixels": 2650,
+      "different_pixel_ids": 0
+    },
+    {
+      "center": [
+        -102.5,
+        23.6
+      ],
+      "zoom": 4,
+      "mapped_pixels": 16,
+      "different_pixel_ids": 0
+    },
+    {
+      "center": [
+        80,
+        -20
+      ],
+      "zoom": 1,
+      "mapped_pixels": 0,
+      "different_pixel_ids": 0
+    }
+  ],
+  "timings_1280x800_offscreen": {
+    "queretaro": {
+      "camera_median_ms": 161.8688070011558,
+      "camera_max_ms": 174.1671089985175
+    },
+    "mexico": {
+      "camera_median_ms": 121.83681500027888,
+      "camera_max_ms": 128.36231399705866
+    },
+    "earth": {
+      "camera_median_ms": 133.26529400001164,
+      "camera_max_ms": 147.0112959977996
+    },
+    "playback": {
+      "frame_median_ms": 6.96495349984616,
+      "frame_max_ms": 11.210279000806622
+    },
+    "moving_camera": {
+      "camera_median_ms": 81.2363005024963,
+      "camera_max_ms": 91.61001299798954
+    }
+  },
+  "first_date": "2001-01-01",
+  "last_date": "2025-12-01",
+  "first_frame_valid_pixels": 11466
+}

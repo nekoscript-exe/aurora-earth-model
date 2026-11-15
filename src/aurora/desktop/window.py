@@ -18,6 +18,7 @@ from .report import render_report
 from .welcome import WelcomePage
 from .ai_lab import AILaboratory
 from .time_machine import TimeMachine
+from .globe import PlanetaryExplorer
 from .pixel_lab import open_pixel_lab
 from PySide6.QtWidgets import QTextBrowser
 from PySide6.QtWidgets import (
@@ -278,6 +279,12 @@ class AuroraWindow(QMainWindow):
         self.welcome = WelcomePage(self.run_button.click)
         self.tabs.addTab(self.welcome, "Home")
 
+        self.planetary_explorer = PlanetaryExplorer(ROOT, self)
+
+        self.tabs.addTab(
+            self.planetary_explorer, "Planetary Explorer"
+        )
+
         self.time_machine = TimeMachine(ROOT, self)
 
         self.tabs.addTab(
@@ -362,6 +369,20 @@ class AuroraWindow(QMainWindow):
             self.log, "Execution log"
         )
 
+        self.investigation_panel = sidebar
+        explorer = self.planetary_explorer
+        explorer.setup_toggle.show()
+        explorer.setup_toggle.clicked.connect(
+            lambda checked: sidebar.setVisible(checked)
+        )
+
+        def sync_workspace(_):
+            # The explorer already has dataset controls; give its globe the
+            # full workspace, retaining an explicit way to reopen investigation.
+            explorer.setup_toggle.setChecked(False)
+            sidebar.setVisible(self.tabs.currentWidget() is not explorer)
+
+        self.tabs.currentChanged.connect(sync_workspace)
         workspace.addWidget(sidebar)
         workspace.addWidget(self.tabs, 1)
 
