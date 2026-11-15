@@ -1,0 +1,34 @@
+{
+    "source": "MODIS/061/MOD13Q1",
+    "grid": {
+        "crs": "EPSG:32614",
+        "transform": [
+            1000.0,
+            0.0,
+            335000.0,
+            0.0,
+            -1000.0,
+            2387000.0
+        ],
+        "width": 161,
+        "height": 171,
+        "nodata": -9999.0
+    },
+    "period": [
+        "2001-01-01",
+        "2025-12-01"
+    ],
+    "primary_method": "OLS",
+    "secondary_method": "Theil-Sen",
+    "annual_min_months": 9,
+    "minimum_valid_years": 15,
+    "multiple_testing": "Benjamini-Hochberg",
+    "alpha": 0.05,
+    "hac_maxlags": 2,
+    "hac_role": "sensitivity_analysis",
+    "variable": "NDVI",
+    "unit": "1",
+    "slope_unit": "NDVI/year",
+    "significance_warning": "Temporal dependence may inflate false positives. HAC is exploratory and does not guarantee calibration.",
+    "commit": "bcb20fa0a0cd7040493580e7d22993e24baba609"
+}
