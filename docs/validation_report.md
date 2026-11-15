@@ -42,12 +42,17 @@ completa cuya pendiente está más cerca de la mediana de su clase. Tolerancia p
 - [x] Hay corrección por pruebas múltiples (Benjamini–Hochberg, q < 0.05).
 - [x] Cobertura (`map_coverage*.png`) y magnitud (`map_change.png`) visibles.
 - [x] No se afirma causalidad; las explicaciones se marcan como hipótesis.
-- [ ] Split 2002–2018 / 2019–2021 / 2022–2025 sin fuga: [PENDIENTE: no se recibieron métricas ni código de predicción]
+- [ ] Split 2002–2018 / 2019–2021 / 2022–2025 sin fuga: se recibieron métricas finales de Ian (XGBoost y ConvLSTM, 2022–2025);
+      PENDIENTE revisar configuración y confirmar que test no se usó para selección. Faltan métricas de persistencia,
+      climatología mensual y OLS estacional sobre los mismos pares.
 
 ## 5. Observaciones y preguntas para Ian
-1. **HAC prueba menos píxeles** (10 053 de 11 288). ¿Qué criterio excluye a 1 235 píxeles?
-2. **Meses excluidos en época de lluvias.** Los 10 meses con cobertura regional < 70 % caen entre junio y octubre,
-   cerca del máximo de NDVI. ¿Se evaluó el posible sesgo de la media anual?
+1. **HAC (respondido por Ian y verificado por Sophia).** Es intencional: OLS admite series con años faltantes, pero la
+   implementación de HAC exige serie anual completa y descarta series constantes. Verificado: HAC probó exactamente los
+   10 053 píxeles con 25 años válidos; los 1 235 píxeles con 15–24 años solo entran al método principal.
+   La comparación justa es solo entre esos 10 053: OLS q<0.05 → 2 123 (21.1 %); HAC → 1 965 (19.5 %); ambos → 1 690.
+2. **Sesgo estacional por meses excluidos (limitación abierta).** Los 10 meses con cobertura regional < 70 % caen entre
+   junio y octubre, cerca del máximo de NDVI. Ian confirma que aún no se evalúa; se documenta como limitación.
 3. **Dos criterios de calidad distintos:** por píxel (≥ 9 meses válidos por año) y regional (cobertura ≥ 0.7 por mes).
    Conviene dejarlo explícito en el README.
 4. **Dependencia espacial.** BH asume independencia o dependencia positiva; con píxeles vecinos correlacionados puede
