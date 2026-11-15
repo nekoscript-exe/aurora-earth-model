@@ -6,7 +6,7 @@
 
 ## Slides
 **1. Title.** AURORA — Earth System Intelligence Model. *Where is vegetation changing, and is it significant?*
-Team AURORA: Ian, Yatz, Sofía · NASA Space Apps 2026 · Challenge: "Changes in the Earth System" (title as listed on the site).
+Team AURORA: Ian, Yatz, René, Sophia · NASA Space Apps 2026 · Challenge: "Changes in the Earth System" (title as listed on the site).
 
 **2. The challenge.** What is changing, where, how much, and is it significant? A trend can go up in one place and
 down in another. Case study: vegetation (NDVI) in Querétaro, Mexico, 2001–2025.
@@ -27,7 +27,7 @@ coverage 94.7 %. Limits: 1 km pixels, clouds in the rainy season, only linear tr
 **7. Impact and next steps.** An open, reproducible tool for "data detectives": any region, any variable.
 Next: add rainfall and land cover to test explanations; extend to other regions. Credits: NASA, LP DAAC, Google Earth Engine.
 
-Speaker split: Yatz slides 3, Ian slide 4, Sofía slides 5–6, all slides 1–2 and 7.
+Speaker split: Yatz slides 3, Ian slide 4, Sophia slides 5–6, all slides 1–2 and 7.
 Add readable fonts, one image per slide, few words.
 
 ## Form drafts (English) — edit to match what the team really did

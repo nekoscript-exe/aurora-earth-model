@@ -47,7 +47,7 @@ Google Earth Engine (Gorelick et al., 2017); SciPy; XGBoost; PyTorch. Full refer
 ---
 
 ## Slide text (7 slides, short)
-**1. AURORA** — Where is vegetation changing, and is it significant? · Team AURORA: Ian, Yatz, Sofía · Challenge: Earth system trends · NASA Space Apps 2026
+**1. AURORA** — Where is vegetation changing, and is it significant? · Team AURORA: Ian, Yatz, René, Sophia · Challenge: Earth system trends · NASA Space Apps 2026
 **2. The challenge** — What is changing? Where? How much? Is it significant? A trend can rise in one place and fall in another.
 **3. NASA data** — MODIS NDVI (MOD13Q1 v061) · 2001–2025 · Querétaro, Mexico · 11,511 pixels at 1 km · via Google Earth Engine
 **4. How it works** — Monthly NDVI → annual means → trend per pixel → false-discovery-rate correction (q < 0.05) → maps
