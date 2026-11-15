@@ -49,3 +49,5 @@
 a27198c feat: figure script, independent validation and tests
 
 **Comandos:** `python -m pytest tests/test_figures.py -q`, `python scripts/plot_results.py ...`, `python scripts/validate_independent.py ...`
+
+### Nov 15, 2026; 9:08 AM
