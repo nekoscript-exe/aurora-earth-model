@@ -1,0 +1,15 @@
+{
+    "variable": "LST",
+    "months": 3,
+    "eligible_years": 0,
+    "minimum_monthly_coverage": 0.7,
+    "minimum_valid_months": 9,
+    "minimum_valid_years": 15,
+    "trend": null,
+    "limitations": [
+        "Unweighted regional pixel means.",
+        "Observed spatial composition may vary over time.",
+        "OLS p-values and intervals are nominal.",
+        "Temporal dependence may inflate significance."
+    ]
+}
