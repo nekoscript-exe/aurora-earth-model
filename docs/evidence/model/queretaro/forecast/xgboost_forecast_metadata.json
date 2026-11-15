@@ -1,0 +1,16 @@
+{
+    "engine": "xgboost",
+    "cube": "data/processed/queretaro/cube.npz",
+    "model": "outputs/queretaro/xgboost/model.ubj",
+    "forecast_date": "2026-01",
+    "history_start": "2025-01",
+    "history_end": "2025-12",
+    "minimum_history": 9,
+    "regional_pixels": 11511,
+    "predicted_pixels": 11123,
+    "prediction_coverage": 0.9662931109373643,
+    "minimum_ndvi": 0.09489287436008453,
+    "maximum_ndvi": 0.8242983222007751,
+    "mean_ndvi": 0.4577614665031433,
+    "seconds": 0.27537435900012497
+}

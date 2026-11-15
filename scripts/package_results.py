@@ -20,7 +20,10 @@ REQUIRED = [
     "trend_hac_q.tif",
     "coverage.tif",
     "metrics.json",
-    "run_metadata.json"
+    "run_metadata.json",
+    "monthly_series.csv",
+    "annual_series.csv",
+    "regional_trend.json"
 ]
 
 
