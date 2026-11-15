@@ -119,6 +119,8 @@ def run_forecast(directory, output, variable='lst', epochs=12, patience=3,
     # Existing masked trainer reused; metrics are transformed back to physical units.
     import importlib.util
     spec = importlib.util.spec_from_file_location('aurora_legacy_trainer', Path(__file__).resolve().parents[3]/'scripts/train_deep.py')
+    if spec is None or spec.loader is None:
+        raise ImportError('Unable to load AURORA trainer')
     trainer = importlib.util.module_from_spec(spec); spec.loader.exec_module(trainer)
     amp = device.type == 'cuda' and torch.cuda.is_bf16_supported()
     history, best, stale, best_epoch = [], float('inf'), 0, 0

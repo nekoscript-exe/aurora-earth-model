@@ -8,6 +8,7 @@ from pathlib import Path
 
 import numpy as np
 import rasterio
+from rasterio.crs import CRS
 
 from rasterio.features import geometry_mask
 from rasterio.transform import Affine
@@ -42,7 +43,7 @@ def build_cube(package, region_path, output, start, end,
 
     records.sort(key=lambda row: row["date"])
 
-    crs = rasterio.crs.CRS.from_string(grid["crs"])
+    crs = CRS.from_string(grid["crs"])
     transform = Affine(*grid["transform"][:6])
 
     height = grid["height"]

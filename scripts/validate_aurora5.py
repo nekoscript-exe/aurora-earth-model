@@ -25,6 +25,7 @@ def main():
     source = registry.find('queretaro', 'lst')
     t = perf_counter(); reader = CubeReader(source.directory); cold_seconds = perf_counter()-t
     timings = []
+    frame = reader.read(slice(0, 12), slice(40, 72), slice(40, 72))
     for _ in range(20):
         t = perf_counter(); frame = reader.read(slice(0, 12), slice(40, 72), slice(40, 72))
         timings.append((perf_counter()-t)*1000)

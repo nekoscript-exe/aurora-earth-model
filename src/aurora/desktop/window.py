@@ -1,5 +1,7 @@
 """AURORA Desktop — Scientific investigation interface."""
 
+from .i18n import tr
+
 import json
 import sys
 
@@ -39,9 +41,7 @@ from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.colors import (
     TwoSlopeNorm, ListedColormap, BoundaryNorm
 )
-from matplotlib.backends.backend_qtagg import (
-    NavigationToolbar2QT
-)
+from matplotlib.backends.backend_qt import NavigationToolbar2QT
 
 MAP_LAYERS = {
     "OLS trend": "trend_slope.tif",
@@ -154,8 +154,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         )
 
         subtitle = QLabel(
-            "EARTH SYSTEM INTELLIGENCE  /  "
-            "Scientific Investigation Environment"
+            tr('EARTH SYSTEM INTELLIGENCE  /  Scientific Investigation Environment')
         )
 
         title.setObjectName("brand")
@@ -177,7 +176,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         header.addLayout(branding)
         header.addStretch()
 
-        edition = QLabel("RESEARCH EDITION")
+        edition = QLabel(tr('RESEARCH EDITION'))
         edition.setStyleSheet(
             "color: #69d9bd; font-size: 11px;"
         )
@@ -196,15 +195,14 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         panel.setContentsMargins(18, 20, 18, 20)
         panel.setSpacing(16)
 
-        heading = QLabel("Investigation setup")
+        heading = QLabel(tr('Investigation setup'))
         heading.setStyleSheet(
             "font-size: 19px; font-weight: bold;"
         )
         panel.addWidget(heading)
 
         description = QLabel(
-            "Configure an environmental investigation "
-            "using historical satellite observations."
+            tr('Configure an environmental investigation using historical satellite observations.')
         )
         description.setWordWrap(True)
         description.setStyleSheet("color: #8da5ba;")
@@ -214,10 +212,10 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         self.variable = QComboBox()
         self.variable.addItem(
-            "Vegetation activity — NDVI", "ndvi"
+            tr('Vegetation activity — NDVI'), "ndvi"
         )
         self.variable.addItem(
-            "Land surface temperature — LST", "lst"
+            tr('Land surface temperature — LST'), "lst"
         )
 
         self.region = QComboBox()
@@ -272,12 +270,12 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         self.tabs = QTabWidget()
 
         self.welcome = WelcomePage(self.run_button.click)
-        self.tabs.addTab(self.welcome, "Home")
+        self.tabs.addTab(self.welcome, tr('Home'))
 
         self.planetary_explorer = PlanetaryExplorer(ROOT, self)
 
         self.tabs.addTab(
-            self.planetary_explorer, "Planetary Explorer"
+            self.planetary_explorer, tr('Planetary Explorer')
         )
 
         self.time_machine = TimeMachine(ROOT, self)
@@ -295,7 +293,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
 
         self.multivariate_lab = MultivariateLaboratory(ROOT, self)
-        self.tabs.addTab(self.multivariate_lab, "Multivariate Laboratory")
+        self.tabs.addTab(self.multivariate_lab, tr('Multivariate Laboratory'))
 
         self.summary = QTextBrowser()
         self.summary.setReadOnly(True)
@@ -330,7 +328,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             self.map_canvas, self
         )
 
-        map_layout.addWidget(QLabel("Scientific map layer"))
+        map_layout.addWidget(QLabel(tr('Scientific map layer')))
         map_layout.addWidget(self.layer_selector)
         map_layout.addWidget(self.map_toolbar)
         map_layout.addWidget(self.map_canvas, 1)
@@ -489,9 +487,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
     def read_output(self):
 
-        text = bytes(
-            self.process.readAllStandardOutput()
-        ).decode("utf-8", errors="replace")
+        text = bytes(self.process.readAllStandardOutput().data()).decode("utf-8", errors="replace")
 
         self.parse_progress(text)
         self.log.moveCursor(
@@ -523,7 +519,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             QProcess.ProcessState.NotRunning
         ):
             self.restore_controls()
-            self.status.setText("Execution error")
+            self.status.setText(tr('Execution error'))
 
     def finished(self, code, exit_status):
 
@@ -537,21 +533,24 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             code != 0
             or exit_status != QProcess.ExitStatus.NormalExit
         ):
-            self.status.setText("Investigation cancelled" if code == 2 else "Investigation failed")
+            self.status.setText(tr('Investigation cancelled') if code == 2 else tr('Investigation failed'))
             return
 
         try:
             self.load_results()
         except Exception as exc:
             self.log.appendPlainText(str(exc))
-            self.status.setText("Result loading failed")
+            self.status.setText(tr('Result loading failed'))
             return
 
         self.progress.setValue(1)
-        self.status.setText("Investigation completed")
+        self.status.setText(tr('Investigation completed'))
         self.tabs.setCurrentWidget(self.summary)
 
     def load_results(self):
+
+        if self.output_path is None:
+            raise ValueError("No scientific result selected")
 
         manifest = self.output_path / 'manifest.json'
         if manifest.exists():
@@ -613,11 +612,12 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         if event.button != 1:
             return
-        if getattr(self, 'current_history', None) and (self.current_history/'manifest.json').exists():
+        history = self.current_history
+        if history is not None and (history/'manifest.json').exists():
             self.inspect_global_pixel(event)
             return
 
-        if not getattr(self, "current_history", None):
+        if self.current_history is None:
             return
 
         if self.process.state() != QProcess.ProcessState.NotRunning:
@@ -637,6 +637,8 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         x, y = event.xdata, event.ydata
         history = self.current_history
+        if history is None:
+            return
 
         try:
             with rasterio.open(
@@ -651,9 +653,10 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
                 ):
                     return
 
-                lon, lat = transform(
+                projected = transform(
                     src.crs, "EPSG:4326", [x], [y]
                 )
+                lon, lat = projected[0], projected[1]
 
             values = {}
 
@@ -729,7 +732,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
     def refresh_map(self, *_):
 
-        if not getattr(self, "current_history", None):
+        if self.current_history is None:
             return
 
         if self.process.state() != (

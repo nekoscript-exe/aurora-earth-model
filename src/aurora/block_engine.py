@@ -90,7 +90,7 @@ def export_field(output, name, values, grid, unit, job=None):
             if job: job.check()
             data = values[y:y+128]
             dst.write(np.where(np.isfinite(data), data, -9999).astype('float64'), 1,
-                      window=Window(0, y, width, data.shape[0]))
+                      window=Window.from_slices((y, y+data.shape[0]), (0, width)))
         levels = [factor for factor in (2, 4, 8, 16, 32, 64) if max(height, width)/factor >= 256 and min(height, width)//factor >= 1]
         for factor in levels:
             if job: job.check()

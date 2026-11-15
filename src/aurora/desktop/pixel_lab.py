@@ -1,5 +1,8 @@
 """Individual satellite pixel investigation."""
 
+from typing import cast
+from aurora.scientific_types import LinearRegressionResult
+
 import numpy as np
 
 from scipy.stats import linregress, t
@@ -9,10 +12,8 @@ from PySide6.QtWidgets import (
 )
 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qtagg import (
-    FigureCanvasQTAgg,
-    NavigationToolbar2QT
-)
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt import NavigationToolbar2QT
 
 
 def open_pixel_lab(parent, cube, row, col, lat, lon):
@@ -97,7 +98,7 @@ def open_pixel_lab(parent, cube, row, col, lat, lon):
 
     if len(years) >= 15:
 
-        result = linregress(years, annual)
+        result = cast(LinearRegressionResult, linregress(years, annual))
 
         fitted = result.intercept + result.slope * years
 

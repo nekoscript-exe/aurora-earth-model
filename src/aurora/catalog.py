@@ -72,7 +72,16 @@ class CubeReader:
             try: import zarr
             except ImportError as exc: raise RuntimeError('Zarr is optional and not installed; use NPY or NPZ') from exc
             zarr.config.set({'async.concurrency': 4, 'threading.max_workers': 4})
-            self.arrays = zarr.open_group(str(path), mode='r')
+            self._zarr_group = zarr.open_group(str(path), mode='r')
+            self.arrays = {}
+
+            for name in ('X', 'valid', 'region_mask', 'dates', 'channels'):
+                array = self._zarr_group[name]
+
+                if not isinstance(array, zarr.Array):
+                    raise ValueError(f'Expected Zarr array: {name}')
+
+                self.arrays[name] = array
             if self.arrays['X'].fill_value is None or not np.isnan(self.arrays['X'].fill_value):
                 raise ValueError('Zarr X fill value must be NaN, never an observed zero')
             if self.arrays['valid'].fill_value not in (False, 0):
@@ -98,7 +107,7 @@ class CubeReader:
             raise ValueError('Cube channel differs from metadata variable')
         self.grid = RasterGrid.from_metadata(self.metadata, self.shape[1:3])
 
-    def read(self, time=slice(None), rows=slice(None), cols=slice(None), max_bytes=128*1024**2):
+    def read(self, time: int | slice = slice(None), rows: int | slice = slice(None), cols: int | slice = slice(None), max_bytes=128*1024**2):
         if self._closed: raise ValueError('Reader is closed')
         self.check()
         # Budget checked from indices before touching the mapped observations.
@@ -143,7 +152,8 @@ class CubeReader:
     def close(self):
         if self._closed: return
         self._closed = True
-        if self.format == 'zarr': self.arrays.store.close()
+        if self.format == 'zarr':
+            self._zarr_group.store.close()
         for value in self.arrays.values() if isinstance(self.arrays, dict) else ():
             mapping = getattr(value, '_mmap', None)
             if mapping is not None and not mapping.closed: mapping.close()

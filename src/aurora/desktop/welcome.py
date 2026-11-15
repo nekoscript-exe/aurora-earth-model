@@ -1,5 +1,7 @@
 """AURORA animated welcome experience."""
 
+from .i18n import tr
+
 import math
 import random
 
@@ -228,7 +230,7 @@ class WelcomePage(QWidget):
 
         layout.addWidget(EarthView(), 1)
 
-        title = QLabel("Discover a changing planet.")
+        title = QLabel(tr('Discover a changing planet.'))
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         title.setStyleSheet(
             "font-size:30px; font-weight:bold;"
@@ -236,8 +238,7 @@ class WelcomePage(QWidget):
         )
 
         subtitle = QLabel(
-            "Explore the past. Understand the present. "
-            "Model what comes next."
+            tr('Explore the past. Understand the present. Model what comes next.')
         )
 
         subtitle.setWordWrap(True)
@@ -271,7 +272,7 @@ class WelcomePage(QWidget):
 
         layout.addLayout(features)
 
-        button = QPushButton("Begin scientific investigation")
+        button = QPushButton(tr('Begin scientific investigation'))
         button.clicked.connect(launch)
 
         layout.addWidget(button)

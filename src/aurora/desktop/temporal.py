@@ -1,4 +1,6 @@
 """Monthly calendar/text fields and linked interval timeline."""
+
+from .i18n import tr
 import numpy as np
 from PySide6.QtCore import Qt, QDate, Signal
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QDateEdit, QSlider, QLabel, QPushButton
@@ -31,7 +33,7 @@ class TemporalSelector(QWidget):
             button = QPushButton(f'{years}y'); self.quick[years] = button
             button.clicked.connect(lambda _, y=years: self.apply_quick(y)); quick.addWidget(button)
         layout.addLayout(quick)
-        self.status = QLabel('Dataset unavailable'); self.status.setWordWrap(True); layout.addWidget(self.status)
+        self.status = QLabel(tr('Dataset unavailable')); self.status.setWordWrap(True); layout.addWidget(self.status)
         self.setEnabled(False)
 
     @staticmethod
@@ -43,7 +45,7 @@ class TemporalSelector(QWidget):
         self.dates = np.asarray(dates).astype('datetime64[M]')
         self.setEnabled(bool(len(self.dates)))
         if not len(self.dates):
-            self.status.setText('Dataset unavailable'); return
+            self.status.setText(tr('Dataset unavailable')); return
         for edit in (self.start, self.end):
             edit.blockSignals(True)
             edit.setDateRange(self.qdate(self.dates[0]), self.qdate(self.dates[-1]).addMonths(1).addDays(-1))
@@ -75,9 +77,11 @@ class TemporalSelector(QWidget):
             self.status.setText(str(exc)); self.changed.emit()
 
     def update_sliders(self, *_):
+        if not len(self.dates):
+            return
         if self.low.value() > self.high.value():
             other = self.high if self.sender() is self.low else self.low
-            other.blockSignals(True); other.setValue(self.sender().value()); other.blockSignals(False)
+            other.blockSignals(True); other.setValue(self.low.value() if other is self.high else self.high.value()); other.blockSignals(False)
         self.set_interval(str(self.dates[self.low.value()]), str(self.dates[self.high.value()]))
 
     def update_status(self):
@@ -90,12 +94,12 @@ class TemporalSelector(QWidget):
         self.set_interval(*quick_period(self.dates, years))
 
     def create_toggle(self):
-        button = QPushButton('Date interval')
+        button = QPushButton(tr('Date interval'))
         button.setCheckable(True)
         self.hide()
         button.toggled.connect(lambda enabled: self.setVisible(enabled))
         def refresh():
             try: start, end = self.interval(); button.setText(f'{start} — {end} · dates')
-            except ValueError: button.setText('Date interval')
+            except ValueError: button.setText(tr('Date interval'))
         self.changed.connect(refresh)
         return button

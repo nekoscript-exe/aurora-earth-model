@@ -16,6 +16,7 @@ os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
 os.environ.setdefault('MPLCONFIGDIR', '/tmp/aurora-validation-mpl')
 import numpy as np
 import rasterio
+from rasterio.crs import CRS
 from rasterio.features import geometry_mask
 from rasterio.warp import transform_geom
 from PySide6 import __version__ as qt_version
@@ -33,7 +34,7 @@ def validate(output):
     values, dates, mask, meta, grid = load_observations(directory, 'ndvi')
     package = ROOT/'data/incoming/queretaro'
     declared = json.loads((package/'grid.json').read_text())
-    assert grid.crs == rasterio.crs.CRS.from_user_input(declared['crs'])
+    assert grid.crs == CRS.from_user_input(declared['crs'])
     np.testing.assert_array_equal(list(grid.affine)[:6], declared['transform'][:6])
     region = json.loads((package/'region.geojson').read_text())
     polygons = [transform_geom('EPSG:4326', grid.crs, f['geometry']) for f in region['features']]
@@ -62,7 +63,7 @@ def validate(output):
                                                  (height/2-yy-.5)/scale, *center)
         p, r, c = grid.mapping(lon, lat, visible)
         reference = np.full(width*height, -1); reference[p] = r*grid.width+c
-        p, r, c = grid.orthographic_mapping(width, height, *center, zoom)
+        p, r, c = grid.orthographic_mapping(width, height, center[0], center[1], zoom)
         actual = np.full(width*height, -1); actual[p] = r*grid.width+c
         np.testing.assert_array_equal(actual, reference)
         camera_checks.append({'center': center, 'zoom': zoom, 'mapped_pixels': len(p),

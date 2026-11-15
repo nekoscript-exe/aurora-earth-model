@@ -1,5 +1,7 @@
 """AURORA — Historical satellite playback."""
 
+from .i18n import tr
+
 import numpy as np
 from .temporal import TemporalSelector
 from aurora.temporal import select_interval
@@ -13,10 +15,8 @@ from PySide6.QtWidgets import (
 )
 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qtagg import (
-    FigureCanvasQTAgg,
-    NavigationToolbar2QT
-)
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt import NavigationToolbar2QT
 
 
 class TimeMachine(QWidget):
@@ -37,7 +37,7 @@ class TimeMachine(QWidget):
 
         layout = QVBoxLayout(self)
 
-        title = QLabel("Earth Time Machine")
+        title = QLabel(tr('Earth Time Machine'))
         title.setStyleSheet(
             "font-size:27px;font-weight:bold;"
             "color:#69d9bd;"
@@ -55,12 +55,12 @@ class TimeMachine(QWidget):
         self.registry = populate_regions(self.region, root)
 
         self.variable = QComboBox()
-        self.variable.addItem("Vegetation — NDVI", "ndvi")
-        self.variable.addItem("Temperature — LST", "lst")
+        self.variable.addItem(tr('Vegetation — NDVI'), "ndvi")
+        self.variable.addItem(tr('Temperature — LST'), "lst")
 
         populate_variables(self.variable, self.registry, self.region.currentData(), preserve=False)
 
-        load = QPushButton("Load satellite imagery")
+        load = QPushButton(tr('Load satellite imagery'))
         load.clicked.connect(lambda _: self.load_dataset(asynchronous=True))
 
         controls.addWidget(self.region)
@@ -69,7 +69,7 @@ class TimeMachine(QWidget):
 
         layout.addLayout(controls)
         self.read_progress = QProgressBar(); self.read_progress.setRange(0, 0); self.read_progress.hide()
-        self.cancel_read_button = QPushButton('Cancel loading'); self.cancel_read_button.setEnabled(False)
+        self.cancel_read_button = QPushButton(tr('Cancel loading')); self.cancel_read_button.setEnabled(False)
         self.cancel_read_button.clicked.connect(self.cancel_read)
         layout.addWidget(self.read_progress); layout.addWidget(self.cancel_read_button)
 
@@ -89,7 +89,7 @@ class TimeMachine(QWidget):
         layout.addWidget(self.period)
         self.period.changed.connect(self.apply_period)
 
-        self.date_label = QLabel("No dataset loaded")
+        self.date_label = QLabel(tr('No dataset loaded'))
 
         self.date_label.setStyleSheet(
             "font-size:25px;font-weight:bold;"
@@ -103,15 +103,15 @@ class TimeMachine(QWidget):
         )
 
         self.slider.setRange(0, 0)
-        self.slider.valueChanged.connect(self.render)
+        self.slider.valueChanged.connect(self.render_frame)
 
         layout.addWidget(self.slider)
 
         playback = QHBoxLayout()
 
-        self.previous = QPushButton("Previous")
-        self.play = QPushButton("Play")
-        self.next = QPushButton("Next")
+        self.previous = QPushButton(tr('Previous'))
+        self.play = QPushButton(tr('Play'))
+        self.next = QPushButton(tr('Next'))
 
         self.previous.clicked.connect(
             lambda: self.step(-1)
@@ -177,7 +177,7 @@ class TimeMachine(QWidget):
     def pause(self):
 
         self.timer.stop()
-        self.play.setText("Play")
+        self.play.setText(tr('Play'))
 
     def hideEvent(self, event):
 
@@ -222,7 +222,7 @@ class TimeMachine(QWidget):
             self.timer.start(
                 self.speed.currentData()
             )
-            self.play.setText("Pause")
+            self.play.setText(tr('Pause'))
 
     def apply_period(self):
         if self.values is None or not len(self.period.dates):
@@ -238,12 +238,11 @@ class TimeMachine(QWidget):
 
     def step(self, amount):
 
-        if self.values is None or self.reader_jobs.busy('frame'):
+        if self.values is None or self.dates is None or self.reader_jobs.busy('frame'):
             return
 
-        index = (
-            self.slider.value() + amount
-        ) % len(self.dates)
+        first, last = self.slider.minimum(), self.slider.maximum()
+        index = first + (self.slider.value() - first + amount) % (last - first + 1)
 
         self.slider.setValue(index)
 
@@ -320,7 +319,7 @@ class TimeMachine(QWidget):
 
             self.period.set_dates(self.dates)
             self.set_controls(True)
-            self.render(0)
+            self.render_frame(0)
 
             self.toolbar.update()
 
@@ -335,12 +334,12 @@ class TimeMachine(QWidget):
         if kind == 'dataset': self.attach_series(value)
         else: self.apply_frame(*value)
 
-    def render(self, index):
+    def render_frame(self, index):
 
         if self.values is None:
             return
 
-        if self.values.reader.format == 'zarr' or self.region_mask.size > 262144:
+        if self.values.reader.format == 'zarr' or self.values.mask.size > 262144:
             series = self.values
             self.set_read_busy(True)
             self.reader_jobs.start('frame', lambda check: (index, series[index]))
@@ -348,6 +347,10 @@ class TimeMachine(QWidget):
         self.apply_frame(index, self.values[index])
 
     def apply_frame(self, index, frame):
+        if self.values is None or self.dates is None:
+            return
+        if not 0 <= index < len(self.dates):
+            return
         self.image.set_data(frame)
 
         date = str(self.dates[index])

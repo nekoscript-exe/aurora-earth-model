@@ -1,5 +1,8 @@
 """AURORA regional time series engine."""
 
+from typing import cast
+from aurora.scientific_types import LinearRegressionResult
+
 import argparse
 import csv
 import json
@@ -84,7 +87,7 @@ def main():
 
         if np.ptp(values) > 0:
 
-            fit = linregress(years, values)
+            fit = cast(LinearRegressionResult, linregress(years, values))
 
             critical = t.ppf(
                 0.975, len(years) - 2

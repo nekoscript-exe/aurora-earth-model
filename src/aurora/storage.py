@@ -6,6 +6,18 @@ from aurora.catalog import CubeReader
 from aurora.jobs import Job, atomic_json
 
 
+def _require_zarr_array(group, name):
+    import zarr
+
+    array = group[name]
+
+    if not isinstance(array, zarr.Array):
+        raise TypeError(f'Expected Zarr array: {name}')
+
+    return array
+
+
+
 def to_zarr(source, output, chunks=(12, 128, 128, 1), progress=None, check=lambda: None):
     import zarr
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
@@ -28,11 +40,11 @@ def to_zarr(source, output, chunks=(12, 128, 128, 1), progress=None, check=lambd
                 check()
                 index = (slice(t, t+chunks[0]), slice(y, y+chunks[1]), slice(x, x+chunks[2]), slice(None))
                 # Copy raw values AND validity exactly, including finite NoData.
-                group['X'][index] = reader.arrays['X'][index]
-                group['valid'][index] = reader.arrays['valid'][index]
+                _require_zarr_array(group, 'X')[index] = reader.arrays['X'][index]
+                _require_zarr_array(group, 'valid')[index] = reader.arrays['valid'][index]
                 if t == 0:
                     spatial = index[1:3]
-                    group['region_mask'][spatial] = reader.arrays['region_mask'][spatial]
+                    _require_zarr_array(group, 'region_mask')[spatial] = reader.arrays['region_mask'][spatial]
                 reader.release_pages()
                 done += 1
                 if progress: progress(done, total, 'convert-zarr')

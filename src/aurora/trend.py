@@ -116,7 +116,7 @@ def sen_trend(values, years, min_years=15):
             slopes[i] = stats.theilslopes(
                 series[valid],
                 t[valid]
-            ).slope
+            )[0]
 
     return slopes.reshape(height, width)
 

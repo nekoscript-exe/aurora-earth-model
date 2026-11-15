@@ -1,0 +1,97 @@
+{
+  "scope": "Files touched during this repair; may also contain preserved prior local edits",
+  "files": [
+    {
+      "path": "pyrightconfig.json",
+      "sha256": "223a7a3e85f08540d704f0eb6dfd1995e595f285ecc64b6390c72e74e21c2eec"
+    },
+    {
+      "path": "scripts/evaluate_hac.py",
+      "sha256": "c5231a9fd5dd33c568ce14d3ac5757d46a7321c4aa1384291f9b40fefdd4a97a"
+    },
+    {
+      "path": "scripts/validate_aurora5.py",
+      "sha256": "c840cfc459028c67eadcbcf9a6e9b76b808ddbf9fcd397dd5a019cb87fb5f60c"
+    },
+    {
+      "path": "scripts/validate_global_engine.py",
+      "sha256": "46d14bde65a6d70edd2ec781abe1f07d719a0eab9a97a9649534bffabb65e9ee"
+    },
+    {
+      "path": "scripts/validate_planetary.py",
+      "sha256": "db422539f92bc0b5d8adf60b4636439192dc7467601c90dc13faeed1685401df"
+    },
+    {
+      "path": "src/aurora/block_engine.py",
+      "sha256": "bb8097dffb9aff711221d0957c34efa1deb06221b206e60eaa606c1ac6fddfe0"
+    },
+    {
+      "path": "src/aurora/block_multivariate.py",
+      "sha256": "5cea307aea06570bdd9d8aab0a97f0eb7abc492d169ad779e5d378c176006e3e"
+    },
+    {
+      "path": "src/aurora/geospatial.py",
+      "sha256": "e21314fb212dc8a85445e6dada0fad0561921e244000ca0e86ae8bbb4b1676a3"
+    },
+    {
+      "path": "src/aurora/trend.py",
+      "sha256": "927efbb623a2fec36dadf59e106ea08e1331c8662461c389f6722afe8e5d5ebe"
+    },
+    {
+      "path": "src/aurora/models/convlstm.py",
+      "sha256": "9d01a0e9e14bdeb96fc713bad0316a3cd486ed4fd2ffd079914672cefee8fd1a"
+    },
+    {
+      "path": "src/aurora/desktop/ai_lab.py",
+      "sha256": "4026e659d37c2783f789bbd269adb08918580d94b665fbdd96bd39110c5755a5"
+    },
+    {
+      "path": "src/aurora/desktop/window.py",
+      "sha256": "7682f85cd2fdbb3b0ebac4b36a8e0852a65297d9568b9be64a8a260e9321a16a"
+    },
+    {
+      "path": "src/aurora/desktop/globe.py",
+      "sha256": "c301fdbae7dab235f6d6298ddbbb5cd3ab35adfced2045df939c5ab4ba0e4ed1"
+    },
+    {
+      "path": "src/aurora/desktop/time_machine.py",
+      "sha256": "4bcf581231fe07c8b1d8521b98f56f68f3233131ec4ac9b3657d6a7f39cf5b25"
+    },
+    {
+      "path": "src/aurora/desktop/temporal.py",
+      "sha256": "a468babaabf2f63ef5534d6e04528f54e942d46846d6b37cee3b9f1bc2e7233d"
+    },
+    {
+      "path": "src/aurora/desktop/global_results.py",
+      "sha256": "da22b2cbf5ab26751b919c4a7a5f9cdcd411fe40d15f924f2871d65a28dc8f02"
+    },
+    {
+      "path": "src/aurora/desktop/tasks.py",
+      "sha256": "bb16ea7322d0e3bc0818e5e7da96c8407b39115e055e6c7dbb0235279ae4928d"
+    },
+    {
+      "path": "tests/test_forecasting_multivariable.py",
+      "sha256": "9d6a8c0fd0ab7eb83b6d3a19af03caddcbe8dd2fc369e0b8887f487ec95fdbaa"
+    },
+    {
+      "path": "tests/test_geospatial.py",
+      "sha256": "13343af1732d21581dd17eed34448ab4748a544ef1afc066b9861e084d6c5af4"
+    },
+    {
+      "path": "tests/test_global_async.py",
+      "sha256": "3ebaa09ada807e5fa6028fdab0c5f4548153755cf116f1e7c112fabdb4743659"
+    },
+    {
+      "path": "tests/test_multivariate.py",
+      "sha256": "be72c9013651c4c962f8271855ea4cac6deaf874878d3c295b5c4804b56739a3"
+    },
+    {
+      "path": "tests/test_planetary_explorer.py",
+      "sha256": "a25c2701d0ba0611985a50e3fab117a65fb7c1df2cb9771fd43fb423f46ac573"
+    },
+    {
+      "path": "docs/desktop-repair-report.md",
+      "sha256": "9d2a920c29c71e661f0ccd6e35586916b48310e5895ce488b7fa95ec5dfed7c7"
+    }
+  ]
+}

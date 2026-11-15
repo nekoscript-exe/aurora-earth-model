@@ -1,0 +1,107 @@
+/home/azael/Proyectos/aurora-earth-model/scripts/evaluate_hac.py
+  /home/azael/Proyectos/aurora-earth-model/scripts/evaluate_hac.py:82:7 - error: Argument of type "ndarray[tuple[int, int], dtype[Any]]" cannot be assigned to parameter "allow_pickle" of type "bool" in function "savez_compressed"
+    "ndarray[tuple[int, int], dtype[Any]]" is not assignable to "bool" (reportArgumentType)
+/home/azael/Proyectos/aurora-earth-model/scripts/validate_aurora5.py
+  /home/azael/Proyectos/aurora-earth-model/scripts/validate_aurora5.py:33:37 - error: "frame" is possibly unbound (reportPossiblyUnboundVariable)
+/home/azael/Proyectos/aurora-earth-model/scripts/validate_global_engine.py
+  /home/azael/Proyectos/aurora-earth-model/scripts/validate_global_engine.py:165:24 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/scripts/validate_global_engine.py:166:24 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/scripts/validate_global_engine.py:170:24 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/scripts/validate_global_engine.py:173:56 - error: "relative_to" is not a known attribute of "None" (reportOptionalMemberAccess)
+  /home/azael/Proyectos/aurora-earth-model/scripts/validate_global_engine.py:173:111 - error: "relative_to" is not a known attribute of "None" (reportOptionalMemberAccess)
+/home/azael/Proyectos/aurora-earth-model/scripts/validate_planetary.py
+  /home/azael/Proyectos/aurora-earth-model/scripts/validate_planetary.py:66:69 - error: Expected 5 positional arguments (reportCallIssue)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/block_engine.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/block_engine.py:93:37 - error: Expected 0 positional arguments (reportCallIssue)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/block_multivariate.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/block_multivariate.py:103:60 - error: Argument of type "NDArray[Unknown]" cannot be assigned to parameter "allow_pickle" of type "bool" in function "savez_compressed"
+    "ndarray[_AnyShape, dtype[Unknown]]" is not assignable to "bool" (reportArgumentType)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/ai_lab.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/ai_lab.py:194:13 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/ai_lab.py:269:13 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/ai_lab.py:324:13 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/ai_lab.py:348:21 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/global_results.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/global_results.py:207:50 - error: Expected 0 positional arguments (reportCallIssue)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:243:25 - error: "None" is not iterable
+    "__iter__" method not defined (reportGeneralTypeIssues)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:293:16 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:314:28 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:752:13 - error: Expression with type "tuple[list[Unknown], list[Unknown], list[Unknown]] | tuple[list[Unknown], list[Unknown]] | Unknown" cannot be assigned to target tuple
+    Type "tuple[list[Unknown], list[Unknown], list[Unknown]]" is incompatible with target tuple
+      Tuple size mismatch; expected 2 but received 3 (reportAssignmentType)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:777:61 - error: Cannot access attribute "size" for class "MethodType"
+    Attribute "size" is unknown (reportAttributeAccessIssue)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:788:47 - error: "summary" is not a known attribute of "None" (reportOptionalMemberAccess)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:791:28 - error: "spec" is not a known attribute of "None" (reportOptionalMemberAccess)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:791:62 - error: "spec" is not a known attribute of "None" (reportOptionalMemberAccess)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:798:16 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/globe.py:799:30 - error: Argument of type "Unknown | None" cannot be assigned to parameter "obj" of type "Sized" in function "len"
+    Type "Unknown | None" is not assignable to type "Sized"
+      "None" is incompatible with protocol "Sized"
+        "__len__" is not present (reportArgumentType)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/temporal.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/temporal.py:82:68 - error: Cannot access attribute "value" for class "QObject"
+    Attribute "value" is unknown (reportAttributeAccessIssue)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/time_machine.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/time_machine.py:246:17 - error: Argument of type "Unknown | None" cannot be assigned to parameter "obj" of type "Sized" in function "len"
+    Type "Unknown | None" is not assignable to type "Sized"
+      "None" is incompatible with protocol "Sized"
+        "__len__" is not present (reportArgumentType)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/time_machine.py:343:68 - error: "size" is not a known attribute of "None" (reportOptionalMemberAccess)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/time_machine.py:353:20 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/time_machine.py:357:24 - error: Argument of type "Unknown | None" cannot be assigned to parameter "obj" of type "Sized" in function "len"
+    Type "Unknown | None" is not assignable to type "Sized"
+      "None" is incompatible with protocol "Sized"
+        "__len__" is not present (reportArgumentType)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/time_machine.py:370:47 - error: "summary" is not a known attribute of "None" (reportOptionalMemberAccess)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/time_machine.py:377:43 - error: "stride" is not a known attribute of "None" (reportOptionalMemberAccess)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:552:20 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:560:19 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:562:13 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:563:32 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:612:56 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:639:17 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:650:17 - error: Expression with type "tuple[list[Unknown], list[Unknown], list[Unknown]] | tuple[list[Unknown], list[Unknown]] | Unknown" cannot be assigned to target tuple
+    Type "tuple[list[Unknown], list[Unknown], list[Unknown]]" is incompatible with target tuple
+      Tuple size mismatch; expected 2 but received 3 (reportAssignmentType)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:667:21 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:717:29 - error: "parent" is not a known attribute of "None" (reportOptionalMemberAccess)
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/desktop/window.py:736:13 - error: Operator "/" not supported for "None" (reportOptionalOperand)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/geospatial.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/geospatial.py:21:9 - error: Expression with type "tuple[list[Unknown], list[Unknown], list[Unknown]] | tuple[list[Unknown], list[Unknown]] | Unknown" cannot be assigned to target tuple
+    Type "tuple[list[Unknown], list[Unknown], list[Unknown]]" is incompatible with target tuple
+      Tuple size mismatch; expected 2 but received 3 (reportAssignmentType)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/models/convlstm.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/models/convlstm.py:83:28 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+/home/azael/Proyectos/aurora-earth-model/src/aurora/trend.py
+  /home/azael/Proyectos/aurora-earth-model/src/aurora/trend.py:119:15 - error: Cannot access attribute "slope" for class "_"
+    Attribute "slope" is unknown (reportAttributeAccessIssue)
+/home/azael/Proyectos/aurora-earth-model/tests/test_forecasting_multivariable.py
+  /home/azael/Proyectos/aurora-earth-model/tests/test_forecasting_multivariable.py:30:48 - error: "fill_" is not a known attribute of "None" (reportOptionalMemberAccess)
+/home/azael/Proyectos/aurora-earth-model/tests/test_geospatial.py
+  /home/azael/Proyectos/aurora-earth-model/tests/test_geospatial.py:104:56 - error: Expected 5 positional arguments (reportCallIssue)
+  /home/azael/Proyectos/aurora-earth-model/tests/test_geospatial.py:120:41 - error: Argument of type "NDArray[Any]" cannot be assigned to parameter "allow_pickle" of type "bool" in function "savez"
+    "ndarray[_AnyShape, dtype[Any]]" is not assignable to "bool" (reportArgumentType)
+/home/azael/Proyectos/aurora-earth-model/tests/test_global_async.py
+  /home/azael/Proyectos/aurora-earth-model/tests/test_global_async.py:81:24 - error: Cannot assign to attribute "error_callback" for class "ReaderJobs"
+    Expression of type "(object: Unknown, /) -> None" cannot be assigned to attribute "error_callback" of class "ReaderJobs"
+      Type "(object: Unknown, /) -> None" is not assignable to type "(message: Unknown) -> None"
+        Missing keyword parameter "message"
+          Position-only parameter mismatch; parameter "message" is not position-only
+          Position-only parameter mismatch; expected 1 but received 0 (reportAttributeAccessIssue)
+/home/azael/Proyectos/aurora-earth-model/tests/test_multivariate.py
+  /home/azael/Proyectos/aurora-earth-model/tests/test_multivariate.py:15:5 - error: No overloads for "assert_allclose" match the provided arguments (reportCallIssue)
+  /home/azael/Proyectos/aurora-earth-model/tests/test_multivariate.py:15:52 - error: Argument of type "_T_co@tuple" cannot be assigned to parameter "desired" of type "_NumericArrayLike" in function "assert_allclose"
+    Type "_T_co@tuple" is not assignable to type "_NumericArrayLike"
+      "object*" is incompatible with protocol "_SupportsArray[dtype[numpy.bool[builtins.bool] | number[Any, Any]]]"
+        "__array__" is not present
+      "object*" is incompatible with protocol "_NestedSequence[_SupportsArray[dtype[numpy.bool[builtins.bool] | number[Any, Any]]]]"
+        "__len__" is not present
+        "__getitem__" is not present
+        "__contains__" is not present
+        "__iter__" is not present
+    ... (reportArgumentType)
+51 errors, 0 warnings, 0 informations

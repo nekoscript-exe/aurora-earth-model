@@ -100,7 +100,7 @@ def run_pair_statistics(x_directory, y_directory, output, start=None, end=None, 
         stride = max(1, int(np.ceil(max(h, w)/512)))
         preview = {f'{mode}_0_{name}': np.array(array[::stride, ::stride]) for mode in ('raw', 'anomaly')
                    for name, array in maps[f'{mode}_0'].items()}
-        np.savez_compressed(Path(output)/'analysis.npz', **preview, dates=calendar.astype(str),
+        np.savez_compressed(Path(output)/'analysis.npz', allow_pickle=False, **preview, dates=calendar.astype(str),
             raw_x=sums['x'], raw_y=sums['y'], anomaly_x=sums['ax'], anomaly_y=sums['ay'],
             raw_ndvi=sums['x'], raw_lst=sums['y'], anomaly_ndvi=sums['ax'], anomaly_lst=sums['ay'],
             coverage=coverage, anomaly_coverage=ac)

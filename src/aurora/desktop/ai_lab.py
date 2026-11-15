@@ -1,5 +1,7 @@
 """AURORA Predictive Intelligence Laboratory."""
 
+from .i18n import tr
+
 import json
 from pathlib import Path
 
@@ -17,9 +19,8 @@ from PySide6.QtWidgets import (
 )
 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qtagg import (
-    FigureCanvasQTAgg, NavigationToolbar2QT
-)
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt import NavigationToolbar2QT
 
 
 class AILaboratory(QWidget):
@@ -34,7 +35,7 @@ class AILaboratory(QWidget):
 
         layout = QVBoxLayout(self)
 
-        title = QLabel("Predictive Intelligence")
+        title = QLabel(tr('Predictive Intelligence'))
         title.setStyleSheet(
             "font-size:26px;font-weight:bold;"
             "color:#b99de8;"
@@ -72,13 +73,13 @@ class AILaboratory(QWidget):
 
         controls.addWidget(self.view, 1)
 
-        refresh = QPushButton("Refresh results")
-        refresh.clicked.connect(self.render)
+        refresh = QPushButton(tr('Refresh results'))
+        refresh.clicked.connect(self.render_results)
 
         controls.addWidget(refresh)
-        self.export_button = QPushButton('Export'); self.export_button.clicked.connect(self.export_results)
+        self.export_button = QPushButton(tr('Export')); self.export_button.clicked.connect(self.export_results)
         controls.addWidget(self.export_button)
-        self.cancel_export_button = QPushButton('Cancel'); self.cancel_export_button.setEnabled(False)
+        self.cancel_export_button = QPushButton(tr('Cancel')); self.cancel_export_button.setEnabled(False)
         self.cancel_export_button.clicked.connect(self.cancel_export); controls.addWidget(self.cancel_export_button)
         self.export_process = QProcess(self); self.export_process.finished.connect(self.export_finished)
 
@@ -105,17 +106,17 @@ class AILaboratory(QWidget):
         layout.addWidget(self.details)
 
         self.region.currentIndexChanged.connect(self.models_region_changed)
-        self.variable.currentIndexChanged.connect(self.render)
-        self.view.currentIndexChanged.connect(self.render)
+        self.variable.currentIndexChanged.connect(self.render_results)
+        self.view.currentIndexChanged.connect(self.render_results)
 
         self.refresh_catalog()
-        self.render()
+        self.render_results()
 
     def read_json(self, path):
 
         return json.loads(path.read_text())
 
-    def style(self, ax):
+    def style_plot(self, ax):
 
         ax.set_facecolor("#080e17")
         ax.tick_params(colors="#bacbd8")
@@ -128,7 +129,7 @@ class AILaboratory(QWidget):
 
         ax.grid(alpha=0.12)
 
-    def render(self, *_):
+    def render_results(self, *_):
 
         variable = self.variable.currentData()
         self.unit = "°C" if variable == "lst" else "NDVI"
@@ -181,13 +182,16 @@ class AILaboratory(QWidget):
 
             self.details.setText(str(exc))
 
-        self.style(ax)
+        self.style_plot(ax)
 
         self.figure.tight_layout()
         self.canvas.draw()
         self.toolbar.update()
 
     def draw_benchmark(self, ax, mode):
+
+        if self.directory is None:
+            raise ValueError("No evaluated model selected")
 
         data = self.read_json(
             self.directory / "final_benchmark.json"
@@ -264,6 +268,9 @@ class AILaboratory(QWidget):
 
     def draw_training(self, ax):
 
+        if self.directory is None:
+            raise ValueError("No evaluated model selected")
+
         data = self.read_json(
             self.directory / "convlstm/metrics.json"
         )
@@ -319,6 +326,9 @@ class AILaboratory(QWidget):
 
     def draw_importance(self, ax):
 
+        if self.directory is None:
+            raise ValueError("No evaluated model selected")
+
         data = self.read_json(
             self.directory / "xgboost/metrics.json"
         )
@@ -343,6 +353,9 @@ class AILaboratory(QWidget):
         )
 
     def read_prediction(self, engine):
+
+        if self.directory is None:
+            raise ValueError("No evaluated model selected")
 
         directory = self.directory / "forecast" / engine
 
@@ -477,7 +490,7 @@ class AILaboratory(QWidget):
         self.models_region_changed()
         index = self.variable.findData(current_variable)
         if index >= 0: self.variable.setCurrentIndex(index)
-        self.render()
+        self.render_results()
 
     def models_region_changed(self, *_):
         current = self.variable.currentData(); self.variable.blockSignals(True); self.variable.clear()
@@ -485,7 +498,7 @@ class AILaboratory(QWidget):
             for variable in sorted({model['variable'] for model in self.model_registry.models if model['region'] == self.region.currentData()}, key=lambda v: (v != 'ndvi', v != 'lst', v)):
                 self.variable.addItem(variable.upper(), variable)
         index = self.variable.findData(current); self.variable.setCurrentIndex(index if index >= 0 else 0)
-        self.variable.blockSignals(False); self.render()
+        self.variable.blockSignals(False); self.render_results()
 
     def models_error(self, error):
         self.info.setText('Model discovery failed: '+error)

@@ -12,8 +12,8 @@ def test_paired_missing_and_rank_ties():
     maps = correlation_maps(a, b, minimum=3)
     valid = np.isfinite(a[:, 0]) & np.isfinite(b[:, 0])
     assert maps['pairs'][0] == 4
-    np.testing.assert_allclose(maps['pearson'][0], pearsonr(a[valid, 0], b[valid, 0]).statistic)
-    np.testing.assert_allclose(maps['spearman'][0], spearmanr(a[valid, 0], b[valid, 0]).statistic)
+    np.testing.assert_allclose(maps['pearson'][0], np.asarray(pearsonr(a[valid, 0], b[valid, 0])[0], dtype=float))
+    np.testing.assert_allclose(maps['spearman'][0], np.asarray(spearmanr(a[valid, 0], b[valid, 0])[0], dtype=float))
     assert np.isnan(paired_correlation(np.ones((40, 1)), np.ones((40, 1)))[0]).all()
 
 

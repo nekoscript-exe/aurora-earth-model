@@ -1,5 +1,7 @@
 """AURORA — Interactive planetary observation explorer."""
 
+from .i18n import tr
+
 import json
 import time
 import numpy as np
@@ -238,6 +240,8 @@ class Planet(QWidget):
 
     def build_mapping(self):
 
+        if self.render_size is None:
+            raise ValueError("Render dimensions have not been initialized")
         width, height = self.render_size
         return self.raster_grid.orthographic_mapping(
             width, height, self.lon, self.lat, self.zoom)
@@ -288,7 +292,10 @@ class Planet(QWidget):
             ((lon+180)*10).astype(int), 0, 3599
         )
 
-        land = self.land[rows, cols] == 1
+        land_mask = self.land
+        if land_mask is None:
+            raise RuntimeError("Land rasterization did not produce an array")
+        land = land_mask[rows, cols] == 1
         # Refine the cartographic basemap at regional zoom without changing
         # scientific sampling. The global fallback safely handles the date line.
         if self.zoom >= 3 and visible.any():
@@ -309,6 +316,8 @@ class Planet(QWidget):
                                       fill=0, dtype="uint8")
                     rr = np.clip(((north-lat)/(north-south)*height).astype(int), 0, height-1)
                     cc = np.clip(((lon-west)/(east-west)*width).astype(int), 0, width-1)
+                    if local is None:
+                        raise RuntimeError("Regional land rasterization did not produce an array")
                     land = local[rr, cc] == 1
                 else:
                     land[:] = False
@@ -464,14 +473,14 @@ class PlanetaryExplorer(QWidget):
 
         layout = QVBoxLayout(self)
 
-        title = QLabel("Planetary Explorer")
+        title = QLabel(tr('Planetary Explorer'))
         title.setStyleSheet(
             "font-size:27px;font-weight:bold;color:#69d9bd;"
         )
         title_row = QHBoxLayout()
         title_row.addWidget(title)
         title_row.addStretch()
-        self.setup_toggle = QPushButton("Investigation setup")
+        self.setup_toggle = QPushButton(tr('Investigation setup'))
         self.setup_toggle.setCheckable(True)
         self.setup_toggle.setToolTip("Toggle the scientific investigation controls")
         self.setup_toggle.hide()  # Enabled by the host window.
@@ -532,7 +541,7 @@ class PlanetaryExplorer(QWidget):
 
         populate_variables(self.variable, self.registry, self.region.currentData(), preserve=False)
 
-        load = QPushButton("Load observations")
+        load = QPushButton(tr('Load observations'))
         load.clicked.connect(lambda _: self.load_dataset(asynchronous=True))
 
         for widget in [self.region, self.variable, load]:
@@ -540,7 +549,7 @@ class PlanetaryExplorer(QWidget):
 
         layout.addLayout(controls)
         self.read_progress = QProgressBar(); self.read_progress.setRange(0, 0); self.read_progress.hide()
-        self.cancel_read_button = QPushButton('Cancel loading'); self.cancel_read_button.setEnabled(False)
+        self.cancel_read_button = QPushButton(tr('Cancel loading')); self.cancel_read_button.setEnabled(False)
         self.cancel_read_button.clicked.connect(self.cancel_read)
         layout.addWidget(self.read_progress); layout.addWidget(self.cancel_read_button)
 
@@ -563,7 +572,7 @@ class PlanetaryExplorer(QWidget):
         self.opacity.setValue(90)
         self.opacity.valueChanged.connect(self.set_opacity)
 
-        for widget in [rotation, grid, light, QLabel("Opacity")]:
+        for widget in [rotation, grid, light, QLabel(tr('Opacity'))]:
             settings.addWidget(widget)
 
         self.opacity_value = QLabel("90%")
@@ -577,7 +586,7 @@ class PlanetaryExplorer(QWidget):
         markers = QCheckBox("Geographic markers")
         markers.setChecked(True)
         markers.toggled.connect(lambda enabled: self.set_overlay("markers", enabled))
-        clear_pins = QPushButton("Clear user pins")
+        clear_pins = QPushButton(tr('Clear user pins'))
         clear_pins.clicked.connect(self.clear_pins)
         for widget in (borders, markers, clear_pins):
             settings.addWidget(widget)
@@ -591,7 +600,7 @@ class PlanetaryExplorer(QWidget):
         layout.addWidget(self.period)
         self.period.changed.connect(self.apply_period)
 
-        self.date = QLabel("No observations loaded")
+        self.date = QLabel(tr('No observations loaded'))
         self.date.setWordWrap(True)
         self.date.setStyleSheet(
             "font-size:20px;font-weight:bold;color:#69d9bd;"
@@ -609,7 +618,7 @@ class PlanetaryExplorer(QWidget):
         previous.setToolTip("Previous observation")
         previous.clicked.connect(lambda: self.step(-1))
 
-        self.play = QPushButton("Play")
+        self.play = QPushButton(tr('Play'))
         self.play.clicked.connect(self.toggle_play)
 
         self.following = following = QPushButton("›")
@@ -681,7 +690,7 @@ class PlanetaryExplorer(QWidget):
 
     def pause(self):
         self.timer.stop()
-        self.play.setText("Play")
+        self.play.setText(tr('Play'))
 
     def hideEvent(self, event):
         self.pause()
@@ -703,8 +712,8 @@ class PlanetaryExplorer(QWidget):
         self.legend.update()
         self.planet.clear_layer()
         self.slider.setRange(0, 0)
-        self.date.setText("No observations loaded")
-        self.details.setText("Load the selected dataset.")
+        self.date.setText(tr('No observations loaded'))
+        self.details.setText(tr('Load the selected dataset.'))
 
     def load_dataset(self, asynchronous=False):
 
@@ -747,7 +756,8 @@ class PlanetaryExplorer(QWidget):
             grid = self.values.reader.grid
             x, y = grid.affine @ (grid.width/2, grid.height/2)
             from rasterio.warp import transform
-            lon, lat = transform(grid.crs, "EPSG:4326", [x], [y])
+            projected = transform(grid.crs, "EPSG:4326", [x], [y])
+            lon, lat = projected[0], projected[1]
             self.planet.focus(lon[0], lat[0], min(48, max(1, 8000/max(grid.width, grid.height))))
 
             self.period.set_dates(self.dates)
@@ -772,7 +782,7 @@ class PlanetaryExplorer(QWidget):
         if self.values is None:
             return
 
-        if self.values.reader.format == 'zarr' or self.mask.size > 262144:
+        if self.values.reader.format == 'zarr' or self.values.mask.size > 262144:
             series = self.values
             self.set_read_busy(True)
             self.reader_jobs.start('frame', lambda check: (index, series[index]))
@@ -780,6 +790,10 @@ class PlanetaryExplorer(QWidget):
         self.apply_frame(index, self.values[index])
 
     def apply_frame(self, index, frame):
+        if self.values is None or self.dates is None:
+            return
+        if not 0 <= index < len(self.dates):
+            return
         self.planet.set_frame(frame)
 
         finite = frame[np.isfinite(frame)]
@@ -832,7 +846,7 @@ class PlanetaryExplorer(QWidget):
             self.pause()
         else:
             self.timer.start(self.speed.currentData())
-            self.play.setText("Pause")
+            self.play.setText(tr('Pause'))
 
     def set_read_busy(self, busy):
         self.read_progress.setVisible(busy); self.cancel_read_button.setEnabled(busy)

@@ -1,0 +1,63 @@
+{
+  "ndvi": {
+    "exact_raw_zarr_roundtrip": true,
+    "max_absolute_map_differences": {
+      "trend_slope": 0.0,
+      "trend_p": 0.0,
+      "trend_change": 0.0,
+      "trend_n": 0.0,
+      "trend_sen": 0.0,
+      "trend_hac_p": 0.0,
+      "trend_q": 2.220446049250313e-16,
+      "trend_hac_q": 2.220446049250313e-16
+    },
+    "area_weighted_monthly_series_matches": true,
+    "area_method": "ellipsoidal geodesic polygon with 8 segments per cell edge (approximation)",
+    "seconds": 11.364353377997759,
+    "block_size": 21,
+    "configured_working_memory_mib": 32.0,
+    "estimated_block_working_mib": 15.58465576171875
+  },
+  "lst": {
+    "exact_raw_zarr_roundtrip": true,
+    "max_absolute_map_differences": {
+      "trend_slope": 0.0,
+      "trend_p": 0.0,
+      "trend_change": 0.0,
+      "trend_n": 0.0,
+      "trend_sen": 0.0,
+      "trend_hac_p": 0.0,
+      "trend_q": 2.220446049250313e-16,
+      "trend_hac_q": 2.220446049250313e-16
+    },
+    "area_weighted_monthly_series_matches": true,
+    "area_method": "ellipsoidal geodesic polygon with 8 segments per cell edge (approximation)",
+    "seconds": 14.284244287999172,
+    "block_size": 21,
+    "configured_working_memory_mib": 32.0,
+    "estimated_block_working_mib": 15.58465576171875
+  },
+  "paired": {
+    "max_coefficient_difference": 0.0,
+    "global_fdr_matches_full_family": true,
+    "paired_observations": 3149060,
+    "seconds": 18.2158969269949,
+    "block_size": 19,
+    "area_weighted": true
+  },
+  "preserved_historical_files": 81,
+  "four_format_exports": [
+    "outputs/global_exports/queretaro_ndvi_scientific",
+    "outputs/global_exports/queretaro_lst_predictive"
+  ],
+  "available_models": [
+    {
+      "region": "queretaro",
+      "variable": "lst"
+    },
+    {
+      "region": "queretaro",
+      "variable": "ndvi"
+    }
+  ]
+}

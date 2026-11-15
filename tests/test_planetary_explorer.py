@@ -161,3 +161,21 @@ def test_shared_monthly_interval_calendars_and_timeline(explorer):
     assert w.slider.value() == 1
     w.period.low.setValue(2)
     assert w.period.interval() == ('2001-03', '2001-03')
+
+
+def test_late_frame_after_reset_does_not_restore_observations(explorer):
+    explorer.load_dataset()
+    explorer.reset()
+    label = explorer.date.text()
+    explorer.apply_frame(0, np.full((2, 2), .9))
+    assert explorer.planet.frame is None
+    assert explorer.values is None and explorer.dates is None
+    assert explorer.date.text() == label
+
+
+def test_out_of_range_frame_does_not_replace_current_observation(explorer):
+    explorer.load_dataset()
+    original = explorer.planet.frame.copy()
+    for index in (-1, 3):
+        explorer.apply_frame(index, np.full((2, 2), .9))
+        np.testing.assert_array_equal(explorer.planet.frame, original)

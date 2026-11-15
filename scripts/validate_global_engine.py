@@ -160,11 +160,13 @@ def validate_ui(output):
     # An actual GUI-created short job must publish a result and preserve responsiveness.
     window.variable.setCurrentIndex(window.variable.findData('lst')); window.temporal.set_interval('2025-01', '2025-12')
     window.run(); job_directory = window.output_path
+    assert job_directory is not None, window.status.text()
     from PySide6.QtCore import QProcess
     wait_ui(app, lambda: window.process.state() == QProcess.ProcessState.NotRunning, 60)
     assert json.loads((job_directory/'manifest.json').read_text())['status'] == 'complete'
     assert json.loads((job_directory/'metrics.json').read_text())['eligibility']['eligible'] is False
     window.temporal.set_interval('2001-01', '2025-12'); window.run(); cancelled = window.output_path
+    assert cancelled is not None, window.status.text()
     window.cancel_operation()
     wait_ui(app, lambda: window.process.state() == QProcess.ProcessState.NotRunning, 60)
     assert json.loads((cancelled/'manifest.json').read_text())['status'] == 'cancelled'

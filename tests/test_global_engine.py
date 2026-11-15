@@ -14,6 +14,18 @@ from aurora.geospatial import RasterGrid
 from aurora.area import cell_areas
 
 
+def _require_zarr_array(group, name):
+    import zarr
+
+    array = group[name]
+
+    if not isinstance(array, zarr.Array):
+        raise TypeError(f'Expected Zarr array: {name}')
+
+    return array
+
+
+
 @pytest.fixture
 def mathematical_cube(tmp_path):
     directory = tmp_path/'synthetic_test'; directory.mkdir()
@@ -48,8 +60,8 @@ def test_missing_zarr_chunks_are_missing_not_zero(mathematical_cube, tmp_path):
     to_zarr(mathematical_cube, tmp_path/'zarr', chunks=(12, 4, 4, 1))
     group = zarr.open_group(str(tmp_path/'zarr/cube.zarr'), mode='a')
     # A genuinely absent chunk in a synthetic store, not a simulated observation.
-    group['X'][0:12, :4, :4, :] = np.nan
-    group['valid'][0:12, :4, :4, :] = False
+    _require_zarr_array(group, 'X')[0:12, :4, :4, :] = np.nan
+    _require_zarr_array(group, 'valid')[0:12, :4, :4, :] = False
     with CubeReader(tmp_path/'zarr') as reader: assert np.isnan(reader.read(slice(0, 12), slice(0, 4), slice(0, 4))).all()
     group.create_array('region_mask', shape=(6, 7), chunks=(4, 4), dtype=bool, fill_value=True, overwrite=True)
     with pytest.raises(ValueError, match='regional mask chunks'): CubeReader(tmp_path/'zarr')

@@ -80,5 +80,7 @@ class AuroraConvLSTM(nn.Module):
                 state1[0], state2
             )
 
+        if state2 is None:
+            raise ValueError("ConvLSTM requires at least one input time step")
         output = self.head(state2[0])
         return torch.tanh(output) if self.output_activation == "tanh" else output

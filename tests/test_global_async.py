@@ -83,5 +83,58 @@ def test_hidden_time_machine_handles_zero_sized_figure(tmp_path):
     deadline = time.monotonic()+3
     while widget.reader_jobs.busy('dataset') and time.monotonic() < deadline: app.processEvents(); time.sleep(.005)
     assert widget.values is not None and hasattr(widget, 'image') and not errors
+    # Restricted playback must wrap inside the selected months, not clamp at the end.
+    widget.period.set_interval('2001-02', '2001-03')
+    widget.slider.setValue(widget.slider.maximum())
+    widget.step(1)
+    assert widget.slider.value() == widget.slider.minimum() == 1
+    widget.step(-1)
+    assert widget.slider.value() == widget.slider.maximum() == 2
+    old_frame = np.full((2, 2), .9)
+    widget.apply_frame(999, old_frame)
+    assert not errors
+    widget.reset_dataset()
+    label = widget.date_label.text()
+    widget.apply_frame(0, old_frame)
+    assert widget.values is None and widget.dates is None and widget.date_label.text() == label
     assert widget.figure.get_figheight() > 0
     shiboken6.delete(widget); app.processEvents()
+
+
+def test_temporal_slider_crossings_and_empty_state():
+    import numpy as np
+    from aurora.desktop.temporal import TemporalSelector
+    app = QApplication.instance() or QApplication([])
+    selector = TemporalSelector()
+    selector.update_sliders()  # No dataset selected yet.
+    selector.set_dates(np.arange('2001-01', '2002-01', dtype='datetime64[M]'))
+    selector.high.setValue(3)
+    selector.low.setValue(5)
+    assert selector.interval() == ('2001-06', '2001-06')
+    selector.high.setValue(2)
+    assert selector.interval() == ('2001-03', '2001-03')
+    selector.set_dates([])
+    selector.update_sliders()
+    assert not selector.isEnabled()
+    shiboken6.delete(selector)
+    app.processEvents()
+
+
+def test_cancelled_failure_does_not_reset_new_generation():
+    app = QApplication.instance() or QApplication([])
+    owner = QWidget(); results = []; errors = []
+    jobs = ReaderJobs(owner, lambda kind, value: results.append(value), errors.append)
+    import threading
+    started = threading.Event()
+    def old_failure(check):
+        started.set()
+        time.sleep(.05)
+        raise ValueError('obsolete failure')
+    jobs.start('dataset', old_failure)
+    assert started.wait(1), 'Worker did not start'
+    jobs.start('dataset', lambda check: 'current')
+    deadline = time.monotonic()+.3
+    while time.monotonic() < deadline:
+        app.processEvents(); time.sleep(.005)
+    assert results == ['current'] and not errors and not jobs.busy('dataset')
+    shiboken6.delete(owner)

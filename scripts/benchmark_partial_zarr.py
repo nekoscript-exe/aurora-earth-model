@@ -10,6 +10,18 @@ import zarr
 from aurora.catalog import CubeReader
 from aurora.jobs import atomic_json
 
+
+def _require_zarr_array(group, name):
+    import zarr
+
+    array = group[name]
+
+    if not isinstance(array, zarr.Array):
+        raise TypeError(f'Expected Zarr array: {name}')
+
+    return array
+
+
 if __name__ == '__main__':
     root = Path(__file__).resolve().parents[1]
     directory = root/'outputs/global_test_fixtures/EXPLICIT_SYNTHETIC_LOGICAL_161GB'
@@ -21,9 +33,9 @@ if __name__ == '__main__':
     group.create_array('region_mask', shape=shape[1:3], chunks=(32, 32), dtype=bool, fill_value=False)
     group.create_array('dates', data=np.arange('2001-01', '2026-01', dtype='datetime64[M]').astype(str))
     group.create_array('channels', data=np.array(['TEST']))
-    group['X'][:12, 4096:4128, 8192:8224, :] = np.full((12, 32, 32, 1), .25, dtype='float32')
-    group['valid'][:12, 4096:4128, 8192:8224, :] = True
-    group['region_mask'][4096:4128, 8192:8224] = True
+    _require_zarr_array(group, 'X')[:12, 4096:4128, 8192:8224, :] = np.full((12, 32, 32, 1), .25, dtype='float32')
+    _require_zarr_array(group, 'valid')[:12, 4096:4128, 8192:8224, :] = True
+    _require_zarr_array(group, 'region_mask')[4096:4128, 8192:8224] = True
     metadata = {'dataset': 'synthetic_test', 'source': 'EXPLICIT MATHEMATICAL STORAGE FIXTURE, NOT SATELLITE OBSERVATIONS',
         'variable': 'test', 'unit': '1', 'variable_definition': {'minimum': -1, 'maximum': 1},
         'shape': list(shape), 'storage': {'format': 'zarr', 'path': 'cube.zarr'},

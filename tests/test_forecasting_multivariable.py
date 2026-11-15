@@ -27,7 +27,7 @@ def test_linear_lst_and_legacy_tanh_heads():
     legacy, lst = AuroraConvLSTM(), AuroraConvLSTM('linear')
     with torch.no_grad():
         for m in (legacy, lst):
-            m.head.weight.zero_(); m.head.bias.fill_(5)
+            m.head.weight.zero_(); assert m.head.bias is not None; m.head.bias.fill_(5)
         X = torch.zeros(1, 12, 2, 4, 4)
         assert legacy(X).max() <= 1
         assert lst(X).min() == 5
@@ -39,3 +39,9 @@ def test_future_inference_no_target_needed():
     result = neural_predictions(model, X, [12], torch.device('cpu'), patch_size=4)
     assert result.shape == (1, 3, 4, 1)
     assert np.isfinite(result).all()
+
+
+def test_empty_convlstm_sequence_is_rejected_explicitly():
+    model = AuroraConvLSTM('linear')
+    with pytest.raises(ValueError, match='at least one input time step'):
+        model(torch.zeros(1, 0, 2, 4, 4))

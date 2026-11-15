@@ -78,7 +78,7 @@ output = ROOT / "outputs/synthetic"
 output.mkdir(parents=True, exist_ok=True)
 
 np.savez_compressed(
-    output / "trend_hac.npz",
+    output / "trend_hac.npz", allow_pickle=False,
     **hac,
     q_ols=q_ols,
     q_hac=q_hac,

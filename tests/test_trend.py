@@ -1,5 +1,8 @@
 """Automated tests for AURORA Statistical Engine."""
 
+from typing import cast
+from aurora.scientific_types import LinearRegressionResult
+
 import sys
 from pathlib import Path
 
@@ -85,7 +88,7 @@ def test_against_scipy():
         + rng.normal(0, 0.02, 25)
     )
 
-    reference = linregress(years, values)
+    reference = cast(LinearRegressionResult, linregress(years, values))
     result = ols_trend(values[:, None, None], years)
 
     np.testing.assert_allclose(

@@ -1,74 +1,126 @@
-"""Cooperative read jobs; all widget callbacks are dispatched on the Qt UI thread."""
+"""Thread-safe background reads with main-thread Qt delivery."""
+
+import queue
 import threading
 import uuid
-from PySide6.QtCore import QObject, QRunnable, QThreadPool, Signal, Slot
+from collections.abc import Callable
+
+from PySide6.QtCore import QObject, QRunnable, QThreadPool, QTimer, Slot
+
 from aurora.jobs import Cancelled
 
 
-class Signals(QObject):
-    result = Signal(object)
-    error = Signal(object)
-
-
 class ReadTask(QRunnable):
-    def __init__(self, kind, function):
-        super().__init__(); self.kind = kind; self.token = uuid.uuid4().hex
-        self.function = function; self.signals = Signals(); self.event = threading.Event()
+    def __init__(self, kind, function, mailbox):
+        super().__init__()
 
-    def cancel(self, *_): self.event.set()
+        self.kind = kind
+        self.token = uuid.uuid4().hex
+        self.function = function
+        self.mailbox = mailbox
+        self.event = threading.Event()
+
+    def cancel(self, *_):
+        self.event.set()
+
     def check(self):
-        if self.event.is_set(): raise Cancelled('Read cancelled')
+        if self.event.is_set():
+            raise Cancelled("Read cancelled")
 
     def run(self):
         try:
-            self.check(); value = self.function(self.check); self.check()
-            self.deliver(self.signals.result, (self.kind, self.token, value))
+            self.check()
+            value = self.function(self.check)
+            self.check()
+
+            self.mailbox.put(
+                ("result", self.kind, self.token, value)
+            )
+
         except Cancelled:
             return
-        except Exception as exc:
-            self.deliver(self.signals.error, (self.kind, self.token, str(exc)))
 
-    def deliver(self, signal, payload):
-        if self.event.is_set(): return
-        try: signal.emit(payload)
-        except RuntimeError as exc:
-            # The application may have destroyed its QObject signal sources at shutdown.
-            if 'deleted' not in str(exc): raise
+        except Exception as exc:
+            if not self.event.is_set():
+                self.mailbox.put(
+                    ("error", self.kind, self.token, str(exc))
+                )
 
 
 class ReaderJobs(QObject):
     def __init__(self, owner, result, error):
-        super().__init__(owner); self.current = {}; self.result_callback = result; self.error_callback = error
+        super().__init__(owner)
+
+        self.current = {}
+        self.mailbox = queue.Queue()
+        self.result_callback = result
+        self.error_callback: Callable[[str], None] = error
+
+        self.timer = QTimer(self)
+        self.timer.setInterval(15)
+        self.timer.timeout.connect(self.drain)
+
         owner.destroyed.connect(self.cancel_all)
 
-    def busy(self, kind): return kind in self.current
+    def busy(self, kind):
+        return kind in self.current
 
     def start(self, kind, function):
-        if kind in self.current: self.current[kind].cancel()
-        task = ReadTask(kind, function); self.current[kind] = task
-        task.signals.result.connect(self.accept)
-        task.signals.error.connect(self.reject)
+        if kind in self.current:
+            self.current[kind].cancel()
+
+        task = ReadTask(kind, function, self.mailbox)
+        self.current[kind] = task
+
         pool = QThreadPool.globalInstance()
-        if pool.maxThreadCount() > 4: pool.setMaxThreadCount(4)
+
+        if pool.maxThreadCount() > 4:
+            pool.setMaxThreadCount(4)
+
+        self.timer.start()
         pool.start(task)
+
+    @Slot()
+    def drain(self):
+        while True:
+            try:
+                status, kind, token, value = self.mailbox.get_nowait()
+            except queue.Empty:
+                break
+
+            if status == "result":
+                self.accept((kind, token, value))
+            else:
+                self.reject((kind, token, value))
+
+        if not self.current:
+            self.timer.stop()
 
     @Slot(object)
     def accept(self, payload):
         kind, token, value = payload
         task = self.current.get(kind)
+
         if task is not None and task.token == token:
             del self.current[kind]
-            try: self.result_callback(kind, value)
-            except Exception as exc: self.error_callback(str(exc))
+
+            try:
+                self.result_callback(kind, value)
+            except Exception as exc:
+                self.error_callback(str(exc))
 
     @Slot(object)
     def reject(self, payload):
         kind, token, error = payload
         task = self.current.get(kind)
+
         if task is not None and task.token == token:
-            del self.current[kind]; self.error_callback(error)
+            del self.current[kind]
+            self.error_callback(error)
 
     @Slot()
     def cancel_all(self, *_):
-        for task in self.current.values(): task.cancel()
+        for task in self.current.values():
+            task.cancel()
+
         self.current.clear()

@@ -10,7 +10,10 @@ def cell_areas(grid, rows=slice(None), cols=slice(None), check=lambda: None, mas
         north = a.f+a.e*yy; south = north+a.e
         if np.max(np.abs(np.r_[north, south]), initial=0) > 90+1e-9 or abs(a.a) > 180:
             raise ValueError('Geographic cell latitude or longitude width invalid')
-        ellipsoid = crs.ellipsoid; radius = ellipsoid.semi_major_metre
+        ellipsoid = crs.ellipsoid
+        if ellipsoid is None:
+            raise ValueError('CRS has no reference ellipsoid')
+        radius = ellipsoid.semi_major_metre
         flattening = 1/ellipsoid.inverse_flattening if ellipsoid.inverse_flattening else 0
         e2 = flattening*(2-flattening); e = np.sqrt(e2)
         def primitive(lat):
@@ -25,8 +28,12 @@ def cell_areas(grid, rows=slice(None), cols=slice(None), check=lambda: None, mas
         return np.full((len(yy), len(xx)), abs(a.determinant)*np.prod(factors)), 'native equal-area projection determinant'
     # Dense projected/geographic cell edges are mapped to their geodetic CRS.
     geodetic = crs.geodetic_crs
+    if geodetic is None:
+        raise ValueError('CRS has no geodetic reference system')
     transformer = Transformer.from_crs(crs, geodetic, always_xy=True)
     geod = geodetic.get_geod()
+    if geod is None:
+        raise ValueError('Unable to initialize geodesic calculations')
     area = np.zeros((len(yy), len(xx)))
     t = np.arange(8)/8
     offsets = np.vstack([np.column_stack([t, t*0]), np.column_stack([t*0+1, t]),

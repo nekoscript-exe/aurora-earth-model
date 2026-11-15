@@ -101,7 +101,7 @@ def test_exact_gdal_mapping_matches_analytic_sampling(crs, affine, shape, center
                                             (h/2-yy-.5)/scale, *center)
     p, r, c = grid.mapping(lon, lat, visible)
     expected = np.full(w*h, -1); expected[p] = r*grid.width+c
-    p, r, c = grid.orthographic_mapping(w, h, *center, zoom)
+    p, r, c = grid.orthographic_mapping(w, h, center[0], center[1], zoom)
     actual = np.full(w*h, -1); actual[p] = r*grid.width+c
     np.testing.assert_array_equal(actual, expected)
 
@@ -117,7 +117,7 @@ def cube(tmp_path):
     def save(change=None, meta_change=None):
         content = dict(arrays); content.update(change or {})
         current_meta = dict(m); current_meta.update(meta_change or {})
-        np.savez(tmp_path/'cube.npz', **content)
+        np.savez(tmp_path/'cube.npz', allow_pickle=False, **content)
         (tmp_path/'cube_metadata.json').write_text(json.dumps(current_meta))
         return tmp_path
     return save

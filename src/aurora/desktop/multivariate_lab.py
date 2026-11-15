@@ -1,4 +1,6 @@
 """Paired observation laboratory; analysis runs outside the UI process."""
+
+from .i18n import tr
 import json
 import sys
 from pathlib import Path
@@ -8,7 +10,8 @@ from PySide6.QtCore import QProcess
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QComboBox, QProgressBar
 from aurora.jobs import ResultRegistry, fresh, request_cancel
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg, NavigationToolbar2QT
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt import NavigationToolbar2QT
 from .temporal import TemporalSelector
 from aurora.catalog import populate_regions
 
@@ -23,32 +26,32 @@ class MultivariateLaboratory(QWidget):
         self._progress_text = ""; self._error_log = ""
         self.process.errorOccurred.connect(lambda _: self.info.setText(self.process.errorString()))
         layout = QVBoxLayout(self)
-        title = QLabel('Multivariate Laboratory · NDVI × LST')
+        title = QLabel(tr('Multivariate Laboratory · NDVI × LST'))
         title.setStyleSheet('font-size:24px;font-weight:bold;color:#69d9bd;'); layout.addWidget(title)
         row = QHBoxLayout(); self.region = QComboBox(); self.registry = populate_regions(self.region, root, paired=True)
         self.x_variable = QComboBox(); self.y_variable = QComboBox()
         row.addWidget(self.x_variable); row.addWidget(self.y_variable)
         self.view = QComboBox(); self.view.addItems(['Overview', 'Pearson raw', 'Spearman anomaly', 'Lag profiles', 'Coverage sensitivity'])
-        self.run_button = QPushButton('Run paired analysis'); self.run_button.clicked.connect(self.run)
+        self.run_button = QPushButton(tr('Run paired analysis')); self.run_button.clicked.connect(self.run)
         for widget in (self.region, self.view, self.run_button): row.addWidget(widget)
-        self.setup_toggle = QPushButton('Investigation setup'); self.setup_toggle.setCheckable(True)
+        self.setup_toggle = QPushButton(tr('Investigation setup')); self.setup_toggle.setCheckable(True)
         self.setup_toggle.hide(); row.addWidget(self.setup_toggle)
         layout.addLayout(row)
         self.progress = QProgressBar(); layout.addWidget(self.progress)
-        self.cancel_button = QPushButton('Cancel paired analysis'); self.cancel_button.setEnabled(False)
+        self.cancel_button = QPushButton(tr('Cancel paired analysis')); self.cancel_button.setEnabled(False)
         self.cancel_button.clicked.connect(self.cancel_analysis); layout.addWidget(self.cancel_button)
         self.period = TemporalSelector()
         layout.addWidget(self.period.create_toggle()); layout.addWidget(self.period)
         self.figure = Figure(facecolor='#080e17'); self.canvas = FigureCanvasQTAgg(self.figure)
         layout.addWidget(NavigationToolbar2QT(self.canvas, self)); layout.addWidget(self.canvas, 1)
-        self.info = QLabel('Coincident observations only · Association does not establish causation.')
+        self.info = QLabel(tr('Coincident observations only · Association does not establish causation.'))
         self.info.setWordWrap(True); layout.addWidget(self.info)
-        self.view.currentIndexChanged.connect(self.render)
+        self.view.currentIndexChanged.connect(self.render_results)
         self.region.currentIndexChanged.connect(self.configure_region)
         self.x_variable.currentIndexChanged.connect(self.configure_pair)
         self.y_variable.currentIndexChanged.connect(self.configure_pair)
         self.configure_region()
-        self.render()
+        self.render_results()
 
     def refresh_catalog(self):
         old = self.region.currentData(); self.region.blockSignals(True)
@@ -84,7 +87,7 @@ class MultivariateLaboratory(QWidget):
             self.run_button.setEnabled(record.variable != other.variable)
         except FileNotFoundError:
             self.period.set_dates([]); self.output = None; self.run_button.setEnabled(False)
-        self.render()
+        self.render_results()
 
     def run(self):
         try: start, end = self.period.interval()
@@ -101,19 +104,19 @@ class MultivariateLaboratory(QWidget):
         self.run_button.setEnabled(True); self.cancel_button.setEnabled(False)
         self.region.setEnabled(True); self.x_variable.setEnabled(True); self.y_variable.setEnabled(True)
         if code:
-            self.info.setText('Cancelled' if code == 2 else (self._error_log+bytes(self.process.readAllStandardOutput()).decode(errors='replace'))[-1500:]); return
-        self.render()
+            self.info.setText('Cancelled' if code == 2 else (self._error_log+bytes(self.process.readAllStandardOutput().data()).decode(errors='replace'))[-1500:]); return
+        self.render_results()
 
-    def style(self, ax):
+    def style_plot(self, ax):
         ax.set_facecolor('#080e17'); ax.tick_params(colors='#bacbd8', labelsize=9)
         ax.title.set_color('#e7edf5'); ax.xaxis.label.set_color('#bacbd8'); ax.yaxis.label.set_color('#bacbd8')
         for spine in ax.spines.values(): spine.set_color('#405568')
 
-    def render(self, *_):
+    def render_results(self, *_):
         self.figure.clear()
         if self.output is None or not (self.output/'report.json').exists():
             ax = self.figure.add_subplot(111); ax.text(.5, .5, 'Run an analysis with aligned real datasets', ha='center', color='#8da5ba')
-            self.style(ax); self.canvas.draw(); return
+            self.style_plot(ax); self.canvas.draw(); return
         report = json.loads((self.output/'report.json').read_text())
         manifest = self.output/'manifest.json'
         if manifest.exists() and (json.loads(manifest.read_text()).get('status') != 'complete' or not fresh(json.loads(manifest.read_text()))):
@@ -133,7 +136,7 @@ class MultivariateLaboratory(QWidget):
                     sensitivity = report['coverage_sensitivity']; keys = list(sensitivity)
                     ax.plot(list(map(float, keys)), [sensitivity[k]['anomaly']['pearson'] for k in keys], 'o-', color='#69d9bd')
                     ax.set_xlabel('Minimum paired regional coverage'); ax.set_ylabel('Anomaly Pearson r'); ax.set_title('Coverage sensitivity')
-        for ax in self.figure.axes: self.style(ax)
+        for ax in self.figure.axes: self.style_plot(ax)
         self.info.setText(f"{report['period'][0]} — {report['period'][1]} · {report['paired_observations']:,} coincident observations · {report.get('variables', ['ndvi', 'lst'])}\n"
                           f"Climatology: {report['climatology']['period']} · ≥8 pairs per calendar month. Positive lag: X(t) vs Y(t+lag).\n"
                           +('Native blocks, area weighting and global FDR. ' if manifest.exists() else 'Historical legacy result: source freshness not independently established. ')+
@@ -169,7 +172,7 @@ class MultivariateLaboratory(QWidget):
             self.info.setText('Cancellation requested; partial products will not be published.')
 
     def read_progress(self):
-        self._progress_text += bytes(self.process.readAllStandardOutput()).decode(errors='replace')
+        self._progress_text += bytes(self.process.readAllStandardOutput().data()).decode(errors='replace')
         lines = self._progress_text.split('\n'); self._progress_text = lines.pop()
         for line in lines:
             try:

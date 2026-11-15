@@ -18,7 +18,8 @@ from aurora.variables import get_variable
 def _project_points(crs, lon, lat):
     """Keep valid points when GDAL rejects another point's projection domain."""
     try:
-        x, y = transform('EPSG:4326', crs, lon, lat)
+        projected = transform('EPSG:4326', crs, lon, lat)
+        x, y = projected[0], projected[1]
         return np.asarray(x), np.asarray(y)
     except Exception as exc:
         # Rasterio exposes GDAL domain failures as private exception classes.
