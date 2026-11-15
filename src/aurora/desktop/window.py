@@ -10,6 +10,9 @@ import pandas as pd
 import rasterio
 
 from PySide6.QtCore import QProcess
+from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtWidgets import QFrame
+from .theme import STYLE as AURORA_STYLE
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout,
     QHBoxLayout, QLabel, QComboBox,
@@ -85,7 +88,11 @@ class AuroraWindow(QMainWindow):
             "AURORA — Earth System Intelligence"
         )
         self.resize(1280, 820)
-        self.setStyleSheet(STYLE)
+        self.setStyleSheet(AURORA_STYLE)
+        self.setMinimumSize(1000, 680)
+        self.setWindowIcon(
+            QIcon(str(ROOT / "assets/desktop/logo.svg"))
+        )
 
         self.process = QProcess(self)
         self.output_path = None
@@ -129,10 +136,59 @@ class AuroraWindow(QMainWindow):
             "Scientific Investigation Environment"
         )
 
-        layout.addWidget(title)
-        layout.addWidget(subtitle)
+        title.setObjectName("brand")
+        subtitle.setObjectName("subtitle")
 
-        controls = QHBoxLayout()
+        header = QHBoxLayout()
+
+        logo = QLabel()
+        logo.setPixmap(
+            QPixmap(str(ROOT / "assets/desktop/logo.svg"))
+            .scaled(66, 66)
+        )
+
+        branding = QVBoxLayout()
+        branding.addWidget(title)
+        branding.addWidget(subtitle)
+
+        header.addWidget(logo)
+        header.addLayout(branding)
+        header.addStretch()
+
+        edition = QLabel("RESEARCH EDITION")
+        edition.setStyleSheet(
+            "color: #69d9bd; font-size: 11px;"
+        )
+        header.addWidget(edition)
+
+        layout.addLayout(header)
+
+        workspace = QHBoxLayout()
+        workspace.setSpacing(18)
+
+        sidebar = QFrame()
+        sidebar.setObjectName("sidebar")
+        sidebar.setFixedWidth(290)
+
+        panel = QVBoxLayout(sidebar)
+        panel.setContentsMargins(18, 20, 18, 20)
+        panel.setSpacing(16)
+
+        heading = QLabel("Investigation setup")
+        heading.setStyleSheet(
+            "font-size: 19px; font-weight: bold;"
+        )
+        panel.addWidget(heading)
+
+        description = QLabel(
+            "Configure an environmental investigation "
+            "using historical satellite observations."
+        )
+        description.setWordWrap(True)
+        description.setStyleSheet("color: #8da5ba;")
+        panel.addWidget(description)
+
+        controls = QVBoxLayout()
 
         self.variable = QComboBox()
         self.variable.addItem(
@@ -165,22 +221,36 @@ class AuroraWindow(QMainWindow):
             column.addWidget(widget)
             controls.addLayout(column)
 
-        layout.addLayout(controls)
+        panel.addLayout(controls)
 
         self.status = QLabel()
-        layout.addWidget(self.status)
+        self.status.setWordWrap(True)
+        panel.addWidget(self.status)
 
         self.run_button = QPushButton(
             "Run scientific investigation"
         )
         self.run_button.clicked.connect(self.run)
-        layout.addWidget(self.run_button)
+        panel.addWidget(self.run_button)
 
         self.progress = QProgressBar()
         self.progress.setRange(0, 1)
         self.progress.setValue(0)
         self.progress.setTextVisible(False)
-        layout.addWidget(self.progress)
+        panel.addWidget(self.progress)
+
+        panel.addStretch()
+
+        source = QLabel(
+            "SATELLITE OBSERVATIONS\n"
+            "NASA Terra / MODIS\n\n"
+            "Statistical trend detection\n"
+            "Geospatial analysis"
+        )
+        source.setStyleSheet(
+            "color: #8da5ba; font-size: 12px;"
+        )
+        panel.addWidget(source)
 
         self.tabs = QTabWidget()
 
@@ -217,7 +287,10 @@ class AuroraWindow(QMainWindow):
             self.log, "Execution log"
         )
 
-        layout.addWidget(self.tabs, 1)
+        workspace.addWidget(sidebar)
+        workspace.addWidget(self.tabs, 1)
+
+        layout.addLayout(workspace, 1)
 
         footer = QLabel(
             "AURORA v4.0  |  "
