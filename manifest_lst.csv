@@ -1,0 +1,4 @@
+date,path,variable,unit,crs,scale_m,valid_fraction,source_id
+2001-01-01,data/raw_lst/lst_day_2001_01.tif,lst_day,C,EPSG:32614,1000,0.9732,MODIS/061/MOD11A2
+2001-02-01,data/raw_lst/lst_day_2001_02.tif,lst_day,C,EPSG:32614,1000,0.9714,MODIS/061/MOD11A2
+2001-03-01,data/raw_lst/lst_day_2001_03.tif,lst_day,C,EPSG:32614,1000,0.9758,MODIS/061/MOD11A2

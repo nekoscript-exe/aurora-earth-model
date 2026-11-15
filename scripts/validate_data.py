@@ -130,23 +130,9 @@ def main():
         w.writeheader()
         w.writerows(report)
 
-    import datetime as dt
-    import matplotlib.dates as mdates
-    pts = [(dt.date.fromisoformat(x["date"]), x["valid_fraction"])
-           for x in report if x["valid_fraction"] != ""]
-    if pts:
-        fig, ax = plt.subplots(figsize=(10, 3.5))
-        ax.plot([d for d, _ in pts], [v for _, v in pts],
-                marker="o", markersize=3, linewidth=0.8)
-        ax.axhline(MIN_COVERAGE, color="red", ls="--", label="umbral 70%")
-        ax.set_ylim(0, 1.05)
-        ax.set_ylabel("fracción válida")
-        ax.set_title("Cobertura mensual dentro de la región")
-        ax.xaxis.set_major_locator(mdates.YearLocator(2))
-        ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
-        ax.legend()
-        fig.tight_layout()
-        fig.savefig(a.out_fig, dpi=100)
+    from plot_coverage import plot_coverage
+    if any(r['valid_fraction'] != '' for r in report):
+        plot_coverage(a.out_csv, a.out_fig)
 
 
 if __name__ == "__main__":
