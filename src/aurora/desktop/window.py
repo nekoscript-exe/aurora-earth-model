@@ -13,6 +13,8 @@ from PySide6.QtCore import QProcess
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QFrame
 from .theme import STYLE as AURORA_STYLE
+from .report import render_report
+from PySide6.QtWidgets import QTextBrowser
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout,
     QHBoxLayout, QLabel, QComboBox,
@@ -267,7 +269,7 @@ class AuroraWindow(QMainWindow):
 
         self.tabs = QTabWidget()
 
-        self.summary = QPlainTextEdit()
+        self.summary = QTextBrowser()
         self.summary.setReadOnly(True)
 
         self.log = QPlainTextEdit()
@@ -397,7 +399,9 @@ class AuroraWindow(QMainWindow):
         )
 
         self.log.clear()
-        self.summary.clear()
+        self.summary.setHtml(
+            "<h2>Scientific investigation running...</h2>"
+        )
         self.map_figure.clear()
         self.series_figure.clear()
         self.map_canvas.draw()
@@ -507,8 +511,8 @@ class AuroraWindow(QMainWindow):
             "regional_analysis": regional
         }
 
-        self.summary.setPlainText(
-            json.dumps(result, indent=4)
+        self.summary.setHtml(
+            render_report(metrics, regional)
         )
 
         self.current_history = history
