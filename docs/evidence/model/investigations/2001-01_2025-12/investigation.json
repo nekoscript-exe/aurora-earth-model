@@ -1,0 +1,15 @@
+{
+    "region": "queretaro",
+    "variable": "NDVI",
+    "description": "Satellite-derived vegetation greenness.",
+    "source": "MODIS/061/MOD13Q1",
+    "unit": "1",
+    "period": [
+        "2001-01",
+        "2025-12"
+    ],
+    "dataset_available": true,
+    "prediction_supported": true,
+    "results": "/home/azael/Proyectos/aurora-earth-model/outputs/investigations/queretaro_ndvi_2001-01_2025-12",
+    "status": "completed"
+}

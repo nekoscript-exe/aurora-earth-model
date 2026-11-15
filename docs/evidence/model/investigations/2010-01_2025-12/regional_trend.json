@@ -1,0 +1,30 @@
+{
+    "variable": "NDVI",
+    "months": 192,
+    "eligible_years": 16,
+    "minimum_monthly_coverage": 0.7,
+    "minimum_valid_months": 9,
+    "minimum_valid_years": 15,
+    "trend": {
+        "slope_per_year": -0.0005623502814860071,
+        "slope_per_decade": -0.005623502814860071,
+        "estimated_change": -0.008435254222290106,
+        "p_value": 0.6765502140241801,
+        "r_squared": 0.012799557002844464,
+        "confidence_interval_95": [
+            -0.003393300326342044,
+            0.002268599763370029
+        ],
+        "years_used": 16,
+        "period": [
+            2010,
+            2025
+        ]
+    },
+    "limitations": [
+        "Unweighted regional pixel means.",
+        "Observed spatial composition may vary over time.",
+        "OLS p-values and intervals are nominal.",
+        "Temporal dependence may inflate significance."
+    ]
+}
