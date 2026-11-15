@@ -1,4 +1,4 @@
-# Reporte de validación independiente — Sofía
+# Reporte de validación independiente — Sophia
 
 Datos: paquete real MODIS/061/MOD13Q1 de Ian (`package_manifest.json`, commit `bcb20fa0…`).
 Script: `scripts/validate_independent.py` (reproducible). Evidencia: `docs/evidence/science/validation_outputs.csv`.
