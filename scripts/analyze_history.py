@@ -69,11 +69,20 @@ def main():
         valid = data["valid"]
         dates = data["dates"]
         region = data["region_mask"]
+        channels = data["channels"]
 
     with open(args.metadata) as f:
         metadata = json.load(f)
 
     grid = metadata["grid"]
+
+    variable = str(channels[0])
+
+    if metadata.get("variable", variable) != variable:
+        raise ValueError("Cube variable does not match metadata")
+
+    unit = metadata.get("unit", "1")
+    slope_unit = metadata.get("slope_unit", f"{variable}/year")
 
     if not np.array_equal(valid, np.isfinite(X)):
         raise ValueError("Invalid cube mask")
@@ -153,6 +162,9 @@ def main():
 
     metrics = {
         "dataset": metadata["dataset"],
+        "variable": variable,
+        "unit": unit,
+        "slope_unit": slope_unit,
         "period": [str(dates[0]), str(dates[-1])],
         "months": len(dates),
         "regional_pixels": n_region,
@@ -194,7 +206,13 @@ def main():
         "alpha": 0.05,
         "hac_maxlags": 2,
         "hac_role": "sensitivity_analysis",
-        "slope_unit": "NDVI/year",
+        "variable": variable,
+        "unit": unit,
+        "slope_unit": slope_unit,
+        "significance_warning": (
+            "Temporal dependence may inflate false positives. "
+            "HAC is exploratory and does not guarantee calibration."
+        ),
         "commit": commit
     }
 
