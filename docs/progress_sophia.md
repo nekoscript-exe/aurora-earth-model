@@ -14,7 +14,6 @@
 **Bloqueos**
 - De momento no encontramos bloqueos
 
-**Commit:** [hash o mensaje]
 **Comandos usados:** `git clone ...`, `git switch feature/science-validation`, `python -m pip install ...`
 
 ### Nov 14, 2026; 10:03 PM
@@ -43,5 +42,10 @@
 - Faltan las métricas de predicción de Ian (revisión del split sin fuga).
 - Por confirmar con Ian: si el repo será público y si acepta `validate_independent.py` en mi carpeta.
 
-**Commits:** [pega aquí los hashes]
+**Commits:** 5fbda23 (HEAD -> feature/science-validation, origin/feature/science-validation) docs: complete submission checklist
+7397cb7 docs: update validation report
+26a23b4 docs: update validation report
+1a14738 docs: report, validation, demo script and evidence
+a27198c feat: figure script, independent validation and tests
+
 **Comandos:** `python -m pytest tests/test_figures.py -q`, `python scripts/plot_results.py ...`, `python scripts/validate_independent.py ...`
