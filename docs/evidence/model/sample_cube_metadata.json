@@ -29,6 +29,8 @@
         {
             "date": "2001-01-01",
             "coverage": 0.9960906958561376,
+            "declared_coverage": 0.9961,
+            "coverage_difference": 9.30414386235423e-06,
             "valid_pixels": 11466,
             "excluded_outside": 365,
             "review_required": false
@@ -36,6 +38,8 @@
         {
             "date": "2001-02-01",
             "coverage": 0.9984362783424551,
+            "declared_coverage": 0.9984,
+            "coverage_difference": 3.6278342455120516e-05,
             "valid_pixels": 11493,
             "excluded_outside": 366,
             "review_required": false
@@ -43,6 +47,8 @@
         {
             "date": "2001-03-01",
             "coverage": 0.9960038224307184,
+            "declared_coverage": 0.996,
+            "coverage_difference": 3.822430718392056e-06,
             "valid_pixels": 11465,
             "excluded_outside": 366,
             "review_required": false

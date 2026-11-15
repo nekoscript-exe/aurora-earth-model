@@ -150,9 +150,25 @@ def build_cube(package, region_path, output, start, end):
                 mask.sum() / inside.sum()
             )
 
+            declared = float(row["valid_fraction"])
+
+            if not np.isfinite(declared) or not 0 <= declared <= 1:
+                raise ValueError(f"Invalid declared coverage: {date}")
+
+            difference = abs(coverage - declared)
+
+            if difference > 0.001:
+                raise ValueError(
+                    f"Coverage mismatch: {date} | "
+                    f"Declared={declared:.6f} | "
+                    f"Calculated={coverage:.6f}"
+                )
+
             report.append({
                 "date": date,
                 "coverage": coverage,
+                "declared_coverage": declared,
+                "coverage_difference": difference,
                 "valid_pixels": int(mask.sum()),
                 "excluded_outside": int(
                     (observed & ~inside).sum()
