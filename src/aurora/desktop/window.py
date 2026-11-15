@@ -8,12 +8,15 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import rasterio
+from rasterio.warp import transform
 
 from PySide6.QtCore import QProcess
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QFrame
 from .theme import STYLE as AURORA_STYLE
 from .report import render_report
+from .welcome import WelcomePage
+from .pixel_lab import open_pixel_lab
 from PySide6.QtWidgets import QTextBrowser
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout,
@@ -23,6 +26,7 @@ from PySide6.QtWidgets import (
 )
 
 from matplotlib.figure import Figure
+from matplotlib.ticker import MaxNLocator, FuncFormatter
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.colors import (
     TwoSlopeNorm, ListedColormap, BoundaryNorm
@@ -269,6 +273,9 @@ class AuroraWindow(QMainWindow):
 
         self.tabs = QTabWidget()
 
+        self.welcome = WelcomePage(self.run_button.click)
+        self.tabs.addTab(self.welcome, "Home")
+
         self.summary = QTextBrowser()
         self.summary.setReadOnly(True)
 
@@ -306,6 +313,24 @@ class AuroraWindow(QMainWindow):
         map_layout.addWidget(self.layer_selector)
         map_layout.addWidget(self.map_toolbar)
         map_layout.addWidget(self.map_canvas, 1)
+
+        self.pixel_info = QLabel(
+            "Click to inspect a pixel. Double-click to explore its history."
+        )
+        self.pixel_info.setWordWrap(True)
+        self.pixel_info.setStyleSheet(
+            "background:#14202d;"
+            "color:#69d9bd;"
+            "padding:14px;border-radius:8px;"
+        )
+
+        map_layout.addWidget(self.pixel_info)
+
+        self.map_canvas.mpl_connect(
+            "button_press_event",
+            self.inspect_pixel
+        )
+
 
         self.layer_selector.currentIndexChanged.connect(
             self.refresh_map
@@ -532,6 +557,121 @@ class AuroraWindow(QMainWindow):
         for spine in ax.spines.values():
             spine.set_color("#405568")
 
+    def inspect_pixel(self, event):
+
+        if event.button != 1:
+            return
+
+        if not hasattr(self, "current_history"):
+            return
+
+        if self.process.state() != QProcess.ProcessState.NotRunning:
+            return
+
+        if self.map_toolbar.mode:
+            return
+
+        if not self.map_figure.axes:
+            return
+
+        if event.inaxes is not self.map_figure.axes[0]:
+            return
+
+        if event.xdata is None or event.ydata is None:
+            return
+
+        x, y = event.xdata, event.ydata
+        history = self.current_history
+
+        try:
+            with rasterio.open(
+                history / "trend_slope.tif"
+            ) as src:
+
+                row, col = src.index(x, y)
+
+                if not (
+                    0 <= row < src.height
+                    and 0 <= col < src.width
+                ):
+                    return
+
+                lon, lat = transform(
+                    src.crs, "EPSG:4326", [x], [y]
+                )
+
+            values = {}
+
+            for key, filename in [
+                ("OLS", "trend_slope.tif"),
+                ("Sen", "trend_sen.tif"),
+                ("p", "trend_p.tif"),
+                ("q", "trend_q.tif"),
+                ("change", "trend_change.tif"),
+                ("coverage", "coverage.tif"),
+                ("years", "trend_n.tif")
+            ]:
+
+                with rasterio.open(
+                    history / filename
+                ) as src:
+
+                    value = next(
+                        src.sample([(x, y)], masked=True)
+                    )[0]
+
+                    values[key] = (
+                        None if np.ma.is_masked(value)
+                        else float(value)
+                    )
+
+            if values["OLS"] is None:
+                self.pixel_info.setText(
+                    "No evaluated trend at this location."
+                )
+                return
+
+            def fmt(key, digits=6):
+                value = values[key]
+                return (
+                    "N/A" if value is None
+                    else f"{value:.{digits}f}"
+                )
+
+            coverage = values["coverage"]
+
+            coverage_text = (
+                "N/A" if coverage is None
+                else f"{coverage:.2%}"
+            )
+
+            unit = self.current_metrics["slope_unit"]
+
+            self.pixel_info.setText(
+                f"PIXEL [{row}, {col}]  |  "
+                f"Lat: {lat[0]:.5f}°  "
+                f"Lon: {lon[0]:.5f}°\n"
+                f"OLS: {fmt('OLS')} {unit}  |  "
+                f"Sen: {fmt('Sen')}  |  "
+                f"Change: {fmt('change')}\n"
+                f"p: {fmt('p')}  |  "
+                f"q: {fmt('q')}  |  "
+                f"Coverage: {coverage_text}  |  "
+                f"Valid years: {fmt('years', 0)}"
+            )
+
+            if event.dblclick:
+                open_pixel_lab(
+                    self,
+                    history.parent / "cube.npz",
+                    row, col, lat[0], lon[0]
+                )
+
+        except Exception as exc:
+            self.pixel_info.setText(
+                f"Pixel inspection failed: {exc}"
+            )
+
     def refresh_map(self, *_):
 
         if not hasattr(self, "current_history"):
@@ -647,6 +787,20 @@ class AuroraWindow(QMainWindow):
 
         ax.set_xlabel(f"Easting — {crs}")
         ax.set_ylabel("Northing")
+
+        ax.xaxis.set_major_locator(MaxNLocator(4))
+        ax.yaxis.set_major_locator(MaxNLocator(5))
+
+        formatter = FuncFormatter(
+            lambda value, _: f"{value / 1000:,.0f}"
+        )
+
+        ax.xaxis.set_major_formatter(formatter)
+        ax.yaxis.set_major_formatter(formatter)
+
+        ax.set_xlabel(f"Easting (km) — {crs}")
+        ax.set_ylabel("Northing (km)")
+
 
         colorbar = self.map_figure.colorbar(
             image, ax=ax,
