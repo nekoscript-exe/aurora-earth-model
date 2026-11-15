@@ -361,3 +361,303 @@ DOI del producto:
 Catálogo oficial de Google Earth Engine:
 
 https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13Q1
+
+Documentación técnica: MODIS LST (Land Surface Temperature)
+
+1. Información general del conjunto de datos
+
+Para el análisis de temperatura superficial terrestre se utilizará el producto MODIS LST, que permite obtener información sobre la temperatura de la superficie terrestre mediante observaciones satelitales.
+
+Colección: MODIS/061/MOD11A2
+
+Plataforma: MODIS Terra.
+
+Resolución espacial: 1000 metros (1 km).
+
+Resolución temporal: Composiciones de 8 días.
+
+Unidad original: Kelvin (K).
+
+Periodo de referencia: El catálogo presenta información desde el 18 de febrero de 2000 hasta el 8 de octubre de 2025 en su resumen. Sin embargo, el campo de disponibilidad indica información hasta el 1 de noviembre de 2026. Debido a esta diferencia, es necesario realizar una consulta directa para confirmar la última fecha disponible.
+
+2. Bandas utilizadas
+
+Se utilizarán dos bandas principales del producto:
+
+Banda
+
+Descripción
+
+Uso
+
+LST_Day_1km
+
+Temperatura superficial terrestre durante el día.
+
+Obtener la temperatura superficial.
+
+QC_Day
+
+Indicador de calidad de la temperatura diurna.
+
+Identificar la confiabilidad de los datos.
+
+2.1 Banda LST_Day_1km
+
+Esta banda contiene los valores de temperatura superficial terrestre durante el día.
+
+Características:
+
+Resolución espacial: 1000 metros.
+
+Unidad original: Kelvin.
+
+Factor de escala: 0.02.
+
+Resolución temporal: 8 días.
+
+Para convertir los valores originales a grados Celsius se debe aplicar la siguiente fórmula:
+
+Temperatura (°C) = DN × 0.02 − 273.15
+
+Donde:
+
+DN: valor digital almacenado en el píxel.
+
+0.02: factor de escala del producto.
+
+273.15: constante utilizada para convertir de Kelvin a Celsius.
+
+La conversión debe realizarse antes de generar los resultados finales de temperatura en grados Celsius.
+
+3. Control de calidad: QC_Day
+
+La banda QC_Day permite identificar la calidad de los datos de temperatura superficial.
+
+Se utilizan principalmente los bits 0-1 para determinar el estado general de calidad del píxel.
+
+Valor
+
+Significado
+
+Interpretación
+
+0
+
+Pixel bueno
+
+Dato de buena calidad.
+
+1
+
+Pixel dudoso
+
+Dato con calidad cuestionable.
+
+2
+
+No producido por nubes
+
+No existe un valor válido debido a condiciones de nubosidad.
+
+3
+
+No producido por otras causas
+
+El dato no pudo generarse por otros motivos.
+
+3.1 Bits 6-7: Error estimado de LST
+
+Los bits 6-7 contienen información sobre el error estimado de la temperatura superficial.
+
+Valor
+
+Error estimado
+
+0
+
+≤ 1 K
+
+1
+
+≤ 2 K
+
+2
+
+≤ 3 K
+
+3
+
+> 3 K
+
+Esta información permite establecer criterios adicionales para seleccionar los píxeles que se utilizarán en el análisis.
+
+3.2 Propuesta de filtrado
+
+Se propone utilizar inicialmente los píxeles cuyo valor de los bits 0-1 sea igual a 0, debido a que representan datos de buena calidad.
+
+También se debe evaluar si es conveniente limitar el error estimado de LST mediante los bits 6-7.
+
+El criterio definitivo de filtrado deberá establecerse junto con Ian, considerando el equilibrio entre calidad de los datos y cantidad de información disponible.
+
+4. Composición temporal de los datos
+
+El producto MOD11A2 proporciona composiciones de 8 días.
+
+Es importante considerar que:
+
+La composición representa un promedio de 8 días.
+
+El promedio no realiza un filtrado previo utilizando los bits de control de calidad.
+
+El valor de calidad asignado a cada píxel se determina mediante la mayoría de los valores diarios de calidad.
+
+Por lo tanto, no se debe asumir que todos los valores de temperatura incluidos en una composición cumplen automáticamente con el criterio de calidad seleccionado.
+
+4.1 Asignación mensual
+
+Para generar información mensual será necesario definir cómo se asignarán las composiciones de 8 días a cada mes.
+
+Existen dos aspectos que deben verificarse:
+
+Cómo se distribuyen las composiciones de 8 días cuando coinciden con el final de un mes o de un año.
+
+Si cada composición se asignará al mes correspondiente a su fecha de inicio o si se considerará el traslape de días entre diferentes meses.
+
+Esta decisión debe establecerse junto con Ian para mantener un criterio uniforme en el procesamiento temporal.
+
+No se debe asumir una metodología de asignación mensual hasta verificar el comportamiento de las fechas del producto.
+
+5. Disponibilidad temporal
+
+El catálogo presenta una diferencia entre sus campos de disponibilidad:
+
+Campo del catálogo
+
+Fecha
+
+Fecha inicial indicada en el resumen
+
+2000-02-18
+
+Fecha final indicada en el resumen
+
+2025-10-08
+
+Fecha final indicada en disponibilidad
+
+2026-11-01
+
+Debido a esta discrepancia, es necesario realizar una consulta directa al conjunto de datos para identificar la última composición disponible.
+
+Consideración: No se debe garantizar un periodo de análisis de 2001 a 2025 sin comprobar previamente la disponibilidad real de las imágenes.
+
+También se debe verificar si existen datos para enero de 2001, debido a que el producto comienza a registrar información en febrero de 2000.
+
+6. Procesamiento espacial
+
+La banda LST_Day_1km ya cuenta con una resolución espacial de 1000 metros.
+
+Por lo tanto, no es necesario realizar una agregación espacial adicional para obtener una resolución de 1 km.
+
+El procesamiento espacial únicamente requiere:
+
+Reproyectar los datos a la rejilla espacial de referencia del proyecto.
+
+Mantener la resolución espacial de 1000 metros.
+
+Asegurar que las imágenes coincidan espacialmente con las demás variables utilizadas en el análisis.
+
+Esto permitirá integrar los datos de temperatura superficial con otros productos satelitales y variables ambientales.
+
+7. Consideraciones para el procesamiento
+
+Antes de generar los resultados definitivos se deben resolver los siguientes puntos:
+
+Aspecto
+
+Estado
+
+Acción requerida
+
+Selección del producto
+
+Definido
+
+Utilizar MODIS/061/MOD11A2.
+
+Banda de temperatura
+
+Definido
+
+Utilizar LST_Day_1km.
+
+Factor de escala
+
+Definido
+
+Aplicar 0.02.
+
+Conversión a Celsius
+
+Definido
+
+Restar 273.15 después de aplicar el factor de escala.
+
+Control de calidad
+
+Pendiente de decisión
+
+Definir el filtro de bits 0-1.
+
+Error estimado de LST
+
+Pendiente de decisión
+
+Determinar si se limitarán los bits 6-7.
+
+Composición temporal
+
+Definido
+
+Considerar que representa un promedio de 8 días.
+
+Asignación mensual
+
+Pendiente de verificación
+
+Definir el criterio de asignación de composiciones.
+
+Disponibilidad temporal
+
+Pendiente de verificación
+
+Consultar la última fecha real disponible.
+
+Resolución espacial
+
+Definido
+
+Mantener 1000 metros.
+
+Reproyección
+
+Definido
+
+Ajustar los datos a la rejilla de referencia.
+
+8. Resultado esperado
+
+El procesamiento de MODIS LST permitirá obtener información de temperatura superficial terrestre en grados Celsius, con una resolución espacial de 1 km y una frecuencia temporal basada en composiciones de 8 días.
+
+Los datos procesados podrán utilizarse para realizar análisis ambientales, identificar variaciones de temperatura superficial y estudiar su comportamiento temporal y espacial.
+
+La integración con otros productos MODIS permitirá construir una base de información ambiental homogénea para el desarrollo de análisis posteriores.
+
+9. Referencias
+
+NASA LP DAAC. MODIS/Terra Land Surface Temperature and Emissivity 8-Day L3 Global 1km SIN Grid.
+
+Google Earth Engine Data Catalog: MODIS/061/MOD11A2.
+
+Documentación técnica del producto MOD11A2, colección 061.
