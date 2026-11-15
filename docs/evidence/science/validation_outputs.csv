@@ -1,0 +1,18 @@
+comprobacion,esperado,observado,ok
+píxeles regionales,11511,11511,True
+píxeles probados,11288,11288,True
+no probados (n<15),223,223,True
+no probados tienen n<15,max n < 15,14.0,True
+aumentos significativos,2010,2010,True
+disminuciones significativas,505,505,True
+no significativos,8773,8773,True
+trend_significant == (q<0.05),True,True,True
+q = Benjamini–Hochberg(p) recalculado,dif. máx < 1e-6,6.57e-08,True
+signo OLS = signo Sen (píxeles con q<0.05),1.0,1.0,True
+cambio = pendiente × intervalo (años),entre 14 y 24,14.00–24.00,True
+pendiente media,0.000832087804987408,0.0008320878055573385,True
+regional: pendiente (linregress),0.001161922268170021,0.001161922268170021,True
+regional: p,0.06590571005696261,0.06590571005696261,True
+regional: R²,0.13949799855794068,0.13949799855794068,True
+regional: IC 95 %,"[-8.286095487558564e-05, 0.0024067054912156275]","[np.float64(-8.286095487558564e-05), np.float64(0.0024067054912156275)]",True
+regional: media anual = media de meses con cobertura ≥ 0.7,dif. máx < 1e-9,0.00e+00,True
