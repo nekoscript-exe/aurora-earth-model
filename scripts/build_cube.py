@@ -3,6 +3,7 @@
 import argparse
 import csv
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -13,7 +14,17 @@ from rasterio.transform import Affine
 from rasterio.warp import transform_geom
 
 
-def build_cube(package, region_path, output, start, end):
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from aurora.variables import get_variable
+
+
+def build_cube(package, region_path, output, start, end,
+               variable="ndvi"):
+
+    spec = get_variable(variable)
+
     package = Path(package)
     output = Path(output)
 
@@ -94,11 +105,14 @@ def build_cube(package, region_path, output, start, end):
         if date not in indices:
             raise ValueError(f"Unexpected date: {date}")
 
-        if row["variable"].lower() != "ndvi":
+        if row["variable"].lower() != spec.identifier.lower():
             raise ValueError("Unexpected variable")
 
-        if row["source_id"] != "MODIS/061/MOD13Q1":
+        if row["source_id"] != spec.source:
             raise ValueError("Unexpected satellite source")
+
+        if row["unit"] != spec.unit:
+            raise ValueError(f"Unexpected unit: {date}")
 
         path = (package / row["path"]).resolve()
 
@@ -131,11 +145,11 @@ def build_cube(package, region_path, output, start, end):
             mask = observed & inside
 
             if np.any(
-                (raw[mask] < -0.200001)
-                | (raw[mask] > 1.000001)
+                (raw[mask] < spec.minimum - 0.0001)
+                | (raw[mask] > spec.maximum + 0.0001)
             ):
                 raise ValueError(
-                    f"Invalid NDVI range: {date}"
+                    f"Invalid {spec.identifier} range: {date}"
                 )
 
             index = indices[date]
@@ -189,13 +203,16 @@ def build_cube(package, region_path, output, start, end):
         X=X,
         valid=valid,
         dates=dates,
-        channels=np.array(["NDVI"]),
+        channels=np.array([spec.identifier]),
         region_mask=inside
     )
 
     metadata = {
         "dataset": "satellite",
-        "source": "MODIS/061/MOD13Q1",
+        "source": spec.source,
+        "variable": spec.identifier,
+        "unit": spec.unit,
+        "slope_unit": spec.slope_unit,
         "shape": list(X.shape),
         "grid": grid,
         "regional_pixels": int(inside.sum()),
@@ -232,6 +249,12 @@ if __name__ == "__main__":
     parser.add_argument("--start", default="2001-01")
     parser.add_argument("--end", default="2025-12")
 
+    parser.add_argument(
+        "--variable",
+        choices=["ndvi", "lst"],
+        default="ndvi"
+    )
+
     args = parser.parse_args()
 
     build_cube(
@@ -239,5 +262,6 @@ if __name__ == "__main__":
         args.region,
         args.output,
         args.start,
-        args.end
+        args.end,
+        args.variable
     )
