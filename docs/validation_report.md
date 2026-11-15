@@ -64,7 +64,7 @@ la predicción ni los 11 288 píxeles restantes. Evidencia: `docs/evidence/scien
    ser imperfecta. Conviene mencionarlo como límite.
 5. **Regional no significativa (p = 0.066)** frente a 17.8 % de píxeles con aumento significativo: no es contradicción,
    pero el mensaje público debe decirlo claramente.
-6. **Sen regional (calculado por Sofía):** +0.00133 NDVI/año, IC 95 % [−0.00009, +0.00261]; Kendall τ = 0.27, p = 0.065.
+6. **Sen regional (calculado por Sophia):** +0.00133 NDVI/año, IC 95 % [−0.00009, +0.00261]; Kendall τ = 0.27, p = 0.065.
    Consistente con OLS. Autocorrelación lag-1 de residuos anuales regionales ≈ 0.20.
 7. `trend_p/q` están en Float32: diferencias del orden de 1e-8 al recalcular son normales.
 
