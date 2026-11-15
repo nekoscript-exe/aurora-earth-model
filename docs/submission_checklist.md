@@ -55,7 +55,7 @@ Fuente: página oficial de entrega de proyecto de NASA Space Apps. URL: [PEGAR U
 **Ciencia**
 - [ ] Referencias verificadas (año, páginas, DOI)
 - [x] Ninguna figura de datos sintéticos presentada como resultado
-- [ ] Validación de 3 píxeles completada o declarada como pendiente
+- [x] Validación de 3 píxeles completada o declarada como pendiente
 
 **Envío**
 - [ ] Marcadas las dos casillas y presionado "Submit for Judging" antes del domingo 11:59 p.m.
