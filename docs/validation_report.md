@@ -2,10 +2,10 @@
 
 Datos: paquete real MODIS/061/MOD13Q1 de Ian (`package_manifest.json`, commit `bcb20fa0…`).
 Script: `scripts/validate_independent.py` (reproducible). Evidencia: `docs/evidence/science/validation_outputs.csv`.
-Fecha: [FECHA] · Revisora: Sofía · Decisiones de corrección: Ian.
+Fecha: Noviembre 14, 2026 · Revisora: Sophia · Decisiones de corrección: Ian.
 
 ## 1. Integridad del paquete
-- Los 15 archivos del paquete coinciden con los SHA-256 de `package_manifest.json`. [Verificar tú: `sha256sum` o `Get-FileHash`]
+- Los 15 archivos del paquete coinciden con los SHA-256 de `package_manifest.json`. 
 - Rejilla: EPSG:32614, 161 × 171, 1000 m, nodata −9999 (`run_metadata.json`).
 - Productos con `dataset: "satellite"` y fuente MODIS/061/MOD13Q1 (no sintéticos).
 
