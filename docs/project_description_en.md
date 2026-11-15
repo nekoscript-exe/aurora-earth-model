@@ -1,7 +1,5 @@
 # AURORA — texts for the submission (English)
 
-> Review every number against the final run before submitting. Items in [BRACKETS] must be confirmed by the team.
-
 ## Project Name
 AURORA — Earth System Intelligence Model
 
