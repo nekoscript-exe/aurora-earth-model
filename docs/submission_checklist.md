@@ -1,15 +1,9 @@
 # Checklist de envío — NASA Space Apps Challenge 2026
 
-Equipo: AURORA · Local Event: **Guadalajara** · Consultado el 14 nov 2026
-Fuente: página oficial de entrega de proyecto de NASA Space Apps. URL: [PEGAR URL EXACTA DE LA PÁGINA]
-
-## Plazos
-| Punto | Dato oficial | Estado |
-|---|---|---|
-| Apertura de envío | Sáb 14 nov 2026, 9:00 a.m., hora del Local Event (Guadalajara) | Abierto |
-| **Cierre de envío** | **Dom 15 nov 2026, 11:59 p.m., hora del Local Event (Guadalajara)** | Pendiente |
-| Meta interna de cierre | Dom 15 nov, 8:00 p.m. (acordar con el equipo) | Confirmado |
-| Juzgamiento y premiación locales | Pueden diferir del plazo global; preguntar al Local Lead | [PENDIENTE] |
+Equipo: AURORA (Ian, Yatz, Sophia, René) · Local Event: **Guadalajara** (registrados los 4) · Modalidad: virtual, con apoyo de UNAQ
+| Cierre de envío | Dom 15 nov 2026, 11:59 p.m., hora de Guadalajara | Pendiente |
+| Evaluación y formato locales | Iguales a los del portal (confirmado por el equipo, 15 nov 2026) | Confirmado |
+| Cortes internos | 14:00 integrar · 15:00 formulario y enlaces listos · 21:00 cierre interno | Acordar |
 
 ## Requisitos del proyecto
 | Punto | Dato oficial |
@@ -34,7 +28,7 @@ Fuente: página oficial de entrega de proyecto de NASA Space Apps. URL: [PEGAR U
 - [ ] Ian aprobó la entrega final
 
 **Demo y materiales**
-- [ ] Diapositivas (máx. 7) en inglés, con equipo, integrantes y reto
+- [x] Diapositivas (máx. 7) en inglés, con equipo, integrantes y reto
 - [x] Sin imágenes ni voz de menores de 18 años
 - [ ] Enlace al demo público, probado en modo incógnito
 - [ ] Imágenes del proyecto en JPG/PNG de máx. 10 MB, solo con datos reales
@@ -53,7 +47,7 @@ Fuente: página oficial de entrega de proyecto de NASA Space Apps. URL: [PEGAR U
 - [ ] Demo reproducible desde un clon limpio
 
 **Ciencia**
-- [ ] Referencias verificadas (año, páginas, DOI)
+- [x] Referencias verificadas (año, páginas, DOI)
 - [x] Ninguna figura de datos sintéticos presentada como resultado
 - [x] Validación de 3 píxeles completada o declarada como pendiente
 
