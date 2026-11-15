@@ -1,0 +1,42 @@
+{
+    "experiment": "AR1 stationary null simulation",
+    "true_slope": 0,
+    "seed": 42,
+    "years": 25,
+    "alpha": 0.05,
+    "results": [
+        {
+            "rho": 0.0,
+            "pixels": 4096,
+            "ols_nominal_false_positive_rate": 0.052490234375,
+            "hac_nominal_false_positive_rate": 0.10888671875,
+            "ols_fdr_false_discoveries": 0,
+            "hac_fdr_false_discoveries": 10
+        },
+        {
+            "rho": 0.3,
+            "pixels": 4096,
+            "ols_nominal_false_positive_rate": 0.154296875,
+            "hac_nominal_false_positive_rate": 0.164306640625,
+            "ols_fdr_false_discoveries": 4,
+            "hac_fdr_false_discoveries": 104
+        },
+        {
+            "rho": 0.6,
+            "pixels": 4096,
+            "ols_nominal_false_positive_rate": 0.323486328125,
+            "hac_nominal_false_positive_rate": 0.276123046875,
+            "ols_fdr_false_discoveries": 771,
+            "hac_fdr_false_discoveries": 563
+        },
+        {
+            "rho": 0.9,
+            "pixels": 4096,
+            "ols_nominal_false_positive_rate": 0.606201171875,
+            "hac_nominal_false_positive_rate": 0.513671875,
+            "ols_fdr_false_discoveries": 2300,
+            "hac_fdr_false_discoveries": 1806
+        }
+    ],
+    "seconds": 2.7381937930003915
+}
