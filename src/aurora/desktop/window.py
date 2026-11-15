@@ -22,7 +22,20 @@ from PySide6.QtWidgets import (
 
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
-from matplotlib.colors import TwoSlopeNorm
+from matplotlib.colors import (
+    TwoSlopeNorm, ListedColormap, BoundaryNorm
+)
+from matplotlib.backends.backend_qtagg import (
+    NavigationToolbar2QT
+)
+
+MAP_LAYERS = {
+    "OLS trend": "trend_slope.tif",
+    "Theil-Sen trend": "trend_sen.tif",
+    "Statistical significance": "trend_significant.tif",
+    "Estimated change": "trend_change.tif",
+    "Satellite coverage": "coverage.tif"
+}
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -277,8 +290,27 @@ class AuroraWindow(QMainWindow):
         self.tabs.addTab(
             self.summary, "Scientific results"
         )
+        self.map_panel = QWidget()
+        map_layout = QVBoxLayout(self.map_panel)
+
+        self.layer_selector = QComboBox()
+        self.layer_selector.addItems(list(MAP_LAYERS))
+
+        self.map_toolbar = NavigationToolbar2QT(
+            self.map_canvas, self
+        )
+
+        map_layout.addWidget(QLabel("Scientific map layer"))
+        map_layout.addWidget(self.layer_selector)
+        map_layout.addWidget(self.map_toolbar)
+        map_layout.addWidget(self.map_canvas, 1)
+
+        self.layer_selector.currentIndexChanged.connect(
+            self.refresh_map
+        )
+
         self.tabs.addTab(
-            self.map_canvas, "Spatial trends"
+            self.map_panel, "Spatial analysis"
         )
         self.tabs.addTab(
             self.series_canvas, "Temporal analysis"
@@ -479,6 +511,9 @@ class AuroraWindow(QMainWindow):
             json.dumps(result, indent=4)
         )
 
+        self.current_history = history
+        self.current_metrics = metrics
+
         self.draw_map(history, metrics)
         self.draw_series(history, metrics)
 
@@ -493,10 +528,28 @@ class AuroraWindow(QMainWindow):
         for spine in ax.spines.values():
             spine.set_color("#405568")
 
+    def refresh_map(self, *_):
+
+        if not hasattr(self, "current_history"):
+            return
+
+        if self.process.state() != (
+            QProcess.ProcessState.NotRunning
+        ):
+            return
+
+        self.draw_map(
+            self.current_history,
+            self.current_metrics
+        )
+
     def draw_map(self, history, metrics):
 
+        layer = self.layer_selector.currentText()
+        variable = metrics["variable"]
+
         with rasterio.open(
-            history / "trend_slope.tif"
+            history / MAP_LAYERS[layer]
         ) as src:
 
             data = (
@@ -504,60 +557,115 @@ class AuroraWindow(QMainWindow):
                 .astype("float64")
                 .filled(np.nan)
             )
+
             bounds = src.bounds
             crs = src.crs
 
-        finite = data[np.isfinite(data)]
-
-        limit = (
-            float(np.percentile(np.abs(finite), 98))
-            if finite.size else 1.0
-        )
-        limit = max(limit, 1e-12)
-
         self.map_figure.clear()
+        self.map_figure.set_facecolor("#080e17")
+
         ax = self.map_figure.add_subplot(111)
 
-        cmap = (
-            "RdYlGn"
-            if metrics["variable"] == "NDVI"
-            else "coolwarm"
+        extent = (
+            bounds.left, bounds.right,
+            bounds.bottom, bounds.top
         )
 
-        image = ax.imshow(
-            data,
-            cmap=cmap,
-            norm=TwoSlopeNorm(
-                vmin=-limit,
-                vcenter=0,
-                vmax=limit
-            ),
-            extent=(
-                bounds.left, bounds.right,
-                bounds.bottom, bounds.top
-            ),
-            origin="upper"
-        )
+        label = metrics["slope_unit"]
+        extend = "neither"
+
+        if layer == "Statistical significance":
+
+            cmap = ListedColormap([
+                "#46576a", "#69d9bd"
+            ])
+
+            norm = BoundaryNorm(
+                [-0.5, 0.5, 1.5], cmap.N
+            )
+
+            label = "OLS / BH-FDR nominal significance"
+
+        elif layer == "Satellite coverage":
+
+            data *= 100
+            cmap = "viridis"
+            norm = None
+            label = "Valid observations (%)"
+
+        else:
+
+            finite = data[np.isfinite(data)]
+
+            limit = (
+                float(np.percentile(np.abs(finite), 98))
+                if finite.size else 1.0
+            )
+
+            limit = max(limit, 1e-12)
+
+            cmap = (
+                "RdYlGn" if variable == "NDVI"
+                else "coolwarm"
+            )
+
+            norm = TwoSlopeNorm(
+                vmin=-limit, vcenter=0, vmax=limit
+            )
+
+            extend = "both"
+
+            if layer == "Estimated change":
+                label = (
+                    "NDVI" if variable == "NDVI"
+                    else "Temperature change (°C)"
+                )
+
+        options = {
+            "cmap": cmap,
+            "norm": norm,
+            "extent": extent,
+            "origin": "upper",
+            "interpolation": "nearest"
+        }
+
+        if layer == "Satellite coverage":
+            options.update(vmin=0, vmax=100)
+
+        image = ax.imshow(data, **options)
 
         ax.set_title(
-            f'{metrics["variable"]} | Spatial trend'
+            f"{variable} | {layer}",
+            fontsize=15,
+            fontweight="bold",
+            pad=18
         )
+
         ax.set_xlabel(f"Easting — {crs}")
         ax.set_ylabel("Northing")
 
         colorbar = self.map_figure.colorbar(
-            image, ax=ax, shrink=0.8, extend="both"
+            image, ax=ax,
+            shrink=0.8,
+            extend=extend
         )
 
         colorbar.set_label(
-            metrics["slope_unit"],
-            color="#bacbd8"
+            label, color="#bacbd8"
         )
+
+        if layer == "Statistical significance":
+            colorbar.set_ticks([0, 1])
+            colorbar.set_ticklabels([
+                "Not significant", "Significant"
+            ])
+
         colorbar.ax.tick_params(colors="#bacbd8")
 
         self.style_axes(ax)
         self.map_figure.tight_layout()
         self.map_canvas.draw()
+        self.map_toolbar.update()
 
     def draw_series(self, history, metrics):
 
