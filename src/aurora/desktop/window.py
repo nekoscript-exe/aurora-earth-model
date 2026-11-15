@@ -16,6 +16,7 @@ from PySide6.QtWidgets import QFrame
 from .theme import STYLE as AURORA_STYLE
 from .report import render_report
 from .welcome import WelcomePage
+from .ai_lab import AILaboratory
 from .pixel_lab import open_pixel_lab
 from PySide6.QtWidgets import QTextBrowser
 from PySide6.QtWidgets import (
@@ -275,6 +276,13 @@ class AuroraWindow(QMainWindow):
 
         self.welcome = WelcomePage(self.run_button.click)
         self.tabs.addTab(self.welcome, "Home")
+
+        self.ai_lab = AILaboratory(ROOT, self)
+
+        self.tabs.addTab(
+            self.ai_lab, "Predictive intelligence"
+        )
+
 
         self.summary = QTextBrowser()
         self.summary.setReadOnly(True)
