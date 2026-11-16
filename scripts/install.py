@@ -24,7 +24,6 @@ def install(root, prefix, profile='cpu', wheelhouse=None):
     if system not in ('linux','windows'): raise RuntimeError('Only Linux and unvalidated Windows recipes are provided')
     if system == 'windows': print('NOTICE: Windows recipes have not been functionally tested on Windows.', flush=True)
     if profile == 'nvidia' and system != 'linux': raise RuntimeError('NVIDIA profile supplied only for Linux; Windows GPU is unvalidated')
-    venv.EnvBuilder(with_pip=True).create(prefix)
     python = prefix/('Scripts/python.exe' if system == 'windows' else 'bin/python')
     lock = root/'requirements/locks'/f'{system}-{profile}-hashed.txt'
     if profile == 'cpu':
@@ -36,6 +35,19 @@ def install(root, prefix, profile='cpu', wheelhouse=None):
         if wheelhouse: raise ValueError('Offline NVIDIA wheels were not supplied/validated')
         command = [str(python),'-m','pip','install','--extra-index-url','https://download.pytorch.org/whl/cu130',
                    '-r',str(root/'requirements/locks/linux-nvidia.txt')]
+    if wheelhouse and not Path(wheelhouse).is_dir():
+        raise FileNotFoundError('Wheelhouse directory unavailable')
+    if profile == 'nvidia' and not (root/'requirements/locks/linux-nvidia.txt').is_file():
+        raise FileNotFoundError('NVIDIA lock unavailable')
+    bootstrap = root/'requirements/locks/installer-bootstrap.txt'
+    if not bootstrap.is_file():
+        raise FileNotFoundError('Hashed installer bootstrap lock unavailable')
+    venv.EnvBuilder(with_pip=True).create(prefix)
+    bootstrap_command = [str(python), '-m', 'pip', '--disable-pip-version-check', 'install',
+                         '--require-hashes', '--only-binary=:all:', '-r', str(bootstrap)]
+    if wheelhouse:
+        bootstrap_command += ['--no-index', '--find-links', str(Path(wheelhouse).resolve())]
+    subprocess.run(bootstrap_command, check=True)
     subprocess.run(command, check=True)
     subprocess.run([str(python),'-m','pip','check'], check=True)
     env = dict(os.environ, PYTHONPATH=str(root/'src'), AURORA_DEVICE='cpu' if profile=='cpu' else 'auto')

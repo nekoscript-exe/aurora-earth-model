@@ -14,7 +14,14 @@ def sha256(path):
 def safe_path(root, name):
     if Path(name).is_absolute() or PureWindowsPath(name).drive or '..' in Path(name).parts or '\\' in name:
         raise ValueError('Unsafe package path')
-    path = (Path(root)/name).resolve()
+    root = Path(root).resolve()
+    candidate = root / name
+    for part in (candidate, *candidate.parents):
+        if part == root:
+            break
+        if part.is_symlink():
+            raise ValueError('Package path must not contain symbolic links')
+    path = candidate.resolve()
     if not path.is_relative_to(Path(root).resolve()): raise ValueError('Package path escapes root')
     return path
 
@@ -32,7 +39,7 @@ def verify_package(root):
             'scope': manifest['scientific_scope']}
 
 
-def build_demo(root, destination, wheelhouse=None, edition='lite'):
+def build_demo(root, destination, wheelhouse=None, edition='lite', source_root=None):
     # Lazy imports let installers verify integrity before scientific dependencies exist.
     from aurora.portability import content_fingerprint, load_manifest
     from aurora.distribution_profiles import PROFILES
@@ -46,6 +53,8 @@ def build_demo(root, destination, wheelhouse=None, edition='lite'):
     files = {root/'README.md', root/'pyrightconfig.json', root/'config/dataset_targets.json'}
     for name in source_dirs:
         files.update(p for p in (root/name).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc' and 'synthetic' not in p.name.lower())
+    if (root/'pytest.ini').is_file():
+        files.add(root/'pytest.ini')
     files.update((root/'docs').glob('*.md'))
     for name in ['ndvi_preservation.json', 'artifact_manifest.json']:
         files.add(root/'docs/evidence/aurora5'/name)
@@ -65,15 +74,15 @@ def build_demo(root, destination, wheelhouse=None, edition='lite'):
     data_dirs.extend(stores)
     data_dirs.extend(profile['results'])
 
-    original_root = root.parent/'aurora-earth-model'
+    fallback_root = Path(source_root).resolve() if source_root is not None else None
     sources = {}
 
     for name in data_dirs:
         directory = root/name
+        if not directory.is_dir() and fallback_root is not None:
+            directory = fallback_root/name
         if not directory.is_dir():
-            directory = original_root/name
-        if not directory.is_dir():
-            raise FileNotFoundError(directory)
+            raise FileNotFoundError(f'Missing payload: {name}; provide --source-root explicitly for external resources')
         sources[name] = directory
 
     payload = {}

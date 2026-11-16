@@ -50,7 +50,7 @@ python-dateutil==4.0.0
 rasterio==1.5.2
 scikit-learn==1.9.1
 scipy==1.18.1
-setuptools==78.1.0
+setuptools==84.1.0
 statsmodels==0.15.0
 sympy==1.14.0
 threadpoolctl==3.8.0

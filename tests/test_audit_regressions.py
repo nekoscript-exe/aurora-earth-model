@@ -114,5 +114,3 @@ def test_export_rejects_empty_mask_before_writing(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match='mask is empty'):
         finalize(np.ones((2, 2)), output, {'height': 2, 'width': 2}, np.zeros((2, 2), bool))
     assert not output.exists()
-
-
