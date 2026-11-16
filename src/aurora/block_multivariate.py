@@ -28,9 +28,26 @@ def run_pair_statistics(x_directory, y_directory, output, start=None, end=None, 
     try:
         job.progress(0, 1, 'open-paired-sources')
         a_reader, b_reader = [CubeReader(p, check=job.check) for p in (x_directory, y_directory)]; readers = [a_reader, b_reader]
-        if a_reader.grid != b_reader.grid or not np.array_equal(a_reader.dates, b_reader.dates):
-            raise ValueError('Exact grid/CRS/calendar alignment required; no implicit interpolation')
-        dates = a_reader.dates
+        if a_reader.grid != b_reader.grid:
+            raise ValueError('Exact grid/CRS alignment required; no implicit interpolation')
+
+        dates, a_index, b_index = np.intersect1d(
+            a_reader.dates,
+            b_reader.dates,
+            return_indices=True
+        )
+
+        if len(dates) < minimum:
+            raise ValueError('Insufficient common monthly observations')
+
+        if not (
+            np.all(np.diff(a_index) == 1)
+            and np.all(np.diff(b_index) == 1)
+        ):
+            raise ValueError('Common calendar must be contiguous in both sources')
+
+        a_time = slice(int(a_index[0]), int(a_index[-1]) + 1)
+        b_time = slice(int(b_index[0]), int(b_index[-1]) + 1)
         if not np.all(np.diff(dates).astype(int) == 1): raise ValueError('Explicit consecutive monthly calendar required')
         selected = np.flatnonzero(select_interval(dates, start or str(dates[0]), end or str(dates[-1])))
         calendar = dates[selected]
@@ -57,8 +74,8 @@ def run_pair_statistics(x_directory, y_directory, output, start=None, end=None, 
             job.check()
             mask = np.asarray(a_reader.arrays['region_mask'][rows, cols]) & np.asarray(b_reader.arrays['region_mask'][rows, cols])
             if mask.any():
-                a = a_reader.read_series(slice(None), rows, cols, max_bytes=budget.bytes)
-                b = b_reader.read_series(slice(None), rows, cols, max_bytes=budget.bytes)
+                a = a_reader.read_series(a_time, rows, cols, max_bytes=budget.bytes)
+                b = b_reader.read_series(b_time, rows, cols, max_bytes=budget.bytes)
                 for array, spec in ((a, sx), (b, sy)):
                     if np.any((array < spec.minimum-.0001) | (array > spec.maximum+.0001)): raise ValueError('Physical range violation')
                 valid = np.isfinite(a) & np.isfinite(b) & mask
@@ -102,7 +119,10 @@ def run_pair_statistics(x_directory, y_directory, output, start=None, end=None, 
                    for name, array in maps[f'{mode}_0'].items()}
         np.savez_compressed(Path(output)/'analysis.npz', allow_pickle=False, **preview, dates=calendar.astype(str),
             raw_x=sums['x'], raw_y=sums['y'], anomaly_x=sums['ax'], anomaly_y=sums['ay'],
-            raw_ndvi=sums['x'], raw_lst=sums['y'], anomaly_ndvi=sums['ax'], anomaly_lst=sums['ay'],
+            **(dict(
+                raw_ndvi=sums['x'], raw_lst=sums['y'],
+                anomaly_ndvi=sums['ax'], anomaly_lst=sums['ay']
+            ) if (mx['variable'].lower(), my['variable'].lower()) == ('ndvi', 'lst') else {}),
             coverage=coverage, anomaly_coverage=ac)
         with (Path(output)/'paired_monthly_series.csv').open('w', newline='') as stream:
             writer = csv.writer(stream); writer.writerow(['date', 'x', 'y', 'x_anomaly', 'y_anomaly', 'paired_area_coverage', 'anomaly_area_coverage', 'paired_pixels'])
@@ -123,7 +143,10 @@ def run_pair_statistics(x_directory, y_directory, output, start=None, end=None, 
         figure.savefig(Path(output)/'summary.png', dpi=130)
         result = {'variables': [mx['variable'].lower(), my['variable'].lower()], 'variable': mx['variable'].lower()+'__'+my['variable'].lower(),
             'units': [sx.unit, sy.unit], 'sources': [mx['source'], my['source']], 'grid': mx['grid'], 'fields': units,
-            'datasets': {'ndvi': Path(x_directory).name, 'lst': Path(y_directory).name},
+            'datasets': {
+                mx['variable'].lower(): Path(x_directory).name,
+                my['variable'].lower(): Path(y_directory).name
+            },
             'period': [str(calendar[0]), str(calendar[-1])], 'paired_observations': int(count.sum()),
             'common_regional_pixels': pixels, 'area_methods': sorted(methods), 'area_weighted': True,
             'display_stride': stride, 'export_precision': 'float64 statistics GeoTIFF/NPY; float64 decimal CSV', 'coverage_sensitivity': sensitivity, 'lag_profiles': profiles,

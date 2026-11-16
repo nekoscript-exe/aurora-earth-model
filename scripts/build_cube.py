@@ -260,7 +260,7 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--variable",
-        choices=["ndvi", "lst"],
+        choices=["ndvi", "lst", "precip"],
         default="ndvi"
     )
 

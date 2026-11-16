@@ -318,7 +318,7 @@ def variable_spec(metadata):
         if metadata['source'] != spec.source or metadata['unit'] != spec.unit:
             raise ValueError('Source/unit inconsistent with variable registry')
         return spec
-    if identifier in ('ndvi', 'lst') and metadata['unit'] != get_variable(identifier).unit:
+    if identifier in ('ndvi', 'lst', 'precip') and metadata['unit'] != get_variable(identifier).unit:
         raise ValueError('Canonical variable units disagree; convert explicitly or register a distinct variable identifier')
     minimum, maximum = float(definition['minimum']), float(definition['maximum'])
     if not np.isfinite([minimum, maximum]).all() or minimum >= maximum or not metadata.get('source') or not metadata.get('unit'):
@@ -333,6 +333,8 @@ def display_scale(metadata):
     spec = variable_spec(metadata); variable = metadata['variable'].lower()
     if variable == 'ndvi': return (-.2, 1., 'RdYlGn', 'NDVI · dimensionless')
     if variable == 'lst': return (-10., 70., 'turbo', 'LST · °C')
+    if variable == 'precip':
+        return (0., 2., 'Blues', 'Precipitation · mm/h')
     display = metadata.get('display', {})
     return (display.get('minimum', spec.minimum), display.get('maximum', spec.maximum),
             display.get('colormap', 'viridis'), spec.identifier+' · '+spec.unit)

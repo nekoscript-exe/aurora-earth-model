@@ -21,7 +21,7 @@ from aurora.variables import get_product
 parser = argparse.ArgumentParser()
 parser.add_argument("--input", type=Path, required=True)
 parser.add_argument("--output", type=Path, required=True)
-parser.add_argument("--variable", choices=["ndvi", "lst"], required=True)
+parser.add_argument("--variable", choices=["ndvi", "lst", "precip"], required=True)
 parser.add_argument("--source", required=True)
 parser.add_argument("--allow-partial", action="store_true")
 args = parser.parse_args()
@@ -91,9 +91,16 @@ annual_sources = []
 for path, year in zip(files, years):
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
 
+    month_count = (
+        9 if args.variable == "precip" and year == 2025 else 12
+    )
+
+    if month_count != 12 and not args.allow_partial:
+        raise ValueError("Partial year requires --allow-partial")
+
     with rasterio.open(path) as src:
         if (
-            src.count != 12
+            src.count != month_count
             or src.crs.to_epsg() != 6933
             or src.shape != shape
             or src.transform != affine
@@ -102,7 +109,7 @@ for path, year in zip(files, years):
         ):
             raise ValueError(f"Incompatible raster: {path}")
 
-        for month in range(1, 13):
+        for month in range(1, month_count + 1):
             date = f"{year}-{month:02d}-01"
             label = f"{args.variable}_{year}_{month:02d}"
             description = src.descriptions[month - 1]
@@ -191,6 +198,13 @@ metadata = {
     "received_months": len(records),
     "expected_months": 300,
     "missing_years": missing,
+    "missing_months": sorted(
+        {f"{y}-{m:02d}-01"
+         for y in range(2001, 2026)
+         for m in range(1, 13)}
+        - {row["date"] for row in records}
+    ),
+    "calendar_complete": len(records) == 300,
     "land_pixels": land_pixels,
     "land_mask_sha256": hashlib.sha256(region_bytes).hexdigest(),
     "land_mask_method": "Natural Earth 1:50m; pixel-center inclusion",

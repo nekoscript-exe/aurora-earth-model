@@ -21,6 +21,21 @@ class VariableSpec:
 
 
 VARIABLES = {
+    "precip": VariableSpec(
+        identifier="PRECIP",
+        name="Precipitation rate",
+        source="NASA/GPM_L3/IMERG_MONTHLY_V07",
+        band="precipitation",
+        unit="mm/h",
+        slope_unit="mm/h/year",
+        minimum=0.0,
+        maximum=1000.0,
+        scale_factor=1.0,
+        offset=0.0,
+        description="Monthly mean precipitation rate.",
+        prediction_supported=False
+    ),
+
 
     "ndvi": VariableSpec(
         identifier="NDVI",
