@@ -50,7 +50,7 @@ jobs:
           .ci-tools/bin/python -m pip_audit --path "$(echo .ci-cpu/lib/python*/site-packages)" -f json -o dependency-audit.json
           # PyPI advisory lookup cannot resolve the official local +cpu version.
           # Fail on any other omission; audit the upstream torch release below.
-          .ci-tools/bin/python -c "import json; d=json.load(open('dependency-audit.json')); unexpected=[p for p in d['dependencies'] if p.get('skip_reason') and (p['name'],p.get('version')) != ('torch','2.14.1+cpu')]; assert not unexpected, unexpected"
+          .ci-tools/bin/python -c "import json; d=json.load(open('dependency-audit.json')); unexpected=[p for p in d['dependencies'] if p.get('skip_reason') and not (p['name']=='torch' and p.get('skip_reason')=='Dependency not found on PyPI and could not be audited: torch (2.14.1+cpu)')]; assert not unexpected, unexpected"
           .ci-tools/bin/python -m pip_audit --strict --no-deps --disable-pip -r requirements/locks/torch-advisory.txt
       - name: High severity static security checks
         run: .ci-tools/bin/python -m bandit -r src scripts -lll
