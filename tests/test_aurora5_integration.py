@@ -9,6 +9,7 @@ import rasterio
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'src'))
 from aurora.catalog import CubeReader
 from aurora.models.baseline import regression_metrics
+pytestmark = pytest.mark.external_data
 ROOT = Path(__file__).resolve().parents[1]
 
 

@@ -6,7 +6,8 @@ import sys
 import tempfile
 import time
 os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
-os.environ.setdefault('MPLCONFIGDIR', '/tmp/aurora-i18n-mpl')
+if 'MPLCONFIGDIR' not in os.environ:
+    os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp(prefix='aurora-validation-mpl-')
 os.environ['XDG_CONFIG_HOME'] = tempfile.mkdtemp(prefix='aurora-i18n-settings-')
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'src'))
@@ -41,8 +42,8 @@ def texts(root):
     return sorted(set(filter(None, result)))
 
 
-def main():
-    output = ROOT/'docs/evidence/i18n'; output.mkdir(parents=True, exist_ok=True)
+def main(output=None):
+    output = Path(output) if output is not None else ROOT/'docs/evidence/i18n'; output.mkdir(parents=True, exist_ok=True)
     visual = output/'visual'; visual.mkdir(exist_ok=True)
     app = QApplication.instance() or QApplication([])
     assert get_language() == 'en'
@@ -58,7 +59,7 @@ def main():
     explorer.planet.animation.setCurrentTime(650)
     machine = window.time_machine
     wait(app, lambda: machine.values is not None and not machine.reader_jobs.busy('dataset') and not machine.reader_jobs.busy('frame'))
-    report = {'base_commit': '0c8eb08', 'new_install_language': get_language(), 'languages': {}, 'qt_errors': errors}
+    report = {'source': 'current working tree; historical products read only', 'new_install_language': get_language(), 'languages': {}, 'qt_errors': errors}
     # Read-only sample of real worker messages, with no new scientific jobs.
     from aurora.desktop.i18n import log_text
     window.log.setPlainText(log_text('{"event":"progress","phase":"native-grid-blocks","done":4,"total":10}\n'))
@@ -135,4 +136,8 @@ def main():
     print('Validated nine tabs and all predictive/multivariate/map views in both languages; returned to English.')
 
 
-if __name__ == '__main__': main()
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, help='Independent evidence directory')
+    main(parser.parse_args().output)

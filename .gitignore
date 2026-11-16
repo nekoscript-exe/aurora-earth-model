@@ -237,3 +237,10 @@ service-account*.json
 # AURORA local datasets and symbolic links
 /data/
 /outputs
+
+# Local static analysis configuration
+/pyrightconfig.local.json
+
+# Independent local CI environments
+/.ci-cpu/
+/.ci-tools/

@@ -3,11 +3,13 @@ import hashlib
 import importlib.util
 import json
 import os
+import tempfile
 from pathlib import Path
 import sys
 from time import perf_counter, monotonic, sleep
 os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
-os.environ.setdefault('MPLCONFIGDIR', '/tmp/aurora-validation-mpl')
+if 'MPLCONFIGDIR' not in os.environ:
+    os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp(prefix='aurora-validation-mpl-')
 ROOT = Path(__file__).resolve().parents[1]; sys.path.insert(0, str(ROOT/'src'))
 import numpy as np
 from PySide6.QtWidgets import QApplication

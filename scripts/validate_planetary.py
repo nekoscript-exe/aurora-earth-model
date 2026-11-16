@@ -7,13 +7,15 @@ import argparse
 import csv
 import json
 import os
+import tempfile
 from pathlib import Path
 import platform
 import sys
 from time import perf_counter
 
 os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
-os.environ.setdefault('MPLCONFIGDIR', '/tmp/aurora-validation-mpl')
+if 'MPLCONFIGDIR' not in os.environ:
+    os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp(prefix='aurora-validation-mpl-')
 import numpy as np
 import rasterio
 from rasterio.crs import CRS

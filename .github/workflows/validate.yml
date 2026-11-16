@@ -1,0 +1,58 @@
+name: Scientific CPU validation
+on:
+  pull_request:
+  push:
+    branches: [integration/final-consolidation]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: aurora-validation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  cpu:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      QT_QPA_PLATFORM: offscreen
+      PYTHONPATH: src
+      AURORA_DEVICE: cpu
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14.4'
+      - name: Install independent CPU and audit environments
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libegl1 libopengl0 libxkbcommon0
+          python -m venv .ci-cpu
+          python -m venv .ci-tools
+          .ci-cpu/bin/python -m pip --disable-pip-version-check install --require-hashes --only-binary=:all: -r requirements/locks/installer-bootstrap.txt
+          .ci-tools/bin/python -m pip --disable-pip-version-check install --require-hashes --only-binary=:all: -r requirements/locks/installer-bootstrap.txt
+          .ci-cpu/bin/python -m pip install --require-hashes --only-binary=:all: --extra-index-url https://download.pytorch.org/whl/cpu -r requirements/locks/linux-cpu-hashed.txt
+          .ci-tools/bin/python -m pip install --only-binary=:all: -r requirements/locks/audit-tools.txt
+      - name: Validate dependencies and static analysis
+        run: |
+          .ci-cpu/bin/python -m pip check
+          .ci-tools/bin/python -m pip check
+          .ci-cpu/bin/python -c "import json; from pathlib import Path; p=next(Path('.ci-tools/lib').glob('python*/site-packages')); Path('pyrightconfig.local.json').write_text(json.dumps({'extends':'./pyrightconfig.json','include':['src','scripts','tests'],'extraPaths':['src','scripts',str(p.resolve())]}))"
+          .ci-tools/bin/python -m pyright --project pyrightconfig.local.json --pythonpath "$PWD/.ci-cpu/bin/python" --warnings
+          .ci-cpu/bin/python -m compileall -q src scripts tests
+          git diff --check
+      - name: CPU tests without external datasets
+        run: .ci-cpu/bin/python -m pytest -q --strict-markers -m 'not external_data'
+      - name: Dependency advisory audit
+        run: .ci-tools/bin/python -m pip_audit --path "$(echo .ci-cpu/lib/python*/site-packages)" --strict
+      - name: High severity static security checks
+        run: .ci-tools/bin/python -m bandit -r src scripts -lll
+      - name: Full history secret scan
+        run: |
+          go install github.com/zricethezav/gitleaks/v8@v8.24.2
+          "$(go env GOPATH)/bin/gitleaks" git --log-opts=--all --redact --no-banner .
+# Real observations and trained runs are intentionally not downloaded by CI.
+# In a provisioned, isolated local checkout run: python -m pytest -m external_data
+# All tests (including that group) remain enabled by default for local validation.

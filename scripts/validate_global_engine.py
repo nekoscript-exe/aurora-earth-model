@@ -6,12 +6,14 @@ Querétaro cubes; it is not a claim of national or global scientific validation.
 import hashlib
 import json
 import os
+import tempfile
 from pathlib import Path
 import resource
 import sys
 from time import perf_counter, monotonic, sleep
 os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
-os.environ.setdefault('MPLCONFIGDIR', '/tmp/aurora-global-mpl')
+if 'MPLCONFIGDIR' not in os.environ:
+    os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp(prefix='aurora-validation-mpl-')
 ROOT = Path(__file__).resolve().parents[1]; sys.path.insert(0, str(ROOT/'src'))
 import numpy as np
 import pandas as pd
