@@ -325,8 +325,8 @@ class Planet(QWidget):
 
         rgb = np.empty((*lon.shape, 3), dtype=np.float32)
 
-        rgb[:] = [13, 39, 58]
-        rgb[land] = [36, 91, 80]
+        rgb[:] = [12, 29, 53]
+        rgb[land] = [61, 111, 149]
 
         if self.daylight:
             light = 0.46 + 0.54*np.clip(
@@ -349,12 +349,12 @@ class Planet(QWidget):
             distance = np.minimum(dlat/np.maximum(lat_step, 1e-8),
                                   dlon/np.maximum(lon_step, 1e-8))
             weight = (np.clip(1.1-distance, 0, 1)*visible*.4)[..., None]
-            rgb = rgb*(1-weight)+np.array([130, 190, 184])*weight
+            rgb = rgb*(1-weight)+np.array([130, 190, 224])*weight
 
         rgb[~visible] = [8, 14, 23]
         # A restrained atmosphere gradient; illumination is illustrative only.
         rim = np.clip((.16-z)/.16, 0, 1)*visible
-        rgb += rim[..., None]*np.array([22, 65, 78])
+        rgb += rim[..., None]*np.array([32, 83, 116])
         return rgb, (lon, lat, visible, z)
 
     def resizeEvent(self, event):
@@ -421,7 +421,7 @@ class Planet(QWidget):
         if self.paths is None:
             self.paths = [self.line_path(self.coast_lines)]
             self.paths.extend(self.line_path(lines) for lines in self.boundary_lines)
-        painter.setPen(QPen(QColor("#538a88"), .8))
+        painter.setPen(QPen(QColor("#7aafce"), .8))
         painter.drawPath(self.paths[0])
         if self.borders:
             painter.setPen(QPen(QColor("#c3d7d8"), 1.0))
@@ -465,8 +465,6 @@ class PlanetaryExplorer(QWidget):
     def __init__(self, root, parent=None):
         super().__init__(parent)
 
-        from .theme import STYLE
-        self.setStyleSheet(STYLE)
         self.root = root
         self.reader_jobs = ReaderJobs(self, self.read_ready, self.read_error)
         self.values = None

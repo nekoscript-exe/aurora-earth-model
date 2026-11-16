@@ -12,12 +12,13 @@ import pandas as pd
 import rasterio
 from rasterio.warp import transform
 
-from PySide6.QtCore import QProcess
+from PySide6.QtCore import QProcess, QSettings
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QFrame
-from .theme import STYLE as AURORA_STYLE
+from .mission_theme import DARK_STYLE, LIGHT_STYLE
+from .appearance import refresh_figures
 from .report import render_report
-from .welcome import WelcomePage
+from .mission_home import MissionHome
 from .ai_lab import AILaboratory
 from .time_machine import TimeMachine
 from .temporal import TemporalSelector
@@ -108,7 +109,11 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             tr("AURORA — Earth System Intelligence")
         )
         self.resize(1280, 820)
-        self.setStyleSheet(AURORA_STYLE)
+        self.settings = QSettings("AURORA", "Desktop")
+        self.appearance = self.settings.value("appearance", "dark")
+        self.setStyleSheet(
+            LIGHT_STYLE if self.appearance == "light" else DARK_STYLE
+        )
         self.setMinimumSize(1000, 680)
         self.setWindowIcon(
             QIcon(str(ROOT / "assets/desktop/logo.svg"))
@@ -135,6 +140,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         )
 
         self.build_ui()
+        self.stabilize_progress_bars()
         names = ['Home', 'Planetary Explorer', 'Time Machine', 'Predictive intelligence',
                  'Multivariate Laboratory', 'Scientific results', 'Spatial analysis', 'Temporal analysis', 'Execution log']
         for index, name in enumerate(names):
@@ -143,6 +149,25 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         self.language_selector.currentIndexChanged.connect(self.change_interface_language)
         self.check_dataset()
         self.start_dataset_watch()
+
+    def stabilize_progress_bars(self):
+        for bar in self.findChildren(QProgressBar):
+            policy = bar.sizePolicy()
+            policy.setRetainSizeWhenHidden(True)
+            bar.setSizePolicy(policy)
+            bar.setFixedHeight(6)
+            bar.setTextVisible(False)
+
+    def change_appearance(self, *_):
+        self.appearance = self.theme_selector.currentData()
+
+        self.settings.setValue("appearance", self.appearance)
+        self.settings.sync()
+
+        self.setStyleSheet(
+            LIGHT_STYLE if self.appearance == "light" else DARK_STYLE
+        )
+        refresh_figures(self)
 
     def change_interface_language(self, *_):
         self.language_controller.change(self.language_selector.currentData())
@@ -197,6 +222,18 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         self.language_selector.setCurrentIndex(self.language_selector.findData(active_language()))
         self.language_selector.setToolTip(tr('Choose the interface language. Applied immediately; saved for the next launch.'))
         header.addWidget(self.language_selector)
+        self.theme_selector = QComboBox()
+        self.theme_selector.addItem(tr("Dark"), "dark")
+        self.theme_selector.addItem(tr("Light"), "light")
+        self.theme_selector.setCurrentIndex(
+            max(0, self.theme_selector.findData(self.appearance))
+        )
+
+        self.theme_selector.currentIndexChanged.connect(
+            self.change_appearance
+        )
+
+        header.addWidget(self.theme_selector)
         header.addWidget(edition)
 
         layout.addLayout(header)
@@ -286,7 +323,9 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         self.tabs = QTabWidget()
 
-        self.welcome = WelcomePage(self.run_button.click)
+        self.welcome = MissionHome(
+            ROOT, self.tabs.setCurrentIndex, self
+        )
         self.tabs.addTab(self.welcome, tr('Home'))
 
         self.planetary_explorer = PlanetaryExplorer(ROOT, self)
@@ -392,17 +431,102 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
             page.setup_toggle.show()
             page.setup_toggle.clicked.connect(lambda checked: sidebar.setVisible(checked))
 
-        def sync_workspace(_):
-            # The explorer already has dataset controls; give its globe the
-            # full workspace, retaining an explicit way to reopen investigation.
-            for page in (explorer, self.multivariate_lab): page.setup_toggle.setChecked(False)
-            sidebar.setVisible(self.tabs.currentWidget() not in (explorer, self.multivariate_lab))
+        def sync_workspace(index):
+            for page in (explorer, self.multivariate_lab):
+                page.setup_toggle.setChecked(False)
+
+            sidebar.setVisible(index in (2, 5, 6, 7, 8))
+
+            for button in getattr(self, "mission_navigation", []):
+                button.setChecked(index in button.property("pageIndexes"))
 
         self.tabs.currentChanged.connect(sync_workspace)
         workspace.addWidget(sidebar)
         workspace.addWidget(self.tabs, 1)
 
+        self.tabs.tabBar().hide()
+
+        navigation = QHBoxLayout()
+        navigation.setSpacing(8)
+
+        self.mission_navigation = []
+
+        for caption, indexes in (
+            ("Home", (0,)),
+            ("Explore", (1, 2)),
+            ("Research", (5, 4, 6, 7, 8)),
+            ("Predictive intelligence", (3,)),
+        ):
+            button = localized_button(caption)
+            button.setObjectName("missionNavigation")
+            button.setCheckable(True)
+            button.setProperty("pageIndexes", indexes)
+            button.clicked.connect(
+                lambda checked=False, i=indexes[0]:
+                    self.tabs.setCurrentIndex(i)
+            )
+            navigation.addWidget(button, 1)
+            self.mission_navigation.append(button)
+
+        layout.addLayout(navigation)
+
+        scientific_navigation = QFrame()
+        scientific_navigation.setObjectName("scientificNavigation")
+        scientific_row = QHBoxLayout(scientific_navigation)
+        scientific_row.setContentsMargins(8, 4, 8, 4)
+
+        exploration_navigation = QFrame()
+        exploration_navigation.setObjectName("scientificNavigation")
+        exploration_row = QHBoxLayout(exploration_navigation)
+        exploration_row.setContentsMargins(8, 4, 8, 4)
+
+        for caption, index in (
+            ("Planetary Explorer", 1),
+            ("Time Machine", 2),
+        ):
+            button = localized_button(caption)
+            button.clicked.connect(
+                lambda checked=False, i=index:
+                    self.tabs.setCurrentIndex(i)
+            )
+            exploration_row.addWidget(button)
+
+        for caption, index in (
+            ("Scientific results", 5),
+            ("Multivariate Laboratory", 4),
+            ("Spatial analysis", 6),
+            ("Temporal analysis", 7),
+            ("Execution log", 8),
+        ):
+            button = localized_button(caption)
+            button.clicked.connect(
+                lambda checked=False, i=index:
+                    self.tabs.setCurrentIndex(i)
+            )
+            scientific_row.addWidget(button)
+
+        self.tabs.currentChanged.connect(
+            lambda index: scientific_navigation.setVisible(index >= 4)
+        )
+
+        self.tabs.currentChanged.connect(
+            lambda index: exploration_navigation.setVisible(
+                index in (1, 2)
+            )
+        )
+
+        exploration_navigation.setVisible(
+            self.tabs.currentIndex() in (1, 2)
+        )
+
+        layout.addWidget(exploration_navigation)
+        layout.addWidget(scientific_navigation)
         layout.addLayout(workspace, 1)
+
+        scientific_navigation.setVisible(
+            self.tabs.currentIndex() >= 4
+        )
+        sync_workspace(self.tabs.currentIndex())
 
         footer = localized_label(
             "AURORA v5.0  |  "
