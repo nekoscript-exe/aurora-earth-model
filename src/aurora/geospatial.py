@@ -141,8 +141,9 @@ class RasterGrid:
 
 def load_observations(directory, variable):
     """Load observed values only, checking the documented cube contract."""
-    spec = get_variable(variable)
+    from aurora.variables import get_product
     metadata = json.loads((directory/'cube_metadata.json').read_text())
+    spec = get_product(variable, metadata['source'])
     if (metadata.get('dataset') != 'satellite'
             or metadata.get('source') != spec.source
             or metadata.get('variable', '').lower() != variable.lower()

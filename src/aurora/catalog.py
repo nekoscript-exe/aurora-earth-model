@@ -313,7 +313,8 @@ def variable_spec(metadata):
     identifier = metadata['variable'].lower()
     definition = metadata.get('variable_definition')
     if definition is None:
-        spec = get_variable(identifier)
+        from aurora.variables import get_product
+        spec = get_product(identifier, metadata['source'])
         if metadata['source'] != spec.source or metadata['unit'] != spec.unit:
             raise ValueError('Source/unit inconsistent with variable registry')
         return spec

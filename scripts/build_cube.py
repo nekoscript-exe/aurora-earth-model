@@ -18,13 +18,13 @@ from rasterio.warp import transform_geom
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from aurora.variables import get_variable
+from aurora.variables import get_product
 
 
 def build_cube(package, region_path, output, start, end,
                variable="ndvi"):
 
-    spec = get_variable(variable)
+
 
     package = Path(package)
     output = Path(output)
@@ -42,6 +42,14 @@ def build_cube(package, region_path, output, start, end,
         raise ValueError("Empty manifest")
 
     records.sort(key=lambda row: row["date"])
+
+    sources = {row["source_id"] for row in records}
+
+    if len(sources) != 1:
+        raise ValueError("Mixed satellite sources in a single cube")
+
+    spec = get_product(variable, next(iter(sources)))
+
 
     crs = CRS.from_string(grid["crs"])
     transform = Affine(*grid["transform"][:6])

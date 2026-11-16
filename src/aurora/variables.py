@@ -1,6 +1,6 @@
 """AURORA Earth science variable registry."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 
 @dataclass(frozen=True)
@@ -64,3 +64,43 @@ def get_variable(identifier):
         )
 
     return VARIABLES[key]
+
+
+# Alternative satellite products in physical units.
+PRODUCTS = {
+    ("ndvi", "MODIS/061/MOD13C1"): replace(
+        VARIABLES["ndvi"],
+        source="MODIS/061/MOD13C1",
+        band="NDVI",
+        scale_factor=1.0,
+        offset=0.0,
+        prediction_supported=False
+    ),
+    ("lst", "MODIS/061/MOD21C3"): replace(
+        VARIABLES["lst"],
+        source="MODIS/061/MOD21C3",
+        band="LST_Day",
+        minimum=-90.0,
+        maximum=80.0,
+        scale_factor=1.0,
+        offset=-273.15,
+        prediction_supported=False
+    )
+}
+
+
+def get_product(identifier, source):
+    """Resolve a variable and its exact satellite product."""
+    spec = get_variable(identifier)
+
+    if source == spec.source:
+        return spec
+
+    key = (identifier.strip().lower(), source)
+
+    if key not in PRODUCTS:
+        raise ValueError(
+            f"Unsupported satellite product: {identifier}/{source}"
+        )
+
+    return PRODUCTS[key]
