@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 import rasterio as rio
 from affine import Affine
+from rasterio.crs import CRS
 from rasterio.features import geometry_mask
 from rasterio.warp import transform_geom
 
@@ -32,7 +33,7 @@ def main():
     g = json.loads((root / "grid.json").read_text())
     rows = list(csv.DictReader((root / "manifest.csv").open()))
     A = Affine(*g["transform"][:6])
-    crs = rio.crs.CRS.from_string(g["crs"])
+    crs = CRS.from_string(g["crs"])
     shape = (g["height"], g["width"])
     geo = json.loads((root / "region.geojson").read_text())
     mask = geometry_mask([transform_geom("EPSG:4326", crs, f["geometry"]) for f in geo["features"]],

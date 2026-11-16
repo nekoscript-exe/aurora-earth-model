@@ -60,7 +60,7 @@ def monthly(year, month):
     ).rename(f"NDVI_{year}_{month:02d}")
 
 existing = {
-    t.config.get("description")
+    (t.config or {}).get("description")
     for t in ee.batch.Task.list()
     if t.state in ["READY", "RUNNING", "COMPLETED"]
 }

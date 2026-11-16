@@ -70,7 +70,7 @@ def process(var, src, out, grid, mask, region_path, start, end):
         ok = finite & mask
         v = z.data[ok]
         cov = float(ok.sum() / mask.sum())
-        rng_alert = bool(v.size and (v.min() < cfg["lo"] - 1e-4 or v.max() > cfg["hi"] + 1e-4))
+        rng_alert = bool(v.size and (v.min() < float(cfg["lo"]) - 1e-4 or v.max() > float(cfg["hi"]) + 1e-4))
         review = cov < MIN_COVERAGE or rng_alert or bad or not v.size
         if bad:
             alerts.append((date, "rejilla distinta"))

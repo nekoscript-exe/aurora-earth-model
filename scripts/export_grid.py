@@ -120,16 +120,17 @@ def download(img, grid, name, tiles=(4, 3)):
 
 
 def finalize(arr, out_path, grid, inside):
+    if inside.shape != (grid["height"], grid["width"]) or not inside.any():
+        raise ValueError("Regional mask is empty or differs from the grid")
     arr = arr.astype("float32")
     if arr.shape != (grid["height"], grid["width"]):
         raise ValueError(f"Forma {arr.shape} distinta a la rejilla")
     arr[~np.isfinite(arr)] = NODATA
     arr[~inside] = NODATA  # mascara regional por centro de pixel
     t = grid["transform"]
-    profile = dict(driver="GTiff", dtype="float32", count=1, nodata=NODATA,
+    with rasterio.open(out_path, "w", driver="GTiff", dtype="float32", count=1, nodata=NODATA,
                    width=grid["width"], height=grid["height"], crs=grid["crs"],
-                   transform=Affine(*t), compress="deflate")
-    with rasterio.open(out_path, "w", **profile) as dst:
+                   transform=Affine(*t), compress="deflate") as dst:
         dst.write(arr, 1)
     return float(((arr != NODATA) & inside).sum() / inside.sum())
 
@@ -159,7 +160,10 @@ def main():
     g = transform_geom("EPSG:4326", grid["crs"], geom)
     inside = rasterize([(g, 1)], out_shape=(grid["height"], grid["width"]),
                        transform=Affine(*grid["transform"]), fill=0,
-                       dtype="uint8").astype(bool)
+                       dtype="uint8")
+    if inside is None:
+        raise ValueError("Rasterization did not return a regional mask")
+    inside = inside.astype(bool)
     print("Rejilla:", {k: grid[k] for k in ("crs", "transform", "width", "height", "scale_m")},
           "| pixeles regionales:", int(inside.sum()))
     x0, y0, x1, y1 = grid["bounds"]

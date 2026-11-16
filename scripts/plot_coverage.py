@@ -33,6 +33,8 @@ def plot_coverage(csv_path, output_path):
 
     coverage = df["valid_fraction"]
     mean = coverage.mean()
+    if not isinstance(mean, (float, int, np.floating)):
+        raise ValueError("Coverage mean must be a numeric scalar")
     threshold = 0.70
 
     low = df[coverage < threshold]
@@ -70,7 +72,7 @@ def plot_coverage(csv_path, output_path):
     )
 
     ax.axhline(
-        mean,
+        float(mean),
         color="#26936c",
         linestyle=":",
         linewidth=1.6,
@@ -155,7 +157,7 @@ def plot_coverage(csv_path, output_path):
         color="#64748b"
     )
 
-    fig.tight_layout(rect=[0, 0.045, 1, 0.93])
+    fig.tight_layout(rect=(0, 0.045, 1, 0.93))
 
     output_path = Path(output_path)
 

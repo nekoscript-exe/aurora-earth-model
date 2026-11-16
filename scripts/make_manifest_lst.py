@@ -19,7 +19,10 @@ with rasterio.open(files[0]) as s0:
     reg = json.load(open("config/region.geojson"))["features"][0]["geometry"]
     g = transform_geom("EPSG:4326", s0.crs.to_string(), reg)
     inside = rasterize([(g, 1)], out_shape=s0.shape, transform=s0.transform,
-                       fill=0, dtype="uint8").astype(bool)
+                       fill=0, dtype="uint8")
+    if inside is None:
+        raise ValueError("Rasterization did not return a regional mask")
+    inside = inside.astype(bool)
 json.dump(grid, open("grid_lst.json", "w"), indent=2)
 
 rows = []

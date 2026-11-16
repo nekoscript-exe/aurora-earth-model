@@ -44,7 +44,10 @@ mask = rasterize(
     out_shape=shape,
     transform=transform,
     all_touched=False
-).astype(bool)
+)
+if mask is None:
+    raise ValueError("Rasterization did not return a regional mask")
+mask = mask.astype(bool)
 
 assert mask.sum() == 78737
 

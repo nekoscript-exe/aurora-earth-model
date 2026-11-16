@@ -32,7 +32,7 @@ def colors():
     mode = QSettings("AURORA", "Desktop").value(
         "appearance", "dark"
     )
-    return PALETTES.get(mode, PALETTES["dark"])
+    return PALETTES.get(mode if isinstance(mode, str) else "dark", PALETTES["dark"])
 
 
 def color(name):

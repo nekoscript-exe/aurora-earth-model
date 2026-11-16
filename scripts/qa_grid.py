@@ -25,7 +25,8 @@ def month_range(start, end):
 
 
 def check_file(path, grid, inside, lo, hi):
-    issues, st = [], {"valid_fraction": "", "min": "", "max": "", "mean": ""}
+    issues: list[str] = []
+    st: dict[str, str | float] = {"valid_fraction": "", "min": "", "max": "", "mean": ""}
     with rasterio.open(path) as s:
         if s.count != 1:
             issues.append(f"bandas={s.count}")
@@ -74,7 +75,10 @@ def main():
                           json.load(open(a.region))["features"][0]["geometry"])
     inside = rasterize([(geom, 1)], out_shape=(grid["height"], grid["width"]),
                        transform=Affine(*grid["transform"]), fill=0,
-                       dtype="uint8").astype(bool)
+                       dtype="uint8")
+    if inside is None:
+        raise RuntimeError("Region rasterization failed")
+    inside = inside.astype(bool)
     files = sorted(glob.glob(os.path.join(a.dir, f"{prefix}_*.tif")))
     if not files:
         raise SystemExit("No hay TIFF en " + a.dir)
@@ -84,7 +88,8 @@ def main():
         y, m = os.path.basename(f)[len(prefix) + 1:-4].split("_")
         issues, st = check_file(f, grid, inside, lo, hi)
         errors += bool(issues)
-        review = st["valid_fraction"] != "" and st["valid_fraction"] < MIN_COVERAGE
+        coverage = st["valid_fraction"]
+        review = isinstance(coverage, float) and coverage < MIN_COVERAGE
         path = f.replace(os.sep, "/")
         rows.append([f"{y}-{m}-01", path, prefix, unit, grid["crs"],
                      grid.get("scale_m", ""), st["valid_fraction"], source])

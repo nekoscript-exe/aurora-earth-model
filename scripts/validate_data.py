@@ -22,8 +22,11 @@ def load_grid(path):
 def region_mask(region_path, grid):
     geom = json.load(open(region_path))["features"][0]["geometry"]
     geom = transform_geom("EPSG:4326", grid["crs"], geom)
-    return rasterize([(geom, 1)], out_shape=(grid["height"], grid["width"]),
-                     transform=grid["affine"], fill=0, dtype="uint8").astype(bool)
+    mask = rasterize([(geom, 1)], out_shape=(grid["height"], grid["width"]),
+                     transform=grid["affine"], fill=0, dtype="uint8")
+    if mask is None:
+        raise RuntimeError("Region rasterization failed")
+    return mask.astype(bool)
 
 
 def find_duplicates(dates):
@@ -48,7 +51,8 @@ def find_missing_months(dates, start=None, end=None):
 
 def check_raster(path, grid, inside):
     """Devuelve (lista de problemas, estadísticas)."""
-    issues, stats = [], {"valid_fraction": "", "min": "", "max": "", "mean": ""}
+    issues: list[str] = []
+    stats: dict[str, str | float] = {"valid_fraction": "", "min": "", "max": "", "mean": ""}
     if not os.path.exists(path):
         return ["archivo no existe"], stats
     with rasterio.open(path) as s:
@@ -118,7 +122,8 @@ def main():
         issues, st = check_raster(r["path"], grid, inside)
         if issues:
             errors += 1
-        review = st["valid_fraction"] != "" and st["valid_fraction"] < MIN_COVERAGE
+        coverage = st["valid_fraction"]
+        review = isinstance(coverage, float) and coverage < MIN_COVERAGE
         report.append({"date": r["date"], "path": r["path"],
                        "status": "ERROR" if issues else ("REVISAR" if review else "OK"),
                        "issues": "; ".join(issues), **st})

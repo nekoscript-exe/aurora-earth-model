@@ -69,9 +69,11 @@ DIV_CMAP, UP_COLOR, DOWN_COLOR = "BrBG", "#1a9850", "#8c510a"
 LABEL_NONE = LABEL_DOWN = LABEL_UP = LABEL_NODATA = LABEL_OUTSIDE = LABEL_UNTESTED = ""
 
 
-def T(key, **kw):
-    v = STR[LANG][key]
-    return v if isinstance(v, dict) else v.format(v=VAR, u=UNIT, **kw)
+def T(key, **kw) -> str:
+    value = STR[LANG][key]
+    if not isinstance(value, str):
+        raise ValueError(f"Translation {key!r} is a mapping, not a text label")
+    return value.format(v=VAR, u=UNIT, **kw)
 
 
 def configure(variable="NDVI", unit="NDVI", source=None, period=None, region=None, lang="es",
@@ -256,7 +258,7 @@ def make_series_fig(dates, series, locations, note=""):
         xm = np.array([np.datetime64(f"{y}-07-01") for y in years])
         ax.plot(xm, means, "o-", color="#08519c", ms=3, label=T("annual9"))
         r, c = locations[label]
-        ax.set_title(T("row_col", label=T("loc")[label], r=r, c=c), fontsize=9)
+        ax.set_title(T("row_col", label=STR[LANG]["loc"][label], r=r, c=c), fontsize=9)
         ax.set_ylabel(UNIT)
         ax.legend(fontsize=7, loc="upper left")
     axes[-1, 0].set_xlabel(T("date"))

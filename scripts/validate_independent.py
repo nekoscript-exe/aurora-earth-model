@@ -19,10 +19,20 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from typing import Protocol, cast
 
 import numpy as np
 import pandas as pd
 from scipy import stats
+
+
+class LinearRegressionResult(Protocol):
+    slope: float
+    intercept: float
+    rvalue: float
+    pvalue: float
+    stderr: float
+
 
 from plot_results import read_raster  # mismo directorio (scripts/)
 
@@ -62,7 +72,7 @@ def regress(years, means):
     """linregress sobre años reales; None si hay menos de MIN_YEARS años."""
     if len(years) < MIN_YEARS:
         return None
-    r = stats.linregress(years, means)
+    r = cast(LinearRegressionResult, stats.linregress(years, means))
     return {"slope": r.slope, "p": r.pvalue, "n_years": len(years)}
 
 
@@ -155,7 +165,7 @@ def check_outputs(outputs):
     a = pd.read_csv(outputs / "annual_series.csv")
     mo = pd.read_csv(outputs / "monthly_series.csv")
     rt = json.load(open(outputs / "regional_trend.json", encoding="utf-8"))["trend"]
-    lr = stats.linregress(a["year"], a["mean"])
+    lr = cast(LinearRegressionResult, stats.linregress(a["year"], a["mean"]))
     add("regional: pendiente (linregress)", rt["slope_per_year"], lr.slope,
         abs(lr.slope - rt["slope_per_year"]) < 1e-9)
     add("regional: p", rt["p_value"], lr.pvalue, abs(lr.pvalue - rt["p_value"]) < 1e-9)
@@ -165,11 +175,11 @@ def check_outputs(outputs):
     add("regional: IC 95 %", ci, [lr.slope - h, lr.slope + h],
         abs(lr.slope - h - ci[0]) < 1e-9 and abs(lr.slope + h - ci[1]) < 1e-9)
     mo["year"] = mo["date"].str[:4].astype(int)
-    ok = mo[mo["coverage"] >= 0.7].groupby("year")["mean"].agg(["mean", "count"])
+    ok = cast(pd.DataFrame, mo[mo["coverage"] >= 0.7].groupby("year")["mean"].agg(["mean", "count"]))
     add("regional: media anual = media de meses con cobertura ≥ 0.7", "dif. máx < 1e-9",
-        f'{np.abs(ok["mean"].values - a["mean"].values).max():.2e}',
-        np.abs(ok["mean"].values - a["mean"].values).max() < 1e-9
-        and (ok["count"].values == a["valid_months"].values).all())
+        f'{np.abs(np.asarray(ok["mean"]) - np.asarray(a["mean"])).max():.2e}',
+        np.abs(np.asarray(ok["mean"]) - np.asarray(a["mean"])).max() < 1e-9
+        and (np.asarray(ok["count"]) == np.asarray(a["valid_months"])).all())
     return pd.DataFrame(rows)
 
 
@@ -231,11 +241,12 @@ def check_pixels_csv(outputs, pixel_csv, tol=TOL_SLOPE, mode="auto"):
     classes = {v: k for k, v in pick_pixels(slope, q, n, mode).items()}
     df = pd.read_csv(pixel_csv)
     rows = []
-    for (r, c), g in df.groupby(["row", "col"]):
+    for key, g in df.groupby(["row", "col"]):
+        r, c = cast(tuple[int, int], key)
         g = g.sort_values("date")
         cls = classes.get((int(r), int(c)), "(píxel no elegido por la regla)")
         rows.append(compare_pixel(cls, int(r), int(c), g["date"].tolist(),
-                                  pd.to_numeric(g["ndvi"], errors="coerce").to_numpy(), slope, p, tol))
+                                  np.asarray(pd.to_numeric(g["ndvi"], errors="coerce")), slope, p, tol))
     return pd.DataFrame(rows)
 
 
@@ -256,7 +267,7 @@ def main():
     A = check_outputs(a.outputs)
     A.to_csv(dest / "validation_outputs.csv", index=False)
     print(A.to_string(index=False))
-    print(f"\nParte A: {int(A['ok'].sum())}/{len(A)} comprobaciones correctas")
+    print(f"\nParte A: {int(np.asarray(A['ok'], dtype=bool).sum())}/{len(A)} comprobaciones correctas")
 
     S = selected_pixels(a.outputs, a.pick_mode)
     S.to_csv(dest / "pixels_selected.csv", index=False)

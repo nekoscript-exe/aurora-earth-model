@@ -1060,7 +1060,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
                 "NDVI": "NDVI",
                 "LST": "Temperature (°C)",
                 "PRECIP": "Precipitation rate (mm/h)",
-            }.get(metrics["variable"].upper(), metrics["variable"]))
+            }.get(metrics["variable"].upper(), metrics["variable"]) or "")
         )
 
         ax.grid(alpha=0.15)

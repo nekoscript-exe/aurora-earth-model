@@ -8,23 +8,33 @@ Reporta todo, sin escoger el resultado mas favorable.
 """
 import argparse
 from pathlib import Path
+from typing import Protocol, cast
 
 import numpy as np
 import pandas as pd
 from scipy import stats
 
+
+class LinearRegressionResult(Protocol):
+    slope: float
+    intercept: float
+    rvalue: float
+    pvalue: float
+    stderr: float
+
+
 MIN_MONTHS, MIN_YEARS = 9, 15
 
 
-def regional_trend(df, thr, months=None):
-    d = df[df["coverage"] >= thr]
+def regional_trend(df: pd.DataFrame, thr: float, months: list[int] | None = None):
+    d = cast(pd.DataFrame, df[df["coverage"] >= thr])
     if months is not None:
-        d = d[d["month"].isin(months)]
-    g = d.groupby("year")["mean"].agg(["mean", "count"])
-    g = g[g["count"] >= MIN_MONTHS] if months is None else g[g["count"] >= len(months)]
+        d = cast(pd.DataFrame, d[d["month"].isin(months)])
+    g = cast(pd.DataFrame, d.groupby("year")["mean"].agg(["mean", "count"]))
+    g = cast(pd.DataFrame, g[g["count"] >= MIN_MONTHS] if months is None else g[g["count"] >= len(months)])
     if len(g) < MIN_YEARS:
         return None
-    r = stats.linregress(g.index.values, g["mean"].values)
+    r = cast(LinearRegressionResult, stats.linregress(g.index.values, g["mean"].values))
     h = stats.t.ppf(0.975, len(g) - 2) * r.stderr
     return {"años": len(g), "pendiente": r.slope, "p": r.pvalue, "R2": r.rvalue**2,
             "IC95_inf": r.slope - h, "IC95_sup": r.slope + h}
@@ -40,13 +50,15 @@ def run(monthly):
         rows.append({"variante": f"cobertura ≥ {int(thr*100)} %", **(r or {"años": 0})})
     # soporte comun: meses del calendario que pasan el umbral en todos los años
     for thr in (0.5, 0.7):
-        ok = df.groupby("month")["coverage"].min()
-        months = sorted(ok[ok >= thr].index)
+        ok = cast(pd.Series, df.groupby("month")["coverage"].min())
+        selected = cast(pd.Series, ok[ok >= thr])
+        months = sorted(int(m) for m in selected.index)
         r = regional_trend(df, 0.0, months) if months else None
         rows.append({"variante": f"mismos meses (cobertura ≥ {int(thr*100)} % en todos los años): {months}",
                      **(r or {"años": 0})})
     cov = df.groupby("month")["coverage"].agg(["min", "mean"]).round(3)
-    low = df[df["coverage"] < 0.7].groupby("month").size().rename("meses_<70%")
+    low = cast(pd.Series, df[df["coverage"] < 0.7].groupby("month").size())
+    low = low.rename("meses_<70%")
     return pd.DataFrame(rows), cov.join(low).fillna(0)
 
 
