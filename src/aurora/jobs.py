@@ -16,8 +16,13 @@ def atomic_json(path, value):
     os.replace(temporary, path)
 
 
-def fingerprint(directory):
+def fingerprint(directory, scheme=None):
     """Metadata plus storage stat fingerprint; no read of the complete observations."""
+    if scheme == 'metadata-storage-sha256-v1':
+        from aurora.portability import content_fingerprint
+        return content_fingerprint(directory)
+    if scheme not in (None, 'metadata-sha256+storage-size-mtime_ns'):
+        raise ValueError('Unsupported fingerprint scheme')
     directory = Path(directory).resolve()
     meta = directory/'cube_metadata.json'; m = json.loads(meta.read_text())
     storage = m.get('storage', {'path': 'cube.npz'})
@@ -33,7 +38,7 @@ def fingerprint(directory):
 
 def fresh(manifest):
     try:
-        return all(fingerprint(source['directory'])['fingerprint'] == source['fingerprint']
+        return all(fingerprint(source['directory'], source.get('scheme'))['fingerprint'] == source['fingerprint']
                    for source in manifest['inputs'])
     except (OSError, ValueError, KeyError): return False
 
@@ -46,7 +51,13 @@ class Job:
                          'created_utc': datetime.now(timezone.utc).isoformat(),
                          'kind': kind, 'region': region, 'parameters': parameters,
                          'observation_kind': 'synthetic_test' if allow_synthetic else 'satellite',
-                         'inputs': [fingerprint(p) for p in inputs]}
+                         'inputs': [fingerprint(p, 'metadata-storage-sha256-v1') for p in inputs]}
+        for root in self.output.resolve().parents:
+            if (root/'config/datasets.json').is_file():
+                locations = [Path(source['directory']) for source in self.manifest['inputs']]
+                if all(path.is_relative_to(root) for path in locations):
+                    self.manifest['input_locations'] = [path.relative_to(root).as_posix() for path in locations]
+                break
         self.save()
 
     def save(self): atomic_json(self.output/'manifest.json', self.manifest)
@@ -83,11 +94,12 @@ class ResultRegistry:
         for location in roots: paths.update((root/location).glob('*/manifest.json'))
         for path in paths:
             try:
-                data = json.loads(path.read_text())
+                from aurora.portability import load_manifest
+                data = load_manifest(path, root)
                 if data.get('schema') != 'aurora-scientific-result-v1' or data.get('observation_kind') != 'satellite': continue
                 data = dict(data, directory=path.parent, stale=not fresh(data))
                 self.results.append(data)
-            except (OSError, ValueError): continue
+            except (OSError, ValueError, KeyError, TypeError): continue
         self.results.sort(key=lambda r: r.get('created_utc', ''), reverse=True)
 
     def available(self, region=None, variable=None, kind=None):

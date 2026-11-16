@@ -43,12 +43,11 @@ def predict_xgboost(history, dates, model_path, eligible):
 
 
 def predict_convlstm(
-    history, model_path, eligible, patch_size=32
+    history, model_path, eligible, patch_size=32, device=None
 ):
 
-    device = torch.device(
-        "cuda" if torch.cuda.is_available() else "cpu"
-    )
+    from aurora.hardware import select_device
+    device = select_device(device)
 
     model = AuroraConvLSTM().to(device)
 
@@ -161,6 +160,7 @@ def main():
     parser.add_argument("--output", required=True)
     parser.add_argument("--min-history", type=int, default=9)
 
+    parser.add_argument('--device', choices=['auto', 'cpu', 'cuda'], default=None)
     args = parser.parse_args()
 
     if not 1 <= args.min_history <= 12:
@@ -212,7 +212,7 @@ def main():
     else:
 
         prediction = predict_convlstm(
-            history, args.model, eligible
+            history, args.model, eligible, device=args.device
         )
 
     if not np.isfinite(prediction[eligible]).all():

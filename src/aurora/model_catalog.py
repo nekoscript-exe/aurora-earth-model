@@ -47,7 +47,10 @@ class ModelRegistry:
                     if not expected:
                         if not result.get('cube'): continue
                         if (root/result['cube']).resolve() != source.resolve(): continue
-                        expected = audit.get(str(source.relative_to(root)), {}).get('sha256')
+                        logical_source = root/'data/processed/queretaro/cube.npz'
+                        if not logical_source.is_file(): continue
+                        if logical_source.resolve() != source.resolve(): continue
+                        expected = audit.get(logical_source.relative_to(root).as_posix(), {}).get('sha256')
                         legacy = True
                         if not expected or not all(preserved.get(str(path.relative_to(root))) == sha(path) for path in [benchmark]+weights): continue
                     elif record.variable != report.get('variable'): continue

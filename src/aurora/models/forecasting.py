@@ -210,7 +210,7 @@ def run_forecast(directory, output, variable='lst', epochs=12, patience=3,
     return report
 
 
-def forecast_saved(directory, run, output):
+def forecast_saved(directory, run, output, device=None):
     """Reproduce next-month estimates from exported weights without retraining."""
     run, output = Path(run), Path(output)
     report = json.loads((run/'metrics.json').read_text())
@@ -222,7 +222,8 @@ def forecast_saved(directory, run, output):
     with np.load(run/'climatology_model.npz', allow_pickle=False) as climate_model:
         climate = climate_model['climatology']
     model = xgb.XGBRegressor(); model.load_model(run/'xgboost/model.ubj'); model.set_params(device='cpu')
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    from aurora.hardware import select_device
+    device = select_device(device)
     deep = AuroraConvLSTM('linear').to(device)
     deep.load_state_dict(torch.load(run/'convlstm/best_model.pt', map_location=device, weights_only=True))
     normalized = ((X-norm['mean'])/norm['std']).astype('float32')

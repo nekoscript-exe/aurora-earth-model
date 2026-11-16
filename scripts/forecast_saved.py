@@ -7,4 +7,5 @@ from aurora.models.forecasting import forecast_saved
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('dataset', 'run', 'output'): p.add_argument('--'+name, type=Path, required=True)
-    a = p.parse_args(); forecast_saved(a.dataset, a.run, a.output)
+    p.add_argument('--device', choices=['auto', 'cpu', 'cuda'], default=None)
+    a = p.parse_args(); forecast_saved(a.dataset, a.run, a.output, a.device)

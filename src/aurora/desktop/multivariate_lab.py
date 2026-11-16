@@ -1,4 +1,5 @@
 """Paired observation laboratory; analysis runs outside the UI process."""
+from aurora.portability import load_manifest
 
 from .i18n import error_text, localized_label, localized_button, add_choices, tr
 import json
@@ -119,7 +120,7 @@ class MultivariateLaboratory(QWidget):
             self.style_plot(ax); self.canvas.draw(); return
         report = json.loads((self.output/'report.json').read_text())
         manifest = self.output/'manifest.json'
-        if manifest.exists() and (json.loads(manifest.read_text()).get('status') != 'complete' or not fresh(json.loads(manifest.read_text()))):
+        if manifest.exists() and (load_manifest(manifest).get('status') != 'complete' or not fresh(load_manifest(manifest))):
             self.info.setText(tr('Incomplete or stale result; run a fresh analysis.')); self.canvas.draw(); return
         self.report = report
         with np.load(self.output/'analysis.npz', allow_pickle=False) as data:
