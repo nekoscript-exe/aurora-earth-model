@@ -1,0 +1,24 @@
+{
+  "Lite": {
+    "archive_sha256": "f2532093db7ca5a8ab365538bb446e47a7166b4ce12bfa824472d44800efb80c",
+    "sidecar_matches": true,
+    "integrity": {
+      "ok": true,
+      "verified_files": 776,
+      "errors": [],
+      "scope": "Real Quer\u00e9taro NDVI/LST, January 2001 to December 2025"
+    },
+    "root": "/tmp/aurora-audit-packages-rm4_wq_6/Lite"
+  },
+  "Full": {
+    "archive_sha256": "ee712f1db7edeaec20b17c1034ca2a91ea52a393ac5dfd95f9b1c08ff62b61c6",
+    "sidecar_matches": true,
+    "integrity": {
+      "ok": true,
+      "verified_files": 5424,
+      "errors": [],
+      "scope": "Real Quer\u00e9taro, Mexico and global NDVI/LST, January 2001 to December 2025; global GPM precipitation through September 2025. Coverage varies by dataset."
+    },
+    "root": "/tmp/aurora-audit-packages-rm4_wq_6/Full"
+  }
+}

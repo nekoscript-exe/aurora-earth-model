@@ -1,0 +1,10 @@
+1357117 fix: resolve static diagnostics and guard optional raster and UI values
+0efa87b fix: protect NPZ cache provenance and verify saved model artifacts
+6e5d529 fix: harden portable package paths and pin patched installation tools
+013b499 fix: complete CPU dependencies and clean cancelled cache staging
+3318051 ci: add isolated CPU checks and separate external scientific tests
+969aaf8 fix: translate navigation and appearance controls in Spanish
+d166c0f test: make historical scientific equivalence checks reproducible
+85ad3b0 fix: resize appearance selector when translated labels change
+3c1de36 ci: audit upstream Torch explicitly and reject unexpected advisory omissions
+59ba48e fix: match actual pip-audit omission schema in CI

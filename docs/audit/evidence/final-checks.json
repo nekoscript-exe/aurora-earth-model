@@ -1,0 +1,44 @@
+[
+  {
+    "check": "compileall-development",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "check": "compileall-CPU",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "check": "pip-check-development",
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  {
+    "check": "pip-check-earthengine",
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  {
+    "check": "pip-check-new-CPU",
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  {
+    "check": "git-diff-check",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "check": "CI pip-audit omission guard on actual JSON plus unexpected-omission negative case",
+    "exit_code": 0,
+    "stdout": "Known local Torch omission accepted; unknown omission rejected.",
+    "stderr": ""
+  }
+]

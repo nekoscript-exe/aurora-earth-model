@@ -1,0 +1,8 @@
+{
+  "source_commit": "85ad3b0dc2974e00ad0e2df776db2ac86bc09fd9",
+  "sha256": "de0dde941c66d1b84bba4377a727f480d28b4a3ce0571fa717690eec4f400959",
+  "sidecar_matches": true,
+  "independent_extraction": true,
+  "doctor_ok": true,
+  "four_cpu_models_pass": true
+}

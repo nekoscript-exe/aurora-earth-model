@@ -1,0 +1,26 @@
+{
+  "initial_commit": "96e7bca",
+  "validated_source_commit": "85ad3b0",
+  "initial_tests": 192,
+  "final_tests_passed": 212,
+  "clean_source_passed": 207,
+  "clean_source_skipped_external_data": 5,
+  "pyright": {
+    "errors": 0,
+    "warnings": 0,
+    "information": 0
+  },
+  "CPU_dependency_audit_known_vulnerabilities": 0,
+  "historical_commits_scanned": 115,
+  "secrets_detected": 0,
+  "historical_archives_unchanged": true,
+  "clean_CPU_installer_succeeded": true,
+  "windows_executed": false,
+  "clean_NVIDIA_installer_executed": false,
+  "managed_security_scan": "failed: Scan output parent must not be group- or world-writable without the sticky bit.",
+  "dependency_audit_omissions": [
+    "torch 2.14.1+cpu not found by PyPI advisory lookup"
+  ],
+  "separate_upstream_torch_2_14_1_audit": "strict query: no known vulnerabilities; not independent CPU binary assurance",
+  "CI_followup_commit": "59ba48e"
+}

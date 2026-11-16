@@ -1,0 +1,74 @@
+{
+  "hardware": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "python": "3.14.4",
+    "logical_cpus": 16,
+    "torch": "2.14.1+cpu",
+    "torch_cuda_build": null,
+    "requested_device": "cpu",
+    "selected_device": "cpu",
+    "gpu": null,
+    "free_disk_bytes": 480286380032
+  },
+  "threads": 4,
+  "models": {
+    "ndvi/xgboost": {
+      "device": "cpu",
+      "unit": "1",
+      "date": "2026-01",
+      "observations_created": false,
+      "mask_exact": true,
+      "pixels": 11123,
+      "max_absolute_difference": 0.0,
+      "rmse_difference": 0.0,
+      "absolute_tolerance": 1e-06,
+      "relative_tolerance": 0,
+      "within_tolerance": true,
+      "seconds": 0.01492926399805583
+    },
+    "ndvi/convlstm": {
+      "device": "cpu",
+      "unit": "1",
+      "date": "2026-01",
+      "observations_created": false,
+      "mask_exact": true,
+      "pixels": 11123,
+      "max_absolute_difference": 0.00031006336212158203,
+      "rmse_difference": 6.380506907005167e-05,
+      "absolute_tolerance": 0.001,
+      "relative_tolerance": 0,
+      "within_tolerance": true,
+      "seconds": 0.20610004600166576
+    },
+    "lst/xgboost": {
+      "device": "cpu",
+      "unit": "degC",
+      "date": "2026-01",
+      "observations_created": false,
+      "mask_exact": true,
+      "pixels": 11095,
+      "max_absolute_difference": 0.0,
+      "rmse_difference": 0.0,
+      "absolute_tolerance": 1e-06,
+      "relative_tolerance": 0,
+      "within_tolerance": true,
+      "seconds": 0.3095965089960373
+    },
+    "lst/convlstm": {
+      "device": "cpu",
+      "unit": "degC",
+      "date": "2026-01",
+      "observations_created": false,
+      "mask_exact": true,
+      "pixels": 11095,
+      "max_absolute_difference": 0.001583099365234375,
+      "rmse_difference": 0.000338741907786359,
+      "absolute_tolerance": 0.01,
+      "relative_tolerance": 0,
+      "within_tolerance": true,
+      "seconds": 0.3095965089960373
+    }
+  },
+  "scope": "Retrospective January 2026 estimates; not new satellite observations"
+}

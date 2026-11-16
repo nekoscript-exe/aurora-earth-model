@@ -1,0 +1,77 @@
+<REPOSITORY>/scripts/acquisition/export_global_ndvi.py
+  <REPOSITORY>/scripts/acquisition/export_global_ndvi.py:63:14 - error: "get" is not a known attribute of "None" (reportOptionalMemberAccess)
+<REPOSITORY>/scripts/acquisition/merge_mexico_history.py
+  <REPOSITORY>/scripts/acquisition/merge_mexico_history.py:47:3 - error: "astype" is not a known attribute of "None" (reportOptionalMemberAccess)
+<REPOSITORY>/scripts/export_grid.py
+  <REPOSITORY>/scripts/export_grid.py:132:41 - error: Argument of type "str | int | float | Affine" cannot be assigned to parameter "sharing" of type "bool" in function "open"
+    Type "str | int | float | Affine" is not assignable to type "bool"
+      "Affine" is not assignable to "bool" (reportArgumentType)
+  <REPOSITORY>/scripts/export_grid.py:132:41 - error: Argument of type "str | int | float | Affine" cannot be assigned to parameter "thread_safe" of type "bool" in function "open"
+    Type "str | int | float | Affine" is not assignable to type "bool"
+      "Affine" is not assignable to "bool" (reportArgumentType)
+  <REPOSITORY>/scripts/export_grid.py:162:39 - error: "astype" is not a known attribute of "None" (reportOptionalMemberAccess)
+<REPOSITORY>/scripts/export_ndvi.py
+  <REPOSITORY>/scripts/export_ndvi.py:30:5 - error: Expression with type "tuple[list[Unknown], list[Unknown], list[Unknown]] | tuple[list[Unknown], list[Unknown]] | Unknown" cannot be assigned to target tuple
+    Type "tuple[list[Unknown], list[Unknown], list[Unknown]]" is incompatible with target tuple
+      Tuple size mismatch; expected 2 but received 3 (reportAssignmentType)
+  <REPOSITORY>/scripts/export_ndvi.py:90:41 - error: Argument of type "str | int | float | Affine" cannot be assigned to parameter "sharing" of type "bool" in function "open"
+    Type "str | int | float | Affine" is not assignable to type "bool"
+      "Affine" is not assignable to "bool" (reportArgumentType)
+  <REPOSITORY>/scripts/export_ndvi.py:90:41 - error: Argument of type "str | int | float | Affine" cannot be assigned to parameter "thread_safe" of type "bool" in function "open"
+    Type "str | int | float | Affine" is not assignable to type "bool"
+      "Affine" is not assignable to "bool" (reportArgumentType)
+<REPOSITORY>/scripts/grid_nacional.py
+  <REPOSITORY>/scripts/grid_nacional.py:21:5 - error: Expression with type "tuple[list[Unknown], list[Unknown], list[Unknown]] | tuple[list[Unknown], list[Unknown]] | Unknown" cannot be assigned to target tuple
+    Type "tuple[list[Unknown], list[Unknown], list[Unknown]]" is incompatible with target tuple
+      Tuple size mismatch; expected 2 but received 3 (reportAssignmentType)
+  <REPOSITORY>/scripts/grid_nacional.py:39:18 - error: "sum" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <REPOSITORY>/scripts/grid_nacional.py:59:27 - error: Object of type "None" cannot be used as iterable value (reportOptionalIterable)
+  <REPOSITORY>/scripts/grid_nacional.py:59:56 - error: Object of type "None" cannot be used as iterable value (reportOptionalIterable)
+<REPOSITORY>/scripts/make_manifest.py
+  <REPOSITORY>/scripts/make_manifest.py:21:47 - error: "astype" is not a known attribute of "None" (reportOptionalMemberAccess)
+<REPOSITORY>/scripts/make_manifest_lst.py
+  <REPOSITORY>/scripts/make_manifest_lst.py:22:47 - error: "astype" is not a known attribute of "None" (reportOptionalMemberAccess)
+<REPOSITORY>/scripts/package_mexico.py
+  <REPOSITORY>/scripts/package_mexico.py:73:48 - error: Operator "-" not supported for types "str | float" and "float"
+    Operator "-" not supported for types "str" and "float" (reportOperatorIssue)
+  <REPOSITORY>/scripts/package_mexico.py:73:78 - error: Operator "+" not supported for types "str | float" and "float"
+    Operator "+" not supported for types "str" and "float" (reportOperatorIssue)
+<REPOSITORY>/scripts/plot_coverage.py
+  <REPOSITORY>/scripts/plot_coverage.py:73:9 - error: Argument of type "Series | Any | Unknown" cannot be assigned to parameter "y" of type "float" in function "axhline"
+    Type "Series | Any | Unknown" is not assignable to type "float"
+      "Series" is not assignable to "float" (reportArgumentType)
+  <REPOSITORY>/scripts/plot_coverage.py:158:27 - error: Argument of type "list[int | float]" cannot be assigned to parameter "rect" of type "tuple[float, float, float, float] | None" in function "tight_layout"
+    Type "list[int | float]" is not assignable to type "tuple[float, float, float, float] | None"
+      "list[int | float]" is not assignable to "tuple[float, float, float, float]"
+      "list[int | float]" is not assignable to "None" (reportArgumentType)
+<REPOSITORY>/scripts/plot_results.py
+  <REPOSITORY>/scripts/plot_results.py:134:19 - error: Argument of type "dict[str, str] | str" cannot be assigned to parameter "xlabel" of type "str" in function "set_xlabel"
+    Type "dict[str, str] | str" is not assignable to type "str"
+      "dict[str, str]" is not assignable to "str" (reportArgumentType)
+  <REPOSITORY>/scripts/plot_results.py:135:19 - error: Argument of type "dict[str, str] | str" cannot be assigned to parameter "ylabel" of type "str" in function "set_ylabel"
+    Type "dict[str, str] | str" is not assignable to type "str"
+      "dict[str, str]" is not assignable to "str" (reportArgumentType)
+  <REPOSITORY>/scripts/plot_results.py:293:19 - error: Argument of type "dict[str, str] | str" cannot be assigned to parameter "xlabel" of type "str" in function "set_xlabel"
+    Type "dict[str, str] | str" is not assignable to type "str"
+      "dict[str, str]" is not assignable to "str" (reportArgumentType)
+<REPOSITORY>/scripts/validar_paquete.py
+  <REPOSITORY>/scripts/validar_paquete.py:35:15 - error: "crs" is not a known attribute of module "rasterio" (reportAttributeAccessIssue)
+<REPOSITORY>/src/aurora/desktop/appearance.py
+  <REPOSITORY>/src/aurora/desktop/appearance.py:35:12 - error: No overloads for "get" match the provided arguments (reportCallIssue)
+  <REPOSITORY>/src/aurora/desktop/appearance.py:35:25 - error: Argument of type "object" cannot be assigned to parameter "key" of type "str" in function "get"
+    "object" is not assignable to "str" (reportArgumentType)
+<REPOSITORY>/src/aurora/desktop/window.py
+  <REPOSITORY>/src/aurora/desktop/window.py:1059:16 - error: Argument of type "str | None" cannot be assigned to parameter "text" of type "str" in function "tr"
+    Type "str | None" is not assignable to type "str"
+      "None" is not assignable to "str" (reportArgumentType)
+<REPOSITORY>/tests/test_data.py
+  <REPOSITORY>/tests/test_data.py:12:38 - error: Argument of type "ModuleSpec | None" cannot be assigned to parameter "spec" of type "ModuleSpec" in function "module_from_spec"
+    Type "ModuleSpec | None" is not assignable to type "ModuleSpec"
+      "None" is not assignable to "ModuleSpec" (reportArgumentType)
+  <REPOSITORY>/tests/test_data.py:13:7 - error: "loader" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <REPOSITORY>/tests/test_data.py:13:14 - error: "exec_module" is not a known attribute of "None" (reportOptionalMemberAccess)
+<REPOSITORY>/tests/test_figures.py
+  <REPOSITORY>/tests/test_figures.py:55:61 - error: "get_texts" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <REPOSITORY>/tests/test_figures.py:129:61 - error: "get_texts" is not a known attribute of "None" (reportOptionalMemberAccess)
+  <REPOSITORY>/tests/test_figures.py:146:72 - error: "get_texts" is not a known attribute of "None" (reportOptionalMemberAccess)
+31 errors, 0 warnings, 0 informations

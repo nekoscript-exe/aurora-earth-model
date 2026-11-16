@@ -1,0 +1,120 @@
+{
+  "queretaro": {
+    "shape": [
+      300,
+      171,
+      161,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 48,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.0406759549950948
+  },
+  "queretaro_lst": {
+    "shape": [
+      300,
+      171,
+      161,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 43,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.028369188999931794
+  },
+  "global_lst_2001_2025_zarr": {
+    "shape": [
+      300,
+      267,
+      694,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 0,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.022321525000734255
+  },
+  "global_ndvi_2001_2025_zarr": {
+    "shape": [
+      300,
+      267,
+      694,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 0,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.01870101100212196
+  },
+  "global_precip_2001_2025_zarr": {
+    "shape": [
+      297,
+      267,
+      694,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 0,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.01967114400031278
+  },
+  "mexico_lst_2001_2025_zarr": {
+    "shape": [
+      300,
+      426,
+      612,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 6,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.022583757003303617
+  },
+  "mexico_ndvi_2001_2025_zarr": {
+    "shape": [
+      300,
+      426,
+      612,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 48,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.021882200002437457
+  },
+  "queretaro_lst_zarr": {
+    "shape": [
+      300,
+      171,
+      161,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 43,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.019599038998421747
+  },
+  "queretaro_ndvi_zarr": {
+    "shape": [
+      300,
+      171,
+      161,
+      1
+    ],
+    "sample_windows": 9,
+    "finite_sample_values": 48,
+    "max_read_budget_bytes": 8388608,
+    "mask_and_values_exact": true,
+    "seconds": 0.01984250700479606
+  },
+  "_scope": "Sparse deterministic infrastructure checks only; not national/global scientific completeness or full QA validation."
+}

@@ -1,0 +1,20 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "torch": "2.14.1+cu130",
+  "models": {
+    "ndvi": {
+      "seconds": 0.338499204000982,
+      "mask_exact": true,
+      "max_abs": 0.0,
+      "atol": 0.001
+    },
+    "lst": {
+      "seconds": 0.15354183300223667,
+      "mask_exact": true,
+      "max_abs": 0.0,
+      "atol": 0.01
+    }
+  },
+  "peak_vram_mib": 32.25244140625,
+  "peak_rss_kib": 1407504
+}
