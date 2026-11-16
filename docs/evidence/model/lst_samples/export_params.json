@@ -1,0 +1,12 @@
+{
+  "collection": "MODIS/061/MOD11A2",
+  "band": "LST_Day_1km",
+  "qc_band": "QC_Day",
+  "assign": "start",
+  "reducer": "median",
+  "max_lst_error": null,
+  "unit": "C",
+  "conversion": "DN*0.02-273.15",
+  "scale_m": 1000,
+  "exported_on": "2026-11-14"
+}

@@ -1,0 +1,11 @@
+{
+  "README.md": false,
+  "CONTRIBUTORS.md": true,
+  "historical_ndvi_files": 35,
+  "all_historical_ndvi_sha256_match": true,
+  "all_other_refs_unchanged": true,
+  "README_in_audit_commits_unchanged": true,
+  "README_working_tree_observation": "Concurrent edit to team section detected after previous preservation check; preserved uncommitted and excluded from this audit.",
+  "README_initial_and_HEAD_sha256": "8467eeca2716cf20a9e87db02420c9afe00618730a08c96664e48c7b8882191b",
+  "README_working_tree_sha256": "1893e32288928a3a4f6a7317f41d203e0459e9b8d9bfb726afadcb6282d65c92"
+}

@@ -18,7 +18,8 @@ NODATA = -9999.0
 def build_grid_from_bounds(lon0, lat0, lon1, lat1, scale, crs=CRS):
     """EPSG:6933 es cilindrica: x depende solo de lon e y solo de lat, asi que
     las esquinas de la caja lon/lat dan la extension exacta."""
-    xs, ys = warp_transform("EPSG:4326", crs, [lon0, lon1], [lat0, lat1])
+    projected = warp_transform("EPSG:4326", crs, [lon0, lon1], [lat0, lat1])
+    xs, ys = projected[:2]
     x0 = math.floor(min(xs) / scale) * scale
     x1 = math.ceil(max(xs) / scale) * scale
     y0 = math.floor(min(ys) / scale) * scale
@@ -36,6 +37,8 @@ def regional_pixels(geom_wgs84, grid):
     g = transform_geom("EPSG:4326", grid["crs"], geom_wgs84)
     m = rasterize([(g, 1)], out_shape=(grid["height"], grid["width"]),
                   transform=Affine(*grid["transform"]), fill=0, dtype="uint8")
+    if m is None:
+        raise ValueError("Rasterization did not return a regional mask")
     return int(m.sum())  # centro de pixel (all_touched=False)
 
 
@@ -56,6 +59,8 @@ def main():
     geom = fc.geometry(maxError=100).simplify(a.simplify)
     gj = geom.getInfo()
     ring = geom.bounds().coordinates().get(0).getInfo()
+    if not isinstance(ring, list) or not ring:
+        raise ValueError("Earth Engine returned no boundary coordinates")
     lons = [c[0] for c in ring]; lats = [c[1] for c in ring]
     grid = build_grid_from_bounds(min(lons), min(lats), max(lons), max(lats), a.scale)
     grid["n_regional_pixels"] = regional_pixels(gj, grid)

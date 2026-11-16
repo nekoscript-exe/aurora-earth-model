@@ -1,0 +1,11 @@
+{
+  "python": "3.14.4",
+  "pyside6": "6.12.0",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "rasterio": "1.5.2",
+  "torch": "2.14.1+cu130",
+  "xgboost": "3.4.1",
+  "cuda": "13.0",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU"
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "aurora-scientific-result-v1",
+  "status": "complete",
+  "created_utc": "2026-11-16T02:10:18.713551+00:00",
+  "kind": "statistics",
+  "region": "global_lst_2001_2025_zarr",
+  "parameters": {
+    "start": "2001-01",
+    "end": "2025-12",
+    "memory_mib": 256,
+    "requested_block_size": 32,
+    "min_months_per_year": 9,
+    "min_valid_years": 15,
+    "alpha": 0.05,
+    "sen": true,
+    "hac": true
+  },
+  "observation_kind": "satellite",
+  "inputs": [
+    {
+      "directory": "/home/azael/Proyectos/aurora-multisource/outputs/global_engine/stores/global_lst_2001_2025_zarr",
+      "fingerprint": "156f03671c19d35b28c5dfe337bb67c7bed9bee89935c8a9246f32741e3b9867",
+      "scheme": "metadata-sha256+storage-size-mtime_ns"
+    }
+  ],
+  "variable": "lst",
+  "unit": "degC",
+  "slope_unit": "degC/year",
+  "source": "MODIS/061/MOD21C3",
+  "period": [
+    "2001-01",
+    "2025-12"
+  ],
+  "grid": {
+    "crs": "EPSG:6933",
+    "transform": [
+      50000,
+      0,
+      -17350000,
+      0,
+      -50000,
+      7300000
+    ],
+    "width": 694,
+    "height": 267,
+    "nodata": -9999.0
+  },
+  "fields": {
+    "coverage": "1",
+    "trend_slope": "degC/year",
+    "trend_p": "1",
+    "trend_q": "1",
+    "trend_change": "degC",
+    "trend_n": "years",
+    "trend_lag1": "1",
+    "trend_significant": "1",
+    "trend_sen": "degC/year",
+    "trend_hac_p": "1",
+    "trend_hac_q": "1"
+  },
+  "region_pixels": 53737,
+  "region_area_m2": 134342500000000.0,
+  "area_methods": [
+    "native equal-area projection determinant"
+  ],
+  "export_precision": "float64 statistics GeoTIFF/NPY; float64 decimal CSV",
+  "eligibility": {
+    "eligible": true,
+    "eligible_calendar_years": 25,
+    "minimum_years": 15,
+    "minimum_months_per_year": 9,
+    "interpretation": "trend eligibility still requires pixel-level coverage"
+  },
+  "fdr_test_count": 45694,
+  "methodology": [
+    "Native-grid annual mean with at least 9 observed months",
+    "OLS/Sen require 15 valid years per pixel; HAC requires complete consecutive annual series",
+    "BH applied to the entire regional family, independently for OLS and HAC, never per block",
+    "Area-weighted means and observed-area coverage; no filling or resampling of observations",
+    "Nominal significance does not remove all temporal or spatial dependence; no causal inference"
+  ],
+  "actual_block_size": 32,
+  "estimated_block_working_bytes": 37945344,
+  "memory_budget_bytes": 268435456,
+  "estimated_output_disk_bytes": 88943040,
+  "seconds": 44.03685758699976
+}

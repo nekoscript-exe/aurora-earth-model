@@ -1,0 +1,38 @@
+{
+  "mexico": {
+    "resolution_m": 5000,
+    "variables": [
+      "ndvi",
+      "lst"
+    ],
+    "status": "awaiting validated observations",
+    "requires": [
+      "documented CRS and affine",
+      "explicit region_id",
+      "monthly calendar",
+      "QA masks",
+      "source and units"
+    ]
+  },
+  "global_land": {
+    "resolution_m": [
+      50000,
+      100000
+    ],
+    "variables": [
+      "ndvi",
+      "lst"
+    ],
+    "status": "awaiting validated land observations; no global scientific coverage claimed",
+    "requires": [
+      "documented land mask and valid observations",
+      "equal-area grid or ellipsoidal area weighting",
+      "antimeridian and polar validation",
+      "explicit monthly calendar and QA"
+    ],
+    "crs_candidates": [
+      "EPSG:8857",
+      "EPSG:6933 with explicit polar-domain handling"
+    ]
+  }
+}

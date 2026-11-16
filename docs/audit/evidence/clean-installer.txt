@@ -1,0 +1,338 @@
+Collecting pip==26.2 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/installer-bootstrap.txt (line 2))
+  Downloading pip-26.2-py3-none-any.whl (1.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 8.9 MB/s eta 0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 25.1.1
+    Uninstalling pip-25.1.1:
+      Successfully uninstalled pip-25.1.1
+Successfully installed pip-26.2
+Looking in indexes: https://pypi.org/simple, https://download.pytorch.org/whl/cpu
+Collecting affine==3.0.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 2))
+  Downloading affine-3.0.1-py3-none-any.whl (10 kB)
+Collecting attrs==26.1.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 3))
+  Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+Collecting certifi==2026.10.23 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 4))
+  Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Collecting click==8.5.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 5))
+  Downloading click-8.5.1-py3-none-any.whl (126 kB)
+Collecting cloudpickle==3.1.2 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 6))
+  Downloading cloudpickle-3.1.2-py3-none-any.whl (22 kB)
+Collecting contourpy==1.4.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 7))
+  Downloading contourpy-1.4.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (384 kB)
+Collecting cycler==0.12.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 8))
+  Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Collecting donfig==0.8.1.post1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 9))
+  Downloading donfig-0.8.1.post1-py3-none-any.whl (21 kB)
+Collecting filelock==4.2.4 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 10))
+  Downloading filelock-4.2.4-py3-none-any.whl (162 kB)
+Collecting fonttools==4.68.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 11))
+  Downloading fonttools-4.68.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 10.1 MB/s  0:00:00
+Collecting formulaic==1.2.2 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 12))
+  Downloading formulaic-1.2.2-py3-none-any.whl (118 kB)
+Collecting fsspec==2026.9.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 13))
+  Downloading fsspec-2026.9.0-py3-none-any.whl (221 kB)
+Collecting google-crc32c==1.9.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 14))
+  Downloading google_crc32c-1.9.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (36 kB)
+Collecting iniconfig==2.3.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 15))
+  Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Collecting interface_meta==2.0.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 16))
+  Downloading interface_meta-2.0.1-py3-none-any.whl (15 kB)
+Collecting Jinja2==3.1.6 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 17))
+  Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Collecting joblib==1.6.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 18))
+  Downloading joblib-1.6.0-py3-none-any.whl (306 kB)
+Collecting kiwisolver==1.5.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 19))
+  Downloading kiwisolver-1.5.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 12.0 MB/s  0:00:00
+Collecting MarkupSafe==3.0.3 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 20))
+  Downloading markupsafe-3.0.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (23 kB)
+Collecting matplotlib==3.11.2 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 21))
+  Downloading matplotlib-3.11.2-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (11.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.0/11.0 MB 11.7 MB/s  0:00:00
+Collecting mpmath==1.3.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 22))
+  Downloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 12.2 MB/s  0:00:00
+Collecting msgspec==0.22.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 23))
+  Downloading msgspec-0.22.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (230 kB)
+Collecting narwhals==2.28.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 24))
+  Downloading narwhals-2.28.0-py3-none-any.whl (490 kB)
+Collecting networkx==3.7 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 25))
+  Downloading networkx-3.7-py3-none-any.whl (2.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 11.6 MB/s  0:00:00
+Collecting numcodecs==0.17.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 26))
+  Downloading numcodecs-0.17.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 11.7 MB/s  0:00:00
+Collecting numpy==2.5.4 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 27))
+  Downloading numpy-2.5.4-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 11.7 MB/s  0:00:01
+Collecting packaging==26.3 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 28))
+  Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Collecting pandas==3.1.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 29))
+  Downloading pandas-3.1.1-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 11.8 MB/s  0:00:01
+Collecting patsy==1.0.3 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 30))
+  Downloading patsy-1.0.3-py2.py3-none-any.whl (233 kB)
+Collecting pillow==13.0.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 31))
+  Downloading pillow-13.0.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 11.8 MB/s  0:00:00
+Collecting pluggy==1.7.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 32))
+  Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+Collecting Pygments==2.21.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 33))
+  Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 11.9 MB/s  0:00:00
+Collecting pyparsing==3.3.3 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 34))
+  Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+Collecting pyproj==3.8.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 35))
+  Downloading pyproj-3.8.0-cp314-cp314-manylinux_2_28_x86_64.whl (9.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 11.7 MB/s  0:00:00
+Collecting PySide6==6.12.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 36))
+  Downloading pyside6-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (577 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 577.7/577.7 kB 12.3 MB/s  0:00:00
+Collecting PySide6_Addons==6.12.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 37))
+  Downloading pyside6_addons-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (59.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 59.2/59.2 MB 11.1 MB/s  0:00:05
+Collecting PySide6_Essentials==6.12.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 38))
+  Downloading pyside6_essentials-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (84.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.3/84.3 MB 11.7 MB/s  0:00:07
+Collecting PySide6_Pdf==6.12.0.140 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 39))
+  Downloading pyside6_pdf-6.12.0.140-cp310-abi3-manylinux_2_34_x86_64.whl (2.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 MB 11.9 MB/s  0:00:00
+Collecting PySide6_WebEngine==6.12.0.140 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 40))
+  Downloading pyside6_webengine-6.12.0.140-cp310-abi3-manylinux_2_34_x86_64.whl (116.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 116.7/116.7 MB 11.7 MB/s  0:00:09
+Collecting pytest==9.2.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 41))
+  Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+Collecting python-dateutil==4.0.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 42))
+  Downloading python_dateutil-4.0.0-py3-none-any.whl (92 kB)
+Collecting PyYAML==6.0.3 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 43))
+  Downloading pyyaml-6.0.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (794 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 794.2/794.2 kB 11.3 MB/s  0:00:00
+Collecting rasterio==1.5.2 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 44))
+  Downloading rasterio-1.5.2-cp314-cp314-manylinux_2_28_x86_64.whl (39.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 39.0/39.0 MB 11.7 MB/s  0:00:03
+Collecting scikit-learn==1.9.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 45))
+  Downloading scikit_learn-1.9.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (9.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.2/9.2 MB 11.9 MB/s  0:00:00
+Collecting scipy==1.18.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 46))
+  Downloading scipy-1.18.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 11.7 MB/s  0:00:03
+Collecting setuptools==84.1.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 47))
+  Downloading setuptools-84.1.0-py3-none-any.whl (819 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 819.4/819.4 kB 11.9 MB/s  0:00:00
+Collecting shiboken6==6.12.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 48))
+  Downloading shiboken6-6.12.0-cp310-abi3-manylinux_2_34_x86_64.whl (279 kB)
+Collecting statsmodels==0.15.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 49))
+  Downloading statsmodels-0.15.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (12.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.1/12.1 MB 13.0 MB/s  0:00:01
+Collecting sympy==1.14.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 50))
+  Downloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 11.7 MB/s  0:00:00
+Collecting threadpoolctl==3.8.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 51))
+  Downloading threadpoolctl-3.8.0-py3-none-any.whl (32 kB)
+Collecting torch==2.14.1+cpu (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 52))
+  Downloading torch-2.14.1%2Bcpu-cp314-cp314-manylinux_2_28_x86_64.whl (196.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 196.3/196.3 MB 10.6 MB/s  0:00:18
+Collecting typing_extensions==4.16.0 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 53))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Collecting tzdata==2026.6 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 54))
+  Downloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Collecting wrapt==2.6.0.dev1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 55))
+  Downloading wrapt-2.6.0.dev1-cp314-cp314-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (251 kB)
+Collecting xgboost-cpu==3.4.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 56))
+  Downloading xgboost_cpu-3.4.1-py3-none-manylinux_2_28_x86_64.whl (5.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.8/5.8 MB 9.4 MB/s  0:00:00
+Collecting zarr==3.4.2 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 57))
+  Downloading zarr-3.4.2-py3-none-any.whl (410 kB)
+Collecting tqdm==4.70.1 (from -r /tmp/aurora-audit-baseline/final-lite/requirements/locks/linux-cpu-hashed.txt (line 58))
+  Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+Installing collected packages: mpmath, wrapt, tzdata, typing_extensions, tqdm, threadpoolctl, sympy, shiboken6, setuptools, PyYAML, pyparsing, Pygments, pluggy, pillow, packaging, numpy, networkx, narwhals, msgspec, MarkupSafe, kiwisolver, interface_meta, iniconfig, google-crc32c, fsspec, fonttools, filelock, cycler, cloudpickle, click, certifi, attrs, scipy, python-dateutil, pytest, PySide6_Essentials, pyproj, patsy, numcodecs, joblib, Jinja2, donfig, contourpy, affine, zarr, xgboost-cpu, torch, scikit-learn, rasterio, PySide6_Pdf, PySide6_Addons, pandas, matplotlib, PySide6_WebEngine, formulaic, statsmodels, PySide6
+
+Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 PySide6-6.12.0 PySide6_Addons-6.12.0 PySide6_Essentials-6.12.0 PySide6_Pdf-6.12.0.140 PySide6_WebEngine-6.12.0.140 PyYAML-6.0.3 Pygments-2.21.0 affine-3.0.1 attrs-26.1.0 certifi-2026.10.23 click-8.5.1 cloudpickle-3.1.2 contourpy-1.4.0 cycler-0.12.1 donfig-0.8.1.post1 filelock-4.2.4 fonttools-4.68.0 formulaic-1.2.2 fsspec-2026.9.0 google-crc32c-1.9.0 iniconfig-2.3.1 interface_meta-2.0.1 joblib-1.6.0 kiwisolver-1.5.1 matplotlib-3.11.2 mpmath-1.3.0 msgspec-0.22.0 narwhals-2.28.0 networkx-3.7 numcodecs-0.17.1 numpy-2.5.4 packaging-26.3 pandas-3.1.1 patsy-1.0.3 pillow-13.0.0 pluggy-1.7.0 pyparsing-3.3.3 pyproj-3.8.0 pytest-9.2.0 python-dateutil-4.0.0 rasterio-1.5.2 scikit-learn-1.9.1 scipy-1.18.1 setuptools-84.1.0 shiboken6-6.12.0 statsmodels-0.15.0 sympy-1.14.0 threadpoolctl-3.8.0 torch-2.14.1+cpu tqdm-4.70.1 typing_extensions-4.16.0 tzdata-2026.6 wrapt-2.6.0.dev1 xgboost-cpu-3.4.1 zarr-3.4.2
+
+[notice] A new release of pip is available: 26.2 -> 26.3
+[notice] To update, run: /var/tmp/aurora-audit-install-gq6m6qw_/env/bin/python -m pip install --upgrade pip
+No broken requirements found.
+{
+  "root": "/tmp/aurora-audit-baseline/final-lite",
+  "dependencies": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pandas": "3.1.1",
+    "rasterio": "1.5.2",
+    "pyproj": "3.8.0",
+    "zarr": "3.4.2",
+    "torch": "2.14.1+cpu",
+    "xgboost": "3.4.1",
+    "PySide6": "6.12.0",
+    "matplotlib": "3.11.2",
+    "statsmodels": "0.15.0"
+  },
+  "errors": [],
+  "integrity": {
+    "ok": true,
+    "verified_files": 811,
+    "errors": [],
+    "scope": "Real Quer\u00e9taro NDVI/LST, January 2001 to December 2025"
+  },
+  "hardware": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "python": "3.14.4",
+    "logical_cpus": 16,
+    "torch": "2.14.1+cpu",
+    "torch_cuda_build": null,
+    "requested_device": "cpu",
+    "selected_device": "cpu",
+    "gpu": null,
+    "free_disk_bytes": 482448424960
+  },
+  "datasets": [
+    {
+      "id": "queretaro",
+      "region": "queretaro",
+      "variable": "ndvi",
+      "source": "MODIS/061/MOD13Q1",
+      "unit": "1",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9473289317464454,
+      "storage": {
+        "format": "npz",
+        "path": "cube.npz"
+      }
+    },
+    {
+      "id": "queretaro_lst",
+      "region": "queretaro",
+      "variable": "lst",
+      "source": "MODIS/061/MOD11A2",
+      "unit": "degC",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9526710682535546,
+      "storage": {
+        "format": "npz",
+        "path": "cube.npz"
+      }
+    },
+    {
+      "id": "queretaro_lst_zarr",
+      "region": "queretaro",
+      "variable": "lst",
+      "source": "MODIS/061/MOD11A2",
+      "unit": "degC",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9526710682535546,
+      "storage": {
+        "format": "zarr",
+        "path": "cube.zarr",
+        "zarr_format": 2,
+        "chunks": [
+          12,
+          128,
+          128,
+          1
+        ]
+      }
+    },
+    {
+      "id": "queretaro_ndvi_zarr",
+      "region": "queretaro",
+      "variable": "ndvi",
+      "source": "MODIS/061/MOD13Q1",
+      "unit": "1",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9473289317464454,
+      "storage": {
+        "format": "zarr",
+        "path": "cube.zarr",
+        "zarr_format": 2,
+        "chunks": [
+          12,
+          128,
+          128,
+          1
+        ]
+      }
+    }
+  ],
+  "models": [
+    {
+      "region": "queretaro",
+      "variable": "lst",
+      "engines": [
+        "xgboost",
+        "convlstm"
+      ],
+      "directory": "/tmp/aurora-audit-baseline/final-lite/outputs/aurora5/queretaro_lst"
+    },
+    {
+      "region": "queretaro",
+      "variable": "ndvi",
+      "engines": [
+        "xgboost",
+        "convlstm"
+      ],
+      "directory": "/tmp/aurora-audit-baseline/final-lite/outputs/queretaro"
+    }
+  ],
+  "fresh_results": 3,
+  "dataset_errors": {},
+  "model_errors": {},
+  "google_earth_engine_required": false,
+  "trained_model_count": 4,
+  "ok": true
+}
+Installed. Run: /var/tmp/aurora-audit-install-gq6m6qw_/env/bin/python /tmp/aurora-audit-baseline/final-lite/scripts/desktop.py --device cpu

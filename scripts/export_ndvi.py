@@ -27,7 +27,8 @@ def flatten(c):
 def build_grid(region_path, scale):
     gj = json.load(open(region_path))
     pts = list(flatten(gj["features"][0]["geometry"]["coordinates"]))
-    xs, ys = warp_transform("EPSG:4326", CRS, [p[0] for p in pts], [p[1] for p in pts])
+    projected = warp_transform("EPSG:4326", CRS, [p[0] for p in pts], [p[1] for p in pts])
+    xs, ys = projected[:2]
     x0 = math.floor(min(xs) / scale) * scale
     x1 = math.ceil(max(xs) / scale) * scale
     y0 = math.floor(min(ys) / scale) * scale
@@ -83,11 +84,10 @@ def finalize(raw_bytes, out_path, grid):
         raise ValueError(f"Forma {arr.shape} distinta a la rejilla")
     arr[~np.isfinite(arr)] = NODATA
     t = grid["transform"]
-    profile = dict(driver="GTiff", dtype="float32", count=1, nodata=NODATA,
+    with rasterio.open(out_path, "w", driver="GTiff", dtype="float32", count=1, nodata=NODATA,
                    width=grid["width"], height=grid["height"], crs=CRS,
                    transform=Affine(t[0], t[1], t[2], t[3], t[4], t[5]),
-                   compress="deflate")
-    with rasterio.open(out_path, "w", **profile) as dst:
+                   compress="deflate") as dst:
         dst.write(arr, 1)
     return float((arr != NODATA).mean())
 

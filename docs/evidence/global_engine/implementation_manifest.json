@@ -1,0 +1,446 @@
+{
+  "branch": "feature/model-core",
+  "scope": "Current source snapshot includes preserved pre-existing local AURORA 5 work; no commit created",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3122,
+      "sha256": "c0601e99809c8b635366ee33276df590944ade2bc47a703d4d3303568ebeb745"
+    },
+    {
+      "path": "config/dataset_targets.json",
+      "bytes": 849,
+      "sha256": "3e7af6e607edb9a71ddfb9138e79f7ed5cb9373a7213981c41a928c8c28f4053"
+    },
+    {
+      "path": "config/datasets.json",
+      "bytes": 1329,
+      "sha256": "573fc0b083d8875c75e098c32fb34fa469f98d81108b7112f9e35d722eddeccf"
+    },
+    {
+      "path": "docs/global-intelligence-engine-report.md",
+      "bytes": 18743,
+      "sha256": "3f3f8886c6c96dc58332991381c39d20716499548da20702ebb6eacd8c6101a4"
+    },
+    {
+      "path": "requirements-global.txt",
+      "bytes": 114,
+      "sha256": "629ea4ed1f070d69a6ef731ed7da30ae5d0f1186d8ea1b737ec26002601ee114"
+    },
+    {
+      "path": "scripts/analyze_history.py",
+      "bytes": 5978,
+      "sha256": "4753e9095b3161cf14d0231f719ce548f12e2d3e67b461afbfca159e21948b92"
+    },
+    {
+      "path": "scripts/analyze_multivariate.py",
+      "bytes": 679,
+      "sha256": "051cb56a305bec23377945d24262dd984158e64dd3c281f673b74b7782d78d5a"
+    },
+    {
+      "path": "scripts/benchmark_partial_zarr.py",
+      "bytes": 3018,
+      "sha256": "0a8045cc46a9a26c9283870c99ab960f023e678268be707c4dab53139d36f290"
+    },
+    {
+      "path": "scripts/build_cube.py",
+      "bytes": 6875,
+      "sha256": "be7010692a513d834ad701588673632b5f0ba3802e6297144b10db562d9c66e5"
+    },
+    {
+      "path": "scripts/catalog_datasets.py",
+      "bytes": 434,
+      "sha256": "271da67e903a09eda30e66dc0d2b5aa424ef2cd4307da3ce4574f3b96b0c15d4"
+    },
+    {
+      "path": "scripts/convert_zarr.py",
+      "bytes": 1143,
+      "sha256": "b949e87aa82d5fe2622a6b85eceb9c33ffd79791e10c42cfd4bc0803507adc82"
+    },
+    {
+      "path": "scripts/desktop.py",
+      "bytes": 441,
+      "sha256": "75a96b8570375c0d51e465d05c43ac8d7d70ae77f61f3a606f92bef24629b10a"
+    },
+    {
+      "path": "scripts/diagnose_trends.py",
+      "bytes": 1056,
+      "sha256": "3467eca10a9471edb5f8817a3c86984221ef15bd87f247442b2d06c50578026c"
+    },
+    {
+      "path": "scripts/evaluate.py",
+      "bytes": 3844,
+      "sha256": "22f078b5c9d09d4e9a41640ca0e7c678e1570682bcda38a84fe62962a6efb4b0"
+    },
+    {
+      "path": "scripts/evaluate_forecast_baselines.py",
+      "bytes": 2243,
+      "sha256": "da79a2d0a6d7510747d7a2a6aa619604c8f4d4607a23fc7be9d6116588b3917d"
+    },
+    {
+      "path": "scripts/evaluate_hac.py",
+      "bytes": 2285,
+      "sha256": "1f23732484fbd62919ce2ea15fccc8a9d27522c8d6bb56b0edbb8e3f9bf41044"
+    },
+    {
+      "path": "scripts/evaluate_trends.py",
+      "bytes": 2491,
+      "sha256": "722f20712745e9725fd3af8d4c77304abd034651960598d44da91336c90dbb08"
+    },
+    {
+      "path": "scripts/explore.py",
+      "bytes": 2597,
+      "sha256": "88c4841c7a64b1a33322efc431bb7731761a67762580ee579c5e33da9338004e"
+    },
+    {
+      "path": "scripts/export_model_result.py",
+      "bytes": 883,
+      "sha256": "d634f9a272f5fd17ad4fc1c1f8b08ec79d736044dd8f3c8e1bdf878aa25089a3"
+    },
+    {
+      "path": "scripts/export_result.py",
+      "bytes": 701,
+      "sha256": "e38971c76856c3bdef6e4c522fec28c0bfb0017b84722614659aa2162afec896"
+    },
+    {
+      "path": "scripts/forecast_saved.py",
+      "bytes": 498,
+      "sha256": "583748fed58391e0073feb6ab924d2c367ee404bfddf1db22dcc7e6a4f21adf4"
+    },
+    {
+      "path": "scripts/generate_synthetic.py",
+      "bytes": 1014,
+      "sha256": "75b0fdaa54be53783b1eb3d551ddc7e2393f900a8092852a431e37fceafd1ee9"
+    },
+    {
+      "path": "scripts/package_results.py",
+      "bytes": 2819,
+      "sha256": "68d0a06a62d8b49023795f16f27595ee41a5642afbf30d0bda038699ad4c7463"
+    },
+    {
+      "path": "scripts/paired_job.py",
+      "bytes": 1286,
+      "sha256": "8a007b176d4f5cd19f1a44cbb0012fec611eaf00ead140df13c711e8ffc7ea3a"
+    },
+    {
+      "path": "scripts/predict.py",
+      "bytes": 6619,
+      "sha256": "0db3c43c02c3d9c0f5414c669e965c3a760a3b5a1f1dbed99af7e88e37505e6a"
+    },
+    {
+      "path": "scripts/prepare_dataset_store.py",
+      "bytes": 1082,
+      "sha256": "62da034d45d2408f44f163593b58525e2ac0a599b65212f63c0f1db577fe701f"
+    },
+    {
+      "path": "scripts/preview_cube.py",
+      "bytes": 1696,
+      "sha256": "64525f2e6bc5bf004a2ede4fa5f715498032d4b2af45da52529fcc32ffd031aa"
+    },
+    {
+      "path": "scripts/preview_synthetic.py",
+      "bytes": 1228,
+      "sha256": "207054854f891640c4328faeffb961c7000fe6df9c73805400ece58695232236"
+    },
+    {
+      "path": "scripts/regional_series.py",
+      "bytes": 3979,
+      "sha256": "583de235354bbaade00526d15a24536e347de59b406d7f0419f46b066def3278"
+    },
+    {
+      "path": "scripts/register_dataset.py",
+      "bytes": 2317,
+      "sha256": "a5cc339a9f2ad44f56d27f597f8cac4ebecc722e6a447a36e15ea3f1e3b94720"
+    },
+    {
+      "path": "scripts/scientific_job.py",
+      "bytes": 1750,
+      "sha256": "f8bf1ba51e9aecc927fede4b9f7cd050c1ce820c1f6fda5bce7a23d656cdc039"
+    },
+    {
+      "path": "scripts/stress_test_statistics.py",
+      "bytes": 2431,
+      "sha256": "337f1b7bceadc3085696dd35beda5397ec5bc77babda89d45cf6e87d62b4f87c"
+    },
+    {
+      "path": "scripts/train_baseline.py",
+      "bytes": 1495,
+      "sha256": "f975382c652bbb9957b6d54738568a5ed5e48f3eedbd926bd0b5047a84df2207"
+    },
+    {
+      "path": "scripts/train_deep.py",
+      "bytes": 8610,
+      "sha256": "8f148eaa9f9a68612e7f7fa5e669aeaca25f9b29829c7c4740490ab3636f6c3d"
+    },
+    {
+      "path": "scripts/train_multivariable.py",
+      "bytes": 782,
+      "sha256": "d64a8b0bb7a9ce05d18d0cdc01ff06a5bbd88177b78ba339e84bea4613ce9818"
+    },
+    {
+      "path": "scripts/train_xgb.py",
+      "bytes": 4478,
+      "sha256": "b6c0745b55032a65a0657cfc0be0e1f799bbfc3ec8e8c5c52b43a18246d3bb1c"
+    },
+    {
+      "path": "scripts/validate_aurora5.py",
+      "bytes": 4284,
+      "sha256": "53b52cadda4393fa703deb09cfd77badfe2c97aa226213af5aa4c6abf456f1df"
+    },
+    {
+      "path": "scripts/validate_global_engine.py",
+      "bytes": 12548,
+      "sha256": "e31cb643618d811d69c74ee32f7f02031ab15f5a12dcb9061acd93a2a118805a"
+    },
+    {
+      "path": "scripts/validate_planetary.py",
+      "bytes": 6367,
+      "sha256": "195c8a3bf4cd8ebfa9b287f797277fbc55a67ba5121ae59b841d39b2a6fb361e"
+    },
+    {
+      "path": "src/aurora/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/aurora/area.py",
+      "bytes": 2698,
+      "sha256": "3c7ba98af7b1e0c63a35a86a042b361526bb2e84db131cb35c7dce28cc49fa2c"
+    },
+    {
+      "path": "src/aurora/block_engine.py",
+      "bytes": 14932,
+      "sha256": "30ee20b445c325360fa71d50a429f457be845f9c454935a8d9e929a42879312f"
+    },
+    {
+      "path": "src/aurora/block_multivariate.py",
+      "bytes": 11351,
+      "sha256": "db0de5322ae59d95ff13ba144684e4a46ae6df86796f0e25c5bb78ce5604134b"
+    },
+    {
+      "path": "src/aurora/catalog.py",
+      "bytes": 19460,
+      "sha256": "fae8e891b204d27fb711cb4ff9db1b736c1bf4c9b42736ba8aac2dd4833470de"
+    },
+    {
+      "path": "src/aurora/desktop/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/aurora/desktop/ai_lab.py",
+      "bytes": 15983,
+      "sha256": "a9ecc913545331bfa36eb78e9db50f2ced87d0897aa16c787ea30b5ff807cb8f"
+    },
+    {
+      "path": "src/aurora/desktop/geospatial.py",
+      "bytes": 285,
+      "sha256": "c9c68bebc4385ef5e10b229f780c237f58ed158e2b527f25b8606cea1621d393"
+    },
+    {
+      "path": "src/aurora/desktop/global_results.py",
+      "bytes": 14044,
+      "sha256": "f7868a21cea298d98ffe5a3ef1055e6452b2b05bed1d53651a991e358005e5c8"
+    },
+    {
+      "path": "src/aurora/desktop/globe.py",
+      "bytes": 31657,
+      "sha256": "1e6e0bf49ad079811b198e69be18a22a5fd60b6978301426772c0ff9d597a461"
+    },
+    {
+      "path": "src/aurora/desktop/multivariate_lab.py",
+      "bytes": 12683,
+      "sha256": "8383f2fc3b6cd597f5edd431b40a50eefcb3c5a24966f4b9ab13788cd34d5afd"
+    },
+    {
+      "path": "src/aurora/desktop/pixel_lab.py",
+      "bytes": 4133,
+      "sha256": "0160f6d0103ecb247d7fbfe06946fede1237253bdebc253e19382f3b82f4f910"
+    },
+    {
+      "path": "src/aurora/desktop/report.py",
+      "bytes": 3800,
+      "sha256": "85666d9109f92c811149588dc51985ad82b1264074dc0faa8c7aa3b7e6409cac"
+    },
+    {
+      "path": "src/aurora/desktop/tasks.py",
+      "bytes": 2687,
+      "sha256": "39cf3d5d3449692eaa7758bf61a59f114660b73fb818923f345f824bab3dfea7"
+    },
+    {
+      "path": "src/aurora/desktop/temporal.py",
+      "bytes": 4981,
+      "sha256": "ef13413eb7184f56289839e1f18dfc0a984eab73a7c7529eb0d9b79d584cf643"
+    },
+    {
+      "path": "src/aurora/desktop/theme.py",
+      "bytes": 1949,
+      "sha256": "a9df03f46b3fbe8f0621353fc2a25ea251e92970290ae4db58099f677f966ee9"
+    },
+    {
+      "path": "src/aurora/desktop/time_machine.py",
+      "bytes": 11714,
+      "sha256": "c6dfc9af97876188412f6d106b29144b78a9be29992011d4c4db380f21c6031b"
+    },
+    {
+      "path": "src/aurora/desktop/welcome.py",
+      "bytes": 7078,
+      "sha256": "ac594f4fe04ed4c66e314f3a486bc9400b1cc03a0caf78d595d97a795f2b8170"
+    },
+    {
+      "path": "src/aurora/desktop/window.py",
+      "bytes": 25933,
+      "sha256": "247ec328e77cbf38e81a9d90c5d920eec1062a27a2d7cf1d10749d70e1e3d0fc"
+    },
+    {
+      "path": "src/aurora/exports.py",
+      "bytes": 1876,
+      "sha256": "bcc2240c753fc773c088c4a535ef0f01b971ebfa857b3939b90c740c65e8f131"
+    },
+    {
+      "path": "src/aurora/geospatial.py",
+      "bytes": 9331,
+      "sha256": "98795b7745d6f4a2fecfa7e3ad48374c18c027e35d6cf52f9f9b60afff0bb7a9"
+    },
+    {
+      "path": "src/aurora/jobs.py",
+      "bytes": 4431,
+      "sha256": "ca9c9974306f936ea7d35b3da3fa5e4888926061a8cb1385920eda300942ef6f"
+    },
+    {
+      "path": "src/aurora/model_catalog.py",
+      "bytes": 5127,
+      "sha256": "00fb6c1af56b7cf5552a8b9d9eac63c54cadd5d6d85f0ad514631b9d7ab273df"
+    },
+    {
+      "path": "src/aurora/model_exports.py",
+      "bytes": 4072,
+      "sha256": "8f14e759f70c14371199635ce8e170fa8141c8b239f297101c38d758803fbc65"
+    },
+    {
+      "path": "src/aurora/models/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/aurora/models/baseline.py",
+      "bytes": 2161,
+      "sha256": "a11ee7e3a05274e8038d6bef84b5baf8c6e1c4ece5dccbf733e21c408c082b4f"
+    },
+    {
+      "path": "src/aurora/models/convlstm.py",
+      "bytes": 1900,
+      "sha256": "0ee10af7cde8dd8e476c4ef532776d8bd2623c05c93bf670861ed2cab4d4f435"
+    },
+    {
+      "path": "src/aurora/models/dataset.py",
+      "bytes": 2492,
+      "sha256": "e7af686c1ab32c7812ea095e4cd6a69d88183e9006666b12b8cf4abf3e958e62"
+    },
+    {
+      "path": "src/aurora/models/features.py",
+      "bytes": 1861,
+      "sha256": "9edaa60544929aa1efa66ef4a8840a05c0b35c4dc79ef69125433096ac362e97"
+    },
+    {
+      "path": "src/aurora/models/forecasting.py",
+      "bytes": 15187,
+      "sha256": "60fb880851e155bcd114a450e3f70efa6331dfc84d917deb644560a2c9257725"
+    },
+    {
+      "path": "src/aurora/multivariate.py",
+      "bytes": 11814,
+      "sha256": "b6d9d15f76a29c3fccd55d2cd95679fd12323dfe589d1c9ee3aaafa92dcb6034"
+    },
+    {
+      "path": "src/aurora/storage.py",
+      "bytes": 2682,
+      "sha256": "071de5b4d909f3f6ce30ca72113569d5e0cdbf6844cf4fa1615055f52835dd8c"
+    },
+    {
+      "path": "src/aurora/synthetic.py",
+      "bytes": 1262,
+      "sha256": "03e0eb8037baf418aff63f785989ec2ce1a4897c3ff0571592fc991cee610754"
+    },
+    {
+      "path": "src/aurora/temporal.py",
+      "bytes": 1740,
+      "sha256": "86d43c3f505eba93732ab647a8bb5a71052d535b0b3d60e87f1d98d625c70317"
+    },
+    {
+      "path": "src/aurora/trend.py",
+      "bytes": 6550,
+      "sha256": "276ffbd4b25ce3be37de407119fce8ca7642497c5b8ca2e5b05d8b63b5afbe86"
+    },
+    {
+      "path": "src/aurora/variables.py",
+      "bytes": 1438,
+      "sha256": "054ecc390a0b31a98c3b4f6518d04a6984790616ef63a7b5fe3d7122be2bb94b"
+    },
+    {
+      "path": "tests/test_aurora5_integration.py",
+      "bytes": 3564,
+      "sha256": "094e85c8f99406703d448f4c8b1ebb48094069739a360dbac90775423a349827"
+    },
+    {
+      "path": "tests/test_catalog.py",
+      "bytes": 2907,
+      "sha256": "012d6d7e985991cbb2ce286873ba90721423e6a74513f46861a710fe9ad9eb97"
+    },
+    {
+      "path": "tests/test_diagnostics.py",
+      "bytes": 3179,
+      "sha256": "81f9abbb91c8ed4ed25d7179289e500662757cd8e4737282aa2ada27d4dc23c7"
+    },
+    {
+      "path": "tests/test_forecasting_multivariable.py",
+      "bytes": 1516,
+      "sha256": "2751a263e0a32314d337bbe54f2ad3a0f8c803b09b52cebd6410692b02754385"
+    },
+    {
+      "path": "tests/test_geospatial.py",
+      "bytes": 7996,
+      "sha256": "1b5542fdb926549ea16fed59cb3e0119c5ab36e08e0b5d51f8e7e70428e27572"
+    },
+    {
+      "path": "tests/test_global_async.py",
+      "bytes": 4780,
+      "sha256": "709bd13e5579364d4b659be8778f89ec41b89791920451a8bc2cf217e2b2ce04"
+    },
+    {
+      "path": "tests/test_global_engine.py",
+      "bytes": 14802,
+      "sha256": "9e7431ff0ec10221b4b2123e047fa10313a2b8ca221e2af59e3cb534650c7eed"
+    },
+    {
+      "path": "tests/test_models.py",
+      "bytes": 2841,
+      "sha256": "76575cad474dd63500da4202b9559b1de0a289d21f698bca91749037ab0446dd"
+    },
+    {
+      "path": "tests/test_multivariate.py",
+      "bytes": 1558,
+      "sha256": "9999e87ece0adf37e2a755c9746aba51fbbdcb71def73373ef60b2eb858f2e87"
+    },
+    {
+      "path": "tests/test_planetary_explorer.py",
+      "bytes": 6506,
+      "sha256": "9d8f0ca41c1db067260a6610cd3941c196264441cedf4f22f53301b3a6d43b43"
+    },
+    {
+      "path": "tests/test_temporal.py",
+      "bytes": 1214,
+      "sha256": "2cb2936e01cad8a5e30518dbfa4734ac3315000f88925c98475b30215fe65e12"
+    },
+    {
+      "path": "tests/test_trend.py",
+      "bytes": 2953,
+      "sha256": "7453b2a476397bfea3ebb25141e2a061e670b7a8cffc7a3741ba960a7014b469"
+    },
+    {
+      "path": "tests/test_variables.py",
+      "bytes": 953,
+      "sha256": "ec464ac49245f1bdc0de03f836ec8f4547a5916ff01ab8a9094d00ee225f3445"
+    }
+  ]
+}

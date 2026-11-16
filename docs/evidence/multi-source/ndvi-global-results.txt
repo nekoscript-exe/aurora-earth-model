@@ -1,0 +1,29 @@
+=== GLOBAL NDVI SCIENTIFIC RESULTS ===
+
+Method: OLS-BH
+Tested: 39002
+Significant: 14859
+Greening: 12605
+Browning: 2254
+Not significant: 24143
+
+Method: HAC-BH
+Tested: 32816
+Significant: 12196
+Greening: 10490
+Browning: 1706
+Not significant: 20620
+
+Estimator: OLS
+Minimum slope: -0.00699127764933868
+Maximum slope: 0.007660775996553583
+Mean pixel slope: 0.0007092977125562537
+Median pixel slope: 0.0004615356607204579
+Mean pixel slope per decade: 0.007092977125562537
+
+Estimator: Theil-Sen
+Minimum slope: -0.006871440239226473
+Maximum slope: 0.007849467375341262
+Mean pixel slope: 0.0006913437356730105
+Median pixel slope: 0.00043996863375705714
+Mean pixel slope per decade: 0.006913437356730105

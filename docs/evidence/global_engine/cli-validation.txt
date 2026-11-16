@@ -1,0 +1,41 @@
+{
+  "region": "queretaro",
+  "dataset": "queretaro_lst_zarr",
+  "variable": "lst",
+  "source": "MODIS/061/MOD11A2",
+  "unit": "degC",
+  "period": [
+    "2025-12",
+    "2025-12"
+  ],
+  "dataset_available": true,
+  "prediction_supported": true,
+  "storage": {
+    "format": "zarr",
+    "path": "cube.zarr",
+    "zarr_format": 2,
+    "chunks": [
+      12,
+      128,
+      128,
+      1
+    ]
+  }
+}
+{"event": "progress", "done": 0, "total": 1, "phase": "open-source"}
+{"event": "progress", "done": 10, "total": 36, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 20, "total": 36, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 30, "total": 36, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 36, "total": 36, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 1, "total": 1, "phase": "export"}
+{
+  "status": "complete",
+  "results": "/home/azael/Proyectos/aurora-earth-model/outputs/global_engine/queretaro_lst_zarr_2025-12_2025-12_20261115_120853_382929",
+  "eligibility": {
+    "eligible": false,
+    "eligible_calendar_years": 0,
+    "minimum_years": 15,
+    "minimum_months_per_year": 9,
+    "interpretation": "descriptive exploration only; insufficient long-term evidence"
+  }
+}

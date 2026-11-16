@@ -1,0 +1,29 @@
+Building annual composites...
+Calculating OLS...
+Calculating Theil-Sen...
+Temporal diagnostics...
+HAC sensitivity analysis...
+Exporting GeoTIFF results...
+============================================================
+AURORA | HISTORICAL TREND ANALYSIS
+{
+    "dataset": "synthetic",
+    "period": [
+        "2001-01-01",
+        "2025-12-01"
+    ],
+    "months": 300,
+    "regional_pixels": 16384,
+    "eligible_pixels": 16384,
+    "tested_pixels": 16384,
+    "mean_temporal_coverage": 0.9200305175781249,
+    "significant_increase": 4186,
+    "significant_decrease": 4198,
+    "not_significant": 8000,
+    "not_tested": 0,
+    "mean_slope": -1.0773440941436906e-06,
+    "hac_tested_pixels": 12160,
+    "hac_significant_pixels": 6447,
+    "seconds": 13.473341095999785
+}
+============================================================

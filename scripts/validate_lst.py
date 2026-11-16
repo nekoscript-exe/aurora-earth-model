@@ -32,7 +32,8 @@ def find_missing_months(dates, start, end):
 
 
 def check_raster(path, grid, inside):
-    issues, stats = [], {"valid_fraction": "", "min": "", "max": "", "mean": ""}
+    issues: list[str] = []
+    stats: dict[str, str | float] = {"valid_fraction": "", "min": "", "max": "", "mean": ""}
     if not os.path.exists(path):
         return ["archivo no existe"], stats
     with rasterio.open(path) as s:
@@ -79,7 +80,10 @@ def main():
     geom = transform_geom("EPSG:4326", grid["crs"], geom)
     inside = rasterize([(geom, 1)], out_shape=(grid["height"], grid["width"]),
                        transform=Affine(*grid["transform"]), fill=0,
-                       dtype="uint8").astype(bool)
+                       dtype="uint8")
+    if inside is None:
+        raise RuntimeError("Region rasterization failed")
+    inside = inside.astype(bool)
     rows = list(csv.DictReader(open(a.manifest)))
     dates = [r["date"] for r in rows]
     errors = 0
@@ -103,11 +107,13 @@ def main():
     report = []
     for r in rows:
         issues, st = check_raster(r["path"], grid, inside)
-        if st["valid_fraction"] != "" and abs(st["valid_fraction"] - float(r["valid_fraction"])) > TOL_COVERAGE:
+        coverage = st["valid_fraction"]
+        if isinstance(coverage, float) and abs(coverage - float(r["valid_fraction"])) > TOL_COVERAGE:
             issues.append("cobertura declarada distinta de la calculada")
         if issues:
             errors += 1
-        review = st["valid_fraction"] != "" and st["valid_fraction"] < MIN_COVERAGE
+        coverage = st["valid_fraction"]
+        review = isinstance(coverage, float) and coverage < MIN_COVERAGE
         report.append({"date": r["date"], "path": r["path"],
                        "status": "ERROR" if issues else ("REVISAR" if review else "OK"),
                        "issues": "; ".join(issues), **st})

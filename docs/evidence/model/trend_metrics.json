@@ -1,0 +1,23 @@
+{
+    "dataset": "synthetic",
+    "alpha": 0.05,
+    "ols": {
+        "mae": 0.00023882112417208153,
+        "rmse": 0.00029905385480005645,
+        "seconds": 0.013169998000194028
+    },
+    "sen": {
+        "mae": 0.0002422622919096631,
+        "rmse": 0.000303511838866554,
+        "seconds": 11.42016373200022
+    },
+    "significance": {
+        "nominal_significant": 8587,
+        "fdr_significant": 8384,
+        "true_positives": 8192,
+        "false_positives": 192,
+        "recall": 1.0,
+        "false_positive_rate": 0.0234375,
+        "false_discovery_proportion": 0.022900763358778626
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "sha256_files_verified": 315,
+  "all_sha256_match": true,
+  "registered_stores": [
+    {
+      "id": "queretaro_ndvi_zarr",
+      "fingerprint_unchanged": true
+    },
+    {
+      "id": "queretaro_lst_zarr",
+      "fingerprint_unchanged": true
+    }
+  ],
+  "core_source_files_changed": false
+}

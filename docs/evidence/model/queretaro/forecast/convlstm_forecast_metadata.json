@@ -1,0 +1,16 @@
+{
+    "engine": "convlstm",
+    "cube": "data/processed/queretaro/cube.npz",
+    "model": "outputs/queretaro/convlstm/best_model.pt",
+    "forecast_date": "2026-01",
+    "history_start": "2025-01",
+    "history_end": "2025-12",
+    "minimum_history": 9,
+    "regional_pixels": 11511,
+    "predicted_pixels": 11123,
+    "prediction_coverage": 0.9662931109373643,
+    "minimum_ndvi": 0.15737204253673553,
+    "maximum_ndvi": 0.8117534518241882,
+    "mean_ndvi": 0.46255818009376526,
+    "seconds": 0.5119982430005621
+}

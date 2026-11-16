@@ -198,12 +198,12 @@ Esto permitirá mantener un registro verificable de los resultados y facilitar s
 # AURORA EARTH MODEL
 ## Documentación técnica: Adquisición, procesamiento y validación de datos históricos de México
 
-**Proyecto:** AURORA Earth Model  
-**Participación:** NASA Space Apps Challenge  
-**Área de trabajo:** Adquisición, procesamiento y validación de datos geoespaciales  
-**Responsable:** Yatzury Garcidueñas  
-**Periodo de datos:** Enero de 2001 – Diciembre de 2025  
-**Región de estudio:** México  
+**Proyecto:** AURORA Earth Model\
+**Participación:** NASA Space Apps Challenge\
+**Área de trabajo:** Adquisición, procesamiento y validación de datos geoespaciales\
+**Responsable:** Yatzury Garcidueñas\
+**Periodo de datos:** Enero de 2001 – Diciembre de 2025\
+**Región de estudio:** México\
 
 ---
 

@@ -1,0 +1,23 @@
+{
+  "qa_grid": {
+    "real_rasters_compared": 300,
+    "outputs_exact": true
+  },
+  "validate_data": {
+    "real_rasters_compared": 300,
+    "outputs_exact": true
+  },
+  "validate_lst": {
+    "real_rasters_compared": 300,
+    "outputs_exact": true
+  },
+  "sensitivity_regional": {
+    "real_monthly_rows": 300,
+    "outputs_exact": true
+  },
+  "validate_independent": {
+    "real_history_checks": 17,
+    "pixel_series": 3,
+    "outputs_exact": true
+  }
+}

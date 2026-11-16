@@ -1,0 +1,16 @@
+{
+    "engine": "convlstm",
+    "cube": "data/synthetic/cube.npz",
+    "model": "outputs/synthetic/convlstm/best_model.pt",
+    "forecast_date": "2026-01",
+    "history_start": "2025-01",
+    "history_end": "2025-12",
+    "minimum_history": 9,
+    "regional_pixels": 16384,
+    "predicted_pixels": 16183,
+    "prediction_coverage": 0.98773193359375,
+    "minimum_ndvi": 0.03219342604279518,
+    "maximum_ndvi": 0.8359231948852539,
+    "mean_ndvi": 0.4782722294330597,
+    "seconds": 0.5595464540001558
+}

@@ -1,0 +1,27 @@
+{
+  "base_commit": "0c8eb08",
+  "branch": "feature/model-core",
+  "modified": [
+    "src/aurora/desktop/__init__.py",
+    "src/aurora/desktop/ai_lab.py",
+    "src/aurora/desktop/global_results.py",
+    "src/aurora/desktop/globe.py",
+    "src/aurora/desktop/i18n.py",
+    "src/aurora/desktop/multivariate_lab.py",
+    "src/aurora/desktop/pixel_lab.py",
+    "src/aurora/desktop/report.py",
+    "src/aurora/desktop/temporal.py",
+    "src/aurora/desktop/time_machine.py",
+    "src/aurora/desktop/translations/aurora_es.qm",
+    "src/aurora/desktop/translations/aurora_es.ts",
+    "src/aurora/desktop/welcome.py",
+    "src/aurora/desktop/window.py"
+  ],
+  "new": [
+    "scripts/validate_i18n.py",
+    "src/aurora/desktop/canvas.py",
+    "src/aurora/desktop/dataset_controls.py",
+    "src/aurora/desktop/toolbar.py",
+    "tests/test_i18n.py"
+  ]
+}

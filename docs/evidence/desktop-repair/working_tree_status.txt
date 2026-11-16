@@ -1,0 +1,40 @@
+ M scripts/benchmark_partial_zarr.py
+ M scripts/build_cube.py
+ M scripts/desktop.py
+ M scripts/evaluate_hac.py
+ M scripts/regional_series.py
+ M scripts/validate_aurora5.py
+ M scripts/validate_global_engine.py
+ M scripts/validate_planetary.py
+ M src/aurora/area.py
+ M src/aurora/block_engine.py
+ M src/aurora/block_multivariate.py
+ M src/aurora/catalog.py
+ M src/aurora/desktop/ai_lab.py
+ M src/aurora/desktop/global_results.py
+ M src/aurora/desktop/globe.py
+ M src/aurora/desktop/multivariate_lab.py
+ M src/aurora/desktop/pixel_lab.py
+ M src/aurora/desktop/tasks.py
+ M src/aurora/desktop/temporal.py
+ M src/aurora/desktop/time_machine.py
+ M src/aurora/desktop/welcome.py
+ M src/aurora/desktop/window.py
+ M src/aurora/geospatial.py
+ M src/aurora/models/convlstm.py
+ M src/aurora/models/forecasting.py
+ M src/aurora/storage.py
+ M src/aurora/trend.py
+ M tests/test_forecasting_multivariable.py
+ M tests/test_geospatial.py
+ M tests/test_global_async.py
+ M tests/test_global_engine.py
+ M tests/test_multivariate.py
+ M tests/test_planetary_explorer.py
+ M tests/test_trend.py
+?? docs/desktop-repair-report.md
+?? docs/evidence/desktop-repair/
+?? pyrightconfig.json
+?? src/aurora/desktop/i18n.py
+?? src/aurora/desktop/translations/
+?? src/aurora/scientific_types.py

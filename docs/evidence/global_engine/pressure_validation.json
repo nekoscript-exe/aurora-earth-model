@@ -1,0 +1,22 @@
+{
+  "kind": "EXPLICIT SYNTHETIC INFRASTRUCTURE BENCHMARK, NOT SCIENTIFIC GLOBAL COVERAGE",
+  "logical_shape": [
+    300,
+    8192,
+    16384,
+    1
+  ],
+  "logical_X_bytes": 161061273600,
+  "physical_store_bytes": 2857,
+  "read_shape": [
+    12,
+    32,
+    32
+  ],
+  "read_array_bytes": 49152,
+  "seconds": 0.0028301899947109632,
+  "peak_rss_before_kib": 98572,
+  "peak_rss_after_kib": 104840,
+  "full_read_rejected_by_budget": true,
+  "zarr_version": "3.4.2"
+}

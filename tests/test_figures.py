@@ -52,7 +52,9 @@ def test_significance_legend_labels(outputs):
     slope, ext = pr.read_raster(outputs / "trend_slope.tif")
     q, _ = pr.read_raster(outputs / "trend_q.tif")
     fig = pr.make_significance_fig(slope, q, ext)
-    texts = [t.get_text() for t in fig.axes[0].get_legend().get_texts()]
+    legend = fig.axes[0].get_legend()
+    assert legend is not None
+    texts = [t.get_text() for t in legend.get_texts()]
     assert pr.LABEL_NONE in texts and pr.LABEL_NODATA in texts
     assert pr.LABEL_UP in texts and pr.LABEL_DOWN in texts
 
@@ -126,7 +128,9 @@ def test_significance_legend_with_region(outputs):
     q, _ = pr.read_raster(outputs / "trend_q.tif")
     n, _ = pr.read_raster(outputs / "trend_n.tif")
     fig = pr.make_significance_fig(slope, q, ext, region=np.isfinite(n))
-    texts = [t.get_text() for t in fig.axes[0].get_legend().get_texts()]
+    legend = fig.axes[0].get_legend()
+    assert legend is not None
+    texts = [t.get_text() for t in legend.get_texts()]
     assert pr.LABEL_UNTESTED in texts and pr.LABEL_OUTSIDE in texts
 
 
@@ -143,4 +147,17 @@ def test_regional_figure(tmp_path):
     (tmp_path / "t.json").write_text(json.dumps(
         {"trend": {"slope_per_year": 0.02, "p_value": 0.1, "period": [2001, 2004]}}))
     fig = pr.make_regional_fig(tmp_path / "m.csv", tmp_path / "a.csv", tmp_path / "t.json")
-    assert any("OLS" in t.get_text() for t in fig.axes[0].get_legend().get_texts())
+    legend = fig.axes[0].get_legend()
+    assert legend is not None
+    assert any("OLS" in t.get_text() for t in legend.get_texts())
+
+
+def test_configure_english_and_lst_labels():
+    try:
+        pr.configure(variable="LST", unit="°C", lang="en", warm=True)
+        assert pr.LABEL_UP == "Significant increase (q<0.05)"
+        fig = pr.make_divergent_fig(np.array([[0.1, -0.1]]), None, pr.T("slope_title"), pr.T("per_year"))
+        assert "LST" in fig.axes[0].get_title() and "°C per year" in fig.axes[1].get_ylabel()
+    finally:
+        pr.configure()  # restaura NDVI/español
+    assert pr.LABEL_UP == "Aumento significativo (q<0.05)"

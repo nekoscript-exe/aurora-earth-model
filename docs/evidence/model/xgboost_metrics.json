@@ -1,0 +1,62 @@
+{
+    "cube": "data/synthetic/cube.npz",
+    "device": "cuda:0",
+    "xgboost_version": "3.4.1",
+    "features": [
+        "lag_1",
+        "lag_3",
+        "lag_6",
+        "lag_12",
+        "mean_3",
+        "mean_6",
+        "mean_12",
+        "std_12",
+        "coverage_12",
+        "month_sin",
+        "month_cos"
+    ],
+    "training_observations": 3075588,
+    "validation_observations": 459206,
+    "best_iteration": 498,
+    "training_seconds": 10.70251484200162,
+    "total_seconds": 11.452073046000805,
+    "validation": {
+        "persistence": {
+            "observations": 459206,
+            "mae": 0.04662313164804146,
+            "rmse": 0.05636474803878373,
+            "r2": 0.9045094415589119
+        },
+        "seasonal": {
+            "observations": 459206,
+            "mae": 0.028526825630941954,
+            "rmse": 0.035761766007372825,
+            "r2": 0.9615600151632293
+        },
+        "climatology": {
+            "observations": 459206,
+            "mae": 0.05032975733949379,
+            "rmse": 0.06239331100670715,
+            "r2": 0.8829904365991157
+        },
+        "xgboost": {
+            "observations": 459206,
+            "mae": 0.02145468066753274,
+            "rmse": 0.026914117996330467,
+            "r2": 0.9782276354482468
+        }
+    },
+    "feature_importance": {
+        "lag_1": 0.14884130656719208,
+        "lag_3": 0.0005624527693726122,
+        "lag_6": 0.0013164469273760915,
+        "lag_12": 0.717545211315155,
+        "mean_3": 0.024100108072161674,
+        "mean_6": 0.0028295456431806087,
+        "mean_12": 0.018951794132590294,
+        "std_12": 0.0005569480708800256,
+        "coverage_12": 0.00024614669382572174,
+        "month_sin": 0.023416651412844658,
+        "month_cos": 0.06163344904780388
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "cube": "data/processed/queretaro/cube.npz",
+    "evaluation": "held_out_test",
+    "period": [
+        "2022-01",
+        "2025-12"
+    ],
+    "months": 48,
+    "comparable_observations": 489633,
+    "observed_targets": 521605,
+    "results": {
+        "persistence": {
+            "observations": 489633,
+            "mae": 0.05646435087532574,
+            "rmse": 0.0824726541172922,
+            "r2": 0.8052221150685045
+        },
+        "seasonal": {
+            "observations": 489633,
+            "mae": 0.06833830647231653,
+            "rmse": 0.09787253778343286,
+            "r2": 0.7256901502662796
+        },
+        "climatology": {
+            "observations": 489633,
+            "mae": 0.055999034440984086,
+            "rmse": 0.07836596827967744,
+            "r2": 0.8241369052635774
+        },
+        "xgboost": {
+            "observations": 489633,
+            "mae": 0.042174972753391916,
+            "rmse": 0.06352679999923061,
+            "r2": 0.8844330472378998
+        },
+        "convlstm": {
+            "observations": 489633,
+            "mae": 0.04437914947933116,
+            "rmse": 0.0636081266894172,
+            "r2": 0.8841369613707311
+        }
+    },
+    "ranking_by_rmse": [
+        "xgboost",
+        "convlstm",
+        "climatology",
+        "persistence",
+        "seasonal"
+    ],
+    "best_model": "xgboost"
+}

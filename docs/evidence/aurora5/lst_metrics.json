@@ -1,0 +1,131 @@
+{
+  "variable": "lst",
+  "unit": "degC",
+  "mae_rmse_unit": "degC",
+  "cube_sha256": "7fcd259175889b01fcb9c433a8d57986633891bf9c09de2e03ce6c3457b7ee36",
+  "splits": {
+    "train": [
+      "2002-01",
+      "2018-12"
+    ],
+    "validation": [
+      "2019-01",
+      "2021-12"
+    ],
+    "test": [
+      "2022-01",
+      "2025-12"
+    ]
+  },
+  "normalization_train_only": {
+    "mean": 29.33673412030091,
+    "std": 6.1487758281534575
+  },
+  "minimum_history": 9,
+  "seed": 42,
+  "device": "cuda",
+  "xgboost_device": "cuda:0",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "torch_version": "2.14.1+cu130",
+  "xgboost_version": "3.4.1",
+  "best_epoch": 7,
+  "xgboost_best_iteration": 75,
+  "configuration": {
+    "epochs": 12,
+    "patience": 3,
+    "trees": 500,
+    "patch_size": 32,
+    "batch_size": 16
+  },
+  "xgboost_seconds": 1.4939303069986636,
+  "convlstm_seconds": 33.791066402998695,
+  "total_seconds": 38.42995303499629,
+  "peak_vram_mib": 189.86376953125,
+  "evaluations": {
+    "validation": {
+      "period": [
+        "2019-01",
+        "2021-12"
+      ],
+      "comparable_observations": 380651,
+      "observed_targets": 396294,
+      "results": {
+        "persistence": {
+          "observations": 380651,
+          "mae": 3.118801579045142,
+          "rmse": 3.8592106509308777,
+          "r2": 0.6076589345876608
+        },
+        "seasonal": {
+          "observations": 380651,
+          "mae": 2.442674837810901,
+          "rmse": 3.222651902519607,
+          "r2": 0.726414174782194
+        },
+        "climatology": {
+          "observations": 380651,
+          "mae": 1.826616352121966,
+          "rmse": 2.3724850800798643,
+          "r2": 0.851723004470034
+        },
+        "xgboost": {
+          "observations": 380651,
+          "mae": 1.7655335098436826,
+          "rmse": 2.273641356346694,
+          "r2": 0.8638208189422318
+        },
+        "convlstm": {
+          "observations": 380651,
+          "mae": 1.8570380231094858,
+          "rmse": 2.390983034800208,
+          "r2": 0.849401798001155
+        }
+      }
+    },
+    "test": {
+      "period": [
+        "2022-01",
+        "2025-12"
+      ],
+      "comparable_observations": 507583,
+      "observed_targets": 528314,
+      "results": {
+        "persistence": {
+          "observations": 507583,
+          "mae": 3.3707925783571002,
+          "rmse": 4.272269474157414,
+          "r2": 0.5886764310870409
+        },
+        "seasonal": {
+          "observations": 507583,
+          "mae": 3.070977356000027,
+          "rmse": 4.071293612884924,
+          "r2": 0.6264651154334306
+        },
+        "climatology": {
+          "observations": 507583,
+          "mae": 2.5899106627261617,
+          "rmse": 3.36224196819682,
+          "r2": 0.7452441011693507
+        },
+        "xgboost": {
+          "observations": 507583,
+          "mae": 2.08755227942035,
+          "rmse": 2.8307012788385437,
+          "r2": 0.819426339716855
+        },
+        "convlstm": {
+          "observations": 507583,
+          "mae": 2.2110722909878446,
+          "rmse": 3.012321614424281,
+          "r2": 0.7955114500863287
+        }
+      }
+    }
+  },
+  "forecast_date": "2026-01",
+  "output_activation": "linear",
+  "history_months": 12,
+  "horizon_months": 1,
+  "evaluation_protocol": "rolling one-month ahead; observed preceding months"
+}

@@ -1,0 +1,58 @@
+ M README.md
+ M scripts/explore.py
+ M scripts/predict.py
+ M scripts/train_deep.py
+ M scripts/validate_planetary.py
+ M src/aurora/desktop/ai_lab.py
+ M src/aurora/desktop/geospatial.py
+ M src/aurora/desktop/globe.py
+ M src/aurora/desktop/time_machine.py
+ M src/aurora/desktop/window.py
+ M src/aurora/models/convlstm.py
+ M src/aurora/variables.py
+ M tests/test_planetary_explorer.py
+ M tests/test_variables.py
+?? config/
+?? docs/aurora5-report.md
+?? docs/evidence/aurora5/
+?? docs/evidence/global_engine/
+?? docs/global-intelligence-engine-report.md
+?? requirements-global.txt
+?? scripts/analyze_multivariate.py
+?? scripts/benchmark_partial_zarr.py
+?? scripts/catalog_datasets.py
+?? scripts/convert_zarr.py
+?? scripts/export_model_result.py
+?? scripts/export_result.py
+?? scripts/forecast_saved.py
+?? scripts/paired_job.py
+?? scripts/prepare_dataset_store.py
+?? scripts/register_dataset.py
+?? scripts/scientific_job.py
+?? scripts/train_multivariable.py
+?? scripts/validate_aurora5.py
+?? scripts/validate_global_engine.py
+?? src/aurora/area.py
+?? src/aurora/block_engine.py
+?? src/aurora/block_multivariate.py
+?? src/aurora/catalog.py
+?? src/aurora/desktop/global_results.py
+?? src/aurora/desktop/multivariate_lab.py
+?? src/aurora/desktop/tasks.py
+?? src/aurora/desktop/temporal.py
+?? src/aurora/exports.py
+?? src/aurora/geospatial.py
+?? src/aurora/jobs.py
+?? src/aurora/model_catalog.py
+?? src/aurora/model_exports.py
+?? src/aurora/models/forecasting.py
+?? src/aurora/multivariate.py
+?? src/aurora/storage.py
+?? src/aurora/temporal.py
+?? tests/test_aurora5_integration.py
+?? tests/test_catalog.py
+?? tests/test_forecasting_multivariable.py
+?? tests/test_global_async.py
+?? tests/test_global_engine.py
+?? tests/test_multivariate.py
+?? tests/test_temporal.py

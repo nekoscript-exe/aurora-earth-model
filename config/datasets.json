@@ -1,0 +1,30 @@
+{
+  "datasets": [
+    {
+      "id": "queretaro_ndvi_zarr",
+      "region_id": "queretaro",
+      "priority": 10,
+      "path": "outputs/global_engine/stores/queretaro_ndvi_zarr",
+      "input": {
+        "directory": "outputs/global_engine/stores/queretaro_ndvi_zarr",
+        "fingerprint": "ab215b869c87b405626a1edbb100eac6a3f1e87fb49f819efe560be7f052570e",
+        "scheme": "metadata-sha256+storage-size-mtime_ns"
+      },
+      "validation": "all physical values checked",
+      "coverage_validation": "no national/global completeness claim; use supplied footprint and coverage"
+    },
+    {
+      "id": "queretaro_lst_zarr",
+      "region_id": "queretaro",
+      "priority": 10,
+      "path": "outputs/global_engine/stores/queretaro_lst_zarr",
+      "input": {
+        "directory": "outputs/global_engine/stores/queretaro_lst_zarr",
+        "fingerprint": "2f13dfbf8dd09722ac9cbed58f8938e601fbc05ceda948d4dafabb18fab14595",
+        "scheme": "metadata-sha256+storage-size-mtime_ns"
+      },
+      "validation": "all physical values checked",
+      "coverage_validation": "no national/global completeness claim; use supplied footprint and coverage"
+    }
+  ]
+}

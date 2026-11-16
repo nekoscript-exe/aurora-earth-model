@@ -1,0 +1,2733 @@
+{
+    "dataset": "satellite",
+    "source": "MODIS/061/MOD13Q1",
+    "variable": "NDVI",
+    "unit": "1",
+    "slope_unit": "NDVI/year",
+    "shape": [
+        300,
+        171,
+        161,
+        1
+    ],
+    "grid": {
+        "crs": "EPSG:32614",
+        "transform": [
+            1000.0,
+            0.0,
+            335000.0,
+            0.0,
+            -1000.0,
+            2387000.0
+        ],
+        "width": 161,
+        "height": 171,
+        "nodata": -9999.0
+    },
+    "regional_pixels": 11511,
+    "received_months": 300,
+    "expected_months": 300,
+    "missing_months": [],
+    "coverage": [
+        {
+            "date": "2001-01-01",
+            "coverage": 0.9960906958561376,
+            "declared_coverage": 0.9961,
+            "coverage_difference": 9.30414386235423e-06,
+            "valid_pixels": 11466,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2001-02-01",
+            "coverage": 0.9984362783424551,
+            "declared_coverage": 0.9984,
+            "coverage_difference": 3.6278342455120516e-05,
+            "valid_pixels": 11493,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2001-03-01",
+            "coverage": 0.9960038224307184,
+            "declared_coverage": 0.996,
+            "coverage_difference": 3.822430718392056e-06,
+            "valid_pixels": 11465,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2001-04-01",
+            "coverage": 0.9853183911041612,
+            "declared_coverage": 0.9853,
+            "coverage_difference": 1.8391104161241678e-05,
+            "valid_pixels": 11342,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2001-05-01",
+            "coverage": 0.9737642255234124,
+            "declared_coverage": 0.9738,
+            "coverage_difference": 3.577447658764665e-05,
+            "valid_pixels": 11209,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2001-06-01",
+            "coverage": 0.7967161845191556,
+            "declared_coverage": 0.7967,
+            "coverage_difference": 1.6184519155637567e-05,
+            "valid_pixels": 9171,
+            "excluded_outside": 278,
+            "review_required": false
+        },
+        {
+            "date": "2001-07-01",
+            "coverage": 0.9399704630353575,
+            "declared_coverage": 0.94,
+            "coverage_difference": 2.9536964642473684e-05,
+            "valid_pixels": 10820,
+            "excluded_outside": 340,
+            "review_required": false
+        },
+        {
+            "date": "2001-08-01",
+            "coverage": 0.9180783598297281,
+            "declared_coverage": 0.9181,
+            "coverage_difference": 2.164017027195264e-05,
+            "valid_pixels": 10568,
+            "excluded_outside": 311,
+            "review_required": false
+        },
+        {
+            "date": "2001-09-01",
+            "coverage": 0.9663799843627834,
+            "declared_coverage": 0.9664,
+            "coverage_difference": 2.001563721665267e-05,
+            "valid_pixels": 11124,
+            "excluded_outside": 343,
+            "review_required": false
+        },
+        {
+            "date": "2001-10-01",
+            "coverage": 0.995221961601946,
+            "declared_coverage": 0.9952,
+            "coverage_difference": 2.1961601946007825e-05,
+            "valid_pixels": 11456,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2001-11-01",
+            "coverage": 0.9963513161323951,
+            "declared_coverage": 0.9964,
+            "coverage_difference": 4.8683867604815134e-05,
+            "valid_pixels": 11469,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2001-12-01",
+            "coverage": 0.9966119364086526,
+            "declared_coverage": 0.9966,
+            "coverage_difference": 1.1936408652601926e-05,
+            "valid_pixels": 11472,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2002-01-01",
+            "coverage": 0.9980019112153592,
+            "declared_coverage": 0.998,
+            "coverage_difference": 1.911215359196028e-06,
+            "valid_pixels": 11488,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2002-02-01",
+            "coverage": 0.9935713665189818,
+            "declared_coverage": 0.9936,
+            "coverage_difference": 2.8633481018225382e-05,
+            "valid_pixels": 11437,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2002-03-01",
+            "coverage": 0.995743202154461,
+            "declared_coverage": 0.9957,
+            "coverage_difference": 4.320215446096398e-05,
+            "valid_pixels": 11462,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2002-04-01",
+            "coverage": 0.994700721049431,
+            "declared_coverage": 0.9947,
+            "coverage_difference": 7.210494309406457e-07,
+            "valid_pixels": 11450,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2002-05-01",
+            "coverage": 0.9845365302753888,
+            "declared_coverage": 0.9845,
+            "coverage_difference": 3.6530275388746425e-05,
+            "valid_pixels": 11333,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2002-06-01",
+            "coverage": 0.9139953088350273,
+            "declared_coverage": 0.914,
+            "coverage_difference": 4.691164972703277e-06,
+            "valid_pixels": 10521,
+            "excluded_outside": 319,
+            "review_required": false
+        },
+        {
+            "date": "2002-07-01",
+            "coverage": 0.9053079662931109,
+            "declared_coverage": 0.9053,
+            "coverage_difference": 7.966293110950318e-06,
+            "valid_pixels": 10421,
+            "excluded_outside": 298,
+            "review_required": false
+        },
+        {
+            "date": "2002-08-01",
+            "coverage": 0.9320649813222135,
+            "declared_coverage": 0.9321,
+            "coverage_difference": 3.501867778654688e-05,
+            "valid_pixels": 10729,
+            "excluded_outside": 338,
+            "review_required": false
+        },
+        {
+            "date": "2002-09-01",
+            "coverage": 0.6636260967769959,
+            "declared_coverage": 0.6636,
+            "coverage_difference": 2.609677699594304e-05,
+            "valid_pixels": 7639,
+            "excluded_outside": 202,
+            "review_required": true
+        },
+        {
+            "date": "2002-10-01",
+            "coverage": 0.8506645817044566,
+            "declared_coverage": 0.8507,
+            "coverage_difference": 3.541829554343234e-05,
+            "valid_pixels": 9792,
+            "excluded_outside": 287,
+            "review_required": false
+        },
+        {
+            "date": "2002-11-01",
+            "coverage": 0.9966988098340718,
+            "declared_coverage": 0.9967,
+            "coverage_difference": 1.1901659282553823e-06,
+            "valid_pixels": 11473,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2002-12-01",
+            "coverage": 0.9965250629832334,
+            "declared_coverage": 0.9965,
+            "coverage_difference": 2.5062983233348213e-05,
+            "valid_pixels": 11471,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2003-01-01",
+            "coverage": 0.9924420119885327,
+            "declared_coverage": 0.9924,
+            "coverage_difference": 4.20119885327086e-05,
+            "valid_pixels": 11424,
+            "excluded_outside": 362,
+            "review_required": false
+        },
+        {
+            "date": "2003-02-01",
+            "coverage": 0.9975675440882634,
+            "declared_coverage": 0.9976,
+            "coverage_difference": 3.245591173661744e-05,
+            "valid_pixels": 11483,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2003-03-01",
+            "coverage": 0.9923551385631135,
+            "declared_coverage": 0.9924,
+            "coverage_difference": 4.486143688642308e-05,
+            "valid_pixels": 11423,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2003-04-01",
+            "coverage": 0.9944401007731735,
+            "declared_coverage": 0.9944,
+            "coverage_difference": 4.010077317351257e-05,
+            "valid_pixels": 11447,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2003-05-01",
+            "coverage": 0.9847971505516463,
+            "declared_coverage": 0.9848,
+            "coverage_difference": 2.849448353714479e-06,
+            "valid_pixels": 11336,
+            "excluded_outside": 363,
+            "review_required": false
+        },
+        {
+            "date": "2003-06-01",
+            "coverage": 0.8642168360698462,
+            "declared_coverage": 0.8642,
+            "coverage_difference": 1.683606984625996e-05,
+            "valid_pixels": 9948,
+            "excluded_outside": 307,
+            "review_required": false
+        },
+        {
+            "date": "2003-07-01",
+            "coverage": 0.9718530101641908,
+            "declared_coverage": 0.9719,
+            "coverage_difference": 4.698983580919691e-05,
+            "valid_pixels": 11187,
+            "excluded_outside": 354,
+            "review_required": false
+        },
+        {
+            "date": "2003-08-01",
+            "coverage": 0.6096776995916949,
+            "declared_coverage": 0.6097,
+            "coverage_difference": 2.230040830508706e-05,
+            "valid_pixels": 7018,
+            "excluded_outside": 204,
+            "review_required": true
+        },
+        {
+            "date": "2003-09-01",
+            "coverage": 0.8018417166188863,
+            "declared_coverage": 0.8018,
+            "coverage_difference": 4.1716618886300516e-05,
+            "valid_pixels": 9230,
+            "excluded_outside": 231,
+            "review_required": false
+        },
+        {
+            "date": "2003-10-01",
+            "coverage": 0.9117365997741291,
+            "declared_coverage": 0.9117,
+            "coverage_difference": 3.65997741291757e-05,
+            "valid_pixels": 10495,
+            "excluded_outside": 330,
+            "review_required": false
+        },
+        {
+            "date": "2003-11-01",
+            "coverage": 0.9964381895578143,
+            "declared_coverage": 0.9964,
+            "coverage_difference": 3.8189557814316544e-05,
+            "valid_pixels": 11470,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2003-12-01",
+            "coverage": 0.9956563287290418,
+            "declared_coverage": 0.9957,
+            "coverage_difference": 4.367127095827872e-05,
+            "valid_pixels": 11461,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2004-01-01",
+            "coverage": 0.975675440882634,
+            "declared_coverage": 0.9757,
+            "coverage_difference": 2.4559117365985372e-05,
+            "valid_pixels": 11231,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2004-02-01",
+            "coverage": 0.99687255668491,
+            "declared_coverage": 0.9969,
+            "coverage_difference": 2.744331508997e-05,
+            "valid_pixels": 11475,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2004-03-01",
+            "coverage": 0.9932238728173052,
+            "declared_coverage": 0.9932,
+            "coverage_difference": 2.3872817305203853e-05,
+            "valid_pixels": 11433,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2004-04-01",
+            "coverage": 0.9887933281209278,
+            "declared_coverage": 0.9888,
+            "coverage_difference": 6.671879072217557e-06,
+            "valid_pixels": 11382,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2004-05-01",
+            "coverage": 0.9895751889497003,
+            "declared_coverage": 0.9896,
+            "coverage_difference": 2.4811050299722304e-05,
+            "valid_pixels": 11391,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2004-06-01",
+            "coverage": 0.9510902614890105,
+            "declared_coverage": 0.9511,
+            "coverage_difference": 9.738510989398819e-06,
+            "valid_pixels": 10948,
+            "excluded_outside": 333,
+            "review_required": false
+        },
+        {
+            "date": "2004-07-01",
+            "coverage": 0.9688124402745201,
+            "declared_coverage": 0.9688,
+            "coverage_difference": 1.244027452007579e-05,
+            "valid_pixels": 11152,
+            "excluded_outside": 362,
+            "review_required": false
+        },
+        {
+            "date": "2004-08-01",
+            "coverage": 0.6917730866128051,
+            "declared_coverage": 0.6918,
+            "coverage_difference": 2.6913387194849037e-05,
+            "valid_pixels": 7963,
+            "excluded_outside": 248,
+            "review_required": true
+        },
+        {
+            "date": "2004-09-01",
+            "coverage": 0.8629137346885588,
+            "declared_coverage": 0.8629,
+            "coverage_difference": 1.373468855880855e-05,
+            "valid_pixels": 9933,
+            "excluded_outside": 296,
+            "review_required": false
+        },
+        {
+            "date": "2004-10-01",
+            "coverage": 0.9965250629832334,
+            "declared_coverage": 0.9965,
+            "coverage_difference": 2.5062983233348213e-05,
+            "valid_pixels": 11471,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2004-11-01",
+            "coverage": 0.9914864043089219,
+            "declared_coverage": 0.9915,
+            "coverage_difference": 1.3595691078172045e-05,
+            "valid_pixels": 11413,
+            "excluded_outside": 363,
+            "review_required": false
+        },
+        {
+            "date": "2004-12-01",
+            "coverage": 0.9976544175136826,
+            "declared_coverage": 0.9977,
+            "coverage_difference": 4.5582486317474746e-05,
+            "valid_pixels": 11484,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2005-01-01",
+            "coverage": 0.9973069238120059,
+            "declared_coverage": 0.9973,
+            "coverage_difference": 6.923812005954488e-06,
+            "valid_pixels": 11480,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2005-02-01",
+            "coverage": 0.9940926070714968,
+            "declared_coverage": 0.9941,
+            "coverage_difference": 7.392928503158203e-06,
+            "valid_pixels": 11443,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2005-03-01",
+            "coverage": 0.9938319867952393,
+            "declared_coverage": 0.9938,
+            "coverage_difference": 3.19867952393027e-05,
+            "valid_pixels": 11440,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2005-04-01",
+            "coverage": 0.9943532273477543,
+            "declared_coverage": 0.9944,
+            "coverage_difference": 4.6772652245619106e-05,
+            "valid_pixels": 11446,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2005-05-01",
+            "coverage": 0.9788897576231431,
+            "declared_coverage": 0.9789,
+            "coverage_difference": 1.0242376856872681e-05,
+            "valid_pixels": 11268,
+            "excluded_outside": 353,
+            "review_required": false
+        },
+        {
+            "date": "2005-06-01",
+            "coverage": 0.9767179219876639,
+            "declared_coverage": 0.9767,
+            "coverage_difference": 1.792198766392694e-05,
+            "valid_pixels": 11243,
+            "excluded_outside": 354,
+            "review_required": false
+        },
+        {
+            "date": "2005-07-01",
+            "coverage": 0.9763704282859873,
+            "declared_coverage": 0.9764,
+            "coverage_difference": 2.9571714012743833e-05,
+            "valid_pixels": 11239,
+            "excluded_outside": 356,
+            "review_required": false
+        },
+        {
+            "date": "2005-08-01",
+            "coverage": 0.724437494570411,
+            "declared_coverage": 0.7244,
+            "coverage_difference": 3.7494570410911976e-05,
+            "valid_pixels": 8339,
+            "excluded_outside": 240,
+            "review_required": false
+        },
+        {
+            "date": "2005-09-01",
+            "coverage": 0.9417948049691599,
+            "declared_coverage": 0.9418,
+            "coverage_difference": 5.195030840066117e-06,
+            "valid_pixels": 10841,
+            "excluded_outside": 336,
+            "review_required": false
+        },
+        {
+            "date": "2005-10-01",
+            "coverage": 0.9897489358005386,
+            "declared_coverage": 0.9897,
+            "coverage_difference": 4.8935800538552066e-05,
+            "valid_pixels": 11393,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2005-11-01",
+            "coverage": 0.9948744679002693,
+            "declared_coverage": 0.9949,
+            "coverage_difference": 2.553209973066295e-05,
+            "valid_pixels": 11452,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2005-12-01",
+            "coverage": 0.9953957084527842,
+            "declared_coverage": 0.9954,
+            "coverage_difference": 4.2915472157067924e-06,
+            "valid_pixels": 11458,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2006-01-01",
+            "coverage": 0.9974806706628442,
+            "declared_coverage": 0.9975,
+            "coverage_difference": 1.932933715587115e-05,
+            "valid_pixels": 11482,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2006-02-01",
+            "coverage": 0.9970463035357484,
+            "declared_coverage": 0.997,
+            "coverage_difference": 4.630353574841539e-05,
+            "valid_pixels": 11477,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2006-03-01",
+            "coverage": 0.9940057336460777,
+            "declared_coverage": 0.994,
+            "coverage_difference": 5.733646077699106e-06,
+            "valid_pixels": 11442,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2006-04-01",
+            "coverage": 0.9945269741985927,
+            "declared_coverage": 0.9945,
+            "coverage_difference": 2.6974198592655263e-05,
+            "valid_pixels": 11448,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2006-05-01",
+            "coverage": 0.9894883155242811,
+            "declared_coverage": 0.9895,
+            "coverage_difference": 1.1684475718976017e-05,
+            "valid_pixels": 11390,
+            "excluded_outside": 363,
+            "review_required": false
+        },
+        {
+            "date": "2006-06-01",
+            "coverage": 0.9817565806619755,
+            "declared_coverage": 0.9818,
+            "coverage_difference": 4.341933802454179e-05,
+            "valid_pixels": 11301,
+            "excluded_outside": 359,
+            "review_required": false
+        },
+        {
+            "date": "2006-07-01",
+            "coverage": 0.7961949439666406,
+            "declared_coverage": 0.7962,
+            "coverage_difference": 5.0560333594296125e-06,
+            "valid_pixels": 9165,
+            "excluded_outside": 270,
+            "review_required": false
+        },
+        {
+            "date": "2006-08-01",
+            "coverage": 0.5481713143949266,
+            "declared_coverage": 0.5482,
+            "coverage_difference": 2.868560507340856e-05,
+            "valid_pixels": 6310,
+            "excluded_outside": 197,
+            "review_required": true
+        },
+        {
+            "date": "2006-09-01",
+            "coverage": 0.9609938319867952,
+            "declared_coverage": 0.961,
+            "coverage_difference": 6.168013204743694e-06,
+            "valid_pixels": 11062,
+            "excluded_outside": 354,
+            "review_required": false
+        },
+        {
+            "date": "2006-10-01",
+            "coverage": 0.9934844930935627,
+            "declared_coverage": 0.9935,
+            "coverage_difference": 1.5506906437368073e-05,
+            "valid_pixels": 11436,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2006-11-01",
+            "coverage": 0.9965250629832334,
+            "declared_coverage": 0.9965,
+            "coverage_difference": 2.5062983233348213e-05,
+            "valid_pixels": 11471,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2006-12-01",
+            "coverage": 0.9962644427069759,
+            "declared_coverage": 0.9963,
+            "coverage_difference": 3.555729302406885e-05,
+            "valid_pixels": 11468,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2007-01-01",
+            "coverage": 0.9943532273477543,
+            "declared_coverage": 0.9944,
+            "coverage_difference": 4.6772652245619106e-05,
+            "valid_pixels": 11446,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2007-02-01",
+            "coverage": 0.9953957084527842,
+            "declared_coverage": 0.9954,
+            "coverage_difference": 4.2915472157067924e-06,
+            "valid_pixels": 11458,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2007-03-01",
+            "coverage": 0.9953957084527842,
+            "declared_coverage": 0.9954,
+            "coverage_difference": 4.2915472157067924e-06,
+            "valid_pixels": 11458,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2007-04-01",
+            "coverage": 0.9935713665189818,
+            "declared_coverage": 0.9936,
+            "coverage_difference": 2.8633481018225382e-05,
+            "valid_pixels": 11437,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2007-05-01",
+            "coverage": 0.9757623143080532,
+            "declared_coverage": 0.9758,
+            "coverage_difference": 3.768569194684268e-05,
+            "valid_pixels": 11232,
+            "excluded_outside": 360,
+            "review_required": false
+        },
+        {
+            "date": "2007-06-01",
+            "coverage": 0.953435843975328,
+            "declared_coverage": 0.9534,
+            "coverage_difference": 3.5843975327964905e-05,
+            "valid_pixels": 10975,
+            "excluded_outside": 340,
+            "review_required": false
+        },
+        {
+            "date": "2007-07-01",
+            "coverage": 0.9231170185040396,
+            "declared_coverage": 0.9231,
+            "coverage_difference": 1.7018504039567617e-05,
+            "valid_pixels": 10626,
+            "excluded_outside": 319,
+            "review_required": false
+        },
+        {
+            "date": "2007-08-01",
+            "coverage": 0.477543219529146,
+            "declared_coverage": 0.4775,
+            "coverage_difference": 4.3219529146043545e-05,
+            "valid_pixels": 5497,
+            "excluded_outside": 168,
+            "review_required": true
+        },
+        {
+            "date": "2007-09-01",
+            "coverage": 0.9960038224307184,
+            "declared_coverage": 0.996,
+            "coverage_difference": 3.822430718392056e-06,
+            "valid_pixels": 11465,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2007-10-01",
+            "coverage": 0.9959169490052993,
+            "declared_coverage": 0.9959,
+            "coverage_difference": 1.6949005299249364e-05,
+            "valid_pixels": 11464,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2007-11-01",
+            "coverage": 0.9960906958561376,
+            "declared_coverage": 0.9961,
+            "coverage_difference": 9.30414386235423e-06,
+            "valid_pixels": 11466,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2007-12-01",
+            "coverage": 0.9954825818782035,
+            "declared_coverage": 0.9955,
+            "coverage_difference": 1.74181217965641e-05,
+            "valid_pixels": 11459,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2008-01-01",
+            "coverage": 0.9958300755798801,
+            "declared_coverage": 0.9958,
+            "coverage_difference": 3.0075579880106673e-05,
+            "valid_pixels": 11463,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2008-02-01",
+            "coverage": 0.9959169490052993,
+            "declared_coverage": 0.9959,
+            "coverage_difference": 1.6949005299249364e-05,
+            "valid_pixels": 11464,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2008-03-01",
+            "coverage": 0.995743202154461,
+            "declared_coverage": 0.9957,
+            "coverage_difference": 4.320215446096398e-05,
+            "valid_pixels": 11462,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2008-04-01",
+            "coverage": 0.9924420119885327,
+            "declared_coverage": 0.9924,
+            "coverage_difference": 4.20119885327086e-05,
+            "valid_pixels": 11424,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2008-05-01",
+            "coverage": 0.9846234037008079,
+            "declared_coverage": 0.9846,
+            "coverage_difference": 2.3403700807889116e-05,
+            "valid_pixels": 11334,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2008-06-01",
+            "coverage": 0.7733472330814004,
+            "declared_coverage": 0.7733,
+            "coverage_difference": 4.723308140042182e-05,
+            "valid_pixels": 8902,
+            "excluded_outside": 258,
+            "review_required": false
+        },
+        {
+            "date": "2008-07-01",
+            "coverage": 0.9886195812700895,
+            "declared_coverage": 0.9886,
+            "coverage_difference": 1.958127008949706e-05,
+            "valid_pixels": 11380,
+            "excluded_outside": 359,
+            "review_required": false
+        },
+        {
+            "date": "2008-08-01",
+            "coverage": 0.8568325949092173,
+            "declared_coverage": 0.8568,
+            "coverage_difference": 3.259490921725394e-05,
+            "valid_pixels": 9863,
+            "excluded_outside": 306,
+            "review_required": false
+        },
+        {
+            "date": "2008-09-01",
+            "coverage": 0.9867083659108679,
+            "declared_coverage": 0.9867,
+            "coverage_difference": 8.36591086783578e-06,
+            "valid_pixels": 11358,
+            "excluded_outside": 359,
+            "review_required": false
+        },
+        {
+            "date": "2008-10-01",
+            "coverage": 0.9953088350273651,
+            "declared_coverage": 0.9953,
+            "coverage_difference": 8.835027365150516e-06,
+            "valid_pixels": 11457,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2008-11-01",
+            "coverage": 0.992615758839371,
+            "declared_coverage": 0.9926,
+            "coverage_difference": 1.5758839370993982e-05,
+            "valid_pixels": 11426,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2008-12-01",
+            "coverage": 0.995221961601946,
+            "declared_coverage": 0.9952,
+            "coverage_difference": 2.1961601946007825e-05,
+            "valid_pixels": 11456,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2009-01-01",
+            "coverage": 0.9949613413256885,
+            "declared_coverage": 0.995,
+            "coverage_difference": 3.865867431152026e-05,
+            "valid_pixels": 11453,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2009-02-01",
+            "coverage": 0.9958300755798801,
+            "declared_coverage": 0.9958,
+            "coverage_difference": 3.0075579880106673e-05,
+            "valid_pixels": 11463,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2009-03-01",
+            "coverage": 0.992615758839371,
+            "declared_coverage": 0.9926,
+            "coverage_difference": 1.5758839370993982e-05,
+            "valid_pixels": 11426,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2009-04-01",
+            "coverage": 0.9927026322647902,
+            "declared_coverage": 0.9927,
+            "coverage_difference": 2.6322647901366736e-06,
+            "valid_pixels": 11427,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2009-05-01",
+            "coverage": 0.9888802015463469,
+            "declared_coverage": 0.9889,
+            "coverage_difference": 1.9798453653074866e-05,
+            "valid_pixels": 11383,
+            "excluded_outside": 362,
+            "review_required": false
+        },
+        {
+            "date": "2009-06-01",
+            "coverage": 0.9374511336982018,
+            "declared_coverage": 0.9375,
+            "coverage_difference": 4.886630179823381e-05,
+            "valid_pixels": 10791,
+            "excluded_outside": 327,
+            "review_required": false
+        },
+        {
+            "date": "2009-07-01",
+            "coverage": 0.9767179219876639,
+            "declared_coverage": 0.9767,
+            "coverage_difference": 1.792198766392694e-05,
+            "valid_pixels": 11243,
+            "excluded_outside": 360,
+            "review_required": false
+        },
+        {
+            "date": "2009-08-01",
+            "coverage": 0.9277213100512554,
+            "declared_coverage": 0.9277,
+            "coverage_difference": 2.131005125538543e-05,
+            "valid_pixels": 10679,
+            "excluded_outside": 331,
+            "review_required": false
+        },
+        {
+            "date": "2009-09-01",
+            "coverage": 0.9876639735904786,
+            "declared_coverage": 0.9877,
+            "coverage_difference": 3.6026409521383584e-05,
+            "valid_pixels": 11369,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2009-10-01",
+            "coverage": 0.43123968378073146,
+            "declared_coverage": 0.4312,
+            "coverage_difference": 3.9683780731436524e-05,
+            "valid_pixels": 4964,
+            "excluded_outside": 168,
+            "review_required": true
+        },
+        {
+            "date": "2009-11-01",
+            "coverage": 0.993136999391886,
+            "declared_coverage": 0.9931,
+            "coverage_difference": 3.699939188606116e-05,
+            "valid_pixels": 11432,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2009-12-01",
+            "coverage": 0.9936582399444011,
+            "declared_coverage": 0.9937,
+            "coverage_difference": 4.176005559897167e-05,
+            "valid_pixels": 11438,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-01-01",
+            "coverage": 0.9933976196681435,
+            "declared_coverage": 0.9934,
+            "coverage_difference": 2.380331856399742e-06,
+            "valid_pixels": 11435,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-02-01",
+            "coverage": 0.9934844930935627,
+            "declared_coverage": 0.9935,
+            "coverage_difference": 1.5506906437368073e-05,
+            "valid_pixels": 11436,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-03-01",
+            "coverage": 0.9943532273477543,
+            "declared_coverage": 0.9944,
+            "coverage_difference": 4.6772652245619106e-05,
+            "valid_pixels": 11446,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-04-01",
+            "coverage": 0.9910520371818261,
+            "declared_coverage": 0.9911,
+            "coverage_difference": 4.796281817387449e-05,
+            "valid_pixels": 11408,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-05-01",
+            "coverage": 0.9894014420988619,
+            "declared_coverage": 0.9894,
+            "coverage_difference": 1.4420988619923136e-06,
+            "valid_pixels": 11389,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-06-01",
+            "coverage": 0.9141690556858657,
+            "declared_coverage": 0.9142,
+            "coverage_difference": 3.094431413430687e-05,
+            "valid_pixels": 10523,
+            "excluded_outside": 327,
+            "review_required": false
+        },
+        {
+            "date": "2010-07-01",
+            "coverage": 0.8253844149074798,
+            "declared_coverage": 0.8254,
+            "coverage_difference": 1.558509252019835e-05,
+            "valid_pixels": 9501,
+            "excluded_outside": 278,
+            "review_required": false
+        },
+        {
+            "date": "2010-08-01",
+            "coverage": 0.8537051515941274,
+            "declared_coverage": 0.8537,
+            "coverage_difference": 5.151594127394965e-06,
+            "valid_pixels": 9827,
+            "excluded_outside": 311,
+            "review_required": false
+        },
+        {
+            "date": "2010-09-01",
+            "coverage": 0.993136999391886,
+            "declared_coverage": 0.9931,
+            "coverage_difference": 3.699939188606116e-05,
+            "valid_pixels": 11432,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-10-01",
+            "coverage": 0.9951350881765268,
+            "declared_coverage": 0.9951,
+            "coverage_difference": 3.5088176526865134e-05,
+            "valid_pixels": 11455,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-11-01",
+            "coverage": 0.995743202154461,
+            "declared_coverage": 0.9957,
+            "coverage_difference": 4.320215446096398e-05,
+            "valid_pixels": 11462,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2010-12-01",
+            "coverage": 0.9973069238120059,
+            "declared_coverage": 0.9973,
+            "coverage_difference": 6.923812005954488e-06,
+            "valid_pixels": 11480,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2011-01-01",
+            "coverage": 0.9939188602206585,
+            "declared_coverage": 0.9939,
+            "coverage_difference": 1.8860220658445392e-05,
+            "valid_pixels": 11441,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2011-02-01",
+            "coverage": 0.9939188602206585,
+            "declared_coverage": 0.9939,
+            "coverage_difference": 1.8860220658445392e-05,
+            "valid_pixels": 11441,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2011-03-01",
+            "coverage": 0.9937451133698202,
+            "declared_coverage": 0.9937,
+            "coverage_difference": 4.511336982016001e-05,
+            "valid_pixels": 11439,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2011-04-01",
+            "coverage": 0.9907914169055686,
+            "declared_coverage": 0.9908,
+            "coverage_difference": 8.583094431413585e-06,
+            "valid_pixels": 11405,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2011-05-01",
+            "coverage": 0.9808878464077838,
+            "declared_coverage": 0.9809,
+            "coverage_difference": 1.2153592216179732e-05,
+            "valid_pixels": 11291,
+            "excluded_outside": 353,
+            "review_required": false
+        },
+        {
+            "date": "2011-06-01",
+            "coverage": 0.9285031708800278,
+            "declared_coverage": 0.9285,
+            "coverage_difference": 3.1708800277696625e-06,
+            "valid_pixels": 10688,
+            "excluded_outside": 322,
+            "review_required": false
+        },
+        {
+            "date": "2011-07-01",
+            "coverage": 0.949787160107723,
+            "declared_coverage": 0.9498,
+            "coverage_difference": 1.2839892276961251e-05,
+            "valid_pixels": 10933,
+            "excluded_outside": 336,
+            "review_required": false
+        },
+        {
+            "date": "2011-08-01",
+            "coverage": 0.9845365302753888,
+            "declared_coverage": 0.9845,
+            "coverage_difference": 3.6530275388746425e-05,
+            "valid_pixels": 11333,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2011-09-01",
+            "coverage": 0.9885327078446703,
+            "declared_coverage": 0.9885,
+            "coverage_difference": 3.270784467024335e-05,
+            "valid_pixels": 11379,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2011-10-01",
+            "coverage": 0.9947875944748501,
+            "declared_coverage": 0.9948,
+            "coverage_difference": 1.2405525149916663e-05,
+            "valid_pixels": 11451,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2011-11-01",
+            "coverage": 0.994179480496916,
+            "declared_coverage": 0.9942,
+            "coverage_difference": 2.051950308401551e-05,
+            "valid_pixels": 11444,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2011-12-01",
+            "coverage": 0.9949613413256885,
+            "declared_coverage": 0.995,
+            "coverage_difference": 3.865867431152026e-05,
+            "valid_pixels": 11453,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2012-01-01",
+            "coverage": 0.9942663539223352,
+            "declared_coverage": 0.9943,
+            "coverage_difference": 3.36460776647618e-05,
+            "valid_pixels": 11445,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2012-02-01",
+            "coverage": 0.9937451133698202,
+            "declared_coverage": 0.9937,
+            "coverage_difference": 4.511336982016001e-05,
+            "valid_pixels": 11439,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2012-03-01",
+            "coverage": 0.9943532273477543,
+            "declared_coverage": 0.9944,
+            "coverage_difference": 4.6772652245619106e-05,
+            "valid_pixels": 11446,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2012-04-01",
+            "coverage": 0.9895751889497003,
+            "declared_coverage": 0.9896,
+            "coverage_difference": 2.4811050299722304e-05,
+            "valid_pixels": 11391,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2012-05-01",
+            "coverage": 0.9914864043089219,
+            "declared_coverage": 0.9915,
+            "coverage_difference": 1.3595691078172045e-05,
+            "valid_pixels": 11413,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2012-06-01",
+            "coverage": 0.9805403527061072,
+            "declared_coverage": 0.9805,
+            "coverage_difference": 4.035270610713848e-05,
+            "valid_pixels": 11287,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2012-07-01",
+            "coverage": 0.957692641820867,
+            "declared_coverage": 0.9577,
+            "coverage_difference": 7.3581791329990764e-06,
+            "valid_pixels": 11024,
+            "excluded_outside": 330,
+            "review_required": false
+        },
+        {
+            "date": "2012-08-01",
+            "coverage": 0.9735036052471548,
+            "declared_coverage": 0.9735,
+            "coverage_difference": 3.6052471548142506e-06,
+            "valid_pixels": 11206,
+            "excluded_outside": 355,
+            "review_required": false
+        },
+        {
+            "date": "2012-09-01",
+            "coverage": 0.9900964295022153,
+            "declared_coverage": 0.9901,
+            "coverage_difference": 3.5704977846551245e-06,
+            "valid_pixels": 11397,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2012-10-01",
+            "coverage": 0.9928763791156285,
+            "declared_coverage": 0.9929,
+            "coverage_difference": 2.362088437146692e-05,
+            "valid_pixels": 11429,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2012-11-01",
+            "coverage": 0.925462600990357,
+            "declared_coverage": 0.9255,
+            "coverage_difference": 3.7399009642946623e-05,
+            "valid_pixels": 10653,
+            "excluded_outside": 337,
+            "review_required": false
+        },
+        {
+            "date": "2012-12-01",
+            "coverage": 0.9921813917122753,
+            "declared_coverage": 0.9922,
+            "coverage_difference": 1.860828772470846e-05,
+            "valid_pixels": 11421,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2013-01-01",
+            "coverage": 0.9953957084527842,
+            "declared_coverage": 0.9954,
+            "coverage_difference": 4.2915472157067924e-06,
+            "valid_pixels": 11458,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2013-02-01",
+            "coverage": 0.9938319867952393,
+            "declared_coverage": 0.9938,
+            "coverage_difference": 3.19867952393027e-05,
+            "valid_pixels": 11440,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2013-03-01",
+            "coverage": 0.9886195812700895,
+            "declared_coverage": 0.9886,
+            "coverage_difference": 1.958127008949706e-05,
+            "valid_pixels": 11380,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2013-04-01",
+            "coverage": 0.9894014420988619,
+            "declared_coverage": 0.9894,
+            "coverage_difference": 1.4420988619923136e-06,
+            "valid_pixels": 11389,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2013-05-01",
+            "coverage": 0.9816697072365563,
+            "declared_coverage": 0.9817,
+            "coverage_difference": 3.029276344368448e-05,
+            "valid_pixels": 11300,
+            "excluded_outside": 360,
+            "review_required": false
+        },
+        {
+            "date": "2013-06-01",
+            "coverage": 0.9494396664060464,
+            "declared_coverage": 0.9494,
+            "coverage_difference": 3.966640604635696e-05,
+            "valid_pixels": 10929,
+            "excluded_outside": 357,
+            "review_required": false
+        },
+        {
+            "date": "2013-07-01",
+            "coverage": 0.932846842150986,
+            "declared_coverage": 0.9328,
+            "coverage_difference": 4.684215098604838e-05,
+            "valid_pixels": 10738,
+            "excluded_outside": 329,
+            "review_required": false
+        },
+        {
+            "date": "2013-08-01",
+            "coverage": 0.9013986621492486,
+            "declared_coverage": 0.9014,
+            "coverage_difference": 1.3378507514039129e-06,
+            "valid_pixels": 10376,
+            "excluded_outside": 309,
+            "review_required": false
+        },
+        {
+            "date": "2013-09-01",
+            "coverage": 0.9888802015463469,
+            "declared_coverage": 0.9889,
+            "coverage_difference": 1.9798453653074866e-05,
+            "valid_pixels": 11383,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2013-10-01",
+            "coverage": 0.7931543740769699,
+            "declared_coverage": 0.7932,
+            "coverage_difference": 4.56259230301459e-05,
+            "valid_pixels": 9130,
+            "excluded_outside": 224,
+            "review_required": false
+        },
+        {
+            "date": "2013-11-01",
+            "coverage": 0.9850577708279037,
+            "declared_coverage": 0.9851,
+            "coverage_difference": 4.2229172096286405e-05,
+            "valid_pixels": 11339,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2013-12-01",
+            "coverage": 0.9900964295022153,
+            "declared_coverage": 0.9901,
+            "coverage_difference": 3.5704977846551245e-06,
+            "valid_pixels": 11397,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2014-01-01",
+            "coverage": 0.9914864043089219,
+            "declared_coverage": 0.9915,
+            "coverage_difference": 1.3595691078172045e-05,
+            "valid_pixels": 11413,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2014-02-01",
+            "coverage": 0.9937451133698202,
+            "declared_coverage": 0.9937,
+            "coverage_difference": 4.511336982016001e-05,
+            "valid_pixels": 11439,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2014-03-01",
+            "coverage": 0.9943532273477543,
+            "declared_coverage": 0.9944,
+            "coverage_difference": 4.6772652245619106e-05,
+            "valid_pixels": 11446,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2014-04-01",
+            "coverage": 0.9854052645295804,
+            "declared_coverage": 0.9854,
+            "coverage_difference": 5.2645295803843695e-06,
+            "valid_pixels": 11343,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2014-05-01",
+            "coverage": 0.9810615932586222,
+            "declared_coverage": 0.9811,
+            "coverage_difference": 3.840674137778333e-05,
+            "valid_pixels": 11293,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2014-06-01",
+            "coverage": 0.8222569715923899,
+            "declared_coverage": 0.8223,
+            "coverage_difference": 4.302840761016835e-05,
+            "valid_pixels": 9465,
+            "excluded_outside": 274,
+            "review_required": false
+        },
+        {
+            "date": "2014-07-01",
+            "coverage": 0.9874033533142211,
+            "declared_coverage": 0.9874,
+            "coverage_difference": 3.3533142210773192e-06,
+            "valid_pixels": 11366,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2014-08-01",
+            "coverage": 0.9176439927026323,
+            "declared_coverage": 0.9176,
+            "coverage_difference": 4.39927026323339e-05,
+            "valid_pixels": 10563,
+            "excluded_outside": 329,
+            "review_required": false
+        },
+        {
+            "date": "2014-09-01",
+            "coverage": 0.9783685170706281,
+            "declared_coverage": 0.9784,
+            "coverage_difference": 3.148292937193986e-05,
+            "valid_pixels": 11262,
+            "excluded_outside": 362,
+            "review_required": false
+        },
+        {
+            "date": "2014-10-01",
+            "coverage": 0.8948831552428113,
+            "declared_coverage": 0.8949,
+            "coverage_difference": 1.6844757188771986e-05,
+            "valid_pixels": 10301,
+            "excluded_outside": 350,
+            "review_required": false
+        },
+        {
+            "date": "2014-11-01",
+            "coverage": 0.9861871253583528,
+            "declared_coverage": 0.9862,
+            "coverage_difference": 1.2874641647120377e-05,
+            "valid_pixels": 11352,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2014-12-01",
+            "coverage": 0.8739466597167926,
+            "declared_coverage": 0.8739,
+            "coverage_difference": 4.66597167926297e-05,
+            "valid_pixels": 10060,
+            "excluded_outside": 294,
+            "review_required": false
+        },
+        {
+            "date": "2015-01-01",
+            "coverage": 0.9610807054122144,
+            "declared_coverage": 0.9611,
+            "coverage_difference": 1.9294587785601003e-05,
+            "valid_pixels": 11063,
+            "excluded_outside": 338,
+            "review_required": false
+        },
+        {
+            "date": "2015-02-01",
+            "coverage": 0.9927895056902094,
+            "declared_coverage": 0.9928,
+            "coverage_difference": 1.0494309790609613e-05,
+            "valid_pixels": 11428,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2015-03-01",
+            "coverage": 0.9884458344192512,
+            "declared_coverage": 0.9884,
+            "coverage_difference": 4.583441925121168e-05,
+            "valid_pixels": 11378,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2015-04-01",
+            "coverage": 0.986795239336287,
+            "declared_coverage": 0.9868,
+            "coverage_difference": 4.760663713021529e-06,
+            "valid_pixels": 11359,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2015-05-01",
+            "coverage": 0.9827121883415864,
+            "declared_coverage": 0.9827,
+            "coverage_difference": 1.2188341586338858e-05,
+            "valid_pixels": 11312,
+            "excluded_outside": 362,
+            "review_required": false
+        },
+        {
+            "date": "2015-06-01",
+            "coverage": 0.9324124750238902,
+            "declared_coverage": 0.9324,
+            "coverage_difference": 1.2475023890234915e-05,
+            "valid_pixels": 10733,
+            "excluded_outside": 333,
+            "review_required": false
+        },
+        {
+            "date": "2015-07-01",
+            "coverage": 0.9470072104943098,
+            "declared_coverage": 0.947,
+            "coverage_difference": 7.210494309850546e-06,
+            "valid_pixels": 10901,
+            "excluded_outside": 337,
+            "review_required": false
+        },
+        {
+            "date": "2015-08-01",
+            "coverage": 0.94075232386413,
+            "declared_coverage": 0.9408,
+            "coverage_difference": 4.767613586997843e-05,
+            "valid_pixels": 10829,
+            "excluded_outside": 358,
+            "review_required": false
+        },
+        {
+            "date": "2015-09-01",
+            "coverage": 0.9596038571800886,
+            "declared_coverage": 0.9596,
+            "coverage_difference": 3.857180088551182e-06,
+            "valid_pixels": 11046,
+            "excluded_outside": 355,
+            "review_required": false
+        },
+        {
+            "date": "2015-10-01",
+            "coverage": 0.7041959864477456,
+            "declared_coverage": 0.7042,
+            "coverage_difference": 4.013552254433783e-06,
+            "valid_pixels": 8106,
+            "excluded_outside": 263,
+            "review_required": false
+        },
+        {
+            "date": "2015-11-01",
+            "coverage": 0.9643818955781427,
+            "declared_coverage": 0.9644,
+            "coverage_difference": 1.810442185734562e-05,
+            "valid_pixels": 11101,
+            "excluded_outside": 357,
+            "review_required": false
+        },
+        {
+            "date": "2015-12-01",
+            "coverage": 0.9833203023195205,
+            "declared_coverage": 0.9833,
+            "coverage_difference": 2.030231952054873e-05,
+            "valid_pixels": 11319,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2016-01-01",
+            "coverage": 0.9879245938667361,
+            "declared_coverage": 0.9879,
+            "coverage_difference": 2.45938667361445e-05,
+            "valid_pixels": 11372,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2016-02-01",
+            "coverage": 0.9881852141429937,
+            "declared_coverage": 0.9882,
+            "coverage_difference": 1.4785857006316405e-05,
+            "valid_pixels": 11375,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2016-03-01",
+            "coverage": 0.9872296064633829,
+            "declared_coverage": 0.9872,
+            "coverage_difference": 2.960646338290296e-05,
+            "valid_pixels": 11364,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2016-04-01",
+            "coverage": 0.9754148206063765,
+            "declared_coverage": 0.9754,
+            "coverage_difference": 1.4820606376475531e-05,
+            "valid_pixels": 11228,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2016-05-01",
+            "coverage": 0.893145686734428,
+            "declared_coverage": 0.8931,
+            "coverage_difference": 4.5686734427952125e-05,
+            "valid_pixels": 10281,
+            "excluded_outside": 318,
+            "review_required": false
+        },
+        {
+            "date": "2016-06-01",
+            "coverage": 0.7346016853444531,
+            "declared_coverage": 0.7346,
+            "coverage_difference": 1.6853444531061967e-06,
+            "valid_pixels": 8456,
+            "excluded_outside": 244,
+            "review_required": false
+        },
+        {
+            "date": "2016-07-01",
+            "coverage": 0.8095734514811919,
+            "declared_coverage": 0.8096,
+            "coverage_difference": 2.65485188081227e-05,
+            "valid_pixels": 9319,
+            "excluded_outside": 299,
+            "review_required": false
+        },
+        {
+            "date": "2016-08-01",
+            "coverage": 0.9457909825384415,
+            "declared_coverage": 0.9458,
+            "coverage_difference": 9.017461558458173e-06,
+            "valid_pixels": 10887,
+            "excluded_outside": 337,
+            "review_required": false
+        },
+        {
+            "date": "2016-09-01",
+            "coverage": 0.9499609069585614,
+            "declared_coverage": 0.95,
+            "coverage_difference": 3.9093041438564846e-05,
+            "valid_pixels": 10935,
+            "excluded_outside": 334,
+            "review_required": false
+        },
+        {
+            "date": "2016-10-01",
+            "coverage": 0.986795239336287,
+            "declared_coverage": 0.9868,
+            "coverage_difference": 4.760663713021529e-06,
+            "valid_pixels": 11359,
+            "excluded_outside": 362,
+            "review_required": false
+        },
+        {
+            "date": "2016-11-01",
+            "coverage": 0.9850577708279037,
+            "declared_coverage": 0.9851,
+            "coverage_difference": 4.2229172096286405e-05,
+            "valid_pixels": 11339,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2016-12-01",
+            "coverage": 0.987837720441317,
+            "declared_coverage": 0.9878,
+            "coverage_difference": 3.772044131700181e-05,
+            "valid_pixels": 11371,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2017-01-01",
+            "coverage": 0.9901833029276345,
+            "declared_coverage": 0.9902,
+            "coverage_difference": 1.6697072365512433e-05,
+            "valid_pixels": 11398,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2017-02-01",
+            "coverage": 0.9913126574580836,
+            "declared_coverage": 0.9913,
+            "coverage_difference": 1.2657458083653594e-05,
+            "valid_pixels": 11411,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2017-03-01",
+            "coverage": 0.9916601511597603,
+            "declared_coverage": 0.9917,
+            "coverage_difference": 3.984884023977564e-05,
+            "valid_pixels": 11415,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2017-04-01",
+            "coverage": 0.9874033533142211,
+            "declared_coverage": 0.9874,
+            "coverage_difference": 3.3533142210773192e-06,
+            "valid_pixels": 11366,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2017-05-01",
+            "coverage": 0.8845452176179307,
+            "declared_coverage": 0.8845,
+            "coverage_difference": 4.521761793074841e-05,
+            "valid_pixels": 10182,
+            "excluded_outside": 356,
+            "review_required": false
+        },
+        {
+            "date": "2017-06-01",
+            "coverage": 0.9768047954130832,
+            "declared_coverage": 0.9768,
+            "coverage_difference": 4.795413083180655e-06,
+            "valid_pixels": 11244,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2017-07-01",
+            "coverage": 0.9119972200503866,
+            "declared_coverage": 0.912,
+            "coverage_difference": 2.7799496133962265e-06,
+            "valid_pixels": 10498,
+            "excluded_outside": 339,
+            "review_required": false
+        },
+        {
+            "date": "2017-08-01",
+            "coverage": 0.9620363130918252,
+            "declared_coverage": 0.962,
+            "coverage_difference": 3.631309182527964e-05,
+            "valid_pixels": 11074,
+            "excluded_outside": 360,
+            "review_required": false
+        },
+        {
+            "date": "2017-09-01",
+            "coverage": 0.9722873772912866,
+            "declared_coverage": 0.9723,
+            "coverage_difference": 1.2622708713494468e-05,
+            "valid_pixels": 11192,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2017-10-01",
+            "coverage": 0.9888802015463469,
+            "declared_coverage": 0.9889,
+            "coverage_difference": 1.9798453653074866e-05,
+            "valid_pixels": 11383,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2017-11-01",
+            "coverage": 0.9944401007731735,
+            "declared_coverage": 0.9944,
+            "coverage_difference": 4.010077317351257e-05,
+            "valid_pixels": 11447,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2017-12-01",
+            "coverage": 0.9886195812700895,
+            "declared_coverage": 0.9886,
+            "coverage_difference": 1.958127008949706e-05,
+            "valid_pixels": 11380,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2018-01-01",
+            "coverage": 0.9900964295022153,
+            "declared_coverage": 0.9901,
+            "coverage_difference": 3.5704977846551245e-06,
+            "valid_pixels": 11397,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2018-02-01",
+            "coverage": 0.992615758839371,
+            "declared_coverage": 0.9926,
+            "coverage_difference": 1.5758839370993982e-05,
+            "valid_pixels": 11426,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2018-03-01",
+            "coverage": 0.9924420119885327,
+            "declared_coverage": 0.9924,
+            "coverage_difference": 4.20119885327086e-05,
+            "valid_pixels": 11424,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2018-04-01",
+            "coverage": 0.9864477456346104,
+            "declared_coverage": 0.9864,
+            "coverage_difference": 4.774563461029668e-05,
+            "valid_pixels": 11355,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2018-05-01",
+            "coverage": 0.9850577708279037,
+            "declared_coverage": 0.9851,
+            "coverage_difference": 4.2229172096286405e-05,
+            "valid_pixels": 11339,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2018-06-01",
+            "coverage": 0.5377465033446269,
+            "declared_coverage": 0.5377,
+            "coverage_difference": 4.6503344626969145e-05,
+            "valid_pixels": 6190,
+            "excluded_outside": 178,
+            "review_required": true
+        },
+        {
+            "date": "2018-07-01",
+            "coverage": 0.9634262878985318,
+            "declared_coverage": 0.9634,
+            "coverage_difference": 2.628789853176272e-05,
+            "valid_pixels": 11090,
+            "excluded_outside": 354,
+            "review_required": false
+        },
+        {
+            "date": "2018-08-01",
+            "coverage": 0.7660498653461906,
+            "declared_coverage": 0.766,
+            "coverage_difference": 4.986534619055849e-05,
+            "valid_pixels": 8818,
+            "excluded_outside": 242,
+            "review_required": false
+        },
+        {
+            "date": "2018-09-01",
+            "coverage": 0.7233081400399618,
+            "declared_coverage": 0.7233,
+            "coverage_difference": 8.140039961745948e-06,
+            "valid_pixels": 8326,
+            "excluded_outside": 231,
+            "review_required": false
+        },
+        {
+            "date": "2018-10-01",
+            "coverage": 0.5258448440622013,
+            "declared_coverage": 0.5258,
+            "coverage_difference": 4.4844062201288004e-05,
+            "valid_pixels": 6053,
+            "excluded_outside": 263,
+            "review_required": true
+        },
+        {
+            "date": "2018-11-01",
+            "coverage": 0.9894014420988619,
+            "declared_coverage": 0.9894,
+            "coverage_difference": 1.4420988619923136e-06,
+            "valid_pixels": 11389,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2018-12-01",
+            "coverage": 0.9893145686734428,
+            "declared_coverage": 0.9893,
+            "coverage_difference": 1.4568673442849622e-05,
+            "valid_pixels": 11388,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2019-01-01",
+            "coverage": 0.990443923203892,
+            "declared_coverage": 0.9904,
+            "coverage_difference": 4.392320389201565e-05,
+            "valid_pixels": 11401,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2019-02-01",
+            "coverage": 0.994700721049431,
+            "declared_coverage": 0.9947,
+            "coverage_difference": 7.210494309406457e-07,
+            "valid_pixels": 11450,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2019-03-01",
+            "coverage": 0.9922682651376944,
+            "declared_coverage": 0.9923,
+            "coverage_difference": 3.173486230556577e-05,
+            "valid_pixels": 11422,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2019-04-01",
+            "coverage": 0.9875771001650595,
+            "declared_coverage": 0.9876,
+            "coverage_difference": 2.2899834940526276e-05,
+            "valid_pixels": 11368,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2019-05-01",
+            "coverage": 0.9442272608808965,
+            "declared_coverage": 0.9442,
+            "coverage_difference": 2.7260880896440298e-05,
+            "valid_pixels": 10869,
+            "excluded_outside": 350,
+            "review_required": false
+        },
+        {
+            "date": "2019-06-01",
+            "coverage": 0.9606463382851186,
+            "declared_coverage": 0.9606,
+            "coverage_difference": 4.633828511857452e-05,
+            "valid_pixels": 11058,
+            "excluded_outside": 350,
+            "review_required": false
+        },
+        {
+            "date": "2019-07-01",
+            "coverage": 0.918512726956824,
+            "declared_coverage": 0.9185,
+            "coverage_difference": 1.2726956823971847e-05,
+            "valid_pixels": 10573,
+            "excluded_outside": 329,
+            "review_required": false
+        },
+        {
+            "date": "2019-08-01",
+            "coverage": 0.9767179219876639,
+            "declared_coverage": 0.9767,
+            "coverage_difference": 1.792198766392694e-05,
+            "valid_pixels": 11243,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2019-09-01",
+            "coverage": 0.9670749717661368,
+            "declared_coverage": 0.9671,
+            "coverage_difference": 2.5028233863189087e-05,
+            "valid_pixels": 11132,
+            "excluded_outside": 360,
+            "review_required": false
+        },
+        {
+            "date": "2019-10-01",
+            "coverage": 0.4574754582573191,
+            "declared_coverage": 0.4575,
+            "coverage_difference": 2.454174268090581e-05,
+            "valid_pixels": 5266,
+            "excluded_outside": 196,
+            "review_required": true
+        },
+        {
+            "date": "2019-11-01",
+            "coverage": 0.9868821127617062,
+            "declared_coverage": 0.9869,
+            "coverage_difference": 1.7887238293767815e-05,
+            "valid_pixels": 11360,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2019-12-01",
+            "coverage": 0.9862739987837721,
+            "declared_coverage": 0.9863,
+            "coverage_difference": 2.6001216227866664e-05,
+            "valid_pixels": 11353,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2020-01-01",
+            "coverage": 0.9874902267396404,
+            "declared_coverage": 0.9875,
+            "coverage_difference": 9.773260359668967e-06,
+            "valid_pixels": 11367,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2020-02-01",
+            "coverage": 0.9872296064633829,
+            "declared_coverage": 0.9872,
+            "coverage_difference": 2.960646338290296e-05,
+            "valid_pixels": 11364,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2020-03-01",
+            "coverage": 0.9867083659108679,
+            "declared_coverage": 0.9867,
+            "coverage_difference": 8.36591086783578e-06,
+            "valid_pixels": 11358,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2020-04-01",
+            "coverage": 0.9849708974024846,
+            "declared_coverage": 0.985,
+            "coverage_difference": 2.9102597515429096e-05,
+            "valid_pixels": 11338,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2020-05-01",
+            "coverage": 0.9649031361306576,
+            "declared_coverage": 0.9649,
+            "coverage_difference": 3.1361306576105363e-06,
+            "valid_pixels": 11107,
+            "excluded_outside": 360,
+            "review_required": false
+        },
+        {
+            "date": "2020-06-01",
+            "coverage": 0.9539570845278429,
+            "declared_coverage": 0.954,
+            "coverage_difference": 4.2915472157067924e-05,
+            "valid_pixels": 10981,
+            "excluded_outside": 360,
+            "review_required": false
+        },
+        {
+            "date": "2020-07-01",
+            "coverage": 0.9098253844149075,
+            "declared_coverage": 0.9098,
+            "coverage_difference": 2.5384414907403396e-05,
+            "valid_pixels": 10473,
+            "excluded_outside": 329,
+            "review_required": false
+        },
+        {
+            "date": "2020-08-01",
+            "coverage": 0.950308400660238,
+            "declared_coverage": 0.9503,
+            "coverage_difference": 8.400660237994906e-06,
+            "valid_pixels": 10939,
+            "excluded_outside": 357,
+            "review_required": false
+        },
+        {
+            "date": "2020-09-01",
+            "coverage": 0.9869689861871254,
+            "declared_coverage": 0.987,
+            "coverage_difference": 3.1013812874625124e-05,
+            "valid_pixels": 11361,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2020-10-01",
+            "coverage": 0.9906176700547302,
+            "declared_coverage": 0.9906,
+            "coverage_difference": 1.767005473019001e-05,
+            "valid_pixels": 11403,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2020-11-01",
+            "coverage": 0.9787160107723047,
+            "declared_coverage": 0.9787,
+            "coverage_difference": 1.6010772304730914e-05,
+            "valid_pixels": 11266,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2020-12-01",
+            "coverage": 0.9861871253583528,
+            "declared_coverage": 0.9862,
+            "coverage_difference": 1.2874641647120377e-05,
+            "valid_pixels": 11352,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2021-01-01",
+            "coverage": 0.9848840239770654,
+            "declared_coverage": 0.9849,
+            "coverage_difference": 1.5976022934571787e-05,
+            "valid_pixels": 11337,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2021-02-01",
+            "coverage": 0.9902701763530536,
+            "declared_coverage": 0.9903,
+            "coverage_difference": 2.9823646946369742e-05,
+            "valid_pixels": 11399,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2021-03-01",
+            "coverage": 0.9892276952480237,
+            "declared_coverage": 0.9892,
+            "coverage_difference": 2.769524802370693e-05,
+            "valid_pixels": 11387,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2021-04-01",
+            "coverage": 0.9831465554686821,
+            "declared_coverage": 0.9831,
+            "coverage_difference": 4.655546868215232e-05,
+            "valid_pixels": 11317,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2021-05-01",
+            "coverage": 0.9755885674572148,
+            "declared_coverage": 0.9756,
+            "coverage_difference": 1.1432542785239086e-05,
+            "valid_pixels": 11230,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2021-06-01",
+            "coverage": 0.7851620189384068,
+            "declared_coverage": 0.7852,
+            "coverage_difference": 3.7981061593250764e-05,
+            "valid_pixels": 9038,
+            "excluded_outside": 260,
+            "review_required": false
+        },
+        {
+            "date": "2021-07-01",
+            "coverage": 0.8539657718703848,
+            "declared_coverage": 0.854,
+            "coverage_difference": 3.422812961517696e-05,
+            "valid_pixels": 9830,
+            "excluded_outside": 302,
+            "review_required": false
+        },
+        {
+            "date": "2021-08-01",
+            "coverage": 0.7922856398227782,
+            "declared_coverage": 0.7923,
+            "coverage_difference": 1.4360177221783843e-05,
+            "valid_pixels": 9120,
+            "excluded_outside": 277,
+            "review_required": false
+        },
+        {
+            "date": "2021-09-01",
+            "coverage": 0.9695943011032925,
+            "declared_coverage": 0.9696,
+            "coverage_difference": 5.69889670753998e-06,
+            "valid_pixels": 11161,
+            "excluded_outside": 363,
+            "review_required": false
+        },
+        {
+            "date": "2021-10-01",
+            "coverage": 0.9423160455216749,
+            "declared_coverage": 0.9423,
+            "coverage_difference": 1.604552167489004e-05,
+            "valid_pixels": 10847,
+            "excluded_outside": 348,
+            "review_required": false
+        },
+        {
+            "date": "2021-11-01",
+            "coverage": 0.9849708974024846,
+            "declared_coverage": 0.985,
+            "coverage_difference": 2.9102597515429096e-05,
+            "valid_pixels": 11338,
+            "excluded_outside": 363,
+            "review_required": false
+        },
+        {
+            "date": "2021-12-01",
+            "coverage": 0.9854921379549996,
+            "declared_coverage": 0.9855,
+            "coverage_difference": 7.86204500047294e-06,
+            "valid_pixels": 11344,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2022-01-01",
+            "coverage": 0.9875771001650595,
+            "declared_coverage": 0.9876,
+            "coverage_difference": 2.2899834940526276e-05,
+            "valid_pixels": 11368,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2022-02-01",
+            "coverage": 0.9874902267396404,
+            "declared_coverage": 0.9875,
+            "coverage_difference": 9.773260359668967e-06,
+            "valid_pixels": 11367,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2022-03-01",
+            "coverage": 0.9866214924854487,
+            "declared_coverage": 0.9866,
+            "coverage_difference": 2.1492485448693088e-05,
+            "valid_pixels": 11357,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2022-04-01",
+            "coverage": 0.9785422639214664,
+            "declared_coverage": 0.9785,
+            "coverage_difference": 4.226392146633451e-05,
+            "valid_pixels": 11264,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2022-05-01",
+            "coverage": 0.9797584918773348,
+            "declared_coverage": 0.9798,
+            "coverage_difference": 4.150812266523474e-05,
+            "valid_pixels": 11278,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2022-06-01",
+            "coverage": 0.8780297107114934,
+            "declared_coverage": 0.878,
+            "coverage_difference": 2.9710711493380337e-05,
+            "valid_pixels": 10107,
+            "excluded_outside": 310,
+            "review_required": false
+        },
+        {
+            "date": "2022-07-01",
+            "coverage": 0.8663886717053253,
+            "declared_coverage": 0.8664,
+            "coverage_difference": 1.1328294674650685e-05,
+            "valid_pixels": 9973,
+            "excluded_outside": 275,
+            "review_required": false
+        },
+        {
+            "date": "2022-08-01",
+            "coverage": 0.8870645469550864,
+            "declared_coverage": 0.8871,
+            "coverage_difference": 3.545304491359147e-05,
+            "valid_pixels": 10211,
+            "excluded_outside": 312,
+            "review_required": false
+        },
+        {
+            "date": "2022-09-01",
+            "coverage": 0.945530362262184,
+            "declared_coverage": 0.9455,
+            "coverage_difference": 3.036226218400273e-05,
+            "valid_pixels": 10884,
+            "excluded_outside": 352,
+            "review_required": false
+        },
+        {
+            "date": "2022-10-01",
+            "coverage": 0.9404048301624534,
+            "declared_coverage": 0.9404,
+            "coverage_difference": 4.830162453339781e-06,
+            "valid_pixels": 10825,
+            "excluded_outside": 363,
+            "review_required": false
+        },
+        {
+            "date": "2022-11-01",
+            "coverage": 0.9888802015463469,
+            "declared_coverage": 0.9889,
+            "coverage_difference": 1.9798453653074866e-05,
+            "valid_pixels": 11383,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2022-12-01",
+            "coverage": 0.979410998175658,
+            "declared_coverage": 0.9794,
+            "coverage_difference": 1.0998175657972453e-05,
+            "valid_pixels": 11274,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2023-01-01",
+            "coverage": 0.9890539483971853,
+            "declared_coverage": 0.9891,
+            "coverage_difference": 4.605160281467846e-05,
+            "valid_pixels": 11385,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2023-02-01",
+            "coverage": 0.9846234037008079,
+            "declared_coverage": 0.9846,
+            "coverage_difference": 2.3403700807889116e-05,
+            "valid_pixels": 11334,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2023-03-01",
+            "coverage": 0.9871427330379637,
+            "declared_coverage": 0.9871,
+            "coverage_difference": 4.273303796376027e-05,
+            "valid_pixels": 11363,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2023-04-01",
+            "coverage": 0.9760229345843107,
+            "declared_coverage": 0.976,
+            "coverage_difference": 2.2934584310685402e-05,
+            "valid_pixels": 11235,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2023-05-01",
+            "coverage": 0.9800191121535922,
+            "declared_coverage": 0.98,
+            "coverage_difference": 1.9112153592182324e-05,
+            "valid_pixels": 11281,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2023-06-01",
+            "coverage": 0.9740248457996699,
+            "declared_coverage": 0.974,
+            "coverage_difference": 2.484579966988143e-05,
+            "valid_pixels": 11212,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2023-07-01",
+            "coverage": 0.9400573364607766,
+            "declared_coverage": 0.9401,
+            "coverage_difference": 4.2663539223442015e-05,
+            "valid_pixels": 10821,
+            "excluded_outside": 342,
+            "review_required": false
+        },
+        {
+            "date": "2023-08-01",
+            "coverage": 0.9697680479541309,
+            "declared_coverage": 0.9698,
+            "coverage_difference": 3.1952045869143575e-05,
+            "valid_pixels": 11163,
+            "excluded_outside": 363,
+            "review_required": false
+        },
+        {
+            "date": "2023-09-01",
+            "coverage": 0.974632959777604,
+            "declared_coverage": 0.9746,
+            "coverage_difference": 3.295977760398028e-05,
+            "valid_pixels": 11219,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2023-10-01",
+            "coverage": 0.9580401355225436,
+            "declared_coverage": 0.958,
+            "coverage_difference": 4.01355225436717e-05,
+            "valid_pixels": 11028,
+            "excluded_outside": 360,
+            "review_required": false
+        },
+        {
+            "date": "2023-11-01",
+            "coverage": 0.9803666058552689,
+            "declared_coverage": 0.9804,
+            "coverage_difference": 3.339414473113589e-05,
+            "valid_pixels": 11285,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2023-12-01",
+            "coverage": 0.9700286682303884,
+            "declared_coverage": 0.97,
+            "coverage_difference": 2.8668230388384508e-05,
+            "valid_pixels": 11166,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2024-01-01",
+            "coverage": 0.9821909477890713,
+            "declared_coverage": 0.9822,
+            "coverage_difference": 9.052210928617299e-06,
+            "valid_pixels": 11306,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2024-02-01",
+            "coverage": 0.9858396316566762,
+            "declared_coverage": 0.9858,
+            "coverage_difference": 3.9631656676197835e-05,
+            "valid_pixels": 11348,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2024-03-01",
+            "coverage": 0.9877508470158979,
+            "declared_coverage": 0.9878,
+            "coverage_difference": 4.915298410212987e-05,
+            "valid_pixels": 11370,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2024-04-01",
+            "coverage": 0.9803666058552689,
+            "declared_coverage": 0.9804,
+            "coverage_difference": 3.339414473113589e-05,
+            "valid_pixels": 11285,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2024-05-01",
+            "coverage": 0.9589957432021544,
+            "declared_coverage": 0.959,
+            "coverage_difference": 4.256797845547666e-06,
+            "valid_pixels": 11039,
+            "excluded_outside": 336,
+            "review_required": false
+        },
+        {
+            "date": "2024-06-01",
+            "coverage": 0.9500477803839805,
+            "declared_coverage": 0.95,
+            "coverage_difference": 4.778038398056683e-05,
+            "valid_pixels": 10936,
+            "excluded_outside": 341,
+            "review_required": false
+        },
+        {
+            "date": "2024-07-01",
+            "coverage": 0.9086960298844583,
+            "declared_coverage": 0.9087,
+            "coverage_difference": 3.970115541651609e-06,
+            "valid_pixels": 10460,
+            "excluded_outside": 347,
+            "review_required": false
+        },
+        {
+            "date": "2024-08-01",
+            "coverage": 0.7609243332464599,
+            "declared_coverage": 0.7609,
+            "coverage_difference": 2.433324645989554e-05,
+            "valid_pixels": 8759,
+            "excluded_outside": 262,
+            "review_required": false
+        },
+        {
+            "date": "2024-09-01",
+            "coverage": 0.9110416123707757,
+            "declared_coverage": 0.911,
+            "coverage_difference": 4.1612370775712115e-05,
+            "valid_pixels": 10487,
+            "excluded_outside": 343,
+            "review_required": false
+        },
+        {
+            "date": "2024-10-01",
+            "coverage": 0.9384067413778125,
+            "declared_coverage": 0.9384,
+            "coverage_difference": 6.741377812535809e-06,
+            "valid_pixels": 10802,
+            "excluded_outside": 353,
+            "review_required": false
+        },
+        {
+            "date": "2024-11-01",
+            "coverage": 0.9808009729823647,
+            "declared_coverage": 0.9808,
+            "coverage_difference": 9.72982364677577e-07,
+            "valid_pixels": 11290,
+            "excluded_outside": 364,
+            "review_required": false
+        },
+        {
+            "date": "2024-12-01",
+            "coverage": 0.9880983407175745,
+            "declared_coverage": 0.9881,
+            "coverage_difference": 1.6592824254590965e-06,
+            "valid_pixels": 11374,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2025-01-01",
+            "coverage": 0.9823646946399096,
+            "declared_coverage": 0.9824,
+            "coverage_difference": 3.530536009044294e-05,
+            "valid_pixels": 11308,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2025-02-01",
+            "coverage": 0.9860133785075146,
+            "declared_coverage": 0.986,
+            "coverage_difference": 1.337850751459424e-05,
+            "valid_pixels": 11350,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2025-03-01",
+            "coverage": 0.9834940491703588,
+            "declared_coverage": 0.9835,
+            "coverage_difference": 5.950829641276911e-06,
+            "valid_pixels": 11321,
+            "excluded_outside": 365,
+            "review_required": false
+        },
+        {
+            "date": "2025-04-01",
+            "coverage": 0.9872296064633829,
+            "declared_coverage": 0.9872,
+            "coverage_difference": 2.960646338290296e-05,
+            "valid_pixels": 11364,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2025-05-01",
+            "coverage": 0.9808009729823647,
+            "declared_coverage": 0.9808,
+            "coverage_difference": 9.72982364677577e-07,
+            "valid_pixels": 11290,
+            "excluded_outside": 362,
+            "review_required": false
+        },
+        {
+            "date": "2025-06-01",
+            "coverage": 0.316219268525758,
+            "declared_coverage": 0.3162,
+            "coverage_difference": 1.9268525758009414e-05,
+            "valid_pixels": 3640,
+            "excluded_outside": 126,
+            "review_required": true
+        },
+        {
+            "date": "2025-07-01",
+            "coverage": 0.9463990965163757,
+            "declared_coverage": 0.9464,
+            "coverage_difference": 9.034836243593247e-07,
+            "valid_pixels": 10894,
+            "excluded_outside": 344,
+            "review_required": false
+        },
+        {
+            "date": "2025-08-01",
+            "coverage": 0.8226044652940665,
+            "declared_coverage": 0.8226,
+            "coverage_difference": 4.465294066502423e-06,
+            "valid_pixels": 9469,
+            "excluded_outside": 319,
+            "review_required": false
+        },
+        {
+            "date": "2025-09-01",
+            "coverage": 0.9470072104943098,
+            "declared_coverage": 0.947,
+            "coverage_difference": 7.210494309850546e-06,
+            "valid_pixels": 10901,
+            "excluded_outside": 354,
+            "review_required": false
+        },
+        {
+            "date": "2025-10-01",
+            "coverage": 0.9795847450264964,
+            "declared_coverage": 0.9796,
+            "coverage_difference": 1.5254973503631142e-05,
+            "valid_pixels": 11276,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2025-11-01",
+            "coverage": 0.9871427330379637,
+            "declared_coverage": 0.9871,
+            "coverage_difference": 4.273303796376027e-05,
+            "valid_pixels": 11363,
+            "excluded_outside": 366,
+            "review_required": false
+        },
+        {
+            "date": "2025-12-01",
+            "coverage": 0.9721136304404483,
+            "declared_coverage": 0.9721,
+            "coverage_difference": 1.3630440448331171e-05,
+            "valid_pixels": 11190,
+            "excluded_outside": 366,
+            "review_required": false
+        }
+    ]
+}

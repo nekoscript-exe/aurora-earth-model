@@ -1,0 +1,60 @@
+{
+    "dataset": "satellite",
+    "source": "MODIS/061/MOD11A2",
+    "variable": "LST",
+    "unit": "degC",
+    "slope_unit": "degC/year",
+    "shape": [
+        3,
+        171,
+        161,
+        1
+    ],
+    "grid": {
+        "crs": "EPSG:32614",
+        "transform": [
+            1000.0,
+            0.0,
+            335000.0,
+            0.0,
+            -1000.0,
+            2387000.0
+        ],
+        "width": 161,
+        "height": 171,
+        "nodata": -9999.0
+    },
+    "regional_pixels": 11511,
+    "received_months": 3,
+    "expected_months": 3,
+    "missing_months": [],
+    "coverage": [
+        {
+            "date": "2001-01-01",
+            "coverage": 0.9731561115454782,
+            "declared_coverage": 0.9732,
+            "coverage_difference": 4.38884545217455e-05,
+            "valid_pixels": 11202,
+            "excluded_outside": 356,
+            "review_required": false
+        },
+        {
+            "date": "2001-02-01",
+            "coverage": 0.9714186430370949,
+            "declared_coverage": 0.9714,
+            "coverage_difference": 1.8643037094867587e-05,
+            "valid_pixels": 11182,
+            "excluded_outside": 354,
+            "review_required": false
+        },
+        {
+            "date": "2001-03-01",
+            "coverage": 0.9758491877334723,
+            "declared_coverage": 0.9758,
+            "coverage_difference": 4.9187733472289e-05,
+            "valid_pixels": 11233,
+            "excluded_outside": 356,
+            "review_required": false
+        }
+    ]
+}

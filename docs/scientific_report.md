@@ -136,6 +136,8 @@ media anual y regresión OLS con IC 95 %.
 - Con HAC se probaron 10 053 píxeles y 1 965 resultaron significativos (19.5 %). Entre los píxeles probados con HAC,
   1 690 son significativos con ambos métodos (≈ 80 % de los 2 123 significativos con el método primario).
 - HAC es exploratorio y no garantiza calibración (advertencia en `run_metadata.json`).
+- HAC solo se calcula en píxeles con serie anual completa (25 años) y excluye series constantes; los 1 235 píxeles
+  con 15–24 años solo se evalúan con el método primario. La comparación entre métodos se hace sobre los 10 053 píxeles comunes.
 
 **7.4 Interpretación prudente**
 - Que haya muchos píxeles con aumento y una tendencia regional no significativa no es contradictorio: la prueba
@@ -144,17 +146,26 @@ media anual y regresión OLS con IC 95 %.
   y cambios de uso de suelo. Contrastarlas requiere datos adicionales (p. ej. precipitación o uso de suelo).
 - Un píxel de 1 km² promedia vegetación, cultivos y construcciones.
 
-**7.5 Predicción (complementaria)**
-[PENDIENTE: métricas MAE/RMSE/R² de los modelos con el conjunto de prueba, cuando Ian las entregue]
+**7.5 Predicción del NDVI del mes siguiente (complementaria)**
+Evaluación en el período de prueba 2022–2025, sobre 489 633 pares comparables pixel-mes [CONFIRMAR cifra con Ian]:
+
+| Modelo | R² | MAE | RMSE |
+|---|---|---|---|
+| XGBoost | 0.884433 | 0.042175 | 0.063527 |
+| ConvLSTM | 0.884137 | 0.044379 | 0.063608 |
+| Persistencia, climatología mensual, OLS estacional | [PENDIENTE: Ian] | [PENDIENTE] | [PENDIENTE] |
+
+Los dos modelos tienen un desempeño prácticamente igual; XGBoost tiene un MAE algo menor. Sin las referencias de
+comparación no se puede afirmar cuánto aportan sobre métodos simples, porque el NDVI tiene un ciclo estacional fuerte.
+No se afirma generalización a otras regiones.
 
 ## 8. Incertidumbre y validación
 Resumen de `docs/validation_report.md` (17 de 17 comprobaciones de coherencia correctas en esta entrega):
 - Los conteos por categoría de `metrics.json` coinciden con los mapas.
 - La q recalculada con Benjamini–Hochberg desde p coincide con `trend_q.tif` (dif. máx. 6.6e-8, precisión Float32).
 - La serie regional recalculada con `scipy.stats.linregress` reproduce pendiente, p, R² e IC de `regional_trend.json`.
-- [PENDIENTE: validación de 3 píxeles con las series mensuales completas (`data/raw`)].
-Incertidumbres que se mantienen: autocorrelación temporal y espacial (las pruebas por píxel no son independientes),
-período corto (≤ 25 años) y exclusión de meses nublados.
+- Tres píxeles (aumento, disminución, sin evidencia) recalculados con `scipy.stats.linregress` desde los 300 TIFF mensuales
+  reproducen la pendiente y el p del modelo (diferencia máxima 7.4e-11 NDVI/año; tolerancia 1e-6).
 
 ## 9. Limitaciones
 - **Resolución:** se agrega a 1 km; zonas pequeñas (parcelas, parques urbanos) se mezclan.
@@ -168,6 +179,9 @@ período corto (≤ 25 años) y exclusión de meses nublados.
 - **Sin causalidad:** el modelo detecta cambios, no explica por qué ocurren.
 - **Generalización:** no se afirma que el modelo funcione en otras regiones sin una prueba independiente.
 - **Datos de prueba:** las figuras generadas con datos sintéticos no son resultados científicos.
+- **Posible sesgo estacional (no evaluado):** los 10 meses excluidos por baja cobertura caen entre junio y octubre,
+  cerca del máximo de NDVI, y pueden sesgar a la baja las medias anuales de esos años.
+- **Predicción:** métricas agrupadas por pixel-mes; sin referencias de comparación publicadas todavía.
 
 ## 10. Referencias
 > Cita completa verificada en cada fuente antes del envío (año, páginas, DOI). Las escribí de memoria.

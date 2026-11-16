@@ -1,0 +1,45 @@
+{
+  "provider": "Natural Earth",
+  "license": "Public domain",
+  "license_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+  "assets": [
+    {
+      "file": "land_50m.geojson",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_land.geojson",
+      "retrieved_date": "2026-11-15",
+      "crs": "OGC:CRS84 (longitude, latitude)",
+      "scale": "1:50 million",
+      "sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "feature_count": 1420
+    },
+    {
+      "file": "countries.geojson",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_boundary_lines_land.geojson",
+      "retrieved_date": "2026-11-15",
+      "crs": "OGC:CRS84 (longitude, latitude)",
+      "scale": "1:50 million",
+      "sha256": "2faac4f6b34386f3d21b6e018cf151f241f00e5c936d44dd17d7d9bfb147fa48",
+      "feature_count": 390
+    },
+    {
+      "file": "states.geojson",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_1_states_provinces_lines.geojson",
+      "retrieved_date": "2026-11-15",
+      "crs": "OGC:CRS84 (longitude, latitude)",
+      "scale": "1:50 million",
+      "sha256": "72cca93c850d412628a5da4bc5ebfe21ba4d376eb34611bde6b623ee73f0fdcf",
+      "feature_count": 581
+    },
+    {
+      "file": "states_mexico.geojson",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces_lines.geojson",
+      "retrieved_date": "2026-11-15",
+      "crs": "OGC:CRS84 (longitude, latitude)",
+      "scale": "1:10 million",
+      "sha256": "33268ce4b92bc8a265911957223b2aab31181717a3b565ab9422a46ec5ce5b5f",
+      "feature_count": 85,
+      "processing": "Retain ADM0_A3 == MEX; JSON serialization only, no coordinate simplification.",
+      "upstream_sha256": "1a1f30ccaaf4cc9c4bde34266f0b8cbb955d3a4cf254b756912255f2ec7c75b6"
+    }
+  ]
+}

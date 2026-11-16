@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 960 650" role="img">
+<title>AURORA system architecture</title>
+<defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8"
+    refX="6" refY="3" orient="auto">
+        <path d="M0 0 L6 3 L0 6" fill="#69edc5"/>
+    </marker>
+</defs>
+
+<rect width="960" height="650" rx="18" fill="#101b29"/>
+
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<text x="480" y="42" font-size="22" font-weight="bold"
+fill="#e7fff8" letter-spacing="3">SYSTEM ARCHITECTURE</text>
+
+
+    <rect x="230" y="75" width="500" height="70"
+    rx="10" fill="#142536" stroke="#376b9e"/>
+    <text x="480.0" y="104" font-size="20"
+    font-weight="bold" fill="#e7fff8">Satellite observations</text>
+    <text x="480.0" y="126" font-size="14"
+    fill="#b5c9d6">MODIS · GPM IMERG</text>
+
+
+    <rect x="230" y="175" width="500" height="70"
+    rx="10" fill="#142536" stroke="#376b9e"/>
+    <text x="480.0" y="204" font-size="20"
+    font-weight="bold" fill="#e7fff8">Acquisition &amp; quality assurance</text>
+    <text x="480.0" y="226" font-size="14"
+    fill="#b5c9d6">Google Earth Engine · Quality masks</text>
+
+
+    <rect x="230" y="275" width="500" height="70"
+    rx="10" fill="#142536" stroke="#376b9e"/>
+    <text x="480.0" y="304" font-size="20"
+    font-weight="bold" fill="#e7fff8">Geospatial processing</text>
+    <text x="480.0" y="326" font-size="14"
+    fill="#b5c9d6">Rasterio · NumPy · NPZ · Zarr</text>
+
+
+    <rect x="45" y="390" width="410" height="70"
+    rx="10" fill="#143439" stroke="#69edc5"/>
+    <text x="250.0" y="419" font-size="20"
+    font-weight="bold" fill="#e7fff8">Statistical intelligence</text>
+    <text x="250.0" y="441" font-size="14"
+    fill="#b5c9d6">OLS · Theil–Sen · HAC · FDR</text>
+
+
+    <rect x="505" y="390" width="410" height="70"
+    rx="10" fill="#143439" stroke="#69edc5"/>
+    <text x="710.0" y="419" font-size="20"
+    font-weight="bold" fill="#e7fff8">Predictive intelligence</text>
+    <text x="710.0" y="441" font-size="14"
+    fill="#b5c9d6">XGBoost · ConvLSTM</text>
+
+
+    <rect x="230" y="510" width="500" height="70"
+    rx="10" fill="#143439" stroke="#69edc5"/>
+    <text x="480.0" y="539" font-size="20"
+    font-weight="bold" fill="#e7fff8">AURORA Desktop</text>
+    <text x="480.0" y="561" font-size="14"
+    fill="#b5c9d6">PySide6 · Interactive visualization · ES / EN</text>
+
+
+<g stroke="#69edc5" stroke-width="2" fill="none"
+marker-end="url(#arrow)">
+    <path d="M480 145 V170"/>
+    <path d="M480 245 V270"/>
+    <path d="M480 345 V367 H250 V385"/>
+    <path d="M480 345 V367 H710 V385"/>
+    <path d="M250 460 V485 H480 V505"/>
+    <path d="M710 460 V485 H480 V505"/>
+</g>
+
+<text x="480" y="622" font-size="13" fill="#83f1cc"
+letter-spacing="2">FROM OBSERVATIONS TO INTELLIGENCE</text>
+</g>
+</svg>

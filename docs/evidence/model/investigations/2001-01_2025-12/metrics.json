@@ -1,0 +1,23 @@
+{
+    "dataset": "satellite",
+    "variable": "NDVI",
+    "unit": "1",
+    "slope_unit": "NDVI/year",
+    "period": [
+        "2001-01-01",
+        "2025-12-01"
+    ],
+    "months": 300,
+    "regional_pixels": 11511,
+    "eligible_pixels": 11288,
+    "tested_pixels": 11288,
+    "mean_temporal_coverage": 0.9473289317464455,
+    "significant_increase": 2010,
+    "significant_decrease": 505,
+    "not_significant": 8773,
+    "not_tested": 223,
+    "mean_slope": 0.000832087804987408,
+    "hac_tested_pixels": 10053,
+    "hac_significant_pixels": 1965,
+    "seconds": 9.794127356999525
+}

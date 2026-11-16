@@ -1,12 +1,17 @@
 """AURORA - validacion independiente (Sofia).
 
 Parte A (siempre): coherencia interna de outputs/ (conteos, BH, serie regional...).
-Parte B (si hay manifest + TIFF mensuales): 3 pixeles recalculados con scipy.stats.linregress.
+Parte B: 3 pixeles recalculados con scipy.stats.linregress. Dos formas de darle las series mensuales:
+  (a) --manifest + --root : lee los 300 TIFF mensuales (data/raw)
+  (b) --pixel-csv         : CSV ligero con columnas date,row,col,ndvi (lo exporta Ian para los 3 pixeles)
+Siempre imprime y guarda los 3 pixeles elegidos (pixels_selected.csv) para pedirselos a Ian.
 
 Uso:
     python scripts/validate_independent.py --outputs outputs --dest docs/evidence/science
     python scripts/validate_independent.py --outputs outputs --dest docs/evidence/science \
         --manifest manifest.csv --root .
+    python scripts/validate_independent.py --outputs outputs --dest docs/evidence/science \
+        --pixel-csv pixel_series.csv
 No corrige nada: solo compara y reporta. Ian decide las correcciones.
 """
 from __future__ import annotations
@@ -14,17 +19,27 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from typing import Protocol, cast
 
 import numpy as np
 import pandas as pd
 from scipy import stats
+
+
+class LinearRegressionResult(Protocol):
+    slope: float
+    intercept: float
+    rvalue: float
+    pvalue: float
+    stderr: float
+
 
 from plot_results import read_raster  # mismo directorio (scripts/)
 
 ALPHA = 0.05
 MIN_MONTHS = 9
 MIN_YEARS = 15
-TOL_SLOPE = 1e-6  # NDVI/año (propuesta del plan)
+TOL_SLOPE = 1e-6  # unidades/año; para LST usar --tol 1e-5 (°C/año)
 
 
 # ---------- funciones puras ----------
@@ -57,25 +72,42 @@ def regress(years, means):
     """linregress sobre años reales; None si hay menos de MIN_YEARS años."""
     if len(years) < MIN_YEARS:
         return None
-    r = stats.linregress(years, means)
+    r = cast(LinearRegressionResult, stats.linregress(years, means))
     return {"slope": r.slope, "p": r.pvalue, "n_years": len(years)}
 
 
-def pick_pixels(slope, q, n):
-    """Regla documentada: en cada clase, el pixel con serie completa (n maximo)
-    cuya pendiente esta mas cerca de la mediana de la clase."""
+def _closest_to_median(slope, mask):
+    med = np.median(slope[mask])
+    d = np.where(mask, np.abs(slope - med), np.inf)
+    return tuple(int(i) for i in np.unravel_index(np.argmin(d), d.shape))
+
+
+def pick_pixels(slope, q, n, mode="auto"):
+    """Regla documentada, determinista, sobre pixeles con serie completa (n maximo).
+    mode='sig'   : aumento significativo / disminucion significativa / sin evidencia.
+    mode='nosig' : pendiente negativa / positiva (si existe) / cercana a cero, SIN etiquetar significancia.
+    mode='auto'  : 'sig' si hay pixeles con q<0.05; si no, 'nosig'."""
     ok = np.isfinite(slope) & np.isfinite(q) & (n == np.nanmax(n))
-    classes = {
-        "aumento significativo": ok & (q < ALPHA) & (slope > 0),
-        "disminución significativa": ok & (q < ALPHA) & (slope < 0),
-        "sin evidencia significativa": ok & (q >= ALPHA),
-    }
+    if mode == "auto":
+        mode = "sig" if (ok & (q < ALPHA)).any() else "nosig"
     out = {}
-    for name, mask in classes.items():
-        if mask.any():
-            med = np.median(slope[mask])
-            d = np.where(mask, np.abs(slope - med), np.inf)
-            out[name] = tuple(int(i) for i in np.unravel_index(np.argmin(d), d.shape))
+    if mode == "sig":
+        classes = {
+            "aumento significativo": ok & (q < ALPHA) & (slope > 0),
+            "disminución significativa": ok & (q < ALPHA) & (slope < 0),
+            "sin evidencia significativa": ok & (q >= ALPHA),
+        }
+        for name, mask in classes.items():
+            if mask.any():
+                out[name] = _closest_to_median(slope, mask)
+    else:
+        for name, mask in {"pendiente negativa": ok & (slope < 0),
+                           "pendiente positiva": ok & (slope > 0)}.items():
+            if mask.any():
+                out[name] = _closest_to_median(slope, mask)
+        if ok.any():
+            d = np.where(ok, np.abs(slope), np.inf)
+            out["pendiente cercana a cero"] = tuple(int(i) for i in np.unravel_index(np.argmin(d), d.shape))
     return out
 
 
@@ -102,9 +134,9 @@ def check_outputs(outputs):
         np.isfinite(slope).sum() == m["tested_pixels"])
     add("no probados (n<15)", m["not_tested"], int((np.isfinite(n) & ~np.isfinite(slope)).sum()),
         (np.isfinite(n) & ~np.isfinite(slope)).sum() == m["not_tested"])
-    add("no probados tienen n<15", "max n < 15",
-        float(np.nanmax(n[np.isfinite(n) & ~np.isfinite(slope)])),
-        np.nanmax(n[np.isfinite(n) & ~np.isfinite(slope)]) < MIN_YEARS)
+    nt = n[np.isfinite(n) & ~np.isfinite(slope)]
+    add("no probados tienen n<15", "max n < 15", float(nt.max()) if nt.size else "n/a (0 no probados)",
+        (nt.max() < MIN_YEARS) if nt.size else True)
     add("aumentos significativos", m["significant_increase"], inc, inc == m["significant_increase"])
     add("disminuciones significativas", m["significant_decrease"], dec,
         dec == m["significant_decrease"])
@@ -113,9 +145,15 @@ def check_outputs(outputs):
         bool(np.all((sig[v] == 1) == (q[v] < ALPHA))), np.all((sig[v] == 1) == (q[v] < ALPHA)))
     d = float(np.abs(bh_qvalues(p[v]) - q[v]).max())
     add("q = Benjamini–Hochberg(p) recalculado", "dif. máx < 1e-6", f"{d:.2e}", d < 1e-6)
-    add("signo OLS = signo Sen (píxeles con q<0.05)", 1.0,
-        float(np.mean(np.sign(slope[v & (q < ALPHA)]) == np.sign(sen[v & (q < ALPHA)]))),
-        np.all(np.sign(slope[v & (q < ALPHA)]) == np.sign(sen[v & (q < ALPHA)])))
+    sg = v & (q < ALPHA)
+    if sg.any():
+        add("signo OLS = signo Sen (píxeles con q<0.05)", 1.0,
+            float(np.mean(np.sign(slope[sg]) == np.sign(sen[sg]))),
+            np.all(np.sign(slope[sg]) == np.sign(sen[sg])))
+    else:
+        add("signo OLS = signo Sen (todos los probados)", ">= 0.9",
+            float(np.mean(np.sign(slope[v]) == np.sign(sen[v]))),
+            np.mean(np.sign(slope[v]) == np.sign(sen[v])) >= 0.9)
     span = ch[v] / slope[v]
     add("cambio = pendiente × intervalo (años)", "entre 14 y 24",
         f"{np.nanmin(span):.2f}–{np.nanmax(span):.2f}",
@@ -127,7 +165,7 @@ def check_outputs(outputs):
     a = pd.read_csv(outputs / "annual_series.csv")
     mo = pd.read_csv(outputs / "monthly_series.csv")
     rt = json.load(open(outputs / "regional_trend.json", encoding="utf-8"))["trend"]
-    lr = stats.linregress(a["year"], a["mean"])
+    lr = cast(LinearRegressionResult, stats.linregress(a["year"], a["mean"]))
     add("regional: pendiente (linregress)", rt["slope_per_year"], lr.slope,
         abs(lr.slope - rt["slope_per_year"]) < 1e-9)
     add("regional: p", rt["p_value"], lr.pvalue, abs(lr.pvalue - rt["p_value"]) < 1e-9)
@@ -137,34 +175,78 @@ def check_outputs(outputs):
     add("regional: IC 95 %", ci, [lr.slope - h, lr.slope + h],
         abs(lr.slope - h - ci[0]) < 1e-9 and abs(lr.slope + h - ci[1]) < 1e-9)
     mo["year"] = mo["date"].str[:4].astype(int)
-    ok = mo[mo["coverage"] >= 0.7].groupby("year")["mean"].agg(["mean", "count"])
+    ok = cast(pd.DataFrame, mo[mo["coverage"] >= 0.7].groupby("year")["mean"].agg(["mean", "count"]))
     add("regional: media anual = media de meses con cobertura ≥ 0.7", "dif. máx < 1e-9",
-        f'{np.abs(ok["mean"].values - a["mean"].values).max():.2e}',
-        np.abs(ok["mean"].values - a["mean"].values).max() < 1e-9
-        and (ok["count"].values == a["valid_months"].values).all())
+        f'{np.abs(np.asarray(ok["mean"]) - np.asarray(a["mean"])).max():.2e}',
+        np.abs(np.asarray(ok["mean"]) - np.asarray(a["mean"])).max() < 1e-9
+        and (np.asarray(ok["count"]) == np.asarray(a["valid_months"])).all())
     return pd.DataFrame(rows)
 
 
 # ---------- Parte B ----------
-def check_pixels(outputs, manifest, root):
+def _load_maps(outputs):
     outputs = Path(outputs)
-    slope, _ = read_raster(outputs / "trend_slope.tif")
+    slope, ext = read_raster(outputs / "trend_slope.tif")
     p, _ = read_raster(outputs / "trend_p.tif")
     q, _ = read_raster(outputs / "trend_q.tif")
     n, _ = read_raster(outputs / "trend_n.tif")
-    picks = pick_pixels(slope, q, n)
+    return slope, p, q, n, ext
+
+
+def pixel_center(ext, shape, r, c):
+    """Coordenadas (este, norte) del centro del pixel, en la proyeccion del raster."""
+    left, right, bottom, top = ext
+    return (left + (c + 0.5) * (right - left) / shape[1],
+            top - (r + 0.5) * (top - bottom) / shape[0])
+
+
+def selected_pixels(outputs, mode="auto"):
+    slope, p, q, n, ext = _load_maps(outputs)
+    rows = []
+    for cls, (r, c) in pick_pixels(slope, q, n, mode).items():
+        x, y = pixel_center(ext, slope.shape, r, c)
+        rows.append({"clase": cls, "fila": r, "columna": c, "este_m": x, "norte_m": y,
+                     "pendiente_Ian": float(slope[r, c]), "p_Ian": float(p[r, c]),
+                     "q_Ian": float(q[r, c]), "n_años": int(n[r, c])})
+    return pd.DataFrame(rows)
+
+
+def compare_pixel(cls, r, c, dates, values, slope, p, tol=TOL_SLOPE):
+    ys, ms = annual_means(dates, values)
+    res = regress(ys, ms)
+    if res is None:
+        return {"clase": cls, "fila": r, "columna": c, "años": len(ys),
+                "nota": f"menos de {MIN_YEARS} años válidos"}
+    ds = abs(res["slope"] - slope[r, c])
+    return {"clase": cls, "fila": r, "columna": c, "años": res["n_years"],
+            "pendiente_linregress": res["slope"], "pendiente_Ian": float(slope[r, c]),
+            "dif_pendiente": ds, "p_linregress": res["p"], "p_Ian": float(p[r, c]),
+            "tolerancia": tol, "dentro_de_tolerancia": bool(ds < tol)}
+
+
+def check_pixels(outputs, manifest, root, tol=TOL_SLOPE, mode="auto"):
+    """Variante (a): lee los TIFF mensuales."""
+    slope, p, q, n, _ = _load_maps(outputs)
+    picks = pick_pixels(slope, q, n, mode)
     df = pd.read_csv(manifest).sort_values("date")
     dates = df["date"].tolist()
     stack = np.stack([read_raster(Path(root) / rel)[0] for rel in df["path"]])  # [T,H,W]
+    return pd.DataFrame([compare_pixel(cls, r, c, dates, stack[:, r, c], slope, p, tol)
+                         for cls, (r, c) in picks.items()])
+
+
+def check_pixels_csv(outputs, pixel_csv, tol=TOL_SLOPE, mode="auto"):
+    """Variante (b): CSV largo date,row,col,ndvi (vacio/NaN = faltante)."""
+    slope, p, q, n, _ = _load_maps(outputs)
+    classes = {v: k for k, v in pick_pixels(slope, q, n, mode).items()}
+    df = pd.read_csv(pixel_csv)
     rows = []
-    for cls, (r, c) in picks.items():
-        ys, ms = annual_means(dates, stack[:, r, c])
-        res = regress(ys, ms)
-        ds = abs(res["slope"] - slope[r, c])
-        rows.append({"clase": cls, "fila": r, "columna": c, "años": res["n_years"],
-                     "pendiente_linregress": res["slope"], "pendiente_Ian": float(slope[r, c]),
-                     "dif_pendiente": ds, "p_linregress": res["p"], "p_Ian": float(p[r, c]),
-                     "dentro_de_tolerancia_1e-6": bool(ds < TOL_SLOPE)})
+    for key, g in df.groupby(["row", "col"]):
+        r, c = cast(tuple[int, int], key)
+        g = g.sort_values("date")
+        cls = classes.get((int(r), int(c)), "(píxel no elegido por la regla)")
+        rows.append(compare_pixel(cls, int(r), int(c), g["date"].tolist(),
+                                  np.asarray(pd.to_numeric(g["ndvi"], errors="coerce")), slope, p, tol))
     return pd.DataFrame(rows)
 
 
@@ -174,6 +256,10 @@ def main():
     ap.add_argument("--dest", required=True)
     ap.add_argument("--manifest", default=None)
     ap.add_argument("--root", default=".")
+    ap.add_argument("--pixel-csv", default=None, help="CSV date,row,col,ndvi de los píxeles elegidos")
+    ap.add_argument("--tol", type=float, default=TOL_SLOPE, help="tolerancia de pendiente (LST: 1e-5)")
+    ap.add_argument("--pick-mode", default="auto", choices=["auto", "sig", "nosig"],
+                    help="nosig: negativa/positiva/cercana a cero, sin etiquetar significancia")
     a = ap.parse_args()
     dest = Path(a.dest)
     dest.mkdir(parents=True, exist_ok=True)
@@ -181,14 +267,23 @@ def main():
     A = check_outputs(a.outputs)
     A.to_csv(dest / "validation_outputs.csv", index=False)
     print(A.to_string(index=False))
-    print(f"\nParte A: {int(A['ok'].sum())}/{len(A)} comprobaciones correctas")
+    print(f"\nParte A: {int(np.asarray(A['ok'], dtype=bool).sum())}/{len(A)} comprobaciones correctas")
 
-    if a.manifest and Path(a.manifest).exists():
-        B = check_pixels(a.outputs, a.manifest, a.root)
+    S = selected_pixels(a.outputs, a.pick_mode)
+    S.to_csv(dest / "pixels_selected.csv", index=False)
+    print("\nPíxeles elegidos (pedir a Ian sus 300 valores mensuales, formato date,row,col,ndvi):")
+    print(S.to_string(index=False))
+
+    B = None
+    if a.pixel_csv and Path(a.pixel_csv).exists():
+        B = check_pixels_csv(a.outputs, a.pixel_csv, a.tol, a.pick_mode)
+    elif a.manifest and Path(a.manifest).exists():
+        B = check_pixels(a.outputs, a.manifest, a.root, a.tol, a.pick_mode)
+    if B is not None:
         B.to_csv(dest / "validation_pixels.csv", index=False)
         print("\n" + B.to_string(index=False))
     else:
-        print("\nParte B omitida: falta --manifest y los TIFF mensuales (data/raw).")
+        print("\nParte B omitida: falta --pixel-csv o --manifest con los TIFF mensuales.")
 
 
 if __name__ == "__main__":

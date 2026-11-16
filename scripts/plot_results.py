@@ -1,4 +1,4 @@
-"""AURORA - figuras cientificas
+"""AURORA - figuras cientificas (Sofia).
 
 Uso:
     python scripts/plot_results.py --outputs outputs --dest docs/evidence/science
@@ -30,12 +30,66 @@ NODATA = -9999.0
 Q_THRESHOLD = 0.05
 MIN_MONTHS = 9
 
-LABEL_NONE = "Sin evidencia significativa"
-LABEL_DOWN = "Disminución significativa (q<0.05)"
-LABEL_UP = "Aumento significativo (q<0.05)"
-LABEL_NODATA = "Sin datos"
-LABEL_OUTSIDE = "Fuera de la región"
-LABEL_UNTESTED = "En la región, no probado (datos insuficientes)"
+STR = {
+    "es": dict(none="Sin evidencia significativa", down="Disminución significativa (q<0.05)",
+               up="Aumento significativo (q<0.05)", nodata="Sin datos", outside="Fuera de la región",
+               untested="En la región, no probado (datos insuficientes)",
+               east="Este (km, UTM 14N)", north="Norte (km, UTM 14N)",
+               slope_title="Pendiente de {v}", per_year="{u} por año",
+               change_title="Cambio estimado en el período", change_label="Cambio de {v} en el período ({u})",
+               sig_title="Significancia de la tendencia (q de Benjamini–Hochberg)",
+               hac_title="Sensibilidad: significancia con errores HAC (q)",
+               cov_title="Cobertura de datos", cov_label="Años válidos por píxel (n)",
+               covm_title="Cobertura temporal mensual", covm_label="Fracción de meses válidos",
+               monthly="{v} mensual", annual9="Media anual (≥9 meses)", date="Fecha",
+               series_title="Series de tiempo en píxeles seleccionados", regional_title="Serie regional de {v}",
+               reg_monthly="Media regional mensual", reg_low="Mes con cobertura < 70 % (excluido)",
+               reg_annual="Media anual regional", reg_ols="OLS: {s:+.5f} {u}/año (p={p:.3f})",
+               row_col="{label} (fila {r}, columna {c})",
+               loc={"Aumento": "Aumento", "Disminución": "Disminución", "Estable": "Estable"}),
+    "en": dict(none="No significant evidence", down="Significant decrease (q<0.05)",
+               up="Significant increase (q<0.05)", nodata="No data", outside="Outside region",
+               untested="In region, not tested (insufficient data)",
+               east="Easting (km, UTM 14N)", north="Northing (km, UTM 14N)",
+               slope_title="{v} trend (slope)", per_year="{u} per year",
+               change_title="Estimated change over the period", change_label="{v} change over the period ({u})",
+               sig_title="Significance of the trend (Benjamini–Hochberg q)",
+               hac_title="Sensitivity: significance with HAC errors (q)",
+               cov_title="Data coverage", cov_label="Valid years per pixel (n)",
+               covm_title="Monthly temporal coverage", covm_label="Fraction of valid months",
+               monthly="Monthly {v}", annual9="Annual mean (≥9 months)", date="Date",
+               series_title="Time series at selected pixels", regional_title="Regional {v} time series",
+               reg_monthly="Monthly regional mean", reg_low="Month with coverage < 70 % (excluded)",
+               reg_annual="Regional annual mean", reg_ols="OLS: {s:+.5f} {u}/year (p={p:.3f})",
+               row_col="{label} (row {r}, column {c})",
+               loc={"Aumento": "Increase", "Disminución": "Decrease", "Estable": "Stable"}),
+}
+LANG, VAR, UNIT = "es", "NDVI", "NDVI"
+DIV_CMAP, UP_COLOR, DOWN_COLOR = "BrBG", "#1a9850", "#8c510a"
+LABEL_NONE = LABEL_DOWN = LABEL_UP = LABEL_NODATA = LABEL_OUTSIDE = LABEL_UNTESTED = ""
+
+
+def T(key, **kw) -> str:
+    value = STR[LANG][key]
+    if not isinstance(value, str):
+        raise ValueError(f"Translation {key!r} is a mapping, not a text label")
+    return value.format(v=VAR, u=UNIT, **kw)
+
+
+def configure(variable="NDVI", unit="NDVI", source=None, period=None, region=None, lang="es",
+              warm=False):
+    """Cambia variable, unidad, fuente, idioma y paleta (warm=True: rojo=aumenta, azul=disminuye)."""
+    global VAR, UNIT, SOURCE, PERIOD, REGION, LANG, DIV_CMAP, UP_COLOR, DOWN_COLOR
+    global LABEL_NONE, LABEL_DOWN, LABEL_UP, LABEL_NODATA, LABEL_OUTSIDE, LABEL_UNTESTED
+    VAR, UNIT, LANG = variable, unit, lang
+    SOURCE, PERIOD, REGION = source or SOURCE, period or PERIOD, region or REGION
+    DIV_CMAP, UP_COLOR, DOWN_COLOR = (("RdBu_r", "#b2182b", "#2166ac") if warm
+                                      else ("BrBG", "#1a9850", "#8c510a"))
+    LABEL_NONE, LABEL_DOWN, LABEL_UP = T("none"), T("down"), T("up")
+    LABEL_NODATA, LABEL_OUTSIDE, LABEL_UNTESTED = T("nodata"), T("outside"), T("untested")
+
+
+configure()
 
 
 # ---------- lectura ----------
@@ -79,8 +133,8 @@ def _map_axes():
     km = FuncFormatter(lambda v, _: f"{v / 1000:.0f}")
     ax.xaxis.set_major_formatter(km)
     ax.yaxis.set_major_formatter(km)
-    ax.set_xlabel("Este (km, UTM 14N)")
-    ax.set_ylabel("Norte (km, UTM 14N)")
+    ax.set_xlabel(T("east"))
+    ax.set_ylabel(T("north"))
     return fig, ax
 
 
@@ -88,8 +142,7 @@ def _map_axes():
 def make_divergent_fig(arr, extent, title, cbar_label, note=""):
     """Mapa divergente centrado en cero (pendiente o cambio estimado)."""
     lim = _sym_limit(arr)
-    cmap = plt.get_cmap("BrBG").copy()
-    cmap.set_bad("#9e9e9e")
+    cmap = plt.get_cmap(DIV_CMAP).with_extremes(bad="#9e9e9e")
     fig, ax = _map_axes()
     im = ax.imshow(arr, cmap=cmap, norm=TwoSlopeNorm(vcenter=0, vmin=-lim, vmax=lim),
                    extent=extent)
@@ -114,10 +167,10 @@ def categorize_significance(slope, q, threshold=Q_THRESHOLD, region=None):
 
 
 def make_significance_fig(slope, q, extent, note="",
-                          title="Significancia de la tendencia (q de Benjamini–Hochberg)",
-                          region=None):
+                          title=None, region=None):
+    title = title or T("sig_title")
     cat = categorize_significance(slope, q, region=region)
-    colors = ["#fff7bc", "#8c510a", "#1a9850"]
+    colors = ["#fff7bc", DOWN_COLOR, UP_COLOR]
     labels = [LABEL_NONE, LABEL_DOWN, LABEL_UP]
     if region is None:
         bad, bad_label, vmax = "#9e9e9e", LABEL_NODATA, 2.5
@@ -125,8 +178,7 @@ def make_significance_fig(slope, q, extent, note="",
         colors.append("#9e9e9e")
         labels.append(LABEL_UNTESTED)
         bad, bad_label, vmax = "#ffffff", LABEL_OUTSIDE, 3.5
-    cmap = ListedColormap(colors)
-    cmap.set_bad(bad)
+    cmap = ListedColormap(colors).with_extremes(bad=bad)
     fig, ax = _map_axes()
     ax.imshow(cat, cmap=cmap, vmin=-0.5, vmax=vmax, interpolation="nearest", extent=extent)
     handles = [Patch(color=c, label=l) for c, l in zip(colors, labels)]
@@ -136,10 +188,9 @@ def make_significance_fig(slope, q, extent, note="",
     return fig
 
 
-def make_coverage_fig(n, extent, note="", label="Años válidos por píxel (n)",
-                      title="Cobertura de datos"):
-    cmap = plt.get_cmap("viridis").copy()
-    cmap.set_bad("#9e9e9e")
+def make_coverage_fig(n, extent, note="", label=None, title=None):
+    label, title = label or T("cov_label"), title or T("cov_title")
+    cmap = plt.get_cmap("viridis").with_extremes(bad="#9e9e9e")
     fig, ax = _map_axes()
     im = ax.imshow(n, cmap=cmap, extent=extent)
     fig.colorbar(im, ax=ax, label=label, shrink=0.8)
@@ -202,16 +253,16 @@ def make_series_fig(dates, series, locations, note=""):
                              sharex=True, squeeze=False)
     x = np.array([np.datetime64(str(d)[:10]) for d in dates])
     for ax, (label, vals) in zip(axes[:, 0], series.items()):
-        ax.plot(x, vals, color="#bdbdbd", lw=0.8, label="NDVI mensual")
+        ax.plot(x, vals, color="#bdbdbd", lw=0.8, label=T("monthly"))
         years, means = annual_means(dates, vals)
         xm = np.array([np.datetime64(f"{y}-07-01") for y in years])
-        ax.plot(xm, means, "o-", color="#08519c", ms=3, label="Media anual (≥9 meses)")
+        ax.plot(xm, means, "o-", color="#08519c", ms=3, label=T("annual9"))
         r, c = locations[label]
-        ax.set_title(f"{label} (fila {r}, columna {c})", fontsize=9)
-        ax.set_ylabel("NDVI")
+        ax.set_title(T("row_col", label=STR[LANG]["loc"][label], r=r, c=c), fontsize=9)
+        ax.set_ylabel(UNIT)
         ax.legend(fontsize=7, loc="upper left")
-    axes[-1, 0].set_xlabel("Fecha")
-    fig.suptitle(_title("Series de tiempo en píxeles seleccionados", note), fontsize=10)
+    axes[-1, 0].set_xlabel(T("date"))
+    fig.suptitle(_title(T("series_title"), note), fontsize=10)
     fig.tight_layout()
     return fig
 
@@ -229,21 +280,21 @@ def make_regional_fig(monthly_csv, annual_csv, trend_json, note=""):
     fig, ax = plt.subplots(figsize=(8, 4))
     x = np.array([np.datetime64(str(d)[:10]) for d in mo["date"]])
     low = mo["coverage"].to_numpy() < 0.7
-    ax.plot(x, mo["mean"], color="#bdbdbd", lw=0.8, label="Media regional mensual")
+    ax.plot(x, mo["mean"], color="#bdbdbd", lw=0.8, label=T("reg_monthly"))
     ax.scatter(x[low], mo["mean"].to_numpy()[low], s=14, facecolors="none",
-               edgecolors="#d95f02", label="Mes con cobertura < 70 % (excluido)")
+               edgecolors="#d95f02", label=T("reg_low"))
     xa = np.array([np.datetime64(f"{int(y)}-07-01") for y in an["year"]])
-    ax.plot(xa, an["mean"], "o", color="#08519c", ms=4, label="Media anual regional")
+    ax.plot(xa, an["mean"], "o", color="#08519c", ms=4, label=T("reg_annual"))
     y0, y1 = int(tr["period"][0]), int(tr["period"][1])
     mean_y, mean_v = an["year"].mean(), an["mean"].mean()
     fit = lambda y: mean_v + tr["slope_per_year"] * (y - mean_y)  # noqa: E731
     ax.plot([np.datetime64(f"{y0}-07-01"), np.datetime64(f"{y1}-07-01")],
             [fit(y0), fit(y1)], color="#b2182b", lw=2,
-            label=f"OLS: {tr['slope_per_year']:+.5f} NDVI/año (p={tr['p_value']:.3f})")
-    ax.set_ylabel("NDVI")
-    ax.set_xlabel("Fecha")
+            label=T("reg_ols", s=tr["slope_per_year"], p=tr["p_value"]))
+    ax.set_ylabel(UNIT)
+    ax.set_xlabel(T("date"))
     ax.legend(fontsize=7, loc="upper left")
-    ax.set_title(_title("Serie regional de NDVI", note), fontsize=10)
+    ax.set_title(_title(T("regional_title"), note), fontsize=10)
     fig.tight_layout()
     return fig
 
@@ -264,13 +315,12 @@ def run_all(outputs, dest, manifest=None, root=".", note=""):
     n, _ = read_raster(outputs / "trend_n.tif")
 
     saved = [
-        save_fig(make_divergent_fig(slope, ext, "Pendiente de NDVI", "NDVI por año", note),
+        save_fig(make_divergent_fig(slope, ext, T("slope_title"), T("per_year"), note),
                  dest / "map_slope.png"),
         save_fig(make_significance_fig(slope, q, ext, note, region=np.isfinite(n)),
                  dest / "map_significance.png"),
         save_fig(make_coverage_fig(n, ext, note), dest / "map_coverage.png"),
-        save_fig(make_divergent_fig(change, ext, "Cambio estimado en el período",
-                                    "Cambio de NDVI en el período", note),
+        save_fig(make_divergent_fig(change, ext, T("change_title"), T("change_label"), note),
                  dest / "map_change.png"),
     ]
 
@@ -280,15 +330,15 @@ def run_all(outputs, dest, manifest=None, root=".", note=""):
         qh, _ = read_raster(hac)
         saved.append(save_fig(
             make_significance_fig(slope, qh, ext, note,
-                                  title="Sensibilidad: significancia con errores HAC (q)",
+                                  title=T("hac_title"),
                                   region=np.isfinite(n)),
             dest / "map_significance_hac.png"))
     cov = outputs / "coverage.tif"
     if cov.exists():
         c, _ = read_raster(cov)
         saved.append(save_fig(
-            make_coverage_fig(c, ext, note, label="Fracción de meses válidos",
-                              title="Cobertura temporal mensual"),
+            make_coverage_fig(c, ext, note, label=T("covm_label"),
+                              title=T("covm_title")),
             dest / "map_coverage_monthly.png"))
 
     mcsv, acsv, tjson = (outputs / "monthly_series.csv", outputs / "annual_series.csv",
@@ -313,7 +363,14 @@ def main():
     p.add_argument("--manifest", default=None, help="manifest.csv (para las series)")
     p.add_argument("--root", default=".", help="raiz para rutas relativas del manifest")
     p.add_argument("--note", default="", help="texto extra en titulos (ej. DATOS SINTÉTICOS)")
+    p.add_argument("--variable", default="NDVI", help="nombre de la variable (ej. LST)")
+    p.add_argument("--unit", default="NDVI", help="unidad para ejes y leyendas (ej. °C)")
+    p.add_argument("--source", default=None, help="fuente (ej. MODIS/061/MOD11A2 (LST))")
+    p.add_argument("--period", default=None)
+    p.add_argument("--lang", default="es", choices=["es", "en"])
+    p.add_argument("--warm", action="store_true", help="paleta de temperatura (rojo=aumenta)")
     a = p.parse_args()
+    configure(a.variable, a.unit, a.source, a.period, lang=a.lang, warm=a.warm)
     for f in run_all(a.outputs, a.dest, a.manifest, a.root, a.note):
         print("OK", f)
 
