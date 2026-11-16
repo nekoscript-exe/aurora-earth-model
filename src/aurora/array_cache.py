@@ -93,13 +93,16 @@ def extract_npz(path, cache, limit, check):
                     finally:
                         if temporary is not None:
                             temporary.unlink(missing_ok=True)
-                with tempfile.NamedTemporaryFile(mode='w', dir=target, delete=False) as out:
-                    temporary = Path(out.name)
-                    json.dump({'source_sha256': source_hash, 'members': hashes}, out)
+                temporary = None
                 try:
+                    with tempfile.NamedTemporaryFile(mode='w', dir=target, delete=False) as out:
+                        temporary = Path(out.name)
+                        json.dump({'source_sha256': source_hash, 'members': hashes}, out)
+                    check()
                     os.replace(temporary, manifest)
                 finally:
-                    temporary.unlink(missing_ok=True)
+                    if temporary is not None:
+                        temporary.unlink(missing_ok=True)
         after = path.stat()
         if (before.st_size, before.st_mtime_ns, before.st_ino) != (after.st_size, after.st_mtime_ns, after.st_ino):
             raise ValueError('NPZ input changed during cache preparation')

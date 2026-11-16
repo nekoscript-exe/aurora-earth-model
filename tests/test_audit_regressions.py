@@ -114,3 +114,17 @@ def test_export_rejects_empty_mask_before_writing(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match='mask is empty'):
         finalize(np.ones((2, 2)), output, {'height': 2, 'width': 2}, np.zeros((2, 2), bool))
     assert not output.exists()
+
+
+def test_cancelled_cache_extraction_removes_its_temporary_files(cube, tmp_path):
+    from aurora.jobs import Cancelled
+    cache = tmp_path / 'cache'
+    def cancel_during_write():
+        if list(cache.glob('aurora-arrays-v2/*/tmp*')):
+            raise Cancelled('Explicit regression-test cancellation')
+    with pytest.raises(Cancelled):
+        CubeReader(cube, cache=cache, check=cancel_during_write)
+    assert not list(cache.glob('aurora-arrays-v2/*/tmp*'))
+    assert not list(cache.glob('aurora-arrays-v2/*/manifest.json'))
+    with CubeReader(cube, cache=cache) as reader:
+        np.testing.assert_array_equal(reader.read(), np.full((3, 2, 2), .25, dtype='float32'))

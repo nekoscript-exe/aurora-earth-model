@@ -54,3 +54,4 @@ tzdata==2026.6
 wrapt==2.6.0.dev1
 xgboost-cpu==3.4.1
 zarr==3.4.2
+tqdm==4.70.1
