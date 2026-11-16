@@ -233,3 +233,7 @@ credentials*.json
 service-account*.json
 /data/incoming/
 /.vscode/
+
+# AURORA local datasets and symbolic links
+/data/
+/outputs
