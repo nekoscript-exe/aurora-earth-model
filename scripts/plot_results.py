@@ -140,8 +140,7 @@ def _map_axes():
 def make_divergent_fig(arr, extent, title, cbar_label, note=""):
     """Mapa divergente centrado en cero (pendiente o cambio estimado)."""
     lim = _sym_limit(arr)
-    cmap = plt.get_cmap(DIV_CMAP).copy()
-    cmap.set_bad("#9e9e9e")
+    cmap = plt.get_cmap(DIV_CMAP).with_extremes(bad="#9e9e9e")
     fig, ax = _map_axes()
     im = ax.imshow(arr, cmap=cmap, norm=TwoSlopeNorm(vcenter=0, vmin=-lim, vmax=lim),
                    extent=extent)
@@ -177,8 +176,7 @@ def make_significance_fig(slope, q, extent, note="",
         colors.append("#9e9e9e")
         labels.append(LABEL_UNTESTED)
         bad, bad_label, vmax = "#ffffff", LABEL_OUTSIDE, 3.5
-    cmap = ListedColormap(colors)
-    cmap.set_bad(bad)
+    cmap = ListedColormap(colors).with_extremes(bad=bad)
     fig, ax = _map_axes()
     ax.imshow(cat, cmap=cmap, vmin=-0.5, vmax=vmax, interpolation="nearest", extent=extent)
     handles = [Patch(color=c, label=l) for c, l in zip(colors, labels)]
@@ -190,8 +188,7 @@ def make_significance_fig(slope, q, extent, note="",
 
 def make_coverage_fig(n, extent, note="", label=None, title=None):
     label, title = label or T("cov_label"), title or T("cov_title")
-    cmap = plt.get_cmap("viridis").copy()
-    cmap.set_bad("#9e9e9e")
+    cmap = plt.get_cmap("viridis").with_extremes(bad="#9e9e9e")
     fig, ax = _map_axes()
     im = ax.imshow(n, cmap=cmap, extent=extent)
     fig.colorbar(im, ax=ax, label=label, shrink=0.8)
