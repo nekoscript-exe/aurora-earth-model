@@ -1,0 +1,45 @@
+{"event": "progress", "done": 0, "total": 1, "phase": "open-paired-sources"}
+{"event": "progress", "done": 10, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 20, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 30, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 40, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 50, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 60, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 70, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 80, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 90, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 100, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 110, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 120, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 130, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 140, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 150, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 160, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 170, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 180, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 190, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 198, "total": 198, "phase": "paired-native-blocks"}
+{"event": "progress", "done": 0, "total": 1, "phase": "global-paired-fdr"}
+	Command being timed: "python -u scripts/paired_job.py --x outputs/global_engine/stores/global_ndvi_2001_2025_zarr --y outputs/global_engine/stores/global_lst_2001_2025_zarr --output outputs/global_engine/jobs/global_ndvi_lst_2001_2025_final --start 2001-01 --end 2025-12 --baseline-start 2002-01 --baseline-end 2018-12 --memory-mib 256 --block-size 32"
+	User time (seconds): 68.35
+	System time (seconds): 24.46
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:33.88
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 376256
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 126
+	Minor (reclaiming a frame) page faults: 16721919
+	Voluntary context switches: 156949
+	Involuntary context switches: 2153
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 10202072
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
