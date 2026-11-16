@@ -214,6 +214,27 @@ def forecast_saved(directory, run, output, device=None):
     """Reproduce next-month estimates from exported weights without retraining."""
     run, output = Path(run), Path(output)
     report = json.loads((run/'metrics.json').read_text())
+    # New runs embed hashes; preserved historical runs use the independently
+    # recorded artifact manifest, as in ModelRegistry. Never rewrite old metrics.
+    expected_hashes = report.get('model_sha256', {})
+    audit = {}
+    resolved_run = run.resolve()
+    audit_root = None
+    for parent in resolved_run.parents:
+        manifest = parent/'docs/evidence/aurora5/artifact_manifest.json'
+        if manifest.is_file():
+            audit = json.loads(manifest.read_text()).get('files', {})
+            audit_root = parent
+            break
+    for relative in ('xgboost/model.ubj', 'convlstm/best_model.pt'):
+        path = resolved_run/relative
+        expected_hash = expected_hashes.get(relative)
+        if expected_hash is None and audit_root is not None:
+            expected_hash = audit.get(path.relative_to(audit_root).as_posix(), {}).get('sha256')
+        with path.open('rb') as stream:
+            actual_hash = hashlib.file_digest(stream, 'sha256').hexdigest()
+        if actual_hash != expected_hash:
+            raise ValueError(f'Saved model integrity check failed: {relative}')
     variable = report['variable']; norm = report['normalization_train_only']
     if hashlib.sha256((Path(directory)/'cube.npz').read_bytes()).hexdigest() != report['cube_sha256']:
         raise ValueError('Reproduction requires the exact training input cube')

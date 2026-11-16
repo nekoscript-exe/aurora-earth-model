@@ -1,16 +1,11 @@
 """Local observed-dataset registry and bounded, windowed array access."""
 from dataclasses import dataclass
-import hashlib
 import json
 import os
 from pathlib import Path
-import shutil
-import tempfile
-import zipfile
 import threading
 from collections import OrderedDict
 from contextlib import contextmanager
-from filelock import FileLock, Timeout
 import numpy as np
 from affine import Affine
 from aurora.variables import get_variable, VariableSpec
@@ -35,34 +30,8 @@ class CubeReader:
             raise ValueError('Storage must remain inside the dataset directory')
         self.format = storage['format']
         if self.format == 'npz':
-            stat = path.stat()
-            stamp = hashlib.sha256(f'{path}:{stat.st_size}:{stat.st_mtime_ns}'.encode()).hexdigest()[:24]
-            target = Path(cache or os.environ.get('AURORA_CACHE_DIR', tempfile.gettempdir()))/'aurora-arrays'/stamp
-            target.mkdir(parents=True, exist_ok=True)
-            lock = FileLock(str(target/'.lock'))
-            while True:
-                check()
-                try: lock.acquire(timeout=.1); break
-                except Timeout: continue
-            try:
-                with zipfile.ZipFile(path) as archive:
-                    needed = sum(archive.getinfo(f'{name}.npy').file_size for name in ('X', 'valid', 'region_mask', 'dates', 'channels')
-                                 if not (target/f'{name}.npy').exists())
-                    used = sum(file.stat().st_size for file in target.parent.glob('*/*.npy'))
-                    if needed+used > cache_limit_bytes or needed > shutil.disk_usage(target).free:
-                        raise MemoryError('NPZ cache disk budget exhausted; convert to chunked Zarr or use another cache location')
-                    for name in ('X', 'valid', 'region_mask', 'dates', 'channels'):
-                        destination = target/f'{name}.npy'
-                        if not destination.exists():
-                            with archive.open(f'{name}.npy') as source:
-                                with tempfile.NamedTemporaryFile(dir=target, delete=False) as out:
-                                    temporary = Path(out.name)
-                                    while True:
-                                        check(); block = source.read(1024*1024)
-                                        if not block: break
-                                        out.write(block)
-                            check(); os.replace(temporary, destination)
-            finally: lock.release()
+            from aurora.array_cache import extract_npz
+            target = extract_npz(path, cache, cache_limit_bytes, check)
             self.arrays = {name: np.load(target/f'{name}.npy', mmap_mode='r', allow_pickle=False)
                            for name in ('X', 'valid', 'region_mask', 'dates', 'channels')}
         elif self.format == 'npy':
