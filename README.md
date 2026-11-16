@@ -1,124 +1,303 @@
-# AURORA — Earth System Intelligence
+<div align="center">
 
-A local scientific desktop application for exploring real satellite observations, spatial/temporal trends, paired NDVI–LST relationships, and evaluated one-month predictive models. The interface supports English and Spanish with an immediate, persistent language selector. English is the default on a new installation.
+<img src="assets/desktop/logo.svg" width="140" alt="AURORA logo">
 
-**Validated observations:** Querétaro, Mexico; NDVI and daytime LST; 300 monthly observations from January 2001 through December 2025, native EPSG:32614 grid, 171 × 161 cells. Missing/QA-excluded observations remain missing. Mexico at 5 km and worldwide land coverage at 50–100 km are preparation targets, **not complete or scientifically validated datasets**.
+# A.U.R.O.R.A.
+### Earth System Intelligence
 
-## Demo distribution
+**Explore Earth. Understand change. Anticipate the future.**
 
-The distribution builder includes the two real historical cubes, exact Zarr copies, existing scientific results, and four trained models: XGBoost and ConvLSTM for each of NDVI and LST. It excludes development environments, credentials, Earth Engine authentication, synthetic result directories, and unrelated regions. The offline demonstration does **not** require a Google Earth Engine account, token, or network connection after installation.
+NASA Space Apps Challenge 2026
 
-The application archive and CPU wheel archives are separate, SHA-256-manifested artifacts. Extract the application and the wheel archive for your platform. Verify the archive SHA-256 sidecars, then use the installer. The payload verifier runs before dependencies are installed; pip additionally verifies every locked CPU wheel hash. SHA-256 provides integrity, not publisher authentication; obtain the sidecar hashes through a trusted channel.
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-EE4C2C?logo=pytorch&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-Machine%20Learning-1683C4)
+![Qt](https://img.shields.io/badge/PySide6-Desktop-41CD52?logo=qt&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-192%20passed-2EA44F)
+![Version](https://img.shields.io/badge/Version-5.0%20RC1-7957D5)
 
-### Linux CPU — clean-environment validation performed
+[Overview](#overview) ·
+[Scientific data](#scientific-data) ·
+[Predictive intelligence](#predictive-intelligence) ·
+[Installation](#installation) ·
+[Team](#team)
 
-Provide **Python 3.14.4**, x86-64 Linux with the desktop system libraries needed by Qt. The supplied wheels require glibc ≥2.34; this is a wheel-tag requirement, not a claim that every such Linux distribution has been tested. Do not run the installer in the development `.venv`.
+<img src="docs/evidence/planetary/earth.png" width="95%" alt="Historical AURORA planetary explorer">
+
+</div>
+
+---
+
+## Overview
+
+AURORA is a scientific desktop application designed to transform
+historical satellite observations into accessible environmental intelligence.
+
+It combines geospatial processing, statistical trend analysis,
+interactive visualization, machine learning and deep learning
+within a bilingual scientific research environment.
+
+Developed for the NASA Space Apps Challenge 2026:
+
+**Be An Earth System Trend Detective!**
+
+## AURORA in numbers
+
+| Indicator | Value |
+| :--- | ---: |
+| Historical period | 2001–2025 |
+| Registered satellite datasets in Full RC1 | 7 |
+| Monthly raster frames | 2,097 |
+| Valid cell-month-variable values | 85,940,785 |
+| Geographic scales | 3 |
+| Final scientific result packages in Full RC1 | 12 |
+| Evaluated predictive models | 4 |
+| Passing tests after consolidation | 192 |
+| Supported interface languages | 2 |
+
+Valid values are spatial-temporal-variable entries, not unique raw
+satellite measurements. Coverage varies by dataset and location.
+
+## Scientific data
+
+AURORA processes three environmental variables:
+
+- **NDVI:** Normalized Difference Vegetation Index.
+- **LST:** Daytime Land Surface Temperature.
+- **Precipitation:** Satellite-derived precipitation rates.
+
+| Region | Grid resolution | Variables | Monthly frames |
+| :--- | ---: | :--- | ---: |
+| Querétaro | 1 km | NDVI, LST | 600 |
+| Mexico | 5 km | NDVI, LST | 600 |
+| Global land | 50 km | NDVI, LST, precipitation | 897 |
+
+NDVI and LST cover January 2001 through December 2025.
+Global precipitation covers January 2001 through September 2025.
+
+Missing observations remain missing. Geographic coverage is
+restricted to the supplied masks and valid observations.
+
+## Scientific capabilities
+
+- Interactive planetary exploration.
+- Historical satellite playback.
+- Spatial and temporal trend analysis.
+- Ordinary Least Squares and Theil–Sen estimation.
+- Multiple-comparison correction using Benjamini–Hochberg FDR.
+- Autocorrelation-aware sensitivity analysis.
+- Multivariate correlation and lag analysis.
+- Individual pixel investigations.
+- Scientific reports and data exports.
+- English and Spanish interfaces.
+
+### Application gallery
+
+The following screenshots document earlier validated development
+stages of the application.
+
+| Planetary exploration | Historical analysis |
+| :---: | :---: |
+| <img src="docs/evidence/planetary/mexico.png" width="420"> | <img src="docs/evidence/global_engine/visual/zarr_time_machine.png" width="420"> |
+
+| Spatial analysis | Multivariate laboratory |
+| :---: | :---: |
+| <img src="docs/evidence/global_engine/visual/spatial_analysis.png" width="420"> | <img src="docs/evidence/global_engine/visual/blocked_multivariate.png" width="420"> |
+
+## Predictive intelligence
+
+AURORA includes four evaluated one-month forecasting models
+for Querétaro, Mexico.
+
+| Variable | Model | MAE | RMSE | R² |
+| :--- | :--- | ---: | ---: | ---: |
+| NDVI | XGBoost | 0.042175 | 0.063527 | 0.884433 |
+| NDVI | ConvLSTM | 0.044379 | 0.063608 | 0.884137 |
+| LST | XGBoost | 2.087552 °C | 2.830701 °C | 0.819426 |
+| LST | ConvLSTM | 2.211072 °C | 3.012322 °C | 0.795511 |
+
+Held-out evaluation period: 2022–2025.
+
+These models have not been validated for national or global forecasting.
+January 2026 inference products are retrospective model estimates,
+not new satellite observations.
+
+<img src="docs/evidence/i18n/visual/en_predictive_ndvi.png" width="850" alt="Historical predictive laboratory screenshot">
+
+## Architecture
+
+```mermaid
+flowchart TD
+    A[NASA MODIS and GPM observations] --> B[Acquisition and quality assurance]
+    B --> C[Geospatial alignment and historical cubes]
+    C --> D[NPZ and Zarr storage]
+    D --> E[Statistical intelligence]
+    D --> F[Predictive intelligence]
+    E --> G[Scientific desktop application]
+    F --> G
+    G --> H[Visualization and scientific reports]
+```
+
+## Distribution editions
+
+| Feature | Lite RC1 | Full RC1 |
+| :--- | :---: | :---: |
+| Querétaro | Yes | Yes |
+| Mexico | No | Yes |
+| Global land | No | Yes |
+| Registered Zarr datasets | 2 | 7 |
+| Monthly raster frames | 600 | 2,097 |
+| Final scientific result packages | 3 | 12 |
+| Evaluated Querétaro models | 4 | 4 |
+| Application ZIP size | ~92 MiB | ~718 MiB |
+
+Archive sizes exclude separate dependency wheel archives.
+
+RC1 archives were built and their SHA-256 checksums verified.
+The corresponding unpackaged distribution directories passed local
+health and CPU inference checks. Fresh installation from the final
+ZIP archives remains unvalidated. Public downloads are not yet available.
+
+## Installation
+
+The source repository does not include the complete historical
+satellite datasets or trained model artifacts.
+
+Use the corresponding distribution package for offline exploration.
+
+### Linux CPU
+
+Requirements:
+
+- Python 3.14.4.
+- Linux x86-64.
+- Compatible Qt system libraries.
+
+From the extracted application directory:
 
 ```bash
-# Run from the extracted application directory.
-bash installers/install-linux.sh --wheelhouse /path/to/linux-cpu-wheels
+bash installers/install-linux.sh
 bash installers/run-linux.sh
 ```
 
-Without `--wheelhouse`, the installer retrieves the same hashed CPU wheels online. It creates `.aurora-venv` and refuses to overwrite an existing environment. To use another new location:
+An offline dependency wheelhouse can be supplied to the installer.
 
-```bash
-python3.14 scripts/install.py --prefix /new/path/aurora-cpu --profile cpu --wheelhouse /path/to/linux-cpu-wheels
-/new/path/aurora-cpu/bin/python scripts/desktop.py --device cpu
-```
+### Windows
 
-### Windows CPU — installer recipe, not Windows compatibility certification
+PowerShell installers and dependency locks are provided, but Windows
+installation, rendering and inference remain unvalidated.
 
-PowerShell wrappers and a platform-specific hashed wheel lock are supplied. Windows wheel availability and Python dependency metadata closure were checked from Linux; **installation, DLL loading, desktop rendering and inference have not been executed on Windows**. Windows support remains unvalidated. Python 3.14.4 x64 and the appropriate Microsoft/Qt runtime system components are required; those OS prerequisites have not been experimentally established here.
+For detailed instructions, see:
 
-```powershell
-# In the extracted application directory; use a new environment path.
-powershell -File installers/install-windows.ps1 -Wheelhouse C:\AuroraWheels\windows-cpu
-powershell -File installers/run-windows.ps1 -Device cpu
-```
+- [Distribution guide](docs/distribution-guide.md)
+- [Runtime and portability](docs/technical/runtime-and-portability.md)
 
-The Windows wheel archive is separate from the Linux wheel archive. Do not point an installer at wheels for another platform. Existing tests that create symlinks may require Windows Developer Mode/appropriate permissions; Windows tests have not been run.
+## Validation and reproducibility
 
-### NVIDIA profile and explicit device selection
+The post-submission consolidation passed 192 automated tests on Linux
+with no reported warnings.
 
-The original development environment is preserved. New CPU environments use `torch==2.14.1+cpu` and Linux `xgboost-cpu==3.4.1`; they contain no CUDA/NVIDIA runtime packages. The NVIDIA profile pins the original Linux environment (`torch==2.14.1+cu130`, XGBoost 3.4.1 and NVIDIA dependencies). A separate clean NVIDIA installation and Windows GPU installation were not validated; GPU wheels are not bundled in the CPU archives.
+Historical RC1 evidence includes CPU inference validation in both
+the development environment and an independent CPU-only environment.
 
-```bash
-# Optional Linux NVIDIA recipe, always targeting a NEW environment.
-python3.14 scripts/install.py --profile nvidia --prefix /new/path/aurora-nvidia
-python3.14 scripts/desktop.py --device cpu   # when using an already provisioned interpreter
-# Prefer the installed environment interpreter, not a system Python without dependencies.
-.aurora-venv/bin/python scripts/desktop.py --device cpu
-.aurora-venv/bin/python scripts/doctor.py --device auto
-```
+| Model | Maximum absolute difference |
+| :--- | ---: |
+| NDVI — XGBoost | 0 |
+| NDVI — ConvLSTM | 0.0003101 |
+| LST — XGBoost | 0 °C |
+| LST — ConvLSTM | 0.0015831 °C |
 
-`auto` probes actual CUDA execution and falls back to CPU if unavailable/incompatible. `cpu` does not probe CUDA. Explicit `cuda` fails clearly if execution is unsupported. `AURORA_DEVICE=cpu` is also available to the saved-inference functions; the desktop CLI has `--device`. XGBoost map inference deliberately remains on CPU. Existing training scripts are not invoked by installation or the demo.
+All four models preserved their exact spatial masks and passed
+their established numerical tolerances.
 
-## Health checks and inference reproduction
+- [Distribution evidence](docs/evidence/distribution/)
+- [Scientific validation](docs/validation_report.md)
+- [Scientific report](docs/scientific_report_en.md)
+- [Model card](docs/model_card.md)
+- [Data sources](docs/data_sources.md)
 
-```bash
-.aurora-venv/bin/python scripts/doctor.py --device cpu
-.aurora-venv/bin/python scripts/doctor.py --integrity-only
-.aurora-venv/bin/python scripts/validate_distribution_inference.py --require-cpu-build
-.aurora-venv/bin/python scripts/forecast_saved.py --dataset data/processed/queretaro_lst --run outputs/aurora5/queretaro_lst --output /new/path/verification-estimates --device cpu
-```
+## Data sources
 
-Health checks verify imports, registered observations, evaluated model qualification, result freshness, hardware policy, and distribution integrity. Outputs must use new directories. Forecasts for January 2026 are **retrospective model estimates, not new satellite observations**.
+AURORA uses NASA satellite products accessed through Google Earth Engine.
 
-The saved ConvLSTM CUDA maps were produced with TF32-enabled convolutions. CPU FP32 inference is bit-identical between the original and independent CPU environments for all four models, but differs slightly from those archived CUDA maps. Validation keeps exact masks/dates, uses strict XGBoost tolerance (1e-6), and a documented TF32 envelope for ConvLSTM (1e-3 NDVI; 1e-2 °C LST). Observed maximum differences are approximately 0.0003101 NDVI and 0.0015831 °C; a CUDA control reproduced the archived maps exactly with TF32 and approached CPU results with TF32 disabled. No historical maps or scores are rewritten.
+| Product | Variable |
+| :--- | :--- |
+| [MOD13Q1](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13Q1) | Regional NDVI |
+| [MOD11A2](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD11A2) | Regional LST |
+| [MOD13C1](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13C1) | Global NDVI |
+| [MOD21C3](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD21C3) | Global LST |
+| [GPM IMERG V07](https://developers.google.com/earth-engine/datasets/catalog/NASA_GPM_L3_IMERG_MONTHLY_V07) | Global precipitation |
 
-## Architecture and portability
+Geographic assets and third-party attribution are documented
+[in the geography directory](assets/desktop/geography/README.md).
 
-- `aurora.catalog`: central metadata/configuration registry and bounded NPZ/NPY/Zarr reads. NPZ extraction is cached; scientific calculations use native grids, masks and physical units.
-- `aurora.block_engine` / `block_multivariate`: spatial blocks, disk-backed maps and global BH correction; area-weighted regional summaries, explicit observation support and inference limits.
-- `aurora.models`: existing statistical baselines, XGBoost and ConvLSTM; temporal splits and train-only normalization are preserved.
-- `aurora.desktop`: nine PySide6/Matplotlib tabs, cancellable workers, bilingual controls, scientific exports and qualified model discovery.
-- `aurora.hardware`: explicit CPU/auto/CUDA inference policy and execution probe.
-- `aurora.portability`: content-based, path/mtime-independent dataset identities. The distribution carries a separate, manifest-hash-bound relocation sidecar; historical JSON/NPZ/Zarr/GeoTIFF/model bytes and absolute provenance records remain intact. Runtime references resolve inside the extracted package rather than the original workstation. New jobs within a registered project record relative input locations and content identities.
-- `aurora.distribution`: allowlisted demo assembly, scientific-audit checks, deterministic ZIP timestamps/order, per-file SHA-256 manifest, and integrity verification. User-generated files/environments are outside the immutable payload manifest; listed payload files remain verified.
+## Team
 
-```bash
-# Development checkout, existing environment; never modifies scientific sources.
-.venv/bin/python scripts/build_distribution.py --output /new/path/demo --archive /new/path/aurora-demo.zip
-# Optional single-archive Linux bundle:
-.venv/bin/python scripts/build_distribution.py --output /new/path/demo-offline --archive /new/path/demo-offline.zip --wheelhouse /path/to/linux-cpu-wheels
-```
+<div align="center">
 
-Keep the extracted project structure and `config/portable_provenance.json` together. Copied legacy results without a verified relocation binding remain stale; paths are never silently guessed. Archive reconstruction is deterministic for identical source snapshots. The original development requirements files remain as historical environment snapshots; new installations use `requirements/locks/*-hashed.txt` for CPU.
+<table>
+<tr>
+<td align="center">
+<a href="https://github.com/nekoscript-exe">
+<img src="https://github.com/nekoscript-exe.png?size=120" width="100"><br>
+<b>Ian</b>
+</a><br>
+Software & AI
+</td>
+<td align="center">
+<a href="https://github.com/tatugagy-cloud">
+<img src="https://github.com/tatugagy-cloud.png?size=120" width="100"><br>
+<b>Yatzury</b>
+</a><br>
+Satellite Data & QA
+</td>
+<td align="center">
+<a href="https://github.com/soup-l07">
+<img src="https://github.com/soup-l07.png?size=120" width="100"><br>
+<b>Sophia</b>
+</a><br>
+Scientific Validation
+</td>
+</tr>
+</table>
 
-## Existing scientific results — unchanged
+</div>
 
-Held-out monthly test period: 2022–2025. Models are compared on common valid observations within each variable. MAE/RMSE are dimensionless for NDVI and degrees Celsius for LST.
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for individual contributions.
 
-| Variable | Model | MAE | RMSE | R² | Common observations |
-|---|---|---:|---:|---:|---:|
-| NDVI | XGBoost | 0.042175 | 0.063527 | 0.884433 | 489,633 |
-| NDVI | ConvLSTM | 0.044379 | 0.063608 | 0.884137 | 489,633 |
-| LST | XGBoost | 2.087552 °C | 2.830701 °C | 0.819426 | 507,583 |
-| LST | ConvLSTM | 2.211072 °C | 3.012322 °C | 0.795511 | 507,583 |
+## Scientific limitations
 
-Sources: `outputs/queretaro/final_benchmark.json` and `outputs/aurora5/queretaro_lst/final_benchmark.json`. This release does not retrain, tune, recompute, or replace these scores. Correlation is not causation; missing/seasonal coverage, autocorrelation and multiple comparisons constrain inference. Regional models are not certified for other regions.
+- Correlation does not establish causation.
+- Missing observations and seasonal coverage constrain inference.
+- Statistical significance is not equivalent to environmental impact.
+- Regional predictive models cannot be assumed to generalize globally.
+- Windows and clean NVIDIA installations remain unvalidated.
+- Listing datasets does not imply complete geographic observation coverage.
 
-## Requirements: measurements versus estimates
+## NASA Space Apps submission
 
-**Measured host:** Linux x86-64, glibc 2.43, Python 3.14.4, 16 logical CPUs and approximately 59.6 GiB RAM. An independent CPU-only environment was provisioned; CPU runtime installation occupies about 2.3 GiB. The Linux wheel set is about 614 MiB; Windows wheel set about 563 MiB. Qt screenshots use the real application with `offscreen`; the physical display compositor and Windows were not certified by these checks.
+The historical RC1 development snapshot is preserved separately:
 
-**Estimates, not experimentally established minima:** 4 logical CPU cores, 4 GiB RAM and 8 GiB free disk for a modest Querétaro demo; 8 cores and 8 GiB RAM recommended. Keep additional disk space for archives, extracted wheels, caches and new outputs. No NVIDIA GPU is required for the CPU demo. Exact timings/resource measurements and platform limitations belong in `docs/evidence/distribution/report.md` in the development checkout.
+[v5.0.0-rc1-nasa](https://github.com/nekoscript-exe/aurora-earth-model/tree/v5.0.0-rc1-nasa)
 
-## Validation and evidence
+Subsequent repository consolidation is post-submission development.
 
-The original 136 tests are retained. New tests cover relocation/mtime loss, content tampering, unsafe cross-platform paths, immutable legacy manifests, deterministic archives, CPU policy, independent installation and payload integrity.
+## AI assistance and licensing
 
-```bash
-PYTHONPATH=src QT_QPA_PLATFORM=offscreen MPLCONFIGDIR=/tmp/aurora-mpl .venv/bin/python -m pytest -q
-.venv/bin/pyright
-.venv/bin/python -m compileall -q src scripts tests
-.venv/bin/python -m pip check
-git diff --check
-```
+OpenAI ChatGPT and Codex assisted software development and documentation.
 
-Use the new CPU environment interpreter to repeat pytest without CUDA. `scripts/validate_i18n.py` reads the available real data and captures all nine tabs in both languages with isolated preferences. The distribution report records checks from an independently extracted copy, CPU inference comparisons and remaining platform limits. Previous implementation reports remain under `docs/`.
+A project license has not yet been selected by the team.
+Third-party software, datasets and geographic assets retain
+their respective terms and attribution requirements.
 
-## Project and third-party licensing
+---
 
-This workflow does **not** select a project license or grant new redistribution rights. `DISTRIBUTION_NOTICE.txt` in generated packages records that status. Third-party software retains its own terms included in its wheels/installations; geography attribution is in `assets/desktop/geography/README.md`, and MODIS sources are retained in dataset metadata. The project owners must decide the project license before public licensing claims are made.
+<div align="center">
+
+**A.U.R.O.R.A.**
+
+Built for scientific discovery.
+
+🌍
+
+</div>
