@@ -224,6 +224,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
         self.language_selector.setToolTip(tr('Choose the interface language. Applied immediately; saved for the next launch.'))
         header.addWidget(self.language_selector)
         self.theme_selector = QComboBox()
+        self.theme_selector.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToContents)
         self.theme_selector.addItem(tr("Dark"), "dark")
         self.theme_selector.addItem(tr("Light"), "light")
         self.theme_selector.setCurrentIndex(
