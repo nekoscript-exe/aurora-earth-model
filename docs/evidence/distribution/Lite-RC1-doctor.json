@@ -1,0 +1,181 @@
+{
+  "root": "/home/azael/Distribuciones/AURORA-5.0-Lite-RC1",
+  "dependencies": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pandas": "3.1.1",
+    "rasterio": "1.5.2",
+    "pyproj": "3.8.0",
+    "zarr": "3.4.2",
+    "torch": "2.14.1+cpu",
+    "xgboost": "3.4.1",
+    "PySide6": "6.12.0",
+    "matplotlib": "3.11.2",
+    "statsmodels": "0.15.0"
+  },
+  "errors": [],
+  "integrity": {
+    "ok": true,
+    "verified_files": 776,
+    "errors": [],
+    "scope": "Real Quer\u00e9taro NDVI/LST, January 2001 to December 2025"
+  },
+  "hardware": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "python": "3.14.4",
+    "logical_cpus": 16,
+    "torch": "2.14.1+cpu",
+    "torch_cuda_build": null,
+    "requested_device": "cpu",
+    "selected_device": "cpu",
+    "gpu": null,
+    "free_disk_bytes": 485467615232
+  },
+  "datasets": [
+    {
+      "id": "queretaro",
+      "region": "queretaro",
+      "variable": "ndvi",
+      "source": "MODIS/061/MOD13Q1",
+      "unit": "1",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9473289317464454,
+      "storage": {
+        "format": "npz",
+        "path": "cube.npz"
+      }
+    },
+    {
+      "id": "queretaro_lst",
+      "region": "queretaro",
+      "variable": "lst",
+      "source": "MODIS/061/MOD11A2",
+      "unit": "degC",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9526710682535546,
+      "storage": {
+        "format": "npz",
+        "path": "cube.npz"
+      }
+    },
+    {
+      "id": "queretaro_lst_zarr",
+      "region": "queretaro",
+      "variable": "lst",
+      "source": "MODIS/061/MOD11A2",
+      "unit": "degC",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9526710682535546,
+      "storage": {
+        "format": "zarr",
+        "path": "cube.zarr",
+        "zarr_format": 2,
+        "chunks": [
+          12,
+          128,
+          128,
+          1
+        ]
+      }
+    },
+    {
+      "id": "queretaro_ndvi_zarr",
+      "region": "queretaro",
+      "variable": "ndvi",
+      "source": "MODIS/061/MOD13Q1",
+      "unit": "1",
+      "resolution_crs_units": [
+        1000.0,
+        1000.0
+      ],
+      "crs": "EPSG:32614",
+      "shape": [
+        300,
+        171,
+        161,
+        1
+      ],
+      "start": "2001-01",
+      "end": "2025-12",
+      "months": 300,
+      "mean_declared_coverage": 0.9473289317464454,
+      "storage": {
+        "format": "zarr",
+        "path": "cube.zarr",
+        "zarr_format": 2,
+        "chunks": [
+          12,
+          128,
+          128,
+          1
+        ]
+      }
+    }
+  ],
+  "models": [
+    {
+      "region": "queretaro",
+      "variable": "lst",
+      "engines": [
+        "xgboost",
+        "convlstm"
+      ],
+      "directory": "/home/azael/Distribuciones/AURORA-5.0-Lite-RC1/outputs/aurora5/queretaro_lst"
+    },
+    {
+      "region": "queretaro",
+      "variable": "ndvi",
+      "engines": [
+        "xgboost",
+        "convlstm"
+      ],
+      "directory": "/home/azael/Distribuciones/AURORA-5.0-Lite-RC1/outputs/queretaro"
+    }
+  ],
+  "fresh_results": 3,
+  "dataset_errors": {},
+  "model_errors": {},
+  "google_earth_engine_required": false,
+  "trained_model_count": 4,
+  "ok": true
+}
