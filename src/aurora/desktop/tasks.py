@@ -120,7 +120,11 @@ class ReaderJobs(QObject):
 
     @Slot()
     def cancel_all(self, *_):
-        for task in self.current.values():
+        current = getattr(self, "current", None)
+        if current is None:
+            return
+
+        for task in list(current.values()):
             task.cancel()
 
-        self.current.clear()
+        current.clear()
