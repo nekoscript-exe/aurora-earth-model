@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"name": "global_50km", "source": "rectangulo lon/lat sin mascara de tierra; el oceano queda NoData por el QA de MODIS"}, "geometry": {"type": "Polygon", "coordinates": [[[-180, -56], [180, -56], [180, 84], [-180, 84], [-180, -56]]]}}]}
