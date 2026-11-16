@@ -21,7 +21,7 @@ fill="#e7fff8" letter-spacing="3">SYSTEM ARCHITECTURE</text>
     font-weight="bold" fill="#e7fff8">Satellite observations</text>
     <text x="480.0" y="126" font-size="14"
     fill="#b5c9d6">MODIS · GPM IMERG</text>
-    
+
 
     <rect x="230" y="175" width="500" height="70"
     rx="10" fill="#142536" stroke="#376b9e"/>
@@ -29,7 +29,7 @@ fill="#e7fff8" letter-spacing="3">SYSTEM ARCHITECTURE</text>
     font-weight="bold" fill="#e7fff8">Acquisition &amp; quality assurance</text>
     <text x="480.0" y="226" font-size="14"
     fill="#b5c9d6">Google Earth Engine · Quality masks</text>
-    
+
 
     <rect x="230" y="275" width="500" height="70"
     rx="10" fill="#142536" stroke="#376b9e"/>
@@ -37,7 +37,7 @@ fill="#e7fff8" letter-spacing="3">SYSTEM ARCHITECTURE</text>
     font-weight="bold" fill="#e7fff8">Geospatial processing</text>
     <text x="480.0" y="326" font-size="14"
     fill="#b5c9d6">Rasterio · NumPy · NPZ · Zarr</text>
-    
+
 
     <rect x="45" y="390" width="410" height="70"
     rx="10" fill="#143439" stroke="#69edc5"/>
@@ -45,7 +45,7 @@ fill="#e7fff8" letter-spacing="3">SYSTEM ARCHITECTURE</text>
     font-weight="bold" fill="#e7fff8">Statistical intelligence</text>
     <text x="250.0" y="441" font-size="14"
     fill="#b5c9d6">OLS · Theil–Sen · HAC · FDR</text>
-    
+
 
     <rect x="505" y="390" width="410" height="70"
     rx="10" fill="#143439" stroke="#69edc5"/>
@@ -53,7 +53,7 @@ fill="#e7fff8" letter-spacing="3">SYSTEM ARCHITECTURE</text>
     font-weight="bold" fill="#e7fff8">Predictive intelligence</text>
     <text x="710.0" y="441" font-size="14"
     fill="#b5c9d6">XGBoost · ConvLSTM</text>
-    
+
 
     <rect x="230" y="510" width="500" height="70"
     rx="10" fill="#143439" stroke="#69edc5"/>
@@ -61,7 +61,7 @@ fill="#e7fff8" letter-spacing="3">SYSTEM ARCHITECTURE</text>
     font-weight="bold" fill="#e7fff8">AURORA Desktop</text>
     <text x="480.0" y="561" font-size="14"
     fill="#b5c9d6">PySide6 · Interactive visualization · ES / EN</text>
-    
+
 
 <g stroke="#69edc5" stroke-width="2" fill="none"
 marker-end="url(#arrow)">

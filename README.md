@@ -17,7 +17,9 @@ NASA Space Apps Challenge 2026
 ![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-EE4C2C?logo=pytorch&logoColor=white&style=for-the-badge)
 ![XGBoost](https://img.shields.io/badge/XGBoost-Machine%20Learning-1683C4?style=for-the-badge)
 ![Qt](https://img.shields.io/badge/PySide6-Desktop-41CD52?logo=qt&logoColor=white&style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-192%20passed-2EA44F?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-212%20passed-2EA44F?style=for-the-badge)
+![Pyright](https://img.shields.io/badge/Pyright-0%20errors-2EA44F?style=for-the-badge)
+![Gitleaks](https://img.shields.io/badge/Gitleaks-0%20detected-2EA44F?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-5.0%20RC1-7957D5?style=for-the-badge)
 
 [Overview](#overview) ·
@@ -61,7 +63,7 @@ Developed for the NASA Space Apps Challenge 2026:
 | Geographic scales | 3 |
 | Final scientific result packages in Full RC1 | 12 |
 | Evaluated predictive models | 4 |
-| Passing tests after consolidation | 192 |
+| Passing tests after consolidation | 212 |
 | Supported interface languages | 2 |
 
 Valid values are spatial-temporal-variable entries, not unique raw
@@ -242,8 +244,13 @@ For detailed instructions, see:
 
 ## Validation and reproducibility
 
-The post-submission consolidation passed 192 automated tests on Linux
-with no reported warnings.
+The post-submission technical audit passed 212 automated tests on Linux.
+Pyright reported zero errors and zero warnings.
+
+A clean CPU environment without external datasets passed 207 tests,
+with five external-data tests intentionally skipped.
+
+- [Final technical audit](docs/audit/FINAL_TECHNICAL_AUDIT.md)
 
 Historical RC1 evidence includes CPU inference validation in both
 the development environment and an independent CPU-only environment.
