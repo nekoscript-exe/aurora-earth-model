@@ -143,11 +143,34 @@ class AILaboratory(QWidget):
             self.directory = model['directory']
             self.unit = model['unit']
             self.scale = display_scale(self.registry.find(region, variable).metadata)
-        else: self.directory = self.root/'outputs/NO_TRAINED_EVALUATED_MODELS'
+        else: self.directory = None
         self.info.setText(tr(f"{str(variable).upper()} / {region} · "+('trained and held-out evaluated' if model else 'No current trained/evaluated models')))
         self.figure.clear()
 
         ax = self.figure.add_subplot(111)
+
+        available = model is not None
+        self.view.setEnabled(available)
+        self.export_button.setEnabled(
+            available and
+            self.export_process.state() == QProcess.ProcessState.NotRunning
+        )
+
+        if not available:
+            message = tr("Predictive results unavailable")
+            ax.text(
+                0.5, 0.5, message,
+                ha="center", va="center",
+                transform=ax.transAxes,
+                color="#efbd76"
+            )
+            self.details.setText(message)
+            self.style_plot(ax)
+            ax.set_axis_off()
+            self.figure.tight_layout()
+            self.canvas.draw()
+            self.toolbar.update()
+            return
 
         mode = self.view.currentData()
 
@@ -522,5 +545,6 @@ class AILaboratory(QWidget):
         request_cancel(self.export_directory); self.cancel_export_button.setEnabled(False)
 
     def export_finished(self, code, *_):
-        self.cancel_export_button.setEnabled(False); self.export_button.setEnabled(True)
+        self.cancel_export_button.setEnabled(False)
+        self.export_button.setEnabled(self.directory is not None)
         self.details.setText(tr('Predictive export complete' if code == 0 else 'Predictive export cancelled or failed; partial bundle is not complete'))
