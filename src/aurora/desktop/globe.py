@@ -29,6 +29,7 @@ from PySide6.QtWidgets import (
 SCALES = {
     "ndvi": (-0.2, 1.0, "RdYlGn", "NDVI · dimensionless"),
     "lst": (-10.0, 70.0, "turbo", "LST · °C"),
+    "precip": (0.0, 2.0, "Blues", "Precipitation · mm/h"),
 }
 
 

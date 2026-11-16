@@ -26,7 +26,7 @@ class MultivariateLaboratory(QWidget):
         self._progress_text = ""; self._error_log = ""
         self.process.errorOccurred.connect(lambda _: self.info.setText(error_text(self.process.errorString())))
         layout = QVBoxLayout(self)
-        title = localized_label('Multivariate Laboratory · NDVI × LST')
+        title = localized_label('Multivariate Laboratory')
         title.setStyleSheet('font-size:24px;font-weight:bold;color:#69d9bd;'); layout.addWidget(title)
         row = QHBoxLayout(); self.region = QComboBox(); self.registry = populate_regions(self.region, root, paired=True)
         self.x_variable = QComboBox(); self.y_variable = QComboBox()
@@ -129,7 +129,7 @@ class MultivariateLaboratory(QWidget):
                 self.scatter(axes[0, 1], data); self.series(axes[1, 0], data); self.lags(axes[1, 1], report)
             else:
                 ax = self.figure.add_subplot(111)
-                if mode == 'Pearson raw': self.draw_map(ax, data, 'raw_0_pearson', 'Observed NDVI–LST Pearson r')
+                if mode == 'Pearson raw': self.draw_map(ax, data, 'raw_0_pearson', f"Observed {'–'.join(v.upper() for v in report.get('variables', ['ndvi', 'lst']))} Pearson r")
                 elif mode == 'Spearman anomaly': self.draw_map(ax, data, 'anomaly_0_spearman', 'Monthly anomaly Spearman ρ')
                 elif mode == 'Lag profiles': self.lags(ax, report)
                 else:

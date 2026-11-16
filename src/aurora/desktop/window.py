@@ -968,8 +968,11 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
             if layer == "Estimated change":
                 label = (
-                    "NDVI" if variable == "NDVI"
-                    else "Temperature change (°C)"
+                    {
+                        "NDVI": "NDVI",
+                        "LST": "Temperature change (°C)",
+                        "PRECIP": "Precipitation rate change (mm/h)",
+                    }.get(variable.upper(), variable)
                 )
 
         options = {
@@ -1052,8 +1055,11 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         ax.set_title(tr("Regional monthly time series"))
         ax.set_ylabel(
-            tr("NDVI" if metrics["variable"] == "NDVI"
-            else "Temperature (°C)")
+            tr({
+                "NDVI": "NDVI",
+                "LST": "Temperature (°C)",
+                "PRECIP": "Precipitation rate (mm/h)",
+            }.get(metrics["variable"].upper(), metrics["variable"]))
         )
 
         ax.grid(alpha=0.15)

@@ -32,11 +32,11 @@ class MissionHome(QWidget):
 
         left.addWidget(self.card(
             "Satellite observations",
-            "Terra / MODIS",
-            "NDVI / LST"
+            "Terra / MODIS · GPM",
+            "NDVI / LST / PRECIP"
         ))
 
-        for variable in ("ndvi", "lst"):
+        for variable in ("ndvi", "lst", "precip"):
             try:
                 record = self.registry.find("global", variable)
                 summary = record.summary()
@@ -104,7 +104,7 @@ class MissionHome(QWidget):
 
         records = []
 
-        for variable in ("ndvi", "lst"):
+        for variable in ("ndvi", "lst", "precip"):
             try:
                 records.append(
                     self.registry.find("global", variable)

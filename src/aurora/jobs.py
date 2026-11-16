@@ -72,7 +72,11 @@ class ResultRegistry:
     def __init__(self, root):
         self.results = []
         root = Path(root)
-        roots = ['outputs/global_engine', 'outputs/aurora5/multivariate']
+        roots = [
+            'outputs/global_engine',
+            'outputs/global_engine/jobs',
+            'outputs/aurora5/multivariate',
+        ]
         config = root/'config/datasets.json'
         if config.exists(): roots += json.loads(config.read_text()).get('result_roots', [])
         paths = set()
