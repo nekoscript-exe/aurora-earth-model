@@ -1,4 +1,5 @@
 """AURORA Desktop — Scientific investigation interface."""
+from aurora.portability import load_manifest
 
 from .i18n import error_text, localized_label, localized_button, add_choices, tr, tr_items, LanguageController, active_language, metadata_text, log_text
 
@@ -581,7 +582,7 @@ class AuroraWindow(QMainWindow, GlobalResultsMixin):
 
         manifest = self.output_path / 'manifest.json'
         if manifest.exists():
-            record = json.loads(manifest.read_text())
+            record = load_manifest(manifest)
             if record.get('status') != 'complete' or not fresh(record):
                 raise ValueError('Incomplete or stale scientific result')
             record['directory'] = self.output_path

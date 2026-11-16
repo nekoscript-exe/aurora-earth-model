@@ -2466,5 +2466,21 @@ x/y fija el eje</translation>
             <source>convert-zarr</source>
             <translation>Conversión a Zarr</translation>
         </message>
+        <message>
+            <source>original inputs</source>
+            <translation>Entradas originales</translation>
+        </message>
+        <message>
+            <source>input locations</source>
+            <translation>Ubicaciones de entrada</translation>
+        </message>
+        <message>
+            <source>relocation</source>
+            <translation>Traslado verificado</translation>
+        </message>
+        <message>
+            <source>historical manifest sha256</source>
+            <translation>SHA256 del manifiesto histórico</translation>
+        </message>
     </context>
 </TS>

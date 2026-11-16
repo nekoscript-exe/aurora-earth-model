@@ -1,6 +1,8 @@
 """Launch AURORA Desktop."""
 
 import sys
+import os
+import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,7 +14,11 @@ from aurora.desktop.i18n import install_translation
 
 
 def main():
-    app = QApplication(sys.argv)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--device', choices=['auto', 'cpu', 'cuda'], default='auto')
+    args, qt_args = parser.parse_known_args()
+    os.environ['AURORA_DEVICE'] = args.device
+    app = QApplication([sys.argv[0], *qt_args])
     app.setApplicationName("AURORA")
     install_translation(app)
     window = AuroraWindow()

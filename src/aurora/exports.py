@@ -1,4 +1,5 @@
 """Scientific export bundles: portable outputs and atomic completion metadata."""
+from aurora.portability import load_manifest
 import json
 import os
 from pathlib import Path
@@ -7,7 +8,7 @@ from aurora.jobs import fresh, atomic_json, Cancelled
 
 def export_bundle(result, output, progress=lambda *args: None):
     result, output = Path(result), Path(output)
-    manifest = json.loads((result/'manifest.json').read_text())
+    manifest = load_manifest(result/'manifest.json')
     if manifest.get('status') != 'complete' or not fresh(manifest): raise ValueError('Only complete, fresh scientific results can be exported')
     if output.with_suffix('.cancel').exists(): raise Cancelled('Export cancelled before start')
     output.mkdir(parents=True, exist_ok=False)

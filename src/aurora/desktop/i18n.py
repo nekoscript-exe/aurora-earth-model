@@ -130,6 +130,10 @@ def install_translation(app, language=None):
         app.installTranslator(qt_candidate)
         app.installTranslator(candidate)
     QLocale.setDefault(QLocale('es_MX' if language == 'es' else 'en_US'))
+
+    # Keep date formatter source strings independent of the OS language.
+    import locale
+    locale.setlocale(locale.LC_TIME, "C")
     return True
 
 
