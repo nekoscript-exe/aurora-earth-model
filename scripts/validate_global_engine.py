@@ -37,7 +37,7 @@ def wait_ui(app, condition, seconds=30):
     if not condition(): raise TimeoutError('Asynchronous UI operation did not finish')
 
 
-def validate_real(output):
+def validate_real(output, export_root=None):
     registry = DatasetRegistry(ROOT); results = {}; native = {}; masks = {}
     for variable, original_name in [('ndvi', 'queretaro'), ('lst', 'queretaro_lst')]:
         original = ROOT/'data/processed'/original_name
@@ -108,15 +108,17 @@ def validate_real(output):
     for name, digest in preserved.items():
         with (ROOT/name).open('rb') as file: assert hashlib.file_digest(file, 'sha256').hexdigest() == digest, name
     results['preserved_historical_files'] = len(preserved)
-    bundle = ROOT/'outputs/global_exports/queretaro_ndvi_scientific'
+    export_root = Path(export_root) if export_root is not None else ROOT/'outputs/global_exports'
+    bundle = export_root/'queretaro_ndvi_scientific'
     if not bundle.exists(): export_bundle(ROOT/'outputs/global_engine/queretaro_ndvi_final', bundle)
     models = ModelRegistry(ROOT, registry)
     model = models.find('queretaro', 'lst')
-    model_bundle = ROOT/'outputs/global_exports/queretaro_lst_predictive'
+    model_bundle = export_root/'queretaro_lst_predictive'
     if not model_bundle.exists(): export_model_bundle(model, model_bundle)
     for folder in (bundle, model_bundle):
         assert all(list(folder.glob('*.'+ext)) for ext in ('csv', 'json', 'tif', 'png'))
-    results['four_format_exports'] = [str(bundle.relative_to(ROOT)), str(model_bundle.relative_to(ROOT))]
+    results['four_format_exports'] = [str(folder.relative_to(output)) if folder.is_relative_to(output)
+                                    else str(folder.relative_to(ROOT)) for folder in (bundle, model_bundle)]
     results['available_models'] = [{'region': m['region'], 'variable': m['variable']} for m in models.models]
     atomic_json(output/'scientific_validation.json', results)
     return results
@@ -184,10 +186,24 @@ def validate_ui(output):
 
 
 if __name__ == '__main__':
-    output = ROOT/'docs/evidence/global_engine'; output.mkdir(parents=True, exist_ok=True)
     import argparse
-    parser = argparse.ArgumentParser(description=__doc__); parser.add_argument('--ui-only', action='store_true'); args = parser.parse_args()
-    if not args.ui_only: print(json.dumps(validate_real(output), indent=2), flush=True)
-    print(json.dumps(validate_ui(output), indent=2), flush=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--ui-only', action='store_true')
+    mode.add_argument('--scientific-only', action='store_true')
+    parser.add_argument('--output', type=Path, help='Independent evidence/export directory')
+    parser.add_argument('--data-root', type=Path, help='Read-only historical scientific checkout; requires --scientific-only')
+    args = parser.parse_args()
+    if args.data_root is not None:
+        if not args.scientific_only:
+            parser.error('--data-root requires --scientific-only; GUI jobs must not write to an alternate source')
+        ROOT = args.data_root.resolve()
+    output = args.output or ROOT/'docs/evidence/global_engine'
+    output.mkdir(parents=True, exist_ok=True)
+    if not args.ui_only:
+        export_root = output/'exports' if args.output is not None else None
+        print(json.dumps(validate_real(output, export_root=export_root), indent=2), flush=True)
+    if not args.scientific_only:
+        print(json.dumps(validate_ui(output), indent=2), flush=True)
     atomic_json(output/'environment.json', {'python': sys.version, 'zarr': zarr.__version__, 'pyproj': pyproj.__version__,
         'validation_peak_rss_kib': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss})
