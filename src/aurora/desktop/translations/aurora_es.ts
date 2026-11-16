@@ -2482,5 +2482,21 @@ x/y fija el eje</translation>
             <source>historical manifest sha256</source>
             <translation>SHA256 del manifiesto histórico</translation>
         </message>
+        <message>
+            <source>Explore</source>
+            <translation>Explorar</translation>
+        </message>
+        <message>
+            <source>Research</source>
+            <translation>Investigación</translation>
+        </message>
+        <message>
+            <source>Dark</source>
+            <translation>Oscuro</translation>
+        </message>
+        <message>
+            <source>Light</source>
+            <translation>Claro</translation>
+        </message>
     </context>
 </TS>

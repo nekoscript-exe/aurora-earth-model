@@ -258,3 +258,18 @@ def test_plot_editor_apply_keeps_data_units_and_internal_choices(localized_app):
     editor.close(); controller.change('en')
     assert set(toolbar._actions) == action_ids
     shiboken6.delete(owner); app.processEvents()
+
+
+
+@pytest.mark.parametrize('source,translated', [
+    ('Explore', 'Explorar'), ('Research', 'Investigación'),
+    ('Dark', 'Oscuro'), ('Light', 'Claro'),
+])
+def test_navigation_and_appearance_labels_are_catalogued(localized_app, source, translated):
+    from aurora.desktop.i18n import catalog
+    assert catalog()[source] == translated
+    app, _ = localized_app
+    install_translation(app, 'es')
+    assert tr(source) == translated
+    install_translation(app, 'en')
+    assert tr(source) == source
