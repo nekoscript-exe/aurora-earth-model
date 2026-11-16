@@ -1,0 +1,57 @@
+{"event": "progress", "done": 0, "total": 1, "phase": "open-source"}
+{"event": "progress", "done": 10, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 20, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 30, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 40, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 50, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 60, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 70, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 80, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 90, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 100, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 110, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 120, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 130, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 140, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 150, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 160, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 170, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 180, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 190, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 198, "total": 198, "phase": "native-grid-blocks"}
+{"event": "progress", "done": 0, "total": 1, "phase": "global-fdr"}
+{"event": "progress", "done": 1, "total": 11, "phase": "export"}
+{"event": "progress", "done": 2, "total": 11, "phase": "export"}
+{"event": "progress", "done": 3, "total": 11, "phase": "export"}
+{"event": "progress", "done": 4, "total": 11, "phase": "export"}
+{"event": "progress", "done": 5, "total": 11, "phase": "export"}
+{"event": "progress", "done": 6, "total": 11, "phase": "export"}
+{"event": "progress", "done": 7, "total": 11, "phase": "export"}
+{"event": "progress", "done": 8, "total": 11, "phase": "export"}
+{"event": "progress", "done": 9, "total": 11, "phase": "export"}
+{"event": "progress", "done": 10, "total": 11, "phase": "export"}
+{"event": "progress", "done": 11, "total": 11, "phase": "export"}
+{"event": "complete", "seconds": 39.61837808600103}
+	Command being timed: "python -u scripts/scientific_job.py --dataset outputs/global_engine/stores/global_ndvi_2001_2025_zarr --output outputs/global_engine/jobs/global_ndvi_2001_2025 --start 2001-01 --end 2025-12 --memory-mib 256 --block-size 32"
+	User time (seconds): 41.68
+	System time (seconds): 0.74
+	Percent of CPU this job got: 104%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:40.45
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 306328
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 14
+	Minor (reclaiming a frame) page faults: 212587
+	Voluntary context switches: 71520
+	Involuntary context switches: 1053
+	Swaps: 0
+	File system inputs: 664
+	File system outputs: 212928
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
