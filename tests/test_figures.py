@@ -144,3 +144,14 @@ def test_regional_figure(tmp_path):
         {"trend": {"slope_per_year": 0.02, "p_value": 0.1, "period": [2001, 2004]}}))
     fig = pr.make_regional_fig(tmp_path / "m.csv", tmp_path / "a.csv", tmp_path / "t.json")
     assert any("OLS" in t.get_text() for t in fig.axes[0].get_legend().get_texts())
+
+
+def test_configure_english_and_lst_labels():
+    try:
+        pr.configure(variable="LST", unit="°C", lang="en", warm=True)
+        assert pr.LABEL_UP == "Significant increase (q<0.05)"
+        fig = pr.make_divergent_fig(np.array([[0.1, -0.1]]), None, pr.T("slope_title"), pr.T("per_year"))
+        assert "LST" in fig.axes[0].get_title() and "°C per year" in fig.axes[1].get_ylabel()
+    finally:
+        pr.configure()  # restaura NDVI/español
+    assert pr.LABEL_UP == "Aumento significativo (q<0.05)"
